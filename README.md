@@ -11,7 +11,6 @@ You will see here the configuration files for:
 * Neovim
 * Rofi
 * Bash
-* PulseAudio
 * And some other less important files
 
 ### **General Recommendation**
