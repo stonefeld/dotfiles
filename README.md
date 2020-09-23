@@ -14,8 +14,9 @@ You will see here the configuration files for:
 * PulseAudio
 * And some other less important files
 
+### **General Recommendation**
 But, before trying this files out, there are many points to take into consideration:
-* You will see that I use many font families in my config files that in Linux Distros like Arch are not included in the base installation so you may need install:
+* You will see that I use many font families in my config files that in Linux Distros like Arch are not included in the base installation so you may need to install:
   * <code>ttf-fantasque-sans-mono</code>
   * <code>ttf-font-icons</code>
   * <code>ttf-unifont</code>
