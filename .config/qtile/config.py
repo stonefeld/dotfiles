@@ -55,10 +55,10 @@ keys = [
     Key([mod], "e", lazy.spawn("thunar")),
 
     # Rofi commands
-    #Key([mod], "s", lazy.spawn("rofi -m -4 -show drun -icon-theme Papirus -show-icons")),
-    Key([mod], "s", lazy.spawn("rofi -modi window,run,calc -show run -monitor eDP-1")),
-    Key([mod], "c", lazy.spawn("rofi -modi window,run,calc -show calc -monitor eDP-1")),
-    Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,run,calc -show window -monitor eDP-1")),
+    Key([mod], "s", lazy.spawn("rofi -modi window,drun,run,calc -show drun -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
+    Key([mod], "r", lazy.spawn("rofi -modi window,drun,run,calc -show run -monitor eDP-1")),
+    Key([mod], "c", lazy.spawn("rofi -modi window,drun,run,calc -show calc -monitor eDP-1")),
+    Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,drun,run,calc -show window -monitor eDP-1")),
 ]
 
 group_names = [

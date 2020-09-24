@@ -37,8 +37,6 @@ alias dmesg='dmesg --color=always'
 
 alias edit='nvim'
 
-alias whatsapp='firefox https://web.whatsapp.com/'
-
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -47,6 +45,45 @@ man() {
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[01;32m' \
     command man "$@"
+}
+
+note() {
+    # if file doesn't exist, create it
+    if [[ ! -f $HOME/.notes ]]; then
+        touch "$HOME/.notes"
+    fi
+
+    if ! (($#)); then
+        # no arguments, print file
+        cat "$HOME/.notes"
+    elif [[ "$1" == "-c" ]]; then
+        # clear file
+        printf "%s" > "$HOME/.notes"
+    else
+        # add all arguments to file
+        printf "%s\n" "$*" >> "$HOME/.notes"
+    fi
+}
+
+todo() {
+    if [[ ! -f $HOME/.todo ]]; then
+        touch "$HOME/.todo"
+    fi
+
+    if ! (($#)); then
+        cat "$HOME/.todo"
+    elif [[ "$1" == "-l" ]]; then
+        nl -b a "$HOME/.todo"
+    elif [[ "$1" == "-c" ]]; then
+        > $HOME/.todo
+    elif [[ "$1" == "-r" ]]; then
+        nl -b a "$HOME/.todo"
+        eval printf %.0s- '{1..'"${COLUMNS:-$(tput cols)}"\}; echo
+        read -p "Type a number to remove: " number
+        sed -i ${number}d $HOME/.todo "$HOME/.todo"
+    else
+        printf "%s\n" "$*" >> "$HOME/.todo"
+    fi
 }
 
 export LESS=-R
