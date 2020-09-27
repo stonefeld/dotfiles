@@ -35,6 +35,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
 Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 
 Plug 'jremmen/vim-ripgrep'
@@ -98,7 +99,7 @@ let g:lightline = {
     \ }
 
 " Airline setup
-let g:airline_theme='onedark'
+let g:airline_theme='base16_monokai'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
@@ -122,11 +123,12 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+nnoremap <C-q> :q!<CR>
 nnoremap <leader>pf :Files<CR>
 
 nnoremap <leader><TAB> :bnext<CR>
 nnoremap <leader><S-Tab> :bprevious<CR>
-nnoremap <leader>x :bd<CR>
+nnoremap <leader>x :bprevious<CR>:bd #<CR>
 nnoremap <C-t> :enew<CR>
 
 nnoremap <silent> <Leader>= :vertical resize +5<CR>

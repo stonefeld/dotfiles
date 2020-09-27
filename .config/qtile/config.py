@@ -62,15 +62,15 @@ keys = [
 ]
 
 group_names = [
-    (" \U0000F0AC ", {'layout': 'monadtall'}),
-    ("\U0000F3DB 1", {'layout': 'monadtall'}),
-    ("\U0000F3DB 2", {'layout': 'monadtall'}),
-    ("\U0000F3DB 3", {'layout': 'monadtall'}),
-    (" \U0000F07B ", {'layout': 'monadtall'}),
-    (" \U0000F30C ", {'layout': 'monadtall'}),
-    (" \U0000F086 ", {'layout': 'monadtall'}),
-    (" \U0000F30A ", {'layout': 'monadtall'}),
-    (" \U0000F120 ", {'layout': 'monadtall'})
+    (" \U0000F0AC  ", {'layout': 'monadtall'}),
+    (" \U0000F292  1 ", {'layout': 'monadtall'}),
+    (" \U0000F292  2 ", {'layout': 'monadtall'}),
+    (" \U0000F292  3 ", {'layout': 'monadtall'}),
+    (" \U0000F07B  ", {'layout': 'monadtall'}),
+    (" \U0000F001  ", {'layout': 'monadtall'}),
+    (" \U0000F086  ", {'layout': 'monadtall'}),
+    (" \U0000F0E0  ", {'layout': 'monadtall'}),
+    (" \U0000F120  ", {'layout': 'monadtall'})
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -87,10 +87,10 @@ layout_theme = {
 }
 
 layouts = [
-    layout.MonadTall(name='\U0000F261 monadtall', **layout_theme),
-    layout.Max(name='\U0000F0C8 max', **layout_theme),
-    layout.Stack(num_stacks=2, name='\U0000F04C stack', **layout_theme),
-    layout.RatioTile(fancy=True, name='\U0000F0C9 ratiotile', **layout_theme),
+    layout.MonadTall(name='\U0000F53C  monadtall', **layout_theme),
+    layout.Max(name='\U0000F0C8  max', **layout_theme),
+    layout.Stack(num_stacks=2, name='\U0000F04C  stack', **layout_theme),
+    layout.RatioTile(fancy=True, name='\U0000F0C9  ratiotile', **layout_theme),
 ]
 
 colors = [
@@ -116,8 +116,7 @@ colors_nord = [
 ]
 
 widget_defaults = dict(
-    font='Fantasque Sans Mono',
-    #font='sans',
+    font = 'FantasqueSansMono Nerd Font',
     fontsize = 16,
     padding = 2,
     background = colors[0]
@@ -130,7 +129,6 @@ def init_widgets_list():
             active = colors[2],
             background = colors[0],
             borderwidth = 4,
-            font = 'Icons Bold',
             fontsize = 14,
             foreground = colors[2],
             highlight_color = colors[1],
@@ -140,7 +138,7 @@ def init_widgets_list():
             margin_y = 3,
             other_current_screen_border = colors[0],
             other_screen_border = colors[0],
-            padding_x = 5,
+            padding_x = 1,
             padding_y = 3,
             rounded = False,
             this_current_screen_border = colors[3],
@@ -163,6 +161,7 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors[0],
+            font = 'Icons',
             fontsize = 40,
             foreground = colors_nord[1],
             padding = 0,
@@ -170,6 +169,7 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[1],
+            font = 'Icons',
             fontsize = 14,
             foreground = '#000000',
             mouse_callbacks = {
@@ -208,6 +208,7 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[1],
+            font = 'Icons',
             fontsize = 40,
             foreground = colors_nord[6],
             padding = 0,
@@ -230,6 +231,7 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[6],
+            font = 'Icons',
             fontsize = 40,
             foreground = colors_nord[5],
             padding = 0,
@@ -237,6 +239,7 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[5],
+            font = 'Icons',
             fontsize = 14,
             foreground = '#000000',
             padding = 0,
@@ -260,12 +263,14 @@ def init_widgets_list():
         widget.TextBox(
             background = colors_nord[5],
             foreground = colors_nord[2],
+            font = 'Icons',
             fontsize = 40,
             padding = 0,
             text = '\U0000F0D9'
         ),
         widget.TextBox(
             background = colors_nord[2],
+            font = 'Icons',
             fontsize = 20,
             foreground = '#000000',
             padding = 0,
@@ -300,17 +305,18 @@ def init_widgets_list():
         ),
         widget.Battery(
             background = colors_nord[2],
-            charge_char = '\U0000F211',
-            discharge_char = '\U0000F214',
-            empty_char = '\U0000F212',
+            charge_char = '\U0000F583',
+            discharge_char = '\U0000F57E',
+            empty_char = '\U0000F58D',
             foreground = '#000000',
             format = '{char} {percent:2.0%}',
-            full_char = '\U0000F213',
+            fontsize = 16,
+            full_char = '\U0000F578',
             low_percentage = 0.2,
             padding = 0,
             show_short_text = False,
             update_interval = 1,
-            unknow_chat = '\U0000F212'
+            unknow_char = '\U0000F590'
         ),
         widget.Sep(
             background = colors_nord[2],
@@ -319,17 +325,18 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[2],
+            font = 'Icons',
             fontsize = 40,
             foreground = colors_nord[3],
             padding = 0,
             text = '\U0000F0D9'
         ),
         widget.TextBox(
-            text = ' \U0000F133 ',
-            fontsize = 14,
+            text = ' \U0000F5EC ',
+            fontsize = 16,
             foreground = '#000000',
             background = colors_nord[3],
-            padding = 0
+            padding = 5
         ),
         widget.Clock(
             background = colors_nord[3],
@@ -341,16 +348,15 @@ def init_widgets_list():
             background = colors_nord[3],
             fontsize = 16,
             foreground = '#000000',
-            padding = 0, 
+            padding = 0,
             text = ' | '
         ),
         widget.TextBox(
             background = colors_nord[3],
-            font = 'Icons',
-            fontsize = 16,
+            fontsize = 14,
             foreground = '#000000',
             padding = 0,
-            text = '\U0000F017 '
+            text = '\U0000F64F  '
         ),
         widget.Clock(
             background = colors_nord[3],
