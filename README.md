@@ -11,6 +11,7 @@ You will see here the configuration files for:
 * Neovim
 * Rofi
 * Bash
+* Zsh
 * And some other less important files
 
 ### **General Recommendation**
