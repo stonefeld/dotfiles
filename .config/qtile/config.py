@@ -52,7 +52,7 @@ keys = [
     Key([mod, "shift"], "m", lazy.window.toggle_fullscreen()),
 
     # Open file manager
-    Key([mod], "e", lazy.spawn("thunar")),
+    Key([mod], "e", lazy.spawn("Thunar")),
 
     # Rofi commands
     Key([mod], "s", lazy.spawn("rofi -modi window,drun,run,calc -show drun -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
@@ -61,16 +61,28 @@ keys = [
     Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,drun,run,calc -show window -monitor eDP-1")),
 ]
 
+# group_names = [
+#     (" \U0000F0AC  ", {'layout': 'monadtall'}),
+#     ("\U0000F292  1", {'layout': 'monadtall'}),
+#     ("\U0000F292  2", {'layout': 'monadtall'}),
+#     ("\U0000F292  3", {'layout': 'monadtall'}),
+#     (" \U0000F07B  ", {'layout': 'monadtall'}),
+#     (" \U0000F001  ", {'layout': 'monadtall'}),
+#     (" \U0000F086  ", {'layout': 'monadtall'}),
+#     (" \U0000F0E0  ", {'layout': 'monadtall'}),
+#     (" \U0000F120  ", {'layout': 'monadtall'})
+# ]
+
 group_names = [
-    (" \U0000F0AC  ", {'layout': 'monadtall'}),
-    (" \U0000F292  1 ", {'layout': 'monadtall'}),
-    (" \U0000F292  2 ", {'layout': 'monadtall'}),
-    (" \U0000F292  3 ", {'layout': 'monadtall'}),
-    (" \U0000F07B  ", {'layout': 'monadtall'}),
-    (" \U0000F001  ", {'layout': 'monadtall'}),
-    (" \U0000F086  ", {'layout': 'monadtall'}),
-    (" \U0000F0E0  ", {'layout': 'monadtall'}),
-    (" \U0000F120  ", {'layout': 'monadtall'})
+    ("WWW", { 'layout': 'monadtall' }),
+    ("DEV-1", { 'layout': 'monadtall' }),
+    ("DEV-2", { 'layout': 'monadtall' }),
+    ("DEV-3", { 'layout': 'monadtall' }),
+    ("DOC", { 'layout': 'monadtall' }),
+    ("MUS", { 'layout': 'monadtall' }),
+    ("CHAT", { 'layout': 'monadtall' }),
+    ("MAIL", { 'layout': 'monadtall' }),
+    ("TERM", { 'layout': 'monadtall' }),
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -82,7 +94,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 layout_theme = {
     "border_width": 2,
     "margin": 10,
-    "border_focus": "#E1ACFF",
+    "border_focus": "#E1ACff",
     "border_normal": "#1D2330"
 }
 
@@ -90,7 +102,7 @@ layouts = [
     layout.MonadTall(name='\U0000F53C  monadtall', **layout_theme),
     layout.Max(name='\U0000F0C8  max', **layout_theme),
     layout.Stack(num_stacks=2, name='\U0000F04C  stack', **layout_theme),
-    layout.RatioTile(fancy=True, name='\U0000F0C9  ratiotile', **layout_theme),
+    layout.RatioTile(name='\U0000F0C9  ratiotile', **layout_theme),
 ]
 
 colors = [
@@ -129,7 +141,8 @@ def init_widgets_list():
             active = colors[2],
             background = colors[0],
             borderwidth = 4,
-            fontsize = 14,
+            font = 'Sans Mono Bold',
+            fontsize = 12,
             foreground = colors[2],
             highlight_color = colors[1],
             highlight_method = 'block',
@@ -138,7 +151,7 @@ def init_widgets_list():
             margin_y = 3,
             other_current_screen_border = colors[0],
             other_screen_border = colors[0],
-            padding_x = 1,
+            padding_x = 3,
             padding_y = 3,
             rounded = False,
             this_current_screen_border = colors[3],
@@ -316,7 +329,7 @@ def init_widgets_list():
             padding = 0,
             show_short_text = False,
             update_interval = 1,
-            unknow_char = '\U0000F590'
+            unknown_char = '\U0000F590'
         ),
         widget.Sep(
             background = colors_nord[2],
@@ -436,6 +449,26 @@ focus_on_window_activation = "smart"
 def startup():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
+
+@hook.subscribe.client_new
+def float_discord(window):
+    if window.window.get_name() == "Discord Updater":
+        window.floating = True
+
+@hook.subscribe.client_new
+def float_pavucontrol(window):
+    if window.window.get_name() == "Volume Control":
+        window.floating = True
+
+@hook.subscribe.client_new
+def float_thunderbirdmessage(window):
+    if window.window.get_wm_class() == ('Msgcompose', 'Thunderbird'):
+        window.floating = True
+
+@hook.subscribe.client_new
+def float_filemanager(window):
+    if window.window.get_wm_class() == ("Thunar", "Thunar"):
+        window.floating = True
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

@@ -37,10 +37,12 @@
 #keystate_capslock = enable
 #keystate_scrolllock= enable
 
-#"pactl set-sink-volume @DEFAULT_SINK@ +3276"
+#"pactl set-sink-volume @DEFAULT_SINK@ +10%"
+#"amixer set Master 5%+"
 "current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && pactl set-sink-volume @DEFAULT_SINK@ +10%"
    XF86AudioRaiseVolume
 
+#"amixer set Master 5%-"
 "pactl set-sink-volume @DEFAULT_SINK@ -10%"
    XF86AudioLowerVolume
 

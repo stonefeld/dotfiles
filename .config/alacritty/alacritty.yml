@@ -659,6 +659,7 @@ key_bindings:
   - { key: Add,      mods: Control,                 action: IncreaseFontSize }
   - { key: Subtract, mods: Control,                 action: DecreaseFontSize }
   - { key: Minus,    mods: Control,                 action: DecreaseFontSize }
+  - { key: Return,   mods: Control|Shift,           action: SpawnNewInstance }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
