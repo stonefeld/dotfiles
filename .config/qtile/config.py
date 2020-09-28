@@ -99,10 +99,10 @@ layout_theme = {
 }
 
 layouts = [
-    layout.MonadTall(name='\U0000F53C  monadtall', **layout_theme),
-    layout.Max(name='\U0000F0C8  max', **layout_theme),
-    layout.Stack(num_stacks=2, name='\U0000F04C  stack', **layout_theme),
-    layout.RatioTile(name='\U0000F0C9  ratiotile', **layout_theme),
+    layout.MonadTall(**layout_theme),
+    layout.Max(**layout_theme),
+    layout.Stack(num_stacks=2, **layout_theme),
+    layout.RatioTile(**layout_theme),
 ]
 
 colors = [
@@ -227,10 +227,17 @@ def init_widgets_list():
             padding = 0,
             text = '\U0000F0D9'
         ),
+        widget.CurrentLayoutIcon(
+            background = colors_nord[6],
+            custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
+            foreground = '#000000',
+            padding = 0,
+            scale = 0.7
+        ),
         widget.Sep(
             background = colors_nord[6],
             linewidth = 0,
-            padding = 10
+            padding = 2
         ),
         widget.CurrentLayout(
             background = colors_nord[6],

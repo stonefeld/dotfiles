@@ -24,13 +24,18 @@ set clipboard=unnamedplus
 set shell=/bin/bash
 set cmdheight=2
 
+set laststatus=2
+if !has('gui_running')
+    set t_Co=256
+endif
+set noshowmode
+
 set colorcolumn=0
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.local/share/nvim/site/plugged')
 
 " Utils
-"Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
@@ -61,7 +66,6 @@ Plug 'HerringtonDarkholme/yats.vim'
 " Colorschemes
 Plug 'morhetz/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
-Plug 'arcticicestudio/nord-vim'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -81,25 +85,8 @@ set termguicolors
 colorscheme monokai_pro
 set background=dark
 
-" Lightline setup
-set laststatus=2
-if !has('gui_running')
-    set t_Co=256
-endif
-set noshowmode
-let g:lightline = {
-    \ 'colorscheme': 'monokai_pro',
-    \ 'active': {
-    \     'left': [ [ 'mode', 'paste' ],
-    \               [ 'gitbranch', 'readolny', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \     'gitbranch': 'FugitiveHead'
-    \ },
-    \ }
-
 " Airline setup
-let g:airline_theme='base16_monokai'
+let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
