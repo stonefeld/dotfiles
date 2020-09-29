@@ -477,6 +477,10 @@ def float_filemanager(window):
     if window.window.get_wm_class() == ("Thunar", "Thunar"):
         window.floating = True
 
+@hook.subscribe.client_new
+def float_filemanager(window):
+    if window.window.get_wm_class() == ('lxappearance', 'Lxappearance'):
+        window.floating = True
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting

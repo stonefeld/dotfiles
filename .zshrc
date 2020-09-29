@@ -25,7 +25,8 @@ parse_git_branch() {
      git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(%F{4}\1%f) /"
 }
 
-PROMPT=$'\n'"%B[ %F{3}%T%f ]%b"$'\n'"%B[ %F{1}%1~%f ] $(parse_git_branch)%F{2}>%f%F{3}>%f%b "
+PROMPT="%B[ %F{1}%1~%f ] $(parse_git_branch)%F{2}>%f%F{3}>%f%b "
+RPROMPT="%B[ %F{3}%T%f ]%b"
 
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
