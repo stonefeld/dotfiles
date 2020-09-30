@@ -24,6 +24,8 @@ set clipboard=unnamedplus
 set shell=/bin/bash
 set cmdheight=2
 
+set autoread
+
 set laststatus=2
 if !has('gui_running')
     set t_Co=256
@@ -55,13 +57,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'stsewd/fzf-checkout.vim'
 
 " Syntax Highlighting
-Plug 'sheerun/vim-polyglot'
-Plug 'vim-python/python-syntax'
-Plug 'pangloss/vim-javascript'
-Plug 'vim-jp/vim-cpp'
-Plug 'arzg/vim-sh'
-Plug 'othree/html5.vim'
-Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'vim-python/python-syntax'
+Plug 'yuezk/vim-js'
+Plug 'leafgarland/typescript-vim'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+"Plug 'pangloss/vim-javascript'
+"Plug 'vim-jp/vim-cpp'
+"Plug 'arzg/vim-sh'
+"Plug 'othree/html5.vim'
+"Plug 'jaxbot/semantic-highlight.vim'
+"Plug 'HerringtonDarkholme/yats.vim'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
@@ -82,7 +88,7 @@ let g:gruvbox_invert_selection='0'
 
 " Colorscheme selection
 set termguicolors
-colorscheme monokai_pro
+colorscheme gruvbox
 set background=dark
 
 " Airline setup
@@ -165,6 +171,25 @@ let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
 let g:javascript_sql_dialect = 'pgsql'
 let g:yats_host_keyword = 1
+
+function MyCustomHighlights()
+    hi semshiLocal           ctermfg=209 guifg=#ff875f
+    hi semshiGlobal          ctermfg=214 guifg=#ffaf00
+    hi semshiImported        ctermfg=214 guifg=#ffaf00 cterm=bold gui=bold
+    hi semshiParameter       ctermfg=75  guifg=#5fafff
+    hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
+    hi semshiFree            ctermfg=218 guifg=#ffafd7
+    hi semshiBuiltin         ctermfg=207 guifg=#458588
+    hi semshiAttribute       ctermfg=49  guifg=#00ffaf
+    hi semshiSelf            ctermfg=249 guifg=#d3869b
+    hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
+    hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+    
+    hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+    hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+    sign define semshiError text=E> texthl=semshiErrorSign
+endfunction
+autocmd FileType python call MyCustomHighlights()
 
 " COC Setup
 set hidden

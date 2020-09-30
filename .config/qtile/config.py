@@ -183,14 +183,14 @@ def init_widgets_list():
         widget.TextBox(
             background = colors_nord[1],
             font = 'Icons',
-            fontsize = 14,
+            fontsize = 16,
             foreground = '#000000',
             mouse_callbacks = {
                 'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop &'),
                 'Button3': lambda qtile: qtile.cmd_spawn(myTerm + ' -e killall htop')
             },
             padding = 0,
-            text = ' \U0000F109 '
+            text = ' \U0000F109  '
         ),
         widget.Memory(
             background = colors_nord[1],
@@ -352,7 +352,7 @@ def init_widgets_list():
             text = '\U0000F0D9'
         ),
         widget.TextBox(
-            text = ' \U0000F5EC ',
+            text = '\U0000F5EC ',
             fontsize = 16,
             foreground = '#000000',
             background = colors_nord[3],
@@ -376,18 +376,18 @@ def init_widgets_list():
             fontsize = 14,
             foreground = '#000000',
             padding = 0,
-            text = '\U0000F64F  '
+            text = '\U0000F64F '
         ),
         widget.Clock(
             background = colors_nord[3],
             foreground = '#000000',
             format = '%H:%M',
-            padding = 0
+            padding = 5
         ),
         widget.Sep(
             background = colors_nord[3],
             linewidth = 0,
-            padding = 10
+            padding = 5
         ),
         widget.Systray(
             background = colors[0],
