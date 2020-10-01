@@ -3,19 +3,23 @@ syntax on
 set spell
 set encoding=utf-8
 set noerrorbells
+
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set smarttab
 set expandtab
+
 set cursorline
 set nu
 set relativenumber
 set nowrap
 set smartcase
+
 set noswapfile
 set nobackup
 set undodir=~/.local/share/nvim/site/undodir
 set undofile
+
 set wildmenu
 set incsearch
 set mouse=a
@@ -34,6 +38,9 @@ set noshowmode
 
 set colorcolumn=0
 highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+" Polyglot language resources disabled
+let g:polyglot_disabled = ['javascript']
 
 call plug#begin('~/.local/share/nvim/site/plugged')
 
@@ -57,17 +64,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'stsewd/fzf-checkout.vim'
 
 " Syntax Highlighting
-"Plug 'sheerun/vim-polyglot'
-"Plug 'vim-python/python-syntax'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-python/python-syntax'
 Plug 'yuezk/vim-js'
-Plug 'leafgarland/typescript-vim'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-"Plug 'pangloss/vim-javascript'
-"Plug 'vim-jp/vim-cpp'
-"Plug 'arzg/vim-sh'
-"Plug 'othree/html5.vim'
-"Plug 'jaxbot/semantic-highlight.vim'
-"Plug 'HerringtonDarkholme/yats.vim'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
@@ -79,7 +78,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 call plug#end()
 
 " Gruvbox colorscheme setup
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'medium'
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -92,7 +91,7 @@ colorscheme gruvbox
 set background=dark
 
 " Airline setup
-let g:airline_theme='onedark'
+let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
@@ -140,7 +139,8 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent><nowait> <space>er :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>er :<C-u>CocList diagnostics<CR>
+nmap <leader>fix :CocFix<CR>
 
 " fzf setup
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
@@ -164,32 +164,8 @@ let g:fzf_branch_actions = {
       \ },
       \}
 
-" Syntax Highlighting setup
+" Vim-Polyglot setup
 let g:python_highlight_all = 1
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow = 1
-let g:javascript_sql_dialect = 'pgsql'
-let g:yats_host_keyword = 1
-
-function MyCustomHighlights()
-    hi semshiLocal           ctermfg=209 guifg=#ff875f
-    hi semshiGlobal          ctermfg=214 guifg=#ffaf00
-    hi semshiImported        ctermfg=214 guifg=#ffaf00 cterm=bold gui=bold
-    hi semshiParameter       ctermfg=75  guifg=#5fafff
-    hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
-    hi semshiFree            ctermfg=218 guifg=#ffafd7
-    hi semshiBuiltin         ctermfg=207 guifg=#458588
-    hi semshiAttribute       ctermfg=49  guifg=#00ffaf
-    hi semshiSelf            ctermfg=249 guifg=#d3869b
-    hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
-    hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
-    
-    hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-    hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-    sign define semshiError text=E> texthl=semshiErrorSign
-endfunction
-autocmd FileType python call MyCustomHighlights()
 
 " COC Setup
 set hidden

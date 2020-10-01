@@ -28,8 +28,8 @@ parse_git_branch() {
 PROMPT="%B[ %F{1}%1~%f ] $(parse_git_branch)%F{2}>%f%F{3}>%f%b "
 RPROMPT="%B[ %F{3}%T%f ]%b"
 
-alias ssn="sudo shutdown now"
-alias sr="sudo reboot"
+alias sn="shutdown now"
+alias re="reboot"
 alias ss="systemctl suspend"
 
 alias ..='cd ../'

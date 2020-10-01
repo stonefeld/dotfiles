@@ -59,6 +59,7 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -modi window,drun,run,calc -show run -monitor eDP-1")),
     Key([mod], "c", lazy.spawn("rofi -modi window,drun,run,calc -show calc -monitor eDP-1")),
     Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,drun,run,calc -show window -monitor eDP-1")),
+    #Key([mod], "t", subprocess.run("/home/master/xmenu/xmenu.sh"))
 ]
 
 # group_names = [
@@ -137,6 +138,16 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
+        widget.TextBox(
+            background = colors[0],
+            fontsize = 18,
+            foreground = colors_nord[1],
+            mouse_callbacks = {
+                'Button3': lambda qtile: qtile.cmd_run('/home/master/xmenu/xmenu.sh')
+            },
+            padding = 0,
+            text = ' \U0000F303  '
+        ),
         widget.GroupBox(
             active = colors[2],
             background = colors[0],
