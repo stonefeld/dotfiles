@@ -3,6 +3,7 @@ import re
 import socket
 import subprocess
 from libqtile.config import Click, Drag, Group, Key, Screen
+from libqtile.config import ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile import bar, layout, widget, hook
 from typing import List
@@ -57,33 +58,20 @@ keys = [
     # Rofi commands
     Key([mod], "s", lazy.spawn("rofi -modi window,drun,run,calc -show drun -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
     Key([mod], "r", lazy.spawn("rofi -modi window,drun,run,calc -show run -monitor eDP-1")),
-    Key([mod], "c", lazy.spawn("rofi -modi window,drun,run,calc -show calc -monitor eDP-1")),
-    Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,drun,run,calc -show window -monitor eDP-1")),
-    #Key([mod], "t", subprocess.run("/home/master/xmenu/xmenu.sh"))
+    Key([mod], "c", lazy.spawn("rofi -modi window,drun,run,calc -show calc -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
+    Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,drun,run,calc -show window -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
 ]
 
-# group_names = [
-#     (" \U0000F0AC  ", {'layout': 'monadtall'}),
-#     ("\U0000F292  1", {'layout': 'monadtall'}),
-#     ("\U0000F292  2", {'layout': 'monadtall'}),
-#     ("\U0000F292  3", {'layout': 'monadtall'}),
-#     (" \U0000F07B  ", {'layout': 'monadtall'}),
-#     (" \U0000F001  ", {'layout': 'monadtall'}),
-#     (" \U0000F086  ", {'layout': 'monadtall'}),
-#     (" \U0000F0E0  ", {'layout': 'monadtall'}),
-#     (" \U0000F120  ", {'layout': 'monadtall'})
-# ]
-
 group_names = [
-    ("WWW", { 'layout': 'monadtall' }),
-    ("DEV-1", { 'layout': 'monadtall' }),
-    ("DEV-2", { 'layout': 'monadtall' }),
-    ("DEV-3", { 'layout': 'monadtall' }),
-    ("DOC", { 'layout': 'monadtall' }),
-    ("MUS", { 'layout': 'monadtall' }),
-    ("CHAT", { 'layout': 'monadtall' }),
-    ("MAIL", { 'layout': 'monadtall' }),
-    ("TERM", { 'layout': 'monadtall' }),
+    ("WWW",     { 'layout': 'monadtall' }),
+    ("DEV-1",   { 'layout': 'monadtall' }),
+    ("DEV-2",   { 'layout': 'monadtall' }),
+    ("DEV-3",   { 'layout': 'monadtall' }),
+    ("DOC",     { 'layout': 'monadtall' }),
+    ("MUS",     { 'layout': 'monadtall' }),
+    ("CHAT",    { 'layout': 'monadtall' }),
+    ("MAIL",    { 'layout': 'monadtall' }),
+    ("TERM",    { 'layout': 'monadtall' }),
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -143,7 +131,7 @@ def init_widgets_list():
             fontsize = 18,
             foreground = colors_nord[1],
             mouse_callbacks = {
-                'Button3': lambda qtile: qtile.cmd_run('/home/master/xmenu/xmenu.sh')
+                'Button3': lambda qtile: qtile.cmd_spawn("/usr/bin/xmenu &"),
             },
             padding = 0,
             text = ' \U0000F303  '
@@ -492,6 +480,7 @@ def float_filemanager(window):
 def float_filemanager(window):
     if window.window.get_wm_class() == ('lxappearance', 'Lxappearance'):
         window.floating = True
+
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting

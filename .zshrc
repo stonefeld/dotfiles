@@ -54,6 +54,10 @@ alias ip='ip -color=auto'
 alias dmesg='dmesg --color=always'
 
 alias edit='nvim'
+alias gs='git status'
+alias gl='git log'
+alias ga='git add'
+alias gc='git commit'
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

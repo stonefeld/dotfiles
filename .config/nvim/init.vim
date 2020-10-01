@@ -63,9 +63,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'stsewd/fzf-checkout.vim'
 
-" Syntax Highlighting
+" Vim-Polyglot syntax highlighting
 Plug 'sheerun/vim-polyglot'
-Plug 'vim-python/python-syntax'
+
+" Standalone syntax highlighting
 Plug 'yuezk/vim-js'
 
 " Colorschemes
@@ -166,6 +167,7 @@ let g:fzf_branch_actions = {
 
 " Vim-Polyglot setup
 let g:python_highlight_all = 1
+let g:yats_host_keyword = 1
 
 " COC Setup
 set hidden
