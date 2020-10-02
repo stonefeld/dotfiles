@@ -79,7 +79,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 call plug#end()
 
 " Gruvbox colorscheme setup
-let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -90,6 +90,20 @@ let g:gruvbox_invert_selection='0'
 set termguicolors
 colorscheme gruvbox
 set background=dark
+
+" General highlight overwrite
+highlight String guifg=#fabd2f
+highlight Identifier guifg=#d3869b
+highlight Comment gui=italic
+highlight Function guifg=#b8bb26
+highlight Structure guifg=#83a598
+
+" Python specific highlight overwrite
+highlight pythonFunction guifg=#b8bb26
+highlight pythonImport guifg=#d3869b
+highlight pythonBuiltinFunc guifg=#b8bb26
+highlight pythonOperator guifg=#fe8019
+highlight pythonBoolean guifg=#8ec07c
 
 " Airline setup
 let g:airline_theme='base16_gruvbox_dark_hard'

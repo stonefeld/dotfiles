@@ -58,6 +58,8 @@ alias gs='git status'
 alias gl='git log'
 alias ga='git add'
 alias gc='git commit'
+alias gps='git push'
+alias gpl='git pull'
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

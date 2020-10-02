@@ -163,6 +163,8 @@ def init_widgets_list():
         ),
         widget.WindowName(
             background = colors[0],
+            font = "Dejavu Sans Mono",
+            fontsize = 14,
             foreground = colors[6],
             padding = 0
         ),
@@ -262,7 +264,7 @@ def init_widgets_list():
             fontsize = 14,
             foreground = '#000000',
             padding = 0,
-            text = ' \U0000F09E '
+            text = ' \U0000F09E  '
         ),
         widget.Wlan(
             background = colors_nord[5],
@@ -277,7 +279,7 @@ def init_widgets_list():
         widget.Sep(
             background = colors_nord[5],
             linewidth = 0,
-            padding = 10
+            padding = 5
         ),
         widget.TextBox(
             background = colors_nord[5],
@@ -433,6 +435,10 @@ cursor_warp = False
 
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
+    {"role":    'pop-up'},
+    {'wname':   'branchdialog'},  # gitk
+    {'wname':   'pinentry'},  # GPG key password entry
+    {'wname':   'Discord Updater'},
     {'wmclass': 'confirm'},
     {'wmclass': 'dialog'},
     {'wmclass': 'download'},
@@ -444,9 +450,13 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'confirmreset'},  # gitk
     {'wmclass': 'makebranch'},  # gitk
     {'wmclass': 'maketag'},  # gitk
-    {'wname': 'branchdialog'},  # gitk
-    {'wname': 'pinentry'},  # GPG key password entry
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
+    {'wmclass': 'VirtualBox Manager'},
+    {'wmclass': 'lxappearance'},
+    {'wmclass': 'Thunar'},
+    {'wmclass': 'pavucontrol'},
+    {'wmclass': 'Msgcompose'},
+    {'wmclass': 'nitrogen'}
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
@@ -455,31 +465,6 @@ focus_on_window_activation = "smart"
 def startup():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
-
-@hook.subscribe.client_new
-def float_discord(window):
-    if window.window.get_name() == "Discord Updater":
-        window.floating = True
-
-@hook.subscribe.client_new
-def float_pavucontrol(window):
-    if window.window.get_name() == "Volume Control":
-        window.floating = True
-
-@hook.subscribe.client_new
-def float_thunderbirdmessage(window):
-    if window.window.get_wm_class() == ('Msgcompose', 'Thunderbird'):
-        window.floating = True
-
-@hook.subscribe.client_new
-def float_filemanager(window):
-    if window.window.get_wm_class() == ("Thunar", "Thunar"):
-        window.floating = True
-
-@hook.subscribe.client_new
-def float_filemanager(window):
-    if window.window.get_wm_class() == ('lxappearance', 'Lxappearance'):
-        window.floating = True
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
