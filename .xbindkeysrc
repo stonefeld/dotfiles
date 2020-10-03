@@ -55,6 +55,9 @@
 "xbacklight -dec 10"
    XF86MonBrightnessDown
 
+"playerctl play-pause"
+   Pause
+
 #"xterm -geom 50x20+20+20"
 #   Shift+Mod2+alt + s
 #

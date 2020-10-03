@@ -60,6 +60,10 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -modi window,drun,run,calc -show run -monitor eDP-1")),
     Key([mod], "c", lazy.spawn("rofi -modi window,drun,run,calc -show calc -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
     Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,drun,run,calc -show window -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
+
+    # Playerctl commands
+    Key([mod, "shift"], "period", lazy.spawn("playerctl next")),
+    Key([mod, "shift"], "comma", lazy.spawn("playerctl previous")),
 ]
 
 group_names = [
@@ -81,7 +85,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layout_theme = {
-    "border_width": 2,
+    "border_width": 4,
     "margin": 10,
     "border_focus": "#E1ACff",
     "border_normal": "#1D2330"
@@ -164,8 +168,9 @@ def init_widgets_list():
         widget.WindowName(
             background = colors[0],
             font = "Dejavu Sans Mono",
-            fontsize = 14,
+            fontsize = 0,
             foreground = colors[6],
+            #foreground = colors[0],
             padding = 0
         ),
         widget.Sep(
