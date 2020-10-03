@@ -34,8 +34,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 5
-    y: 5
+    x: 6
+    y: 6
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -63,7 +63,7 @@ window:
   #startup_mode: Windowed
 
   # Window title
-  title: terminal
+  title: Alacritty
 
   # Window class (Linux/BSD only):
   class:
@@ -96,8 +96,6 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    #family: monospace
-    #family: Mononoki Nerd Font
     family: Fantasque Sans Mono
 
     # The `style` can be specified to pick a specific face.
@@ -109,8 +107,6 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
-    #family: Mononoki Nerd Font
     family: Fantasque Sans Mono
 
     # The `style` can be specified to pick a specific face.
@@ -122,7 +118,6 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
     family: Fantasque Sans Mono
 
     # The `style` can be specified to pick a specific face.
@@ -134,14 +129,13 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
     family: Fantasque Sans Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
 
   # Point size
-  size: 9.0
+  size: 8.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -316,7 +310,7 @@ font:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.85
+background_opacity: 0.9
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"

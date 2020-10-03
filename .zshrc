@@ -26,7 +26,7 @@ parse_git_branch() {
 }
 
 PROMPT="%B[ %F{1}%1~%f ] $(parse_git_branch)%F{2}>%f%F{3}>%f%b "
-RPROMPT="%B[ %F{3}%T%f ]%b"
+#RPROMPT="%B[ %F{3}%T%f ]%b"
 
 alias sn="shutdown now"
 alias re="reboot"

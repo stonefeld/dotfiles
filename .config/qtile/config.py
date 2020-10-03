@@ -10,6 +10,7 @@ from typing import List
 
 mod = "mod4"
 myTerm = "alacritty"
+home = os.path.expanduser('~')
 
 keys = [
     # Launch my terminal
@@ -37,20 +38,37 @@ keys = [
     Key([mod], "r", lazy.layout.next()),
 
     # Switch between windows in current stack pane
-    Key([mod], "k", lazy.layout.down()),
-    Key([mod], "j", lazy.layout.up()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "l", lazy.layout.right()),
+    Key([mod], "h", lazy.layout.left()),
+
+    # Move windows in pane
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
 
     # Swap panes of split stack
     Key([mod, "shift"], "space", lazy.layout.rotate(), lazy.layout.flip()),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
 
-    # Window controls
-    Key([mod], "h", lazy.layout.grow(), lazy.layout.increase_nmaster()),
-    Key([mod], "l", lazy.layout.shrink(), lazy.layout.decrease_nmaster()),
+    # Window size controls
+    Key([mod, "control"], "l", lazy.layout.grow_right(), lazy.layout.grow(), lazy.layout.increase_ratio(), lazy.layout.delete()),
+    Key([mod, "control"], "h", lazy.layout.grow_left(), lazy.layout.shrink(), lazy.layout.decrease_ratio(), lazy.layout.add()),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), lazy.layout.grow(), lazy.layout.decrease_nmaster()),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), lazy.layout.shrink(), lazy.layout.increase_nmaster()),
+
+    Key([mod, "shift"], "f", lazy.window.toggle_floating()),
+    Key([], "F11", lazy.window.toggle_fullscreen()),
+
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "m", lazy.layout.maximize()),
-    Key([mod, "shift"], "f", lazy.window.toggle_floating()),
-    Key([mod, "shift"], "m", lazy.window.toggle_fullscreen()),
+
+    Key([mod, "mod1"], "k", lazy.layout.flip_up()),
+    Key([mod, "mod1"], "j", lazy.layout.flip_down()),
+    Key([mod, "mod1"], "l", lazy.layout.flip_right()),
+    Key([mod, "mod1"], "h", lazy.layout.flip_left()),
 
     # Open file manager
     Key([mod], "e", lazy.spawn("Thunar")),
@@ -64,18 +82,21 @@ keys = [
     # Playerctl commands
     Key([mod, "shift"], "period", lazy.spawn("playerctl next")),
     Key([mod, "shift"], "comma", lazy.spawn("playerctl previous")),
+
+    # Screeshot
+    Key([], "Print", lazy.spawn("/usr/bin/scrot " + home + "/Pictures/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png")),
 ]
 
 group_names = [
-    ("WWW",     { 'layout': 'monadtall' }),
-    ("DEV-1",   { 'layout': 'monadtall' }),
-    ("DEV-2",   { 'layout': 'monadtall' }),
-    ("DEV-3",   { 'layout': 'monadtall' }),
-    ("DOC",     { 'layout': 'monadtall' }),
-    ("MUS",     { 'layout': 'monadtall' }),
-    ("CHAT",    { 'layout': 'monadtall' }),
-    ("MAIL",    { 'layout': 'monadtall' }),
-    ("TERM",    { 'layout': 'monadtall' }),
+    ("WWW",     { 'layout': 'tile' }),
+    ("DEV-1",   { 'layout': 'tile' }),
+    ("DEV-2",   { 'layout': 'tile' }),
+    ("DEV-3",   { 'layout': 'tile' }),
+    ("DOC",     { 'layout': 'tile' }),
+    ("MUS",     { 'layout': 'tile' }),
+    ("CHAT",    { 'layout': 'tile' }),
+    ("MAIL",    { 'layout': 'tile' }),
+    ("TERM",    { 'layout': 'tile' }),
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -85,17 +106,21 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layout_theme = {
-    "border_width": 4,
-    "margin": 10,
+    "border_width": 2,
+    "margin": 7,
     "border_focus": "#E1ACff",
     "border_normal": "#1D2330"
 }
 
 layouts = [
-    layout.MonadTall(**layout_theme),
-    layout.Max(**layout_theme),
+    layout.Tile(**layout_theme),
+    layout.Columns(num_columns=2, autosplit=True, **layout_theme),
     layout.Stack(num_stacks=2, **layout_theme),
-    layout.RatioTile(**layout_theme),
+    layout.MonadTall(**layout_theme),
+    layout.MonadWide(**layout_theme),
+    layout.Bsp(**layout_theme),
+    layout.Zoomy(**layout_theme),
+    layout.Max(**layout_theme),
 ]
 
 colors = [
@@ -395,15 +420,15 @@ def init_widgets_list():
             linewidth = 0,
             padding = 5
         ),
-        widget.Systray(
-            background = colors[0],
-            padding = 5
-        ),
     ]
     return widgets_list
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
+    widgets_screen1.append(widget.Systray(
+        background = colors[0],
+        padding = 5
+    ))
     return widgets_screen1
 
 def init_widgets_screen2():
@@ -461,15 +486,35 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'Thunar'},
     {'wmclass': 'pavucontrol'},
     {'wmclass': 'Msgcompose'},
-    {'wmclass': 'nitrogen'}
+    {'wmclass': 'nitrogen'},
+    {'wmclass': 'xarchiver'},
+    {'wmclass': 'gpicview'}
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+
+floating_types = [
+    "notification", "toolbar", "splash", "dialog",
+    "utility", "menu", "dropdown_menu", "popup_menu", "tooltip,dock",
+]
 
 @hook.subscribe.startup
 def startup():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
+
+@hook.subscribe.client_new
+def set_floating(window):
+    if (window.window.get_wm_transient_for()
+            or window.window.get_wm_type() in floating_types):
+        window.floating = True
+
+@hook.subscribe.client_new
+def floating_dialogs(window):
+    dialog = window.window.get_wm_type() == 'dialog'
+    transient = window.window.get_wm_transient_for()
+    if dialog or transient:
+        window.floating = True
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
