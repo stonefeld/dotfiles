@@ -63,7 +63,7 @@ window:
   #startup_mode: Windowed
 
   # Window title
-  title: Alacritty
+  title: terminal
 
   # Window class (Linux/BSD only):
   class:

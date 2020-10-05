@@ -21,12 +21,17 @@ bindkey '^ ' autosuggest-accept
 
 [[ $- != *i* ]] && return
 
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(%F{4}\1%f) /"
+parse_git_commit() {
+    st=$(git status 2> /dev/null | tail -n 1)
+    if [[ $st != "nothing to commit (working directory clean)" ]]
+    then
+        git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(%F{1}\1%f) /"
+    else
+        git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(%F{2}\1%f) /"
+    fi
 }
 
-PROMPT="%B[ %F{1}%1~%f ] $(parse_git_branch)%F{2}>%f%F{3}>%f%b "
-#RPROMPT="%B[ %F{3}%T%f ]%b"
+PROMPT="%B[ %F{4}%1~%f ] $(parse_git_commit)%F{2}>%f%F{3}>%f%b "
 
 alias sn="shutdown now"
 alias re="reboot"
@@ -54,12 +59,6 @@ alias ip='ip -color=auto'
 alias dmesg='dmesg --color=always'
 
 alias edit='nvim'
-alias gs='git status'
-alias gl='git log'
-alias ga='git add'
-alias gc='git commit'
-alias gps='git push'
-alias gpl='git pull'
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

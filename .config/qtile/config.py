@@ -74,10 +74,10 @@ keys = [
     Key([mod], "e", lazy.spawn("Thunar")),
 
     # Rofi commands
-    Key([mod], "s", lazy.spawn("rofi -modi window,drun,run,calc -show drun -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
-    Key([mod], "r", lazy.spawn("rofi -modi window,drun,run,calc -show run -monitor eDP-1")),
-    Key([mod], "c", lazy.spawn("rofi -modi window,drun,run,calc -show calc -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
-    Key(["mod1"], "Tab", lazy.spawn("rofi -modi window,drun,run,calc -show window -monitor eDP-1 -icon-theme Papirus-Dark -show-icons -icon-size 20")),
+    Key([mod], "s", lazy.spawn("rofi -show drun")),
+    Key([mod], "r", lazy.spawn("rofi -show run")),
+    Key([mod], "c", lazy.spawn("rofi -show calc")),
+    Key(["mod1"], "Tab", lazy.spawn("rofi -show window")),
 
     # Playerctl commands
     Key([mod, "shift"], "period", lazy.spawn("playerctl next")),
@@ -157,13 +157,13 @@ def init_widgets_list():
     widgets_list = [
         widget.TextBox(
             background = colors[0],
-            fontsize = 18,
+            fontsize = 16,
             foreground = colors_nord[1],
             mouse_callbacks = {
                 'Button3': lambda qtile: qtile.cmd_spawn("/usr/bin/xmenu &"),
             },
-            padding = 0,
-            text = ' \U0000F303  '
+            padding = 10,
+            text = '\U0000F111 '
         ),
         widget.GroupBox(
             active = colors[2],
@@ -195,7 +195,6 @@ def init_widgets_list():
             font = "Dejavu Sans Mono",
             fontsize = 0,
             foreground = colors[6],
-            #foreground = colors[0],
             padding = 0
         ),
         widget.Sep(
@@ -363,7 +362,7 @@ def init_widgets_list():
             format = '{char} {percent:2.0%}',
             fontsize = 16,
             full_char = '\U0000F578',
-            low_percentage = 0.2,
+            low_percentage = 0.21,
             padding = 0,
             show_short_text = False,
             update_interval = 1,
@@ -383,7 +382,7 @@ def init_widgets_list():
             text = '\U0000F0D9'
         ),
         widget.TextBox(
-            text = '\U0000F5EC ',
+            text = '\U0000F5ED ',
             fontsize = 16,
             foreground = '#000000',
             background = colors_nord[3],
@@ -515,6 +514,11 @@ def floating_dialogs(window):
     transient = window.window.get_wm_transient_for()
     if dialog or transient:
         window.floating = True
+
+@hook.subscribe.client_focus
+def bring_to_front_focus_client(window):
+    if window.floating:
+        window.cmd_bring_to_front()
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

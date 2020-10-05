@@ -1,5 +1,5 @@
 configuration {
-/*	modi: "window,run,ssh";*/
+	modi: "window,drun,run,calc";
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
@@ -10,7 +10,7 @@ configuration {
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
-/*	show-icons: false;*/
+	show-icons: true;
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
@@ -19,7 +19,7 @@ configuration {
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
-/*	icon-theme: ;*/
+/*	icon-theme: Papirus-Dark;*/
 /*	drun-match-fields: "name,generic,exec,categories,keywords";*/
 /*	drun-categories: ;*/
 /*	drun-show-actions: false;*/
@@ -39,11 +39,11 @@ configuration {
 /*	combi-modi: "window,run";*/
 /*	matching: "normal";*/
 /*	tokenize: true;*/
-/*	m: "-5";*/
+	m: "eDP-1";
 /*	line-margin: 2;*/
 /*	line-padding: 1;*/
 /*	filter: ;*/
-/*	separator-style: "dash";*/
+	separator-style: "dash";
 /*	hide-scrollbar: false;*/
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
@@ -76,11 +76,11 @@ configuration {
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	display-calc: ;*/
-/*	kb-primary-paste: "Control+V,Shift+Insert";*/
+	kb-primary-paste: "Control+V,Shift+Insert";
 /*	kb-secondary-paste: "Control+v,Insert";*/
-/*	kb-clear-line: "Control+w";*/
-/*	kb-move-front: "Control+a";*/
-/*	kb-move-end: "Control+e";*/
+	kb-clear-line: "Control+w";
+	kb-move-front: "Control+a";
+	kb-move-end: "Control+e";
 /*	kb-move-word-back: "Alt+b,Control+Left";*/
 /*	kb-move-word-forward: "Alt+f,Control+Right";*/
 /*	kb-move-char-back: "Left,Control+b";*/
@@ -89,9 +89,9 @@ configuration {
 /*	kb-remove-word-forward: "Control+Alt+d";*/
 /*	kb-remove-char-forward: "Delete,Control+d";*/
 /*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
-/*	kb-remove-to-eol: "Control+k";*/
+	kb-remove-to-eol: "";
 /*	kb-remove-to-sol: "Control+u";*/
-/*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
+	kb-accept-entry: "Control+m,Return,KP_Enter";
 /*	kb-accept-custom: "Control+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
@@ -99,8 +99,8 @@ configuration {
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
-/*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
-/*	kb-row-down: "Down,Control+n";*/
+	kb-row-up: "Up,Control+k";
+	kb-row-down: "Down,Control+j";
 /*	kb-row-tab: "Tab";*/
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/
