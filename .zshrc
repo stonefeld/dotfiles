@@ -13,6 +13,9 @@ zstyle :compinstall filename '/home/master/.zshrc'
 autoload -Uz compinit
 compinit
 
+autoload -Uz promptinit
+promptinit
+
 # End of lines added by compinstall
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -21,9 +24,9 @@ bindkey '^ ' autosuggest-accept
 
 [[ $- != *i* ]] && return
 
-setopt promptsubst
+setopt prompt_subst
 
-parse_git_commit() {
+function parse_git_commit() {
     st=$(git status 2> /dev/null | tail -n 1)
     if [[ $st != "nothing to commit, working tree clean" ]]
     then
@@ -33,7 +36,7 @@ parse_git_commit() {
     fi
 }
 
-PROMPT="%B[ %F{4}%1~%f ] $(parse_git_commit)%F{2}>%f%F{3}>%f%b "
+PROMPT='%B[ %F{4}%1~%f ] $(parse_git_commit)%F{2}>%f%F{3}>%f%b '
 
 alias sn="shutdown now"
 alias re="reboot"
