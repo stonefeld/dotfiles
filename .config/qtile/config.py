@@ -130,7 +130,7 @@ colors = [
     ["#FF5555", "#FF5555"], # border line color for current tab
     ["#8D62A9", "#8D62A9"], # border line color for other tab and odd widgets
     ["#668BD7", "#668BD7"], # color for the even widgets
-    ["#E1ACff", "#E1ACff"], # window name
+    ["#E1ACFF", "#E1ACFF"], # window name
     ["#808080", "#808080"]  # color for inactive group names
 ]
 
@@ -442,9 +442,6 @@ def init_screens():
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
-    widgets_list = init_widgets_list
-    widgets_screen1 = init_widgets_screen1()
-    widgets_screen2 = init_widgets_screen2()
 
 # Drag floating layouts.
 mouse = [
