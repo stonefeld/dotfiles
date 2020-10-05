@@ -21,6 +21,8 @@ bindkey '^ ' autosuggest-accept
 
 [[ $- != *i* ]] && return
 
+setopt promptsubst
+
 parse_git_commit() {
     st=$(git status 2> /dev/null | tail -n 1)
     if [[ $st != "nothing to commit, working tree clean" ]]
