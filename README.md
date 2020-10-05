@@ -32,6 +32,7 @@ Before trying this files out, there are many points to take into consideration:
   * Then you need to run <code>:PlugInstall</code> within NeoVim after running <code>:w</code> and <code>:source %</code> in the NeoVim config file
 * To get Qtile running:
   * There are some Python modules required to get Qtile running that are listed in the [Qtile Documentation](http://docs.qtile.org/en/latest/) which is very well explained. The packages are mentioned in every **widget** section so you may need to explore the documentation to find out which modules are required.
+  * Also you may need to install [xmenu](https://github.com/phillbush/xmenu).
 * To get Alacritty running you just need to install **Alacritty** from your package manager and the configuration file will be loaded automatically since it's located in the default location.
 * To get Bash running you need to install some packages from  your package manager to get every <code>.bashrc</code> feature working:
   * <code>Git</code>
