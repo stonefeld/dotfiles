@@ -23,7 +23,7 @@ bindkey '^ ' autosuggest-accept
 
 parse_git_commit() {
     st=$(git status 2> /dev/null | tail -n 1)
-    if [[ $st != "nothing to commit (working directory clean)" ]]
+    if [[ $st != "nothing to commit, working tree clean" ]]
     then
         git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/(%F{1}\1%f) /"
     else
