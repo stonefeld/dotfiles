@@ -40,4 +40,4 @@ Before trying this files out, there are many points to take into consideration:
   * <code>firefox</code> (this one is optional since I added a command on the <code>.bashrc</code> that needs it just for testing)
 * Lastly, to get Rofi running you may need to install [rofi-calc](https://github.com/svenstaro/rofi-calc) from your package manager.
 
-I hope you enjoy it and if you have any suggestion I'd likely hear them :D
+I hope you enjoy it and if you have any suggestion I'd likely to hear them :D
