@@ -27,8 +27,10 @@ Before trying this files out, there are many points to take into consideration:
 
 * To get NeoVim running:
   * You firstly need to install a Plugin Manager. My NeoVim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run 
-    <pre><code>sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'</code></pre>
+    ```bash
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+      ```
   * Then you need to run <code>:PlugInstall</code> within NeoVim after running <code>:w</code> and <code>:source %</code> in the NeoVim config file
 * To get Qtile running:
   * There are some Python modules required to get Qtile running that are listed in the [Qtile Documentation](http://docs.qtile.org/en/latest/) which is very well explained. The packages are mentioned in every **widget** section so you may need to explore the documentation to find out which modules are required.
