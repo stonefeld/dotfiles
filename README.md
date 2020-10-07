@@ -39,7 +39,6 @@ Before trying this files out, there are many points to take into consideration:
 * To get Bash running you need to install some packages from  your package manager to get every <code>.bashrc</code> feature working:
   * <code>Git</code>
   * <code>exa</code>
-  * <code>firefox</code> (this one is optional since I added a command on the <code>.bashrc</code> that needs it just for testing)
 * Lastly, to get Rofi running you may need to install [rofi-calc](https://github.com/svenstaro/rofi-calc) from your package manager.
 
 I hope you enjoy it and if you have any suggestion I'd likely to hear them :D
