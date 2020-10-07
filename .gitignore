@@ -1,0 +1,14 @@
+/*
+!.gitignore
+!.config/alacritty/
+!.config/autorandr/postswitch
+!.config/dunst/
+!.config/nvim/init.vim
+!.config/picom/picom.conf
+!.config/qtile/autostart.sh
+!.config/qtile/config.py
+!.config/qtile/icons/
+!.config/rofi/
+!.bashrc
+!.xbindkeysrc
+!.zshrc
