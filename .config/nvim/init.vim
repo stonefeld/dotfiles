@@ -122,6 +122,10 @@ map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 
+" Terminal setup
+let g:stt_auto_insert = 1
+let g:stt_auto_quit = 1
+
 " Keyboard Shortcuts
 let mapleader = " "
 nnoremap <leader>h :wincmd h<CR>
@@ -137,6 +141,7 @@ nnoremap <leader><TAB> :bnext<CR>
 nnoremap <leader><S-Tab> :bprevious<CR>
 nnoremap <leader>x :bprevious<CR>:bd #<CR>
 nnoremap <C-t> :enew<CR>
+nnoremap <C-m> :belowright split<bar> :resize 10<bar> :terminal<CR>
 
 nnoremap <silent> <Leader>= :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
