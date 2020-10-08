@@ -3,9 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=10000
 bindkey -v
-#bindkey  "^[[H"   beginning-of-line
-#bindkey  "^[[F"   end-of-line
-#bindkey  "^[[3~"  delete-char
+
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/master/.zshrc'
