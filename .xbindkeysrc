@@ -55,7 +55,7 @@
 "xbacklight -dec 10"
    XF86MonBrightnessDown
 
-"playerctl play-pause"
+"playerctl --player=spotify play-pause"
    Pause
 
 #"xterm -geom 50x20+20+20"
