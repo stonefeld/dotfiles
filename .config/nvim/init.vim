@@ -14,6 +14,7 @@ set nu
 set relativenumber
 set nowrap
 set smartcase
+set scrolloff=8
 
 set noswapfile
 set nobackup
@@ -29,6 +30,11 @@ set shell=/bin/bash
 set cmdheight=2
 
 set autoread
+set hidden
+set nobackup
+set nowritebackup
+set updatetime=50
+set shortmess+=c
 
 set laststatus=2
 if !has('gui_running')
@@ -40,7 +46,7 @@ set colorcolumn=0
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " Polyglot language resources disabled
-let g:polyglot_disabled = ['javascript']
+"let g:polyglot_disabled = ['javascript']
 
 call plug#begin('~/.local/share/nvim/site/plugged')
 
@@ -63,14 +69,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'stsewd/fzf-checkout.vim'
 
-" Vim-Polyglot syntax highlighting
+" Syntax highlighting
 Plug 'sheerun/vim-polyglot'
-
-" Standalone syntax highlighting
-Plug 'yuezk/vim-js'
+"Plug 'yuezk/vim-js'
 
 " Colorschemes
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
 
 " Autocomplete
@@ -91,6 +95,22 @@ set termguicolors
 colorscheme gruvbox
 set background=dark
 
+" Vim-Polyglot setup
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
+
 " General highlight overwrite
 highlight String guifg=#fabd2f
 highlight Identifier guifg=#d3869b
@@ -99,11 +119,18 @@ highlight Function guifg=#b8bb26
 highlight Structure guifg=#83a598
 
 " Python specific highlight overwrite
-highlight pythonFunction guifg=#b8bb26
 highlight pythonImport guifg=#d3869b
+"highlight pythonFunction guifg=#83a598
+"highlight pythonFunctionCall guifg=#b8bb26
 highlight pythonBuiltinFunc guifg=#b8bb26
 highlight pythonOperator guifg=#fe8019
 highlight pythonBoolean guifg=#8ec07c
+
+" JavaScript specific highlight overwrite
+
+
+" NERDTree specific highlight overwrite
+highlight NERDTreeDir guifg=#fe8019
 
 " Airline setup
 let g:airline_theme='base16_gruvbox_dark_hard'
@@ -122,10 +149,6 @@ map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 
-" Terminal setup
-let g:stt_auto_insert = 1
-let g:stt_auto_quit = 1
-
 " Keyboard Shortcuts
 let mapleader = " "
 nnoremap <leader>h :wincmd h<CR>
@@ -141,14 +164,13 @@ nnoremap <leader><TAB> :bnext<CR>
 nnoremap <leader><S-Tab> :bprevious<CR>
 nnoremap <leader>x :bprevious<CR>:bd #<CR>
 nnoremap <C-t> :enew<CR>
-nnoremap <C-m> :belowright split<bar> :resize 10<bar> :terminal<CR>
 
 nnoremap <silent> <Leader>= :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
 nnoremap <C-p> :GFiles<CR>
 nnoremap <leader>gs :G<CR>
-nnoremap <leader>gc :GBranches<CR>
+nnoremap <leader>gb :GBranches<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
 nnoremap <leader>grom :Git rebase origin/master<CR>
 nnoremap <leader>gh :diffget //3<CR>
@@ -184,17 +206,7 @@ let g:fzf_branch_actions = {
       \ },
       \}
 
-" Vim-Polyglot setup
-let g:python_highlight_all = 1
-let g:yats_host_keyword = 1
-
 " COC Setup
-set hidden
-set nobackup
-set nowritebackup
-set updatetime=300
-set shortmess+=c
-
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
