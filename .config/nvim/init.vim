@@ -120,8 +120,6 @@ highlight Structure guifg=#83a598
 
 " Python specific highlight overwrite
 highlight pythonImport guifg=#d3869b
-"highlight pythonFunction guifg=#83a598
-"highlight pythonFunctionCall guifg=#b8bb26
 highlight pythonBuiltinFunc guifg=#b8bb26
 highlight pythonOperator guifg=#fe8019
 highlight pythonBoolean guifg=#8ec07c
@@ -133,11 +131,14 @@ highlight pythonBoolean guifg=#8ec07c
 highlight NERDTreeDir guifg=#fe8019
 
 " Airline setup
-let g:airline_theme='base16_gruvbox_dark_hard'
+"let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_powerline_fonts = 1
-let g:airline_symbols_ascii = 0
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 0
+let g:airline_symbols_ascii = 1
 let g:airline_detect_spell = 0
 let g:airline_detect_spelllang = 0
 
