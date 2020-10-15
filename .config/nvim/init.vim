@@ -56,8 +56,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'Yggdroot/indentLine'
+Plug 'voldikss/vim-floaterm'
 
+Plug 'Yggdroot/indentLine'
+Plug 'liuchengxu/vim-which-key'
+Plug 'honza/vim-snippets'
 Plug 'jremmen/vim-ripgrep'
 Plug 'lyuts/rtags'
 
@@ -71,7 +74,6 @@ Plug 'stsewd/fzf-checkout.vim'
 
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'
-"Plug 'yuezk/vim-js'
 
 " Colorschemes
 Plug 'gruvbox-community/gruvbox'
@@ -94,22 +96,6 @@ let g:gruvbox_invert_selection='0'
 set termguicolors
 colorscheme gruvbox
 set background=dark
-
-" Vim-Polyglot setup
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_auto_sameids = 1
 
 " General highlight overwrite
 highlight String guifg=#fabd2f
@@ -150,40 +136,86 @@ map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 
+" Floaterm
+let g:floaterm_keymap_toggle = '<F1>'
+let g:floaterm_keymap_next   = '<F2>'
+let g:floaterm_keymap_prev   = '<F3>'
+let g:floaterm_keymap_new    = '<F4>'
+
+let g:floaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+let g:floaterm_wintitle=0
+let g:floaterm_autoclose=1
+
 " Keyboard Shortcuts
 let mapleader = " "
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
-nnoremap <C-q> :q!<CR>
-nnoremap <leader>pf :Files<CR>
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+set timeoutlen=500
 
-nnoremap <leader><TAB> :bnext<CR>
-nnoremap <leader><S-Tab> :bprevious<CR>
-nnoremap <leader>x :bprevious<CR>:bd #<CR>
+let g:which_key_map = {}
+
+nnoremap <C-q> :q!<CR>
+
+let g:which_key_map = {
+      \ 'w' : [':w', 'save-file'],
+      \ 'q' : [':q', 'quit-file'],
+      \ 'h' : [':wincmd h', 'window-left'],
+      \ 'j' : [':wincmd j', 'window-down'],
+      \ 'k' : [':wincmd k', 'window-up'],
+      \ 'l' : [':wincmd l', 'window-right'],
+      \ '=' : [':vertical resize +5', 'vertical-resize-plus'],
+      \ '-' : [':vertical resize -5', 'vertical-resize-minus'],
+      \ }
+
+nnoremap <silent><C-l> :bnext<CR>
+nnoremap <silent><C-h> :bprevious<CR>
+nnoremap <silent><C-x> :bprevious<CR>:bd #<CR>
 nnoremap <C-t> :enew<CR>
 
-nnoremap <silent> <Leader>= :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
+let g:which_key_map['b'] = {
+      \ 'name' : '+buffer' ,
+      \ '1' : ['b1', 'buffer 1'],
+      \ '2' : ['b2', 'buffer 2'],
+      \ 'd' : ['bd', 'delete-buffer'],
+      \ 'f' : ['bfirst', 'first-buffer'],
+      \ 'h' : ['Startify', 'home-buffer'],
+      \ 'l' : ['blast', 'last-buffer'],
+      \ 'n' : ['bnext', 'next-buffer'],
+      \ 'p' : ['bprevious', 'previous-buffer'],
+      \ '?' : ['Buffers', 'fzf-buffer'],
+      \ }
 
-nnoremap <C-p> :GFiles<CR>
-nnoremap <leader>gs :G<CR>
-nnoremap <leader>gb :GBranches<CR>
-nnoremap <leader>ga :Git fetch --all<CR>
-nnoremap <leader>grom :Git rebase origin/master<CR>
-nnoremap <leader>gh :diffget //3<CR>
-nnoremap <leader>gl :diffget //2<CR>
+let g:which_key_map['t'] = {
+      \ 'name' : '+terminal' ,
+      \ 'f' : [':FloatermNew fzf', 'fzf'],
+      \ 'g' : [':FloatermNew lazygit', 'git'],
+      \ 'p' : [':FloatermNew python', 'python'],
+      \ 'n' : [':FloatermNew node', 'node'],
+      \ 't' : [':FloatermToggle', 'toggle'],
+      \ 'h' : [':FloatermNew htop', 'htop'],
+      \ 'c' : ['', ''],
+      \ }
 
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent><nowait> <leader>er :<C-u>CocList diagnostics<CR>
-nmap <leader>fix :CocFix<CR>
+nnoremap <silent><nowait> <leader>ce :<C-u>CocList diagnostics<CR>
+nmap <leader>cr <Plug>(coc-rename)
+
+let g:which_key_map['c'] = {
+      \ 'name' : '+coc-commands',
+      \ 'e' : 'errors',
+      \ 'r' : 'rename',
+      \ }
+
+let g:which_key_map['g'] = {
+      \ 'name': '+git',
+      \ 'f' : [':GFiles', 'git files'],
+      \ 's' : [':G', 'git status'],
+      \ 'b' : [':GBranches', 'git branches'],
+      \ 'h' : [':diffget //3', 'merge left'],
+      \ 'l' : [':diffget //2', 'merge right'],
+      \ }
 
 " fzf setup
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
@@ -208,10 +240,7 @@ let g:fzf_branch_actions = {
       \}
 
 " COC Setup
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
@@ -256,11 +285,6 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -269,11 +293,6 @@ augroup mygroup
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)

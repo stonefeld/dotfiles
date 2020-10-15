@@ -88,15 +88,15 @@ keys = [
 ]
 
 group_names = [
-    ("WWW",     { 'layout': 'tile'     }),
-    ("DEV-1",   { 'layout': 'tile'     }),
-    ("DEV-2",   { 'layout': 'tile'     }),
-    ("DEV-3",   { 'layout': 'floating' }),
-    ("DOC",     { 'layout': 'floating' }),
-    ("MUS",     { 'layout': 'tile'     }),
-    ("CHAT",    { 'layout': 'tile'     }),
-    ("MAIL",    { 'layout': 'tile'     }),
-    ("TERM",    { 'layout': 'tile'     }),
+    ("WWW",     { 'layout': 'tile' }),
+    ("DEV-1",   { 'layout': 'tile' }),
+    ("DEV-2",   { 'layout': 'tile' }),
+    ("DEV-3",   { 'layout': 'tile' }),
+    ("DOC",     { 'layout': 'tile' }),
+    ("MUS",     { 'layout': 'tile' }),
+    ("CHAT",    { 'layout': 'tile' }),
+    ("MAIL",    { 'layout': 'tile' }),
+    ("TERM",    { 'layout': 'tile' }),
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -119,7 +119,6 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.Bsp(**layout_theme),
-    layout.Floating(**layout_theme),
     layout.Zoomy(**layout_theme),
     layout.Max(**layout_theme),
 ]
