@@ -157,11 +157,12 @@ set timeoutlen=500
 
 let g:which_key_map = {}
 
-nnoremap <C-q> :q!<CR>
+nnoremap <silent><leader>q :q<CR>
+nnoremap <silent><C-q> :q!<CR>
 
 let g:which_key_map = {
       \ 'w' : [':w', 'save-file'],
-      \ 'q' : [':q', 'quit-file'],
+      \ 'q' : 'quit-file',
       \ 'h' : [':wincmd h', 'window-left'],
       \ 'j' : [':wincmd j', 'window-down'],
       \ 'k' : [':wincmd k', 'window-up'],
