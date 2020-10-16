@@ -3,11 +3,18 @@ syntax on
 set spell
 set encoding=utf-8
 set noerrorbells
+set iskeyword+=-
+set formatoptions-=cro
+set ruler
 
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set smarttab
 set expandtab
+
+set splitbelow
+set splitright
+set showtabline=2
 
 set cursorline
 set nu
@@ -44,9 +51,6 @@ set noshowmode
 
 set colorcolumn=0
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-" Polyglot language resources disabled
-"let g:polyglot_disabled = ['javascript']
 
 call plug#begin('~/.local/share/nvim/site/plugged')
 
@@ -114,7 +118,9 @@ highlight pythonBoolean guifg=#8ec07c
 
 
 " NERDTree specific highlight overwrite
-highlight NERDTreeDir guifg=#fe8019
+highlight NERDTreeDir guifg=#fe8019 gui=bold
+highlight NERDTreeOpenable guifg=#8ec07c gui=bold
+highlight NERDTreeClosable guifg=#8ec07c gui=bold
 
 " Airline setup
 "let g:airline_theme='base16_gruvbox_dark_hard'
@@ -133,8 +139,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
+let g:NERDTreeDirArrowExpandable = ' +'
+let g:NERDTreeDirArrowCollapsible = ' -'
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F1>'
