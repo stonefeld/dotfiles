@@ -33,7 +33,7 @@ set incsearch
 set mouse=a
 set clipboard=unnamedplus
 
-set shell=/bin/bash
+set shell=/bin/zsh
 set cmdheight=2
 
 set autoread
@@ -117,11 +117,6 @@ highlight pythonBoolean guifg=#8ec07c
 " JavaScript specific highlight overwrite
 
 
-" NERDTree specific highlight overwrite
-highlight NERDTreeDir guifg=#fe8019 gui=bold
-highlight NERDTreeOpenable guifg=#8ec07c gui=bold
-highlight NERDTreeClosable guifg=#8ec07c gui=bold
-
 " Airline setup
 "let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline_theme='gruvbox'
@@ -139,21 +134,23 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = ' +'
-let g:NERDTreeDirArrowCollapsible = ' -'
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F1>'
-let g:floaterm_keymap_next   = '<F2>'
-let g:floaterm_keymap_prev   = '<F3>'
-let g:floaterm_keymap_new    = '<F4>'
+let g:floaterm_keymap_next = '<F2>'
+let g:floaterm_keymap_prev = '<F3>'
+let g:floaterm_keymap_new = '<F4>'
+tnoremap <silent><A-space> <C-\><C-n>:FloatermToggle<CR>
 
 let g:floaterm_gitcommit='floaterm'
+let g:floaterm_title=''
 let g:floaterm_autoinsert=1
 let g:floaterm_width=0.8
 let g:floaterm_height=0.8
 let g:floaterm_wintitle=0
-let g:floaterm_autoclose=1
+let g:floaterm_autoclose=2
 
 " Keyboard Shortcuts
 let mapleader = " "
@@ -195,6 +192,8 @@ let g:which_key_map['b'] = {
       \ '?' : ['Buffers', 'fzf-buffer'],
       \ }
 
+silent! unmap <leader>tc
+
 let g:which_key_map['t'] = {
       \ 'name' : '+terminal' ,
       \ 'f' : [':FloatermNew fzf', 'fzf'],
@@ -203,7 +202,6 @@ let g:which_key_map['t'] = {
       \ 'n' : [':FloatermNew node', 'node'],
       \ 't' : [':FloatermToggle', 'toggle'],
       \ 'h' : [':FloatermNew htop', 'htop'],
-      \ 'c' : ['', ''],
       \ }
 
 nnoremap <silent><nowait> <leader>ce :<C-u>CocList diagnostics<CR>
