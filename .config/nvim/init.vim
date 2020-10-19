@@ -94,7 +94,8 @@ if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-let g:gruvbox_invert_selection='0'
+let g:gruvbox_invert_selection=0
+let g:gruvbox_italic=1
 
 " Colorscheme selection
 set termguicolors
@@ -118,7 +119,6 @@ highlight pythonBoolean guifg=#8ec07c
 
 
 " Airline setup
-"let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
