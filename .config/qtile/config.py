@@ -1,3 +1,14 @@
+#  _____ _               ____  _               __ _      _     _ 
+# |_   _| |__   ___  ___/ ___|| |_ __ _ _ __  / _(_) ___| | __| |
+#   | | | '_ \ / _ \/ _ \___ \| __/ _` | '_ \| |_| |/ _ \ |/ _` |
+#   | | | | | |  __/ (_) |__) | || (_| | | | |  _| |  __/ | (_| |
+#   |_| |_| |_|\___|\___/____/ \__\__,_|_| |_|_| |_|\___|_|\__,_|
+# 
+# Author: Theo Stanfield
+# Date: 23/09/2020
+# Git: https://github.com/TheoStanfield/dotfiles.git
+#
+
 import os
 import re
 import socket
@@ -312,9 +323,9 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[5],
-            foreground = colors_nord[2],
             font = 'Icons',
             fontsize = 40,
+            foreground = colors_nord[2],
             padding = 0,
             text = '\U0000F0D9'
         ),
@@ -382,11 +393,11 @@ def init_widgets_list():
             text = '\U0000F0D9'
         ),
         widget.TextBox(
-            text = '\U0000F5ED ',
+            background = colors_nord[3],
             fontsize = 16,
             foreground = '#000000',
-            background = colors_nord[3],
-            padding = 5
+            padding = 5,
+            text = '\U0000F5ED '
         ),
         widget.Clock(
             background = colors_nord[3],

@@ -65,7 +65,7 @@ alias diff='diff --color=auto'
 alias ip='ip -color=auto'
 alias dmesg='dmesg --color=always'
 
-alias edit='nvim'
+alias v='nvim'
 alias pacinstall="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias pacremove="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias lgit='lazygit'

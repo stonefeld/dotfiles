@@ -1,3 +1,14 @@
+"  _____ _               ____  _               __ _      _     _ 
+" |_   _| |__   ___  ___/ ___|| |_ __ _ _ __  / _(_) ___| | __| |
+"   | | | '_ \ / _ \/ _ \___ \| __/ _` | '_ \| |_| |/ _ \ |/ _` |
+"   | | | | | |  __/ (_) |__) | || (_| | | | |  _| |  __/ | (_| |
+"   |_| |_| |_|\___|\___/____/ \__\__,_|_| |_|_| |_|\___|_|\__,_|
+" 
+" Author: Theo Stanfield
+" Date: 23/09/2020
+" Git: https://github.com/TheoStanfield/dotfiles.git
+"
+
 syntax on
 
 set spell
@@ -15,6 +26,7 @@ set expandtab
 set splitbelow
 set splitright
 set showtabline=2
+set showmatch
 
 set cursorline
 set nu
@@ -54,19 +66,24 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.local/share/nvim/site/plugged')
 
-" Utils
+" Appereance
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
-Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'voldikss/vim-floaterm'
-
 Plug 'Yggdroot/indentLine'
+
+" Utils
 Plug 'liuchengxu/vim-which-key'
-Plug 'honza/vim-snippets'
+Plug 'voldikss/vim-floaterm'
+Plug 'mhinz/vim-startify'
+
 Plug 'jremmen/vim-ripgrep'
 Plug 'lyuts/rtags'
+
+" NERDTree
+Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -85,6 +102,7 @@ Plug 'phanviet/vim-monokai-pro'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -118,23 +136,68 @@ highlight pythonBoolean guifg=#8ec07c
 
 
 " Airline setup
-let g:airline_theme='gruvbox'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 let g:airline_symbols_ascii = 0
 let g:airline_detect_spell = 0
 let g:airline_detect_spelllang = 0
 
+" Python setup
+let g:python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
+
 " NERDTree setup
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <C-n> :NERDTreeToggle<CR>
+
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
+let g:NERDTreeWinPos = "right"
+let NERDTreeMinimalUI = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMouseMode = 3
+let NERDTreeWinSize = 45
+let NERDTreeNodeDelimiter="\u00b7"
+
+" NERDTree syntax highlight
+let g:NERDTreeLimitedSyntax = 1
+let g:NERDTreeHighlightCursorline = 0
+
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+
+let s:brown = "905532"
+let s:aqua =  "3AFFDB"
+let s:blue = "689FB6"
+let s:darkBlue = "44788E"
+let s:purple = "834F79"
+let s:lightPurple = "834F79"
+let s:red = "AE403F"
+let s:beige = "F5C06F"
+let s:yellow = "F09F17"
+let s:orange = "D4843E"
+let s:darkOrange = "F16529"
+let s:pink = "CB6F6F"
+let s:salmon = "EE6E73"
+let s:green = "8FAA54"
+let s:lightGreen = "31B53E"
+let s:white = "FFFFFF"
+let s:rspec_red = "FE405F"
+let s:git_orange = "F54D27"
+
+let g:NERDTreeExtensionHighlightColor = {}
+let g:NERDTreeExtensionHighlightColor['css'] = s:blue
+
+let g:NERDTreeExactMatchHighlightColor = {}
+let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange
+
+let g:NERDTreePatternMatchHighlightColor = {}
+let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red
+
+let g:WebDevIconsDefaultFolderSymbolColor = s:beige
+let g:WebDevIconsDefaultFileSymbolColor = s:blue
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F1>'
@@ -309,3 +372,13 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Startify setup
+let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_lists = [
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
