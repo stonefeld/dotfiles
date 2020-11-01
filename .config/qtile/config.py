@@ -328,21 +328,28 @@ def init_widgets_list():
             fontsize = 20,
             foreground = '#000000',
             padding = 0,
-            text = '\U0000F2E4 '
+            text = '\U0000F2E4'
         ),
         widget.Backlight(
             background = colors_nord[2],
             backlight_name = 'intel_backlight',
             foreground = '#000000',
             format = '{percent:2.0%}',
-            padding = 0
+            padding = 5
         ),
         widget.TextBox(
             background = colors_nord[2],
             fontsize = 16,
             foreground = '#000000',
-            padding = 0,
-            text = ' | \U0000F357 '
+            padding = 5,
+            text = '|'
+        ),
+        widget.TextBox(
+            background = colors_nord[2],
+            fontsize = 16,
+            foreground = '#000000',
+            padding = 5,
+            text = '\U0000F028 '
         ),
         widget.Volume(
             background = colors_nord[2],
@@ -406,10 +413,10 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[3],
-            fontsize = 14,
+            fontsize = 16,
             foreground = '#000000',
             padding = 0,
-            text = '\U0000F64F '
+            text = '\U0000E384 '
         ),
         widget.Clock(
             background = colors_nord[3],
