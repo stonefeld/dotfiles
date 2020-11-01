@@ -16,7 +16,7 @@ import subprocess
 from libqtile.config import Click, Drag, Group, Key, Screen
 from libqtile.config import ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile import bar, layout, widget, hook
+from libqtile import bar, layout, widget, hook, extension
 from typing import List
 
 mod = "mod4"
@@ -53,6 +53,7 @@ keys = [
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "h", lazy.layout.left()),
+    Key([mod], "Up", lazy.window.bring_to_front()),
 
     # Move windows in pane
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
@@ -117,10 +118,10 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layout_theme = {
-    "border_width": 2,
-    "margin": 7,
     "border_focus": "#E1ACff",
-    "border_normal": "#1D2330"
+    "border_normal": "#1D2330",
+    "border_width": 2,
+    "margin": 6,
 }
 
 layouts = [
@@ -191,10 +192,11 @@ def init_widgets_list():
             other_current_screen_border = colors[0],
             other_screen_border = colors[0],
             padding_x = 3,
-            padding_y = 3,
+            padding_y = 5,
             rounded = False,
             this_current_screen_border = colors[3],
-            this_screen_border = colors[4]
+            this_screen_border = colors[4],
+            use_mouse_wheel = False
         ),
         widget.Sep(
             background = colors[0],
@@ -215,11 +217,10 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors[0],
-            font = 'Icons',
-            fontsize = 40,
+            fontsize = 35,
             foreground = colors_nord[1],
             padding = 0,
-            text = '\U0000F0D9'
+            text = '\U0000E0B2'
         ),
         widget.TextBox(
             background = colors_nord[1],
@@ -231,7 +232,7 @@ def init_widgets_list():
                 'Button3': lambda qtile: qtile.cmd_spawn(myTerm + ' -e killall htop')
             },
             padding = 0,
-            text = ' \U0000F109  '
+            text = '\U0000F109  '
         ),
         widget.Memory(
             background = colors_nord[1],
@@ -262,23 +263,17 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[1],
-            font = 'Icons',
-            fontsize = 40,
+            fontsize = 35,
             foreground = colors_nord[6],
             padding = 0,
-            text = '\U0000F0D9'
+            text = '\U0000E0B2'
         ),
         widget.CurrentLayoutIcon(
             background = colors_nord[6],
             custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
             foreground = '#000000',
             padding = 0,
-            scale = 0.7
-        ),
-        widget.Sep(
-            background = colors_nord[6],
-            linewidth = 0,
-            padding = 2
+            scale = 0.6
         ),
         widget.CurrentLayout(
             background = colors_nord[6],
@@ -292,11 +287,10 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[6],
-            font = 'Icons',
-            fontsize = 40,
+            fontsize = 35,
             foreground = colors_nord[5],
             padding = 0,
-            text = '\U0000F0D9'
+            text = '\U0000E0B2'
         ),
         widget.TextBox(
             background = colors_nord[5],
@@ -304,7 +298,7 @@ def init_widgets_list():
             fontsize = 14,
             foreground = '#000000',
             padding = 0,
-            text = ' \U0000F09E  '
+            text = '\U0000F09E  '
         ),
         widget.Wlan(
             background = colors_nord[5],
@@ -319,15 +313,14 @@ def init_widgets_list():
         widget.Sep(
             background = colors_nord[5],
             linewidth = 0,
-            padding = 5
+            padding = 10
         ),
         widget.TextBox(
             background = colors_nord[5],
-            font = 'Icons',
-            fontsize = 40,
+            fontsize = 35,
             foreground = colors_nord[2],
             padding = 0,
-            text = '\U0000F0D9'
+            text = '\U0000E0B2'
         ),
         widget.TextBox(
             background = colors_nord[2],
@@ -335,7 +328,7 @@ def init_widgets_list():
             fontsize = 20,
             foreground = '#000000',
             padding = 0,
-            text = ' \U0000F2E4 '
+            text = '\U0000F2E4 '
         ),
         widget.Backlight(
             background = colors_nord[2],
@@ -386,17 +379,16 @@ def init_widgets_list():
         ),
         widget.TextBox(
             background = colors_nord[2],
-            font = 'Icons',
-            fontsize = 40,
+            fontsize = 35,
             foreground = colors_nord[3],
             padding = 0,
-            text = '\U0000F0D9'
+            text = '\U0000E0B2'
         ),
         widget.TextBox(
             background = colors_nord[3],
             fontsize = 16,
             foreground = '#000000',
-            padding = 5,
+            padding = 2,
             text = '\U0000F5ED '
         ),
         widget.Clock(
@@ -437,7 +429,8 @@ def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     widgets_screen1.append(widget.Systray(
         background = colors[0],
-        padding = 5
+        icon_size = 20,
+        padding = 2
     ))
     return widgets_screen1
 
@@ -447,8 +440,8 @@ def init_widgets_screen2():
 
 def init_screens():
     return [
-        Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=20)),
-        Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=20))
+        Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=25, margin=6)),
+        Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=25, margin=6))
     ]
 
 if __name__ in ["config", "__main__"]:
@@ -467,7 +460,7 @@ dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
-bring_front_click = False
+bring_front_click = True
 cursor_warp = False
 
 floating_layout = layout.Floating(float_rules=[
@@ -505,11 +498,6 @@ floating_types = [
     "utility", "menu", "dropdown_menu", "popup_menu", "tooltip,dock",
 ]
 
-@hook.subscribe.startup
-def startup():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
-
 @hook.subscribe.client_new
 def set_floating(window):
     if (window.window.get_wm_transient_for()
@@ -523,10 +511,15 @@ def floating_dialogs(window):
     if dialog or transient:
         window.floating = True
 
-@hook.subscribe.client_focus
-def bring_to_front_focus_client(window):
-    if window.floating:
-        window.cmd_bring_to_front()
+# @hook.subscribe.client_focus
+# def bring_to_front_focus_client(window):
+#     if window.floating:
+#         window.cmd_bring_to_front()
+
+@hook.subscribe.startup
+def startup():
+    home = os.path.expanduser('~')
+    subprocess.call([home + '/.config/qtile/autostart.sh'])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

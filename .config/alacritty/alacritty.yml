@@ -35,7 +35,7 @@ window:
   # by DPI and the specified value is always added at both opposing sides.
   padding:
     x: 1
-    y: 1
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -135,7 +135,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 8.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -358,8 +358,8 @@ background_opacity: 0.9
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
+shell:
+  program: /bin/zsh
 #  args:
 #    - --login
 
@@ -726,3 +726,5 @@ colors:
      magenta: '#B48EAD'
      cyan:    '#8FBCBB'
      white:   '#ECEFF4'
+
+WINIT_X11_SCALE_FACTOR: 1

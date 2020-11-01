@@ -131,6 +131,7 @@ highlight pythonImport guifg=#d3869b
 highlight pythonBuiltinFunc guifg=#b8bb26
 highlight pythonOperator guifg=#fe8019
 highlight pythonBoolean guifg=#8ec07c
+highlight pythonDot guifg=#fe8019
 
 " JavaScript specific highlight overwrite
 
@@ -139,6 +140,10 @@ highlight pythonBoolean guifg=#8ec07c
 let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = '|'
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 let g:airline_symbols_ascii = 0
 let g:airline_detect_spell = 0
@@ -150,7 +155,7 @@ let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
 
 " NERDTree setup
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <C-n> :NERDTreeToggle<CR>
+map <silent><C-n> :NERDTreeToggle<CR>
 
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
@@ -158,8 +163,7 @@ let g:NERDTreeWinPos = "right"
 let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMouseMode = 3
-let NERDTreeWinSize = 45
-let NERDTreeNodeDelimiter="\u00b7"
+let NERDTreeWinSize = 40
 
 " NERDTree syntax highlight
 let g:NERDTreeLimitedSyntax = 1

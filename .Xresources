@@ -1,6 +1,8 @@
 Xcursor.theme: oxy-honeycomb
 Xcursor.size: 32
 
+Xft.dpi: 105 
+
 XTerm*renderFont: true
 XTerm*faceName: xft:Fantasque Sans Mono, \
                 xft:JoyPixels:size=12, \
