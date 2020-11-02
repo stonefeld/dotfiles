@@ -45,7 +45,7 @@ set incsearch
 set mouse=a
 set clipboard=unnamedplus
 
-set shell=/bin/zsh
+set shell=/usr/bin/fish
 set cmdheight=2
 
 set autoread
