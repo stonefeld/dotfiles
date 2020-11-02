@@ -3,6 +3,7 @@
 !.config/alacritty/
 !.config/autorandr/postswitch
 !.config/dunst/
+!.config/fish/
 !.config/nvim/init.vim
 !.config/picom/picom.conf
 !.config/qtile/autostart.sh
