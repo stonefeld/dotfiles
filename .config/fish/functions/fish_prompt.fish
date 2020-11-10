@@ -6,31 +6,25 @@ function fish_prompt
   set -g red (set_color -o red)
   set -g blue (set_color -o blue)
   set -l green (set_color -o green)
-  set -g normal (set_color white)
+  set -g normal (set_color -o white)
 
   set -l ahead (_git_ahead)
   set -g whitespace ' '
 
   if test $last_status = 0
-    set initial_indicator "$green➜"
+    #set initial_indicator "$green➜"
+    set status_indicator "$green>$green>"
   else
-    set initial_indicator "$red➜"
+    #set initial_indicator "$red➜"
+    set status_indicator "$red>$red>"
   end
-  set status_indicator "$green>$yellow>"
-  set -l cwd $normal"[ " $blue(basename (prompt_pwd))$normal" ]"
+  set -l cwd $normal"[ "$blue(basename (prompt_pwd))$normal" ]"
 
   if [ (_git_branch_name) ]
-    if test (_git_branch_name) = 'master'
-      set -l git_branch (_git_branch_name)
-      set git_info "$normal ($red$git_branch$normal)"
-    else
-      set -l git_branch (_git_branch_name)
-      set git_info "$normal ($blue$git_branch$normal)"
-    end
     set -l git_branch (_git_branch_name)
+    set git_info "$normal ($red$git_branch$normal)"
     if [ (_is_git_dirty) ]
       set -l dirty "$yellow ✗"
-      set git_info "$normal ($red$git_branch$normal)"
       set git_info "$git_info$dirty"
     else
       set git_info "$normal ($green$git_branch$normal)"
@@ -41,7 +35,7 @@ function fish_prompt
     echo The last command took (math "$CMD_DURATION/1000") seconds.
   end
 
-  echo -n -s $initial_indicator $whitespace $cwd $git_info $whitespace $ahead $status_indicator $whitespace
+  echo -n -s $cwd $git_info $whitespace $ahead $status_indicator $whitespace
 
 end
 
