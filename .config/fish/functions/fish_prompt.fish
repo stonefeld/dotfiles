@@ -1,88 +1,74 @@
 function fish_prompt
-    set -l __last_command_exit_status $status
 
-    if not set -q -g __fish_robbyrussell_functions_defined
-        set -g __fish_robbyrussell_functions_defined
-        function _git_branch_name
-            set -l branch (git symbolic-ref --quiet HEAD 2>/dev/null)
-            if set -q branch[1]
-                echo (string replace -r '^refs/heads/' '' $branch)
-            else
-                echo (git rev-parse --short HEAD 2>/dev/null)
-            end
-        end
+  set -l last_status $status
+  set -l cyan (set_color -o 98be65)
+  set -l yellow (set_color -o yellow)
+  set -g red (set_color -o red)
+  set -g blue (set_color -o blue)
+  set -l green (set_color -o green)
+  set -g normal (set_color white)
 
-        function _is_git_dirty
-            echo (git status -s --ignore-submodules=dirty 2>/dev/null)
-        end
+  set -l ahead (_git_ahead)
+  set -g whitespace ' '
 
-        function _is_git_repo
-            type -q git
-            or return 1
-            git rev-parse --git-dir >/dev/null 2>&1
-        end
+  if test $last_status = 0
+    set initial_indicator "$green➜"
+  else
+    set initial_indicator "$red➜"
+  end
+  set status_indicator "$green>$yellow>"
+  set -l cwd $normal"[ " $blue(basename (prompt_pwd))$normal" ]"
 
-        function _hg_branch_name
-            echo (hg branch 2>/dev/null)
-        end
-
-        function _is_hg_dirty
-            echo (hg status -mard 2>/dev/null)
-        end
-
-        function _is_hg_repo
-            fish_print_hg_root >/dev/null
-        end
-
-        function _repo_branch_name
-            _$argv[1]_branch_name
-        end
-
-        function _is_repo_dirty
-            _is_$argv[1]_dirty
-        end
-
-        function _repo_type
-            if _is_hg_repo
-                echo 'hg'
-                return 0
-            else if _is_git_repo
-                echo 'git'
-                return 0
-            end
-            return 1
-        end
+  if [ (_git_branch_name) ]
+    if test (_git_branch_name) = 'master'
+      set -l git_branch (_git_branch_name)
+      set git_info "$normal ($red$git_branch$normal)"
+    else
+      set -l git_branch (_git_branch_name)
+      set git_info "$normal ($blue$git_branch$normal)"
     end
-
-    set -l cyan (set_color -o cyan)
-    set -l yellow (set_color -o yellow)
-    set -l red (set_color -o red)
-    set -l green (set_color -o green)
-    set -l blue (set_color -o blue)
-    set -l normal (set_color normal)
-
-    set -l arrow_color "$green"
-    if test $__last_command_exit_status != 0
-        set arrow_color "$red"
+    set -l git_branch (_git_branch_name)
+    if [ (_is_git_dirty) ]
+      set -l dirty "$yellow ✗"
+      set git_info "$normal ($red$git_branch$normal)"
+      set git_info "$git_info$dirty"
+    else
+      set git_info "$normal ($green$git_branch$normal)"
     end
+  end
+  # Notify if a command took more than 5 minutes
+  if [ "$CMD_DURATION" -gt 300000 ]
+    echo The last command took (math "$CMD_DURATION/1000") seconds.
+  end
 
-    set -l arrow "$arrow_color➜ "
-    if test "$USER" = 'root'
-        set arrow "$arrow_color# "
-    end
+  echo -n -s $initial_indicator $whitespace $cwd $git_info $whitespace $ahead $status_indicator $whitespace
 
-    set -l cwd $cyan(basename (prompt_pwd))
+end
 
-    if set -l repo_type (_repo_type)
-        set -l repo_branch $red(_repo_branch_name $repo_type)
-        set repo_info "$blue $repo_type:($repo_branch$blue)"
+function _git_ahead
+  set -l commits (command git rev-list --left-right '@{upstream}...HEAD' ^/dev/null)
+  if [ $status != 0 ]
+    return
+  end
+  set -l behind (count (for arg in $commits; echo $arg; end | grep '^<'))
+  set -l ahead  (count (for arg in $commits; echo $arg; end | grep -v '^<'))
+  switch "$ahead $behind"
+    case ''     # no upstream
+    case '0 0'  # equal to upstream
+      return
+    case '* 0'  # ahead of upstream
+      echo "$blue↑$normal_c$ahead$whitespace"
+    case '0 *'  # behind upstream
+      echo "$red↓$normal_c$behind$whitespace"
+    case '*'    # diverged from upstream
+      echo "$blue↑$normal$ahead $red↓$normal_c$behind$whitespace"
+  end
+end
 
-        set -l dirty (_is_repo_dirty $repo_type)
-        if test -n "$dirty"
-            set -l dirty "$yellow ✗"
-            set repo_info "$repo_info$dirty"
-        end
-    end
+function _git_branch_name
+  echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
+end
 
-    echo -n -s $arrow ' '$cwd $repo_info $normal ' '
+function _is_git_dirty
+  echo (command git status -s --ignore-submodules=dirty ^/dev/null)
 end

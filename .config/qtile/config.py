@@ -15,10 +15,10 @@ import os
 import re
 import socket
 import subprocess
+from libqtile import bar, widget, layout, hook, extension
 from libqtile.config import Click, Drag, Group, Key, Screen
 from libqtile.config import ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile import bar, layout, widget, hook, extension
 from typing import List
 
 mod = "mod4"
@@ -97,20 +97,20 @@ keys = [
     Key([mod, "shift"], "period", lazy.spawn("playerctl next")),
     Key([mod, "shift"], "comma", lazy.spawn("playerctl previous")),
 
-    # Screeshot
+    # Screenshot
     Key([], "Print", lazy.spawn("/usr/bin/scrot " + home + "/Pictures/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png")),
 ]
 
 group_names = [
-    ("WWW",     { 'layout': 'tile' }),
-    ("DEV-1",   { 'layout': 'tile' }),
-    ("DEV-2",   { 'layout': 'tile' }),
-    ("DEV-3",   { 'layout': 'tile' }),
-    ("DOC",     { 'layout': 'tile' }),
-    ("MUS",     { 'layout': 'tile' }),
-    ("CHAT",    { 'layout': 'tile' }),
-    ("MAIL",    { 'layout': 'tile' }),
-    ("TERM",    { 'layout': 'tile' }),
+    ("WWW",     { 'layout': 'monadtall' }),
+    ("DEV-1",   { 'layout': 'monadtall' }),
+    ("DEV-2",   { 'layout': 'monadtall' }),
+    ("DEV-3",   { 'layout': 'monadtall' }),
+    ("DOC",     { 'layout': 'monadtall' }),
+    ("MUS",     { 'layout': 'monadtall' }),
+    ("CHAT",    { 'layout': 'monadtall' }),
+    ("MAIL",    { 'layout': 'monadtall' }),
+    ("TERM",    { 'layout': 'monadtall' }),
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -120,17 +120,17 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layout_theme = {
-    "border_focus": "#A1E1F1",
+    "border_focus": "#c792ea",
     "border_normal": "#1D2330",
     "border_width": 2,
     "margin": 6,
 }
 
 layouts = [
-    layout.Tile(**layout_theme),
+    layout.MonadTall(**layout_theme),
     layout.Columns(num_columns=2, autosplit=True, **layout_theme),
     layout.Stack(num_stacks=2, **layout_theme),
-    layout.MonadTall(**layout_theme),
+    layout.Tile(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.Bsp(**layout_theme),
     layout.Zoomy(**layout_theme),
@@ -174,6 +174,7 @@ def init_widgets_list():
             fontsize = 16,
             foreground = colors_nord[1],
             mouse_callbacks = {
+                'Button1': lambda qtile: qtile.cmd_spawn("/usr/bin/xmenu &"),
                 'Button3': lambda qtile: qtile.cmd_spawn("/usr/bin/xmenu &"),
             },
             padding = 10,
@@ -472,39 +473,42 @@ follow_mouse_focus = True
 bring_front_click = True
 cursor_warp = False
 
-floating_layout = layout.Floating(float_rules=[
+floating_layout = layout.Floating(**layout_theme, float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
-    {"role":    'pop-up'},
-    {'wname':   'branchdialog'},  # gitk
-    {'wname':   'pinentry'},  # GPG key password entry
-    {'wname':   'Discord Updater'},
-    {'wmclass': 'confirm'},
-    {'wmclass': 'dialog'},
-    {'wmclass': 'download'},
-    {'wmclass': 'error'},
-    {'wmclass': 'file_progress'},
-    {'wmclass': 'notification'},
-    {'wmclass': 'splash'},
-    {'wmclass': 'toolbar'},
-    {'wmclass': 'confirmreset'},  # gitk
-    {'wmclass': 'makebranch'},  # gitk
-    {'wmclass': 'maketag'},  # gitk
-    {'wmclass': 'ssh-askpass'},  # ssh-askpass
-    {'wmclass': 'VirtualBox Manager'},
-    {'wmclass': 'lxappearance'},
-    {'wmclass': 'Thunar'},
-    {'wmclass': 'pavucontrol'},
-    {'wmclass': 'Msgcompose'},
-    {'wmclass': 'nitrogen'},
-    {'wmclass': 'xarchiver'},
-    {'wmclass': 'gpicview'}
+    { "role":    'pop-up'             },
+    { 'wname':   'branchdialog'       },
+    { 'wname':   'pinentry'           },
+    { 'wname':   'Discord Updater'    },
+    { 'wmclass': 'confirm'            },
+    { 'wmclass': 'dialog'             },
+    { 'wmclass': 'download'           },
+    { 'wmclass': 'error'              },
+    { 'wmclass': 'file_progress'      },
+    { 'wmclass': 'notification'       },
+    { 'wmclass': 'splash'             },
+    { 'wmclass': 'toolbar'            },
+    { 'wmclass': 'confirmreset'       },
+    { 'wmclass': 'makebranch'         },
+    { 'wmclass': 'maketag'            },
+    { 'wmclass': 'ssh-askpass'        },
+    { 'wmclass': 'VirtualBox Manager' },
+    { 'wmclass': 'lxappearance'       },
+    { 'wmclass': 'Thunar'             },
+    { 'wmclass': 'pavucontrol'        },
+    { 'wmclass': 'Msgcompose'         },
+    { 'wmclass': 'nitrogen'           },
+    { 'wmclass': 'xarchiver'          },
+    { 'wmclass': 'gpicview'           },
+    { 'wmclass': 'Leafpad'            },
+    { 'wmclass': 'Galculator'         },
+    { 'wmclass': 'qutebrowser'        },
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 floating_types = [
     "notification", "toolbar", "splash", "dialog",
-    "utility", "menu", "dropdown_menu", "popup_menu", "tooltip,dock",
+    "utility", "menu", "dropdown_menu", "popup_menu", "tooltip" ,"dock",
 ]
 
 @hook.subscribe.client_new
@@ -519,11 +523,6 @@ def floating_dialogs(window):
     transient = window.window.get_wm_transient_for()
     if dialog or transient:
         window.floating = True
-
-# @hook.subscribe.client_focus
-# def bring_to_front_focus_client(window):
-#     if window.floating:
-#         window.cmd_bring_to_front()
 
 @hook.subscribe.startup
 def startup():

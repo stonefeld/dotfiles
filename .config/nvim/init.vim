@@ -78,7 +78,10 @@ Plug 'Yggdroot/indentLine'
 " Utils
 Plug 'liuchengxu/vim-which-key'
 Plug 'voldikss/vim-floaterm'
-Plug 'mhinz/vim-startify'
+
+" Debugging
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
 
 Plug 'jremmen/vim-ripgrep'
 Plug 'lyuts/rtags'
@@ -139,7 +142,7 @@ highlight pythonDot guifg=#fe8019
 
 
 " Airline setup
-let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:airline_theme = 'deus'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_left_sep = ''
@@ -207,10 +210,7 @@ let g:WebDevIconsDefaultFileSymbolColor = s:blue
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F1>'
-let g:floaterm_keymap_next = '<F2>'
-let g:floaterm_keymap_prev = '<F3>'
-let g:floaterm_keymap_new = '<F4>'
-tnoremap <silent><A-space> <C-\><C-n>:FloatermToggle<CR>
+"tnoremap <silent><A-space> <C-\><C-n>:FloatermToggle<CR>
 
 let g:floaterm_gitcommit='floaterm'
 let g:floaterm_title=''
@@ -378,13 +378,3 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Startify setup
-let g:startify_session_dir = '~/.config/nvim/session'
-let g:startify_lists = [
-      \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ ]

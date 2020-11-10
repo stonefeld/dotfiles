@@ -1,7 +1,13 @@
 Xcursor.theme: oxy-honeycomb
 Xcursor.size: 32
 
-Xft.dpi: 105 
+Xft.dpi: 105
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
 
 XTerm*renderFont: true
 XTerm*faceName: xft:Fantasque Sans Mono, \
