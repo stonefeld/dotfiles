@@ -13,7 +13,7 @@
 
 syntax on
 
-set spell
+set nospell
 set encoding=utf-8
 set noerrorbells
 set iskeyword+=-
@@ -64,7 +64,6 @@ endif
 set noshowmode
 
 set colorcolumn=0
-highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.local/share/nvim/site/plugged')
 
@@ -104,6 +103,7 @@ Plug 'sheerun/vim-polyglot'
 " Colorschemes
 Plug 'gruvbox-community/gruvbox'
 Plug 'phanviet/vim-monokai-pro'
+Plug 'arcticicestudio/nord-vim'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -122,27 +122,31 @@ let g:gruvbox_italic=1
 
 " Colorscheme selection
 set termguicolors
-colorscheme gruvbox
+colorscheme nord
 set background=dark
 
-" General highlight overwrite
-highlight String guifg=#fabd2f
-highlight Identifier guifg=#d3869b
-highlight Function guifg=#b8bb26
-highlight Structure guifg=#83a598
+"" General highlight overwrite
+"highlight String guifg=#fabd2f
+"highlight Identifier guifg=#d3869b
+"highlight Function guifg=#b8bb26
+"highlight Structure guifg=#83a598
+"
+"" Python specific highlight overwrite
+"highlight pythonImport guifg=#d3869b
+"highlight pythonBuiltinFunc guifg=#b8bb26
+"highlight pythonOperator guifg=#fe8019
+"highlight pythonBoolean guifg=#8ec07c
+"highlight pythonDot guifg=#fe8019
+"
+"" JavaScript specific highlight overwrite
+"
 
-" Python specific highlight overwrite
-highlight pythonImport guifg=#d3869b
-highlight pythonBuiltinFunc guifg=#b8bb26
-highlight pythonOperator guifg=#fe8019
-highlight pythonBoolean guifg=#8ec07c
-highlight pythonDot guifg=#fe8019
-
-" JavaScript specific highlight overwrite
-
+highlight Normal guibg=none
+highlight NonText guibg=none
+highlight Comment gui=italic
 
 " Airline setup
-let g:airline_theme = 'deus'
+let g:airline_theme = 'nord'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_left_sep = ''
@@ -167,7 +171,6 @@ let g:NERDTreeDirArrowCollapsible = '-'
 let g:NERDTreeWinPos = "right"
 let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMouseMode = 3
 let NERDTreeWinSize = 40
 
 " NERDTree syntax highlight
@@ -177,24 +180,24 @@ let g:NERDTreeHighlightCursorline = 0
 let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 
-let s:brown = "905532"
-let s:aqua =  "3AFFDB"
-let s:blue = "689FB6"
-let s:darkBlue = "44788E"
-let s:purple = "834F79"
-let s:lightPurple = "834F79"
-let s:red = "AE403F"
-let s:beige = "F5C06F"
-let s:yellow = "F09F17"
-let s:orange = "D4843E"
-let s:darkOrange = "F16529"
-let s:pink = "CB6F6F"
-let s:salmon = "EE6E73"
-let s:green = "8FAA54"
-let s:lightGreen = "31B53E"
-let s:white = "FFFFFF"
-let s:rspec_red = "FE405F"
-let s:git_orange = "F54D27"
+let s:brown = "#905532"
+let s:aqua =  "#3AFFDB"
+let s:blue = "#689FB6"
+let s:darkBlue = "#44788E"
+let s:purple = "#834F79"
+let s:lightPurple = "#834F79"
+let s:red = "#AE403F"
+let s:beige = "#F5C06F"
+let s:yellow = "#F09F17"
+let s:orange = "#D4843E"
+let s:darkOrange = "#F16529"
+let s:pink = "#CB6F6F"
+let s:salmon = "#EE6E73"
+let s:green = "#8FAA54"
+let s:lightGreen = "#31B53E"
+let s:white = "#FFFFFF"
+let s:rspec_red = "#FE405F"
+let s:git_orange = "#F54D27"
 
 let g:NERDTreeExtensionHighlightColor = {}
 let g:NERDTreeExtensionHighlightColor['css'] = s:blue

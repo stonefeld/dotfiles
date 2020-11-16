@@ -48,7 +48,6 @@ keys = [
 
     # Switch window focus to other pane(s) of stack
     Key([mod], "space", lazy.layout.next()),
-    Key([mod], "r", lazy.layout.next()),
 
     # Switch between windows in current stack pane
     Key([mod], "j", lazy.layout.down()),
@@ -89,9 +88,9 @@ keys = [
 
     # Rofi commands
     Key([mod], "s", lazy.spawn("rofi -show drun")),
-    Key([mod], "r", lazy.spawn("rofi -show run")),
-    Key([mod], "c", lazy.spawn("rofi -show calc")),
-    Key(["mod1"], "Tab", lazy.spawn("rofi -show window")),
+    Key([mod], "r", lazy.spawn("dmenu_run -b -m eDP-1")),
+    Key([mod], "c", lazy.spawn("galculator")),
+    Key(["mod1"], "Tab", lazy.spawn("rofi -show windowcd")),
 
     # Playerctl commands
     Key([mod, "shift"], "period", lazy.spawn("playerctl next")),
@@ -120,7 +119,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layout_theme = {
-    "border_focus": "#c792ea",
+    "border_focus": "#88c0d0",
     "border_normal": "#1D2330",
     "border_width": 2,
     "margin": 6,
@@ -131,8 +130,8 @@ layouts = [
     layout.Columns(num_columns=2, autosplit=True, **layout_theme),
     layout.Stack(num_stacks=2, **layout_theme),
     layout.Tile(**layout_theme),
-    layout.MonadWide(**layout_theme),
     layout.Bsp(**layout_theme),
+    layout.Floating(**layout_theme),
     layout.Zoomy(**layout_theme),
     layout.Max(**layout_theme),
 ]
@@ -206,13 +205,7 @@ def init_widgets_list():
             linewidth = 0,
             padding = 20
         ),
-        widget.WindowName(
-            background = colors[0],
-            font = "Dejavu Sans Mono",
-            fontsize = 0,
-            foreground = colors[6],
-            padding = 0
-        ),
+        widget.Spacer(bar.STRETCH),
         widget.Sep(
             background = colors[0],
             linewidth = 0,
@@ -446,6 +439,7 @@ def init_widgets_screen1():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
+    widgets_screen2.remove(widgets_screen2[0])
     return widgets_screen2
 
 def init_screens():

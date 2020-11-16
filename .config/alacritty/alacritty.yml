@@ -34,8 +34,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 11
-    y: 11
+    x: 7
+    y: 7
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -163,8 +163,8 @@ font:
 #colors:
   # Default colors
   #primary:
-  #  background: '0x292d3e'
-  #  foreground: '0xbbc5ff'
+    #background: '0x292d3e'
+    #foreground: '0xbbc5ff'
 
     # Bright and dim foreground colors
     #
@@ -700,31 +700,31 @@ key_bindings:
 
 # Colors (Nord)
 colors:
-   # Default colors
-   primary:
-     background: '#2E3440'
-     foreground: '#D8DEE9'
+  # Default colors
+  primary:
+    background: '#2E3440'
+    foreground: '#D8DEE9'
 
-   # Normal colors
-   normal:
-     black:   '#3B4252'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#88C0D0'
-     white:   '#E5E9F0'
+  # Normal colors
+  normal:
+    black:   '#3B4252'
+    red:     '#BF616A'
+    green:   '#A3BE8C'
+    yellow:  '#EBCB8B'
+    blue:    '#81A1C1'
+    magenta: '#B48EAD'
+    cyan:    '#88C0D0'
+    white:   '#E5E9F0'
 
-   # Bright colors
-   bright:
-     black:   '#4C566A'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#8FBCBB'
-     white:   '#ECEFF4'
+  # Bright colors
+  bright:
+    black:   '#4C566A'
+    red:     '#BF616A'
+    green:   '#A3BE8C'
+    yellow:  '#EBCB8B'
+    blue:    '#81A1C1'
+    magenta: '#B48EAD'
+    cyan:    '#8FBCBB'
+    white:   '#ECEFF4'
 
 WINIT_X11_SCALE_FACTOR: 1

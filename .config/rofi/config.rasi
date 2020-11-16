@@ -1,25 +1,25 @@
 configuration {
-	modi: "window,drun,run,calc";
+	modi: "windowcd,drun,run";
 /*	width: 50;*/
-/*	lines: 15;*/
+	lines: 15;
 /*	columns: 1;*/
-/*	font: "mono 12";*/
+	font: "Ubuntu Sans 14";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
-/*	fixed-num-lines: true;*/
+	fixed-num-lines: true;
 	show-icons: true;
-/*	terminal: "rofi-sensible-terminal";*/
-/*	ssh-client: "ssh";*/
+	terminal: "alacritty";
+	ssh-client: "open-ssh";
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*	run-command: "{cmd}";*/
 /*	run-list-command: "";*/
-/*	run-shell-command: "{terminal} -e {cmd}";*/
+	run-shell-command: "{terminal} -e {cmd}";
 /*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
-	icon-theme: "Papirus";
+	icon-theme: "Papirus-Dark";
 /*	drun-match-fields: "name,generic,exec,categories,keywords";*/
 /*	drun-categories: ;*/
 /*	drun-show-actions: false;*/
@@ -31,12 +31,12 @@ configuration {
 /*	sorting-method: "normal";*/
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
-/*	sidebar-mode: false;*/
+	sidebar-mode: false;
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-/*	combi-modi: "window,run";*/
+	combi-modi: "";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 	m: "eDP-1";
@@ -50,12 +50,12 @@ configuration {
 /*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/
-/*	scroll-method: 0;*/
+	scroll-method: 0;
 /*	fake-background: "screenshot";*/
 /*	window-format: "{w}    {c}   {t}";*/
-/*	click-to-exit: true;*/
+	click-to-exit: true;
 /*	show-match: true;*/
-/*	theme: ;*/
+	theme: "/home/master/.config/rofi/themes/clean.rasi";
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
@@ -64,31 +64,31 @@ configuration {
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
 /*	cache-dir: ;*/
-/*	window-thumbnail: false;*/
+	window-thumbnail: true;
 /*	drun-use-desktop-cache: false;*/
 /*	drun-reload-desktop-cache: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-/*	display-window: ;*/
+	display-window: "Windows";
 /*	display-windowcd: ;*/
-/*	display-run: ;*/
+	display-run: "Run";
 /*	display-ssh: ;*/
-/*	display-drun: ;*/
+	display-drun: "Apps";
 /*	display-combi: ;*/
 /*	display-keys: ;*/
-/*	display-calc: ;*/
+	display-calc: "Calculator";
 	kb-primary-paste: "Control+V,Shift+Insert";
 /*	kb-secondary-paste: "Control+v,Insert";*/
 	kb-clear-line: "Control+w";
 	kb-move-front: "Control+a";
 	kb-move-end: "Control+e";
-/*	kb-move-word-back: "Alt+b,Control+Left";*/
-/*	kb-move-word-forward: "Alt+f,Control+Right";*/
-/*	kb-move-char-back: "Left,Control+b";*/
-/*	kb-move-char-forward: "Right,Control+f";*/
+	kb-move-word-back: "Alt+b";
+	kb-move-word-forward: "Alt+f";
+	kb-move-char-back: "Control+b";
+	kb-move-char-forward: "Control+f";
 /*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
 /*	kb-remove-word-forward: "Control+Alt+d";*/
 /*	kb-remove-char-forward: "Delete,Control+d";*/
-/*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
+	kb-remove-char-back: "BackSpace,Shift+BackSpace";
 	kb-remove-to-eol: "";
 /*	kb-remove-to-sol: "Control+u";*/
 	kb-accept-entry: "Control+m,Return,KP_Enter";
@@ -97,8 +97,8 @@ configuration {
 /*	kb-delete-entry: "Shift+Delete";*/
 /*	kb-mode-next: "Shift+Right,Control+Tab";*/
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
-/*	kb-row-left: "Control+Page_Up";*/
-/*	kb-row-right: "Control+Page_Down";*/
+	kb-row-left: "Left,Control+h";
+	kb-row-right: "Right,Control+l";
 	kb-row-up: "Up,Control+k";
 	kb-row-down: "Down,Control+j";
 /*	kb-row-tab: "Tab";*/
@@ -141,12 +141,11 @@ configuration {
 /*	kb-select-8: "Super+8";*/
 /*	kb-select-9: "Super+9";*/
 /*	kb-select-10: "Super+0";*/
-/*	ml-row-left: "ScrollLeft";*/
-/*	ml-row-right: "ScrollRight";*/
-/*	ml-row-up: "ScrollUp";*/
-/*	ml-row-down: "ScrollDown";*/
-/*	me-select-entry: "MousePrimary";*/
-/*	me-accept-entry: "MouseDPrimary";*/
+	ml-row-left: "ScrollLeft";
+	ml-row-right: "ScrollRight";
+	ml-row-up: "ScrollUp";
+	ml-row-down: "ScrollDown";
+	me-select-entry: "MouseDPrimary";
+	me-accept-entry: "MousePrimary";
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
-@import "/home/master/.config/rofi/themes/slate.rasi"

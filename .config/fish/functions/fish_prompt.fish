@@ -1,33 +1,34 @@
 function fish_prompt
 
   set -l last_status $status
-  set -l cyan (set_color -o 98be65)
-  set -l yellow (set_color -o yellow)
-  set -g red (set_color -o red)
-  set -g blue (set_color -o blue)
-  set -l green (set_color -o green)
-  set -g normal (set_color -o white)
+  set -l yellow (set_color -o "#EBCB8B")
+  set -g red (set_color -o "#BF616A")
+  set -g blue (set_color -o "#81A1C1")
+  set -g cyan (set_color -o "#8FBCBB")
+  set -l green (set_color -o "#A3BE8C")
+  set -g white (set_color -o "#D8DEE9")
+  set -g normal (set_color brwhite)
 
   set -l ahead (_git_ahead)
   set -g whitespace ' '
 
   if test $last_status = 0
     #set initial_indicator "$green➜"
-    set status_indicator "$green>$green>"
+    set status_indicator "$blue>>$normal"
   else
     #set initial_indicator "$red➜"
-    set status_indicator "$red>$red>"
+    set status_indicator "$red>>$normal"
   end
-  set -l cwd $normal"[ "$blue(basename (prompt_pwd))$normal" ]"
+  set -l cwd $white"[ "$blue(basename (prompt_pwd))$white" ]"
 
   if [ (_git_branch_name) ]
     set -l git_branch (_git_branch_name)
-    set git_info "$normal ($red$git_branch$normal)"
+    set git_info "$white ($cyan$git_branch$white)"
     if [ (_is_git_dirty) ]
-      set -l dirty "$yellow ✗"
+      set -l dirty "$cyan ✗"
       set git_info "$git_info$dirty"
     else
-      set git_info "$normal ($green$git_branch$normal)"
+      set git_info "$white ($blue$git_branch$white)"
     end
   end
   # Notify if a command took more than 5 minutes
@@ -35,7 +36,7 @@ function fish_prompt
     echo The last command took (math "$CMD_DURATION/1000") seconds.
   end
 
-  echo -n -s $cwd $git_info $whitespace $ahead $status_indicator $whitespace
+  echo -n -s $cwd $git_info $whitespace $ahead $status_indicator $normal $whitespace
 
 end
 
@@ -51,11 +52,11 @@ function _git_ahead
     case '0 0'  # equal to upstream
       return
     case '* 0'  # ahead of upstream
-      echo "$blue↑$normal_c$ahead$whitespace"
+      echo "$cyan↑$normal_c$ahead$whitespace"
     case '0 *'  # behind upstream
-      echo "$red↓$normal_c$behind$whitespace"
+      echo "$cyan↓$normal_c$behind$whitespace"
     case '*'    # diverged from upstream
-      echo "$blue↑$normal$ahead $red↓$normal_c$behind$whitespace"
+      echo "$cyan↑$normal$ahead $cyan↓$normal_c$behind$whitespace"
   end
 end
 

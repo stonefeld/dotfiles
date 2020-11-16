@@ -1,11 +1,3 @@
-configuration {
-    display-window: "Window";
-    display-drun: "Apps";
-    display-run: "Run";
-    display-calc: "Calculator";
-    show-icons: true;
-}
-
 * {
   background-color: #282C33;
   border-color: #2e343f;
