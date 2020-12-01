@@ -96,7 +96,6 @@
 
 .tabbrowser-tab[selected] {
   color: var(--night_color1)!important;
-  /*background-color: pink !important;*/
 }
 
 .tab-background {
@@ -119,13 +118,13 @@
 
 .tab-close-button:hover {
   fill-opacity: 0.2 !important;
+  background: var(--night_color1) !important;
 }
 
 .tab-text {
   font-family: var(--mff-tab-font-family);
   font-weight: var(--mff-tab-font-weight);
   font-size: var(--mff-tab-font-size) !important;
-  /*color: var(--night_color1);*/
 }
 
 /* Hide the favicon for tabs */
