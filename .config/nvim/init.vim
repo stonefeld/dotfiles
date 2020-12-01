@@ -77,6 +77,7 @@ Plug 'Yggdroot/indentLine'
 " Utils
 Plug 'liuchengxu/vim-which-key'
 Plug 'voldikss/vim-floaterm'
+Plug 'voldikss/vim-skylight'
 
 " Debugging
 Plug 'puremourning/vimspector'
@@ -292,11 +293,17 @@ let g:which_key_map['t'] = {
 
 nnoremap <silent><nowait> <leader>ce :<C-u>CocList diagnostics<CR>
 nmap <leader>cr <Plug>(coc-rename)
+nnoremap <silent><nowait> <leader>cp :SkylightPreview<CR>
+nnoremap <silent><nowait> <leader>cg :SkylightJumpTo<CR>
+nnoremap <silent><expr> <C-f> skylight#float#has_scroll() ? skylight#float#scroll(1)
+nnoremap <silent><expr> <C-b> skylight#float#has_scroll() ? skylight#float#scroll(0)
 
 let g:which_key_map['c'] = {
-      \ 'name' : '+coc-commands',
+      \ 'name' : '+coc/skylight',
       \ 'e' : 'errors',
       \ 'r' : 'rename',
+      \ 'p' : 'preview',
+      \ 'g' : 'goto',
       \ }
 
 let g:which_key_map['g'] = {
