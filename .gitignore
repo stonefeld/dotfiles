@@ -4,7 +4,7 @@
 !.config/alacritty/
 !.config/autorandr/postswitch
 !.config/dunst/
-!.config/firefox
+!.config/firefox/
 !.config/fish/
 !.config/nvim/init.vim
 !.config/picom/picom.conf
