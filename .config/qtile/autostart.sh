@@ -1,9 +1,9 @@
 #!/bin/sh
 
 nitrogen --restore &
-picom --experimental-backends &
+picom &
 xbindkeys &
 dunst &
 setxkbmap -model pc105 -layout us,es,de -option grp:alt_shift_toggle
 light-locker &
-xset -dpms
+xset s off

@@ -133,7 +133,6 @@ let g:nord_italic_comments = 1
 let g:nord_underline = 1
 augroup nord-theme-overrides
   autocmd!
-  " Use 'nord7' as foreground color for Vim comment titles.
   autocmd ColorScheme nord highlight vimCommentTitle ctermfg=14 guifg=#8FBCBB
 augroup END
 
@@ -141,22 +140,6 @@ augroup END
 set termguicolors
 colorscheme nord
 set background=dark
-
-"" General highlight overwrite
-"highlight String guifg=#fabd2f
-"highlight Identifier guifg=#d3869b
-"highlight Function guifg=#b8bb26
-"highlight Structure guifg=#83a598
-"
-"" Python specific highlight overwrite
-"highlight pythonImport guifg=#d3869b
-"highlight pythonBuiltinFunc guifg=#b8bb26
-"highlight pythonOperator guifg=#fe8019
-"highlight pythonBoolean guifg=#8ec07c
-"highlight pythonDot guifg=#fe8019
-"
-"" JavaScript specific highlight overwrite
-"
 
 highlight Normal guibg=none
 highlight NonText guibg=none
@@ -175,7 +158,6 @@ let g:airline_detect_spell = 0
 let g:airline_detect_spelllang = 0
 
 " Python setup
-let g:python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
 
 " NERDTree setup

@@ -1,5 +1,5 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=~/.zshhistory
 HISTSIZE=5000
 SAVEHIST=10000
 bindkey -v
