@@ -11,5 +11,5 @@ Settings
 	Pulseaudio Volume Control		pavucontrol
 	Lxappearance					lxappearance
 
-Power		/home/master/.config/rofi/scripts/launch.sh powermenu
+Power		~/.config/rofi/scripts/launch.sh powermenu
 EOF
