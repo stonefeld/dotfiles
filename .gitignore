@@ -1,18 +1,22 @@
 /*
 
+# Files
 !.gitignore
-!.config/alacritty/
 !.config/autorandr/postswitch
-!.config/dunst/
-!.config/firefox/
-!.config/fish/
 !.config/nvim/init.vim
 !.config/picom/picom.conf
 !.config/qtile/autostart.sh
 !.config/qtile/config.py
-!.config/qtile/icons/
-!.config/rofi/
+!.config/xmenu/run.sh
 !.bashrc
 !.xbindkeysrc
 !.Xresources
 !.zshrc
+
+# Folders
+!.config/alacritty/
+!.config/dunst/
+!.config/firefox/
+!.config/fish/
+!.config/qtile/icons/
+!.config/rofi/

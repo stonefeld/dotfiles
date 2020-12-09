@@ -1,15 +1,14 @@
-
 # ------------ PROMPT ------------ #
 function fish_prompt
 
   set -l last_status $status
   set -l yellow (set_color -o "#EBCB8B")
-  set -g red (set_color -o "#BF616A")
-  set -g blue (set_color -o "#81A1C1")
-  set -g cyan (set_color -o "#8FBCBB")
-  set -l green (set_color -o "#A3BE8C")
-  set -g white (set_color -o "#D8DEE9")
-  set -g normal (set_color brwhite)
+  set -g red    (set_color -o "#BF616A")
+  set -g blue   (set_color -o "#81A1C1")
+  set -g cyan   (set_color -o "#8FBCBB")
+  set -l green  (set_color -o "#A3BE8C")
+  set -g white  (set_color -o "#D8DEE9")
+  set -g normal (set_color     brwhite )
 
   set -l ahead (_git_ahead)
   set -g whitespace ' '

@@ -16,8 +16,7 @@ import re
 import socket
 import subprocess
 from   libqtile        import bar, widget, layout, hook, extension
-from   libqtile.config import Click, Drag, Group, Key, Screen
-from   libqtile.config import ScratchPad, DropDown
+from   libqtile.config import Click, Drag, Group, Key, Screen, ScratchPad, DropDown
 from   libqtile.lazy   import lazy
 from   typing          import List
 
@@ -89,9 +88,11 @@ keys = [
 
     # Rofi commands
     Key([mod],            "s",      lazy.spawn("rofi -show drun")),
+    Key(["mod1"],         "Tab",    lazy.spawn("rofi -show windowcd")),
+
+    # Launch Utilities
     Key([mod],            "r",      lazy.spawn("dmenu_run -b -m eDP-1")),
     Key([mod],            "c",      lazy.spawn("galculator")),
-    Key(["mod1"],         "Tab",    lazy.spawn("rofi -show windowcd")),
 
     # Playerctl commands  
     Key([mod, "shift"],   "period", lazy.spawn("playerctl next")),
@@ -99,37 +100,49 @@ keys = [
 
     # Screenshot
     Key([],               "Print",  lazy.spawn("/usr/bin/scrot " + home + "/Pictures/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png")),
+
+    Key([mod],            "d",      lazy.group["scratchpad"].dropdown_toggle("term"))
 ]
 
 group_names = [
-    ("WWW",     { 'layout': 'monadtall' }),
-    ("DEV-1",   { 'layout': 'monadtall' }),
-    ("DEV-2",   { 'layout': 'monadtall' }),
-    ("DEV-3",   { 'layout': 'monadtall' }),
-    ("DOC",     { 'layout': 'monadtall' }),
-    ("MUS",     { 'layout': 'monadtall' }),
-    ("CHAT",    { 'layout': 'monadtall' }),
-    ("MAIL",    { 'layout': 'monadtall' }),
-    ("TERM",    { 'layout': 'monadtall' }),
+    ("WWW",     { 'layout': 'columns' }),
+    ("DEV-1",   { 'layout': 'columns' }),
+    ("DEV-2",   { 'layout': 'columns' }),
+    ("DEV-3",   { 'layout': 'columns' }),
+    ("DOC",     { 'layout': 'columns' }),
+    ("MUS",     { 'layout': 'columns' }),
+    ("CHAT",    { 'layout': 'columns' }),
+    ("MAIL",    { 'layout': 'columns' }),
+    ("TERM",    { 'layout': 'columns' }),
+]
+
+scratchpads = [
+    ScratchPad(
+        "scratchpad", [
+            DropDown("term", myTerm, opacity=1, warp_pointer=False)
+        ]
+    )
 ]
 
 groups = [ Group(name, **kwargs) for name, kwargs in group_names ]
+groups.extend(scratchpads)
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-    keys.append(Key( [mod],          str(i), lazy.group[name].toscreen() ))
-    keys.append(Key( [mod, "shift"], str(i), lazy.window.togroup(name)   ))
+    keys.append(Key([mod],          str(i), lazy.group[name].toscreen()))
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layout_theme = {
     "border_focus":  "#88c0d0",
     "border_normal": "#1D2330",
     "border_width":  2,
     "margin":        6,
+    "change_size":   10,
 }
 
 layouts = [
+    layout.Columns   (**layout_theme, num_columns=2, autosplit=True),
     layout.MonadTall (**layout_theme),
-    layout.Columns   (num_columns=2, autosplit=True, **layout_theme),
-    layout.Stack     (num_stacks=2, **layout_theme),
+    layout.Stack     (**layout_theme, num_stacks=2),
     layout.Tile      (**layout_theme),
     layout.Bsp       (**layout_theme),
     layout.Floating  (**layout_theme),
@@ -174,8 +187,8 @@ def init_widgets_list():
             fontsize        = 16,
             foreground      = colors_nord[1],
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn("/usr/bin/xmenu &"),
-                'Button3': lambda qtile: qtile.cmd_spawn("/usr/bin/xmenu &"),
+                'Button1': lambda qtile: qtile.cmd_spawn(home + "/.config/xmenu/run.sh"),
+                'Button3': lambda qtile: qtile.cmd_spawn(home + "/.config/xmenu/run.sh"),
             },
             padding         = 10,
             text            = '\U0000F111 '
@@ -498,6 +511,7 @@ floating_layout = layout.Floating(**layout_theme, float_rules=[
     { 'wmclass': 'Galculator'            },
     { 'wmclass': 'qutebrowser'           },
     { 'wmclass': 'system-config-printer' },
+    { 'wmclass': 'nm-connection-editor'  },
 ])
 auto_fullscreen            = True
 focus_on_window_activation = "smart"

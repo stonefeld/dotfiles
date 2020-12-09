@@ -30,4 +30,4 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SETUVAR fish_user_paths:/etc/profile\x1e\x2ebash_profile\x1e/etc/bash\x2ebashrc\x1e\x2ebashrc
+SETUVAR fish_user_paths:/etc/profile\x1e\x2ebash_profile\x1e/etc/bash\x2ebashrc\x1e\x2ebashrc\x1e.local/bin
