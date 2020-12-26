@@ -132,11 +132,13 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layout_theme = {
-    "border_focus":  "#88c0d0",
-    "border_normal": "#1D2330",
-    "border_width":  2,
-    "margin":        6,
-    "change_size":   10,
+    "border_focus":        "#88C0D0",
+    "border_normal":       "#1D2330",
+    "border_focus_stack":  "#BD616A",
+    "border_normal_stack": "#1D2330",
+    "border_width":        2,
+    "margin":              6,
+    "change_size":         10,
 }
 
 layouts = [
@@ -501,6 +503,7 @@ floating_layout = layout.Floating(**layout_theme, float_rules=[
     { 'wmclass': 'ssh-askpass'           },
     { 'wmclass': 'VirtualBox Manager'    },
     { 'wmclass': 'lxappearance'          },
+    { 'wmclass': 'lxpolkit'              },
     { 'wmclass': 'Thunar'                },
     { 'wmclass': 'pavucontrol'           },
     { 'wmclass': 'Msgcompose'            },

@@ -141,9 +141,6 @@ end
 function diff --wraps='diff --color=auto' --description 'alias diff diff --color=auto'
  command diff --color=auto $argv;
 end
-function dmesg --wraps='dmesg --color=always' --description 'alias dmesg dmesg --color=always'
- command dmesg --color=always $argv;
-end
 function grep --wraps='grep --color=auto' --description 'alias grep grep --color=auto'
  command grep --color=auto $argv;
 end
@@ -154,3 +151,5 @@ function fgrep --wraps='fgrep --color=auto' --description 'alias fgrep fgrep --c
  command fgrep --color=auto $argv;
 end
 # ---------- END ALIASES --------- #
+
+export BAT_THEME="Nord"
