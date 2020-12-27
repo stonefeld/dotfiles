@@ -1,12 +1,12 @@
 # ------------ PROMPT ------------ #
 function fish_prompt
   set -l last_status $status
-  set -l yellow (set_color -o yellow )
-  set -g red    (set_color -o red    )
-  set -g blue   (set_color -o blue   )
-  set -g cyan   (set_color -o cyan   )
-  set -l green  (set_color -o green  )
-  set -g white  (set_color -o white  )
+  set -l yellow (set_color -o bryellow )
+  set -g red    (set_color -o brred    )
+  set -g blue   (set_color -o brblue   )
+  set -g cyan   (set_color -o brcyan   )
+  set -l green  (set_color -o brgreen  )
+  set -g white  (set_color -o brwhite  )
   set -l normal (set_color    brwhite)
 
   set -l ahead (_git_ahead)
@@ -35,39 +35,39 @@ end
 function fish_mode_prompt
   switch $fish_bind_mode
     case default
-      set_color -o white
+      set_color -o brwhite
       echo "[ "
-      set_color -o red
+      set_color -o brred
       echo "N"
-      set_color -o white
+      set_color -o brwhite
       echo " ]"
     case insert
-      set_color -o white
+      set_color -o brwhite
       echo "[ "
-      set_color -o green
+      set_color -o brgreen
       echo "I"
-      set_color -o white
+      set_color -o brwhite
       echo " ]"
     case replace_one
-      set_color -o white
+      set_color -o brwhite
       echo "[ "
-      set_color -o yellow
+      set_color -o bryellow
       echo "R"
-      set_color -o white
+      set_color -o brwhite
       echo " ]"
     case visual
-      set_color -o white
+      set_color -o brwhite
       echo "[ "
       set_color -o brmagenta
       echo "V"
-      set_color -o white
+      set_color -o brwhite
       echo " ]"
     case '*'
-      set_color -o white
+      set_color -o brwhite
       echo "[ "
-      set_color -o red
+      set_color -o brred
       echo "?"
-      set_color -o white
+      set_color -o brwhite
       echo " ]"
   end
   set_color normal
@@ -91,11 +91,11 @@ function _git_ahead
     case '0 0'
       return
     case '* 0'
-      echo "$green↑$normal_c$ahead$whitespace"
+      echo "$yellow↑$normal_c$ahead$whitespace"
     case '0 *'
-      echo "$red↓$normal_c$behind$whitespace"
+      echo "$yellow↓$normal_c$behind$whitespace"
     case '*'
-      echo "$green↑$normal$ahead $red↓$normal_c$behind$whitespace"
+      echo "$yellow↑$normal$ahead $yellow↓$normal_c$behind$whitespace "
   end
 end
 
@@ -124,7 +124,7 @@ alias lt='exa -aT --color=always --group-directories-first'
 # NeoVim shortcut
 alias v='nvim'
 alias v.='nvim .'
-alias vf="fzf --preview 'bat --theme Nord {1}' | xargs -ro nvim $argv;"
+alias vf="fzf --preview 'bat --theme Nord {1}' | xargs -ro nvim"
 
 # Fish keybindings shortcut
 alias vk='fish_vi_key_bindings'

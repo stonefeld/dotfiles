@@ -22,12 +22,15 @@ from   libqtile.lazy   import lazy
 from   typing          import List
 
 # Some important variables
-mod    = 'mod4'
-myTerm = 'alacritty'
-home   = os.path.expanduser('~')
+mod           = 'mod4'
+myTerm        = 'alacritty'
+home          = os.path.expanduser('~')
+qtile_root    = os.path.join(home, '.config/qtile')
+qtile_scripts = os.path.join(qtile_root, 'scripts')
 
-colors_inherited = colors.colors_nord()
-colors_standard = colors.colors_standard()
+# Colors
+colors_inherited = colors.nord()
+colors_standard = colors.standard()
 
 keys = [
     # Launch terminal
@@ -103,11 +106,11 @@ keys = [
     Key([mod, 'shift'],   'comma',  lazy.spawn('playerctl previous')),
 
     # Screenshot
-    Key([],               'Print',  lazy.spawn('scrot ' + home + '/Pictures/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png')),
+    Key([],               'Print',  lazy.spawn(f'scrot {home}/Pictures/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png')),
 
     # DropDown
     Key([mod],            'd',      lazy.group['scratchpad'].dropdown_toggle('term')),
-    Key([mod],            'p',      lazy.group['scratchpad'].dropdown_toggle('mpd'))
+    Key([mod],            'p',      lazy.group['scratchpad'].dropdown_toggle('spt'))
 ]
 
 group_names = [
@@ -125,8 +128,9 @@ group_names = [
 scratchpads = [
     ScratchPad(
         'scratchpad', [
-            DropDown('term', myTerm, opacity=1, warp_pointer=False),
-            DropDown('mpd', myTerm + ' -e ncmpcpp', opacity=1, warp_pointer=False)
+            DropDown('term', myTerm,                                            opacity=1, warp_pointer=False),
+            DropDown('mpd',  f'{myTerm} -e ncmpcpp',                            opacity=0, warp_pointer=False),
+            DropDown('spt',  f'{myTerm} -e {qtile_scripts}/spt.sh', height=0.8, opacity=1, warp_pointer=False)
         ]
     )
 ]
@@ -174,8 +178,8 @@ def init_widgets_list():
             fontsize        = 16,
             foreground      = colors_inherited[1],
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(home + '/.config/xmenu/run.sh'),
-                'Button3': lambda qtile: qtile.cmd_spawn(home + '/.config/xmenu/run.sh'),
+                'Button1': lambda qtile: qtile.cmd_spawn(f'{home}/.config/xmenu/run.sh'),
+                'Button3': lambda qtile: qtile.cmd_spawn(f'{home}/.config/xmenu/run.sh'),
             },
             padding         = 10,
             text            = '\U0000F111 '
@@ -197,7 +201,7 @@ def init_widgets_list():
             padding_x                   = 3,
             padding_y                   = 5,
             rounded                     = False,
-            this_current_screen_border  = colors_standard[3],
+            this_current_screen_border  = colors_inherited[1],
             this_screen_border          = colors_standard[4],
             use_mouse_wheel             = False
         ),
@@ -267,7 +271,7 @@ def init_widgets_list():
         ),
         widget.CurrentLayoutIcon(
             background        = colors_inherited[6],
-            custom_icon_paths = [ os.path.join(home, '.config/qtile/icons/') ],
+            custom_icon_paths = [ os.path.join(qtile_root, 'icons/') ],
             foreground        = '#000000',
             padding           = 0,
             scale             = 0.6
@@ -530,8 +534,7 @@ def floating_dialogs(window):
 
 @hook.subscribe.startup
 def startup():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    subprocess.call([f'{qtile_scripts}/autostart.sh'])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

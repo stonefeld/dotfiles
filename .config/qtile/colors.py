@@ -1,15 +1,15 @@
-def colors_standard():
-    colors_standard = [
+def standard():
+    standard = [
         ["#1d2330", "#1d2330"], # 0
         ["#292d3e", "#292d3e"], # 1
         ["#434758", "#434758"], # 2
         ["#ff5555", "#ff5555"], # 3
         ["#8d62a9", "#8d62a9"]  # 4
     ]
-    return colors_standard
+    return standard
 
-def colors_nord():
-    colors_nord = [
+def nord():
+    nord = [
         ["#3b4252", "#3b4252"], # 0
         ["#bd616a", "#bd616a"], # 1
         ["#a3be8c", "#a3be8c"], # 2
@@ -35,5 +35,26 @@ def colors_nord():
         ["#6d96a5", "#6d96a5"], # 22
         ["#aeb3bb", "#aeb3bb"]  # 23
     ]
-    return colors_nord
+    return nord
+
+def gruvbox():
+    gruvbox = [
+        ["#282828", "#282828"], # 0
+        ["#fb4934", "#fb4934"], # 1
+        ["#b8bb26", "#b8bb26"], # 2
+        ["#fabd2f", "#fabd2f"], # 3
+        ["#83a598", "#83a598"], # 4
+        ["#d3869b", "#d3869b"], # 5
+        ["#8ec07c", "#8ec07c"], # 6
+        ["#ebdbb2", "#ebdbb2"], # 7
+        ["#928374", "#928374"], # 8
+        ["#cc241d", "#cc241d"], # 9
+        ["#98971a", "#98971a"], # 10
+        ["#d79921", "#d79921"], # 11
+        ["#458588", "#458588"], # 12
+        ["#b16286", "#b16286"], # 13
+        ["#689d6a", "#689d6a"], # 14
+        ["#a89984", "#a89984"], # 15
+    ]
+    return gruvbox
 
