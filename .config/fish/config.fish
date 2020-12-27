@@ -1,14 +1,13 @@
 # ------------ PROMPT ------------ #
 function fish_prompt
-
   set -l last_status $status
-  set -l yellow (set_color -o "#EBCB8B")
-  set -g red    (set_color -o "#BF616A")
-  set -g blue   (set_color -o "#81A1C1")
-  set -g cyan   (set_color -o "#8FBCBB")
-  set -l green  (set_color -o "#A3BE8C")
-  set -g white  (set_color -o "#D8DEE9")
-  set -g normal (set_color     brwhite )
+  set -l yellow (set_color -o yellow )
+  set -g red    (set_color -o red    )
+  set -g blue   (set_color -o blue   )
+  set -g cyan   (set_color -o cyan   )
+  set -l green  (set_color -o green  )
+  set -g white  (set_color -o white  )
+  set -l normal (set_color    brwhite)
 
   set -l ahead (_git_ahead)
   set -g whitespace ' '
@@ -24,14 +23,60 @@ function fish_prompt
     set -l git_branch (_git_branch_name)
     set git_info "$white ($cyan$git_branch$white)"
     if [ (_is_git_dirty) ]
-      set -l dirty "$cyan ✗"
+      set -l dirty " $yellow✗"
       set git_info "$git_info$dirty"
     else
-      set git_info "$white ($blue$git_branch$white)"
+      set git_info "$white ($green$git_branch$white)"
     end
   end
   echo -n -s $cwd $git_info $whitespace $ahead $status_indicator $normal $whitespace
+end
 
+function fish_mode_prompt
+  switch $fish_bind_mode
+    case default
+      set_color -o white
+      echo "[ "
+      set_color -o red
+      echo "N"
+      set_color -o white
+      echo " ]"
+    case insert
+      set_color -o white
+      echo "[ "
+      set_color -o green
+      echo "I"
+      set_color -o white
+      echo " ]"
+    case replace_one
+      set_color -o white
+      echo "[ "
+      set_color -o yellow
+      echo "R"
+      set_color -o white
+      echo " ]"
+    case visual
+      set_color -o white
+      echo "[ "
+      set_color -o brmagenta
+      echo "V"
+      set_color -o white
+      echo " ]"
+    case '*'
+      set_color -o white
+      echo "[ "
+      set_color -o red
+      echo "?"
+      set_color -o white
+      echo " ]"
+  end
+  set_color normal
+end
+
+function fish_user_key_bindings
+  for mode in insert default visual
+    bind -M $mode \cf forward-char
+  end
 end
 
 function _git_ahead
@@ -46,13 +91,14 @@ function _git_ahead
     case '0 0'
       return
     case '* 0'
-      echo "$cyan↑$normal_c$ahead$whitespace"
+      echo "$green↑$normal_c$ahead$whitespace"
     case '0 *'
-      echo "$cyan↓$normal_c$behind$whitespace"
+      echo "$red↓$normal_c$behind$whitespace"
     case '*'
-      echo "$cyan↑$normal$ahead $cyan↓$normal_c$behind$whitespace"
+      echo "$green↑$normal$ahead $red↓$normal_c$behind$whitespace"
   end
 end
+
 
 function _git_branch_name
   echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
@@ -65,91 +111,62 @@ end
 
 # ------------ ALIASES ----------- #
 # Power functions
-function re --wraps=reboot --description 'alias re reboot'
-  reboot  $argv;
-end
-function sn --wraps='shutdown now' --description 'alias sn shutdown now'
-  shutdown now $argv;
-end
-function ss --wraps='systemctl suspend' --description 'alias ss systemctl suspend'
-  systemctl suspend $argv;
-end
+alias sn='shutdown now'
+alias re='reboot'
+alias ss='systemctl suspend'
 
 # ls Replacement
-function ls --wraps='exa -lag --color=always --group-directories-first --git' --description 'alias ls exa -lag --color=always --group-directories-first --git'
-  exa -lag --color=always --group-directories-first --git $argv;
-end
-function la --wraps='exa -a --color=always --group-directories-first' --description 'alias la exa -a --color=always --group-directories-first'
-  exa -a --color=always --group-directories-first $argv;
-end
-function ll --wraps='exa -l --color=always --group-directories-first' --description 'alias ll exa -l --color=always --group-directories-first'
-  exa -l --color=always --group-directories-first $argv;
-end
-function lt --wraps='exa -aT --color=always --group-directories-first' --description 'alias lt exa -aT --color=always --group-directories-first'
-  exa -aT --color=always --group-directories-first $argv;
-end
-function l. --wraps=exa\ -a\ \|\ egrep\ \"\^\\.\" --description alias\ l.\ exa\ -a\ \|\ egrep\ \"\^\\.\"
-  exa -a | egrep "^\." $argv;
-end
+alias ls='exa -lag --color=always --group-directories-first --git'
+alias la='exa -a --color=always --group-directories-first'
+alias ll='exa -lg --color=always --group-directories-first --git'
+alias lt='exa -aT --color=always --group-directories-first'
 
 # NeoVim shortcut
-function v --wraps=nvim --description 'alias v nvim'
-  nvim  $argv;
-end
-function v. --wraps='nvim .' --description 'alias v. nvim .'
-  nvim . $argv;
-end
+alias v='nvim'
+alias v.='nvim .'
+alias vf="fzf --preview 'bat --theme Nord {1}' | xargs -ro nvim $argv;"
+
+# Fish keybindings shortcut
+alias vk='fish_vi_key_bindings'
+alias nk='fish_default_key_bindings'
 
 # LazyGit shortcut
-function lgit --wraps=lazygit --description 'alias lgit lazygit'
-  lazygit  $argv;
-end
+alias lgit='lazygit'
 
 # Python3 shortcut
-function py --wraps=python3 --description 'alias py python3'
-  python3  $argv;
-end
+alias py='python3'
 
 # Pacman
-function pacinstall --wraps=pacman\ -Slq\ \|\ fzf\ --multi\ --preview\ \'pacman\ -Si\ \{1\}\'\ \|\ xargs\ -ro\ sudo\ pacman\ -S --description alias\ pacinstall\ pacman\ -Slq\ \|\ fzf\ --multi\ --preview\ \'pacman\ -Si\ \{1\}\'\ \|\ xargs\ -ro\ sudo\ pacman\ -S
-  pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S $argv;
-end
-function pacremove --wraps=pacman\ -Qq\ \|\ fzf\ --multi\ --preview\ \'pacman\ -Qi\ \{1\}\'\ \|\ xargs\ -ro\ sudo\ pacman\ -Rns --description alias\ pacremove\ pacman\ -Qq\ \|\ fzf\ --multi\ --preview\ \'pacman\ -Qi\ \{1\}\'\ \|\ xargs\ -ro\ sudo\ pacman\ -Rns
-  pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns $argv;
-end
+alias pacinstall="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias pacremove="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 
 # Pip3 Package Update Shortcut
-function pip3-update --wraps=pip3\ list\ --outdated\ --format=freeze\ \|\ grep\ -v\ \'\^\\-e\'\ \|\ cut\ -d\ =\ -f\ 1\ \ \|\ xargs\ -n1\ pip\ install\ -U --description alias\ pip3-update\ pip3\ list\ --outdated\ --format=freeze\ \|\ grep\ -v\ \'\^\\-e\'\ \|\ cut\ -d\ =\ -f\ 1\ \ \|\ xargs\ -n1\ pip\ install\ -U
-  pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U $argv;
-end
+alias pip3_update="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
 # Overwrite confirm
-function cp --wraps='cp -i' --description 'alias cp cp -i'
- command cp -i $argv;
-end
-function mv --wraps='mv -i' --description 'alias mv mv -i'
- command mv -i $argv;
-end
-function rm --wraps='rm -i' --description 'alias rm rm -i'
- command rm -i $argv;
-end
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
 
 # Colors
-function ip --wraps='ip -color=auto' --description 'alias ip ip -color=auto'
- command ip -color=auto $argv;
-end
-function diff --wraps='diff --color=auto' --description 'alias diff diff --color=auto'
- command diff --color=auto $argv;
-end
-function grep --wraps='grep --color=auto' --description 'alias grep grep --color=auto'
- command grep --color=auto $argv;
-end
-function egrep --wraps='egrep --color=auto' --description 'alias egrep egrep --color=auto'
- command egrep --color=auto $argv;
-end
-function fgrep --wraps='fgrep --color=auto' --description 'alias fgrep fgrep --color=auto'
- command fgrep --color=auto $argv;
-end
+alias ip='ip -color=auto'
+alias diff='diff --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 # ---------- END ALIASES --------- #
 
+# -------- ENV VARIABLES --------- #
 export BAT_THEME="Nord"
+export EDITOR="nvim"
+# ------ END ENV VARIABLES ------- #
+
+# --------- MANPAGES COLORS ------ #
+set -x LESS_TERMCAP_mb (printf "\033[01;31m")  
+set -x LESS_TERMCAP_md (printf "\033[01;31m")  
+set -x LESS_TERMCAP_me (printf "\033[0m")  
+set -x LESS_TERMCAP_se (printf "\033[0m")  
+set -x LESS_TERMCAP_so (printf "\033[01;44;33m")  
+set -x LESS_TERMCAP_ue (printf "\033[0m")  
+set -x LESS_TERMCAP_us (printf "\033[01;32m")  
+# ------ END MANPAGES COLORS ----- #

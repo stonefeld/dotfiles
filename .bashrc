@@ -35,7 +35,7 @@ alias diff='diff --color=auto'
 alias ip='ip -color=auto'
 alias dmesg='dmesg --color=always'
 
-alias edit='nvim'
+alias v='vim'
 
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \

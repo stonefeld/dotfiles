@@ -150,6 +150,7 @@ set background=dark
 
 highlight Normal  guibg=none
 highlight NonText guibg=none
+highlight LineNr gui=bold
 
 " Airline setup
 let g:airline_theme                         = 'nord'
@@ -233,6 +234,7 @@ let g:floaterm_width      = 0.8
 let g:floaterm_height     = 0.8
 let g:floaterm_wintitle   = 0
 let g:floaterm_autoclose  = 2
+let g:floaterm_shell      = '/usr/bin/fish'
 
 " Keyboard Shortcuts
 let mapleader = " "
@@ -283,15 +285,16 @@ let g:which_key_map['b'] = {
       \ }
 
 silent! unmap <leader>tc
-nnoremap <C-p> :Files<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-o> :History<CR>
 
 let g:which_key_map['t'] = {
       \ 'name' :                          '+Terminal',
+      \ 't'    : [':FloatermToggle',      'toggle'],
       \ 'f'    : [':FloatermNew fzf',     'fzf'   ],
       \ 'g'    : [':FloatermNew lazygit', 'git'   ],
       \ 'p'    : [':FloatermNew python',  'python'],
       \ 'n'    : [':FloatermNew node',    'node'  ],
-      \ 't'    : [':FloatermToggle',      'toggle'],
       \ 'h'    : [':FloatermNew htop',    'htop'  ],
       \ 'b'    : [':FloatermNew bpytop',  'bpytop'],
       \ }
@@ -325,39 +328,40 @@ let g:which_key_map['g'] = {
 
 " fzf setup
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.75 } }
+let $FZF_DEFAULT_OPTS = '--reverse'
 let g:fzf_colors = {
-      \ 'fg':      ['fg', 'Normal'],   
-      \ 'bg':      ['bg', 'Normal'],   
-      \ 'hl':      ['fg', 'Comment'],   
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],   
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],   
-      \ 'hl+':     ['fg', 'Statement'],   
-      \ 'info':    ['fg', 'PreProc'],   
-      \ 'border':  ['fg', 'Normal'],   
-      \ 'prompt':  ['fg', 'Conditional'],   
-      \ 'pointer': ['fg', 'Exception'],   
-      \ 'marker':  ['fg', 'Keyword'],   
-      \ 'spinner': ['fg', 'Label'],   
-      \ 'header':  ['fg', 'Comment']
+      \ 'fg':      ['fg', 'Normal'                              ],
+      \ 'bg':      ['bg', 'Normal'                              ],
+      \ 'hl':      ['fg', 'Comment'                             ],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'          ],
+      \ 'hl+':     ['fg', 'Statement'                           ],
+      \ 'info':    ['fg', 'PreProc'                             ],
+      \ 'border':  ['fg', 'Normal'                              ],
+      \ 'prompt':  ['fg', 'Conditional'                         ],
+      \ 'pointer': ['fg', 'Exception'                           ],
+      \ 'marker':  ['fg', 'Keyword'                             ],
+      \ 'spinner': ['fg', 'Label'                               ],
+      \ 'header':  ['fg', 'Comment'                             ],
       \ } 
 let g:fzf_branch_actions = {
       \ 'rebase': {
-      \   'prompt': 'Rebase> ',
-      \   'execute': 'echo system("{git} rebase {branch}")',
+      \   'prompt':   'Rebase> ',
+      \   'execute':  'echo system("{git} rebase {branch}")',
       \   'multiple': v:false,
-      \   'keymap': 'ctrl-r',
+      \   'keymap':   'ctrl-r',
       \   'required': ['branch'],
-      \   'confirm': v:false,
+      \   'confirm':  v:false,
       \ },
       \ 'track': {
-      \   'prompt': 'Track> ',
-      \   'execute': 'echo system("{git} checkout --track {branch}")',
+      \   'prompt':   'Track> ',
+      \   'execute':  'echo system("{git} checkout --track {branch}")',
       \   'multiple': v:false,
-      \   'keymap': 'ctrl-t',
+      \   'keymap':   'ctrl-t',
       \   'required': ['branch'],
-      \   'confirm': v:false,
+      \   'confirm':  v:false,
       \ },
-      \}
+      \ }
 
 " COC Setup
 if has("patch-8.1.1564")
@@ -403,8 +407,6 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
 
 augroup mygroup
     autocmd!
