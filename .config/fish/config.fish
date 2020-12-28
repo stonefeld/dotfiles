@@ -120,6 +120,7 @@ alias ls='exa -lag --color=always --group-directories-first --git'
 alias la='exa -a --color=always --group-directories-first'
 alias ll='exa -lg --color=always --group-directories-first --git'
 alias lt='exa -aT --color=always --group-directories-first'
+alias lf='ranger'
 
 # NeoVim shortcut
 alias v='nvim'

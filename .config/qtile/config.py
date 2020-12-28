@@ -202,7 +202,7 @@ def init_widgets_list():
             padding_y                   = 5,
             rounded                     = False,
             this_current_screen_border  = colors_inherited[1],
-            this_screen_border          = colors_standard[4],
+            this_screen_border          = colors_inherited[13],
             use_mouse_wheel             = False
         ),
         widget.Sep(
@@ -294,12 +294,16 @@ def init_widgets_list():
             text       = '\U0000E0B2'
         ),
         widget.TextBox(
-            background = colors_inherited[5],
-            font       = 'Icons',
-            fontsize   = 14,
-            foreground = '#000000',
-            padding    = 0,
-            text       = '\U0000F09E  '
+            background      = colors_inherited[5],
+            font            = 'Icons',
+            fontsize        = 14,
+            foreground      = '#000000',
+            mouse_callbacks = {
+                'Button1': lambda qtile: qtile.cmd_spawn('nm-applet'),
+                'Button3': lambda qtile: qtile.cmd_spawn('killall nm-applet')
+            },
+            padding         = 0,
+            text            = '\U0000F09E  '
         ),
         widget.Wlan(
             background      = colors_inherited[5],

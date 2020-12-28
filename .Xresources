@@ -10,9 +10,7 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
 XTerm*renderFont: true
-XTerm*faceName: xft:Fantasque Sans Mono, \
-                xft:JoyPixels:size=12, \
-                xft:Monospace:style=Medium:size=12   
+XTerm*faceName: xft:Fantasque Sans Mono Nerd Font
 XTerm*faceSize: 14
 XTerm*utf8: 2
 XTerm*locale: true

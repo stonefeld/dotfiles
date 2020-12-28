@@ -28,6 +28,7 @@ set smarttab
 set expandtab
 set smartindent
 set autoindent
+set autochdir
 
 set splitbelow
 set splitright
