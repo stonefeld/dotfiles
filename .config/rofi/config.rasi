@@ -1,5 +1,5 @@
 configuration {
-	modi: "windowcd,drun";
+	modi: "";
 	font: "Ubuntu Sans 14";
 	terminal: "alacritty";
 	m: "eDP-1";
