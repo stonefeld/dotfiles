@@ -1,19 +1,19 @@
 # ------------ PROMPT ------------ #
 function fish_prompt
   set -l last_status $status
-  set -l yellow (set_color -o bryellow )
-  set -g red    (set_color -o brred    )
-  set -g blue   (set_color -o brblue   )
-  set -g cyan   (set_color -o brcyan   )
-  set -l green  (set_color -o brgreen  )
-  set -g white  (set_color -o brwhite  )
-  set -l normal (set_color    brwhite)
+  set -l yellow ( set_color -o bryellow )
+  set -g red    ( set_color -o brred    )
+  set -g blue   ( set_color -o brblue   )
+  set -g cyan   ( set_color -o brcyan   )
+  set -l green  ( set_color -o brgreen  )
+  set -g white  ( set_color -o brwhite  )
+  set -l normal ( set_color    brwhite  )
 
   set -l ahead (_git_ahead)
   set -g whitespace ' '
 
   if test $last_status = 0
-    set status_indicator "$blue>>$normal"
+    set status_indicator "$green>>$normal"
   else
     set status_indicator "$red>>$normal"
   end
@@ -26,10 +26,12 @@ function fish_prompt
       set -l dirty " $yellow✗"
       set git_info "$git_info$dirty"
     else
-      set git_info "$white ($green$git_branch$white)"
+      set git_info "$white ($blue$git_branch$white)"
     end
   end
-  echo -n -s $cwd $git_info $whitespace $ahead $status_indicator $normal $whitespace
+  echo -n -s $cwd $git_info $whitespace $ahead $status_indicator
+  set_color normal
+  echo $whitespace
 end
 
 function fish_mode_prompt
