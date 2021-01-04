@@ -29,7 +29,7 @@ qtile_root    = os.path.join(home, '.config/qtile')
 qtile_scripts = os.path.join(qtile_root, 'scripts')
 
 # Colors
-colors_inherited = colors.nord()
+colors_inherited = colors.monokai_pro()
 colors_standard = colors.standard()
 
 keys = [
@@ -80,7 +80,7 @@ keys = [
     Key([mod, 'control'], 'j',      lazy.layout.grow_down(), lazy.layout.shrink(), lazy.layout.increase_nmaster()),
 
     Key([mod, 'shift'],   'f',      lazy.window.toggle_floating()),
-    Key([],               'F11',    lazy.window.toggle_fullscreen()),
+    Key([mod, 'shift'],   'm',      lazy.window.toggle_fullscreen()),
 
     Key([mod],            'n',      lazy.layout.normalize()),
     Key([mod],            'm',      lazy.layout.maximize()),
@@ -110,7 +110,10 @@ keys = [
 
     # DropDown
     Key([mod],            'd',      lazy.group['scratchpad'].dropdown_toggle('term')),
-    Key([mod],            'p',      lazy.group['scratchpad'].dropdown_toggle('spt'))
+    Key([mod],            'p',      lazy.group['scratchpad'].dropdown_toggle('spt')),
+    Key([mod],            'o',      lazy.group['scratchpad'].dropdown_toggle('mpd')),
+    Key([mod],            'i',      lazy.group['scratchpad'].dropdown_toggle('mutt')),
+    Key([mod],            'u',      lazy.group['scratchpad'].dropdown_toggle('htop')),
 ]
 
 group_names = [
@@ -129,8 +132,10 @@ scratchpads = [
     ScratchPad(
         'scratchpad', [
             DropDown('term', myTerm,                                            opacity=1, warp_pointer=False),
-            DropDown('mpd',  f'{myTerm} -e ncmpcpp',                            opacity=0, warp_pointer=False),
-            DropDown('spt',  f'{myTerm} -e {qtile_scripts}/spt.sh', height=0.8, opacity=1, warp_pointer=False)
+            DropDown('mpd',  f'{myTerm} -e {qtile_scripts}/mpd.sh', height=0.8, opacity=1, warp_pointer=False),
+            DropDown('spt',  f'{myTerm} -e {qtile_scripts}/spt.sh', height=0.8, opacity=1, warp_pointer=False),
+            DropDown('mutt', f'{myTerm} -e neomutt',                height=0.8, opacity=1, warp_pointer=False),
+            DropDown('htop', f'{myTerm} -e htop',                   height=0.8, opacity=1, warp_pointer=False)
         ]
     )
 ]
@@ -174,15 +179,15 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.TextBox(
-            background      = colors_standard[1],
-            fontsize        = 16,
-            foreground      = colors_inherited[1],
-            mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(f'{home}/.config/xmenu/run.sh'),
-                'Button3': lambda qtile: qtile.cmd_spawn(f'{home}/.config/xmenu/run.sh'),
+            background                  = colors_standard[1],
+            fontsize                    = 16,
+            foreground                  = colors_inherited[1],
+            mouse_callbacks             = {
+                'Button1': lambda qtile: qtile.cmd_spawn(f'{qtile_scripts}/xmenu.sh'),
+                'Button3': lambda qtile: qtile.cmd_spawn(f'{qtile_scripts}/xmenu.sh')
             },
-            padding         = 10,
-            text            = '\U0000F111 '
+            padding                     = 10,
+            text                        = '\U0000F111 '
         ),
         widget.GroupBox(
             active                      = colors_inherited[7],
@@ -206,233 +211,233 @@ def init_widgets_list():
             use_mouse_wheel             = False
         ),
         widget.Sep(
-            background = colors_standard[1],
-            linewidth  = 0,
-            padding    = 20
+            background                  = colors_standard[1],
+            linewidth                   = 0,
+            padding                     = 20
         ),
         widget.Spacer(bar.STRETCH),
         widget.Sep(
-            background = colors_standard[1],
-            linewidth  = 0,
-            padding    = 20
+            background                  = colors_standard[1],
+            linewidth                   = 0,
+            padding                     = 20
         ),
         widget.TextBox(
-            background = colors_standard[1],
-            fontsize   = 35,
-            foreground = colors_inherited[1],
-            padding    = 0,
-            text       = '\U0000E0B2'
+            background                  = colors_standard[1],
+            fontsize                    = 35,
+            foreground                  = colors_inherited[1],
+            padding                     = 0,
+            text                        = '\U0000E0B2'
         ),
         widget.TextBox(
-            background      = colors_inherited[1],
-            font            = 'Icons',
-            fontsize        = 16,
-            foreground      = '#000000',
+            background                  = colors_inherited[1],
+            font                        = 'Icons',
+            fontsize                    = 16,
+            foreground                  = '#000000',
             mouse_callbacks = {
                 'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop &'),
-                'Button3': lambda qtile: qtile.cmd_spawn(myTerm + ' -e killall htop')
+                'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
             },
-            padding         = 0,
-            text            = '\U0000F109  '
+            padding                     = 0,
+            text                        = '\U0000F109  '
         ),
         widget.Memory(
-            background      = colors_inherited[1],
-            foreground      = '#000000',
-            format          = 'RAM: {MemPercent}%',
+            background                  = colors_inherited[1],
+            foreground                  = '#000000',
+            format                      = 'RAM: {MemPercent}%',
             mouse_callbacks = {
                 'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop &'),
-                'Button3': lambda qtile: qtile.cmd_spawn(myTerm + ' -e killall htop')
+                'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
             },
-            padding         = 0,
-            update_interval = 1
+            padding                     = 0,
+            update_interval             = 1
         ),
         widget.CPU(
-            background      = colors_inherited[1],
-            foreground      = '#000000',
-            format          = ' | CPU: {load_percent}%',
+            background                  = colors_inherited[1],
+            foreground                  = '#000000',
+            format                      = ' | CPU: {load_percent}%',
             mouse_callbacks = {
                 'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop &'),
-                'Button3': lambda qtile: qtile.cmd_spawn(myTerm + ' -e killall htop')
+                'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
             },
-            padding         = 0,
-            update_interval = 1
+            padding                     = 0,
+            update_interval             = 1
         ),
         widget.Sep(
-            background = colors_inherited[1],
-            linewidth  = 0,
-            padding    = 10
+            background                  = colors_inherited[1],
+            linewidth                   = 0,
+            padding                     = 10
         ),
         widget.TextBox(
-            background = colors_inherited[1],
-            fontsize   = 35,
-            foreground = colors_inherited[6],
-            padding    = 0,
-            text       = '\U0000E0B2'
+            background                  = colors_inherited[1],
+            fontsize                    = 35,
+            foreground                  = colors_inherited[6],
+            padding                     = 0,
+            text                        = '\U0000E0B2'
         ),
         widget.CurrentLayoutIcon(
-            background        = colors_inherited[6],
-            custom_icon_paths = [ os.path.join(qtile_root, 'icons/') ],
-            foreground        = '#000000',
-            padding           = 0,
-            scale             = 0.6
+            background                  = colors_inherited[6],
+            custom_icon_paths           = [ os.path.join(qtile_root, 'icons/') ],
+            foreground                  = '#000000',
+            padding                     = 0,
+            scale                       = 0.6
         ),
         widget.CurrentLayout(
-            background = colors_inherited[6],
-            foreground = '#000000',
-            padding    = 0
+            background                  = colors_inherited[6],
+            foreground                  = '#000000',
+            padding                     = 0
         ),
         widget.Sep(
-            background = colors_inherited[6],
-            linewidth  = 0,
-            padding    = 10
+            background                  = colors_inherited[6],
+            linewidth                   = 0,
+            padding                     = 10
         ),
         widget.TextBox(
-            background = colors_inherited[6],
-            fontsize   = 35,
-            foreground = colors_inherited[5],
-            padding    = 0,
-            text       = '\U0000E0B2'
+            background                  = colors_inherited[6],
+            fontsize                    = 35,
+            foreground                  = colors_inherited[5],
+            padding                     = 0,
+            text                        = '\U0000E0B2'
         ),
         widget.TextBox(
-            background      = colors_inherited[5],
-            font            = 'Icons',
-            fontsize        = 14,
-            foreground      = '#000000',
+            background                  = colors_inherited[5],
+            font                        = 'Icons',
+            fontsize                    = 14,
+            foreground                  = '#000000',
             mouse_callbacks = {
                 'Button1': lambda qtile: qtile.cmd_spawn('nm-applet'),
                 'Button3': lambda qtile: qtile.cmd_spawn('killall nm-applet')
             },
-            padding         = 0,
-            text            = '\U0000F09E  '
+            padding                     = 0,
+            text                        = '\U0000F09E  '
         ),
         widget.Wlan(
-            background      = colors_inherited[5],
-            foreground      = '#000000',
-            interface       = 'wlp1s0',
+            background                  = colors_inherited[5],
+            foreground                  = '#000000',
+            interface                   = 'wlp1s0',
             mouse_callbacks = {
                 'Button1': lambda qtile: qtile.cmd_spawn('nm-applet'),
                 'Button3': lambda qtile: qtile.cmd_spawn('killall nm-applet')
             },
-            padding         = 0
+            padding                    = 0
         ),
         widget.Sep(
-            background = colors_inherited[5],
-            linewidth  = 0,
-            padding    = 10
+            background                 = colors_inherited[5],
+            linewidth                  = 0,
+            padding                    = 10
         ),
         widget.TextBox(
-            background = colors_inherited[5],
-            fontsize   = 35,
-            foreground = colors_inherited[2],
-            padding    = 0,
-            text       = '\U0000E0B2'
+            background                 = colors_inherited[5],
+            fontsize                   = 35,
+            foreground                 = colors_inherited[2],
+            padding                    = 0,
+            text                       = '\U0000E0B2'
         ),
         widget.TextBox(
-            background     = colors_inherited[2],
-            font           = 'Icons',
-            fontsize       = 20,
-            foreground     = '#000000',
-            padding        = 0,
-            text           = '\U0000F2E4'
+            background                 = colors_inherited[2],
+            font                       = 'Icons',
+            fontsize                   = 20,
+            foreground                 = '#000000',
+            padding                    = 0,
+            text                       = '\U0000F2E4'
         ),
         widget.Backlight(
-            background     = colors_inherited[2],
-            backlight_name = 'intel_backlight',
-            foreground     = '#000000',
-            format         = '{percent:2.0%}',
-            padding        = 5
+            background                 = colors_inherited[2],
+            backlight_name             = 'intel_backlight',
+            foreground                 = '#000000',
+            format                     = '{percent:2.0%}',
+            padding                    = 5
         ),
         widget.TextBox(
-            background = colors_inherited[2],
-            fontsize   = 16,
-            foreground = '#000000',
-            padding    = 5,
-            text       = '|'
+            background                 = colors_inherited[2],
+            fontsize                   = 16,
+            foreground                 = '#000000',
+            padding                    = 5,
+            text                       = '|'
         ),
         widget.TextBox(
-            background = colors_inherited[2],
-            fontsize   = 16,
-            foreground = '#000000',
-            padding    = 5,
-            text       = '\U0000F028 '
+            background                 = colors_inherited[2],
+            fontsize                   = 16,
+            foreground                 = '#000000',
+            padding                    = 5,
+            text                       = '\U0000F028 '
         ),
         widget.Volume(
-            background      = colors_inherited[2],
-            foreground      = '#000000',
-            volume_app      = 'alsamixer',
-            update_interval = 0.1
+            background                 = colors_inherited[2],
+            foreground                 = '#000000',
+            volume_app                 = 'alsamixer',
+            update_interval            = 0.1
         ),
         widget.TextBox(
-            background = colors_inherited[2],
-            fontsize   = 16,
-            foreground = '#000000',
-            padding    = 0,
-            text       = ' | '
+            background                 = colors_inherited[2],
+            fontsize                   = 16,
+            foreground                 = '#000000',
+            padding                    = 0,
+            text                       = ' | '
         ),
         widget.Battery(
-            background      = colors_inherited[2],
-            charge_char     = '\U0000F583',
-            discharge_char  = '\U0000F57E',
-            empty_char      = '\U0000F58D',
-            foreground      = '#000000',
-            format          = '{char} {percent:2.0%}',
-            fontsize        = 16,
-            full_char       = '\U0000F578',
-            low_percentage  = 0.21,
-            padding         = 0,
-            show_short_text = False,
-            update_interval = 1,
-            unknown_char    = '\U0000F590'
+            background                 = colors_inherited[2],
+            charge_char                = '\U0000F583',
+            discharge_char             = '\U0000F57E',
+            empty_char                 = '\U0000F58D',
+            foreground                 = '#000000',
+            format                     = '{char} {percent:2.0%}',
+            fontsize                   = 16,
+            full_char                  = '\U0000F578',
+            low_percentage             = 0.21,
+            padding                    = 0,
+            show_short_text            = False,
+            update_interval            = 1,
+            unknown_char               = '\U0000F590'
         ),
         widget.Sep(
-            background = colors_inherited[2],
-            linewidth  = 0,
-            padding    = 10
+            background                 = colors_inherited[2],
+            linewidth                  = 0,
+            padding                    = 10
         ),
         widget.TextBox(
-            background = colors_inherited[2],
-            fontsize   = 35,
-            foreground = colors_inherited[3],
-            padding    = 0,
-            text       = '\U0000E0B2'
+            background                 = colors_inherited[2],
+            fontsize                   = 35,
+            foreground                 = colors_inherited[3],
+            padding                    = 0,
+            text                       = '\U0000E0B2'
         ),
         widget.TextBox(
-            background = colors_inherited[3],
-            fontsize   = 16,
-            foreground = '#000000',
-            padding    = 2,
-            text       = '\U0000F5ED '
+            background                 = colors_inherited[3],
+            fontsize                   = 16,
+            foreground                 = '#000000',
+            padding                    = 2,
+            text                       = '\U0000F5ED '
         ),
         widget.Clock(
-            background = colors_inherited[3],
-            foreground = '#000000',
-            format     = '%a, %b %d - %Y',
-            padding    = 0
+            background                 = colors_inherited[3],
+            foreground                 = '#000000',
+            format                     = '%a, %b %d - %Y',
+            padding                    = 0
         ),
         widget.TextBox(
-            background = colors_inherited[3],
-            fontsize   = 16,
-            foreground = '#000000',
-            padding    = 0,
-            text       = ' | '
+            background                 = colors_inherited[3],
+            fontsize                   = 16,
+            foreground                 = '#000000',
+            padding                    = 0,
+            text                       = ' | '
         ),
         widget.TextBox(
-            background = colors_inherited[3],
-            fontsize   = 16,
-            foreground = '#000000',
-            padding    = 0,
-            text       = '\U0000E384 '
+            background                 = colors_inherited[3],
+            fontsize                   = 16,
+            foreground                 = '#000000',
+            padding                    = 0,
+            text                       = '\U0000E384 '
         ),
         widget.Clock(
-            background = colors_inherited[3],
-            foreground = '#000000',
-            format     = '%H:%M',
-            padding    = 5
+            background                 = colors_inherited[3],
+            foreground                 = '#000000',
+            format                     = '%H:%M',
+            padding                    = 5
         ),
         widget.Sep(
-            background = colors_inherited[3],
-            linewidth  = 0,
-            padding    = 5
+            background                 = colors_inherited[3],
+            linewidth                  = 0,
+            padding                    = 5
         ),
     ]
     return widgets_list
@@ -440,7 +445,7 @@ def init_widgets_list():
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     widgets_screen1.append(widget.Systray(
-        background = colors_inherited[0],
+        background = colors_standard[1],
         icon_size  = 20,
         padding    = 2
     ))

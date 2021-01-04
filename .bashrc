@@ -17,11 +17,10 @@ alias ss="systemctl suspend"
 alias ..='cd ../'
 alias ...='cd ../../'
 
-alias ls="exa -al --color=always --group-directories-first"
+alias ls="exa -lag -a --color=always --group-directories-first"
 alias la="exa -a --color=always --group-directories-first"
-alias ll="exa -l --color=always --group-directories-first"
+alias ll="exa -lgh --color=always --group-directories-first"
 alias lt="exa -aT --color=always --group-directories-first"
-alias l.='exa -a | egrep "^\."'
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'

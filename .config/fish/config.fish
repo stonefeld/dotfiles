@@ -93,11 +93,24 @@ function _git_ahead
     case '0 0'
       return
     case '* 0'
-      echo "$yellow↑$normal_c$ahead$whitespace"
+      set_color yellow
+      echo "↑"
+      set_color normal
+      echo "$ahead "
     case '0 *'
-      echo "$yellow↓$normal_c$behind$whitespace"
+      set_color yellow
+      echo "↓"
+      set_color normal
+      echo "$behind "
     case '*'
-      echo "$yellow↑$normal$ahead $yellow↓$normal_c$behind$whitespace "
+      set_color yellow
+      echo "↑"
+      set_color normal
+      echo "$ahead "
+      set_color yellow
+      echo "↓"
+      set_color normal
+      echo "$behind "
   end
 end
 
@@ -118,7 +131,7 @@ alias re='reboot'
 alias ss='systemctl suspend'
 
 # ls Replacement
-alias ls='exa -lag --color=always --group-directories-first --git'
+alias ls='exa -lag -a --color=always --group-directories-first --git'
 alias la='exa -a --color=always --group-directories-first'
 alias ll='exa -lg --color=always --group-directories-first --git'
 alias lt='exa -aT --color=always --group-directories-first'
@@ -144,7 +157,7 @@ alias pacinstall="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -
 alias pacremove="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 
 # Pip3 Package Update Shortcut
-alias pip3_update="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias pip3_update="sudo pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U"
 
 # Overwrite confirm
 alias cp='cp -i'

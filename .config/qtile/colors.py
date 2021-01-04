@@ -50,3 +50,24 @@ def gruvbox():
     ]
     return gruvbox
 
+def monokai_pro():
+    monokai_pro = [
+        ["#403E41", "#403E41"], # 0
+        ["#FF6188", "#FF6188"], # 1
+        ["#A9DC76", "#A9DC76"], # 2
+        ["#FFD866", "#FFD866"], # 3
+        ["#FC9867", "#FC9867"], # 4
+        ["#AB9DF2", "#AB9DF2"], # 5
+        ["#78DCE8", "#78DCE8"], # 6
+        ["#FCFCFA", "#FCFCFA"], # 7
+        ["#727072", "#727072"], # 8
+        ["#FF6188", "#FF6188"], # 9
+        ["#A9DC76", "#A9DC76"], # 10
+        ["#FFD866", "#FFD866"], # 11
+        ["#FC9867", "#FC9867"], # 12
+        ["#AB9DF2", "#AB9DF2"], # 13
+        ["#78DCE8", "#78DCE8"], # 14
+        ["#FCFCFA", "#FCFCFA"]  # 15
+    ]
+    return monokai_pro
+

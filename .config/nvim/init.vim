@@ -111,8 +111,9 @@ Plug 'sheerun/vim-polyglot'
 
 " Colorschemes
 Plug 'gruvbox-community/gruvbox'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
+Plug 'sainnhe/sonokai'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -146,15 +147,17 @@ augroup END
 
 " Colorscheme selection
 set termguicolors
-colorscheme nord
+colorscheme sonokai
 set background=dark
 
 highlight Normal  guibg=none
 highlight NonText guibg=none
-highlight LineNr gui=bold
+highlight EndOfBuffer guibg=none
+highlight LineNr gui=bold guibg=none
+highlight SignColumn guibg=none
 
 " Airline setup
-let g:airline_theme                         = 'nord'
+let g:airline_theme                         = 'sonokai'
 let g:airline#extensions#tabline#enabled    = 1
 let g:airline#extensions#tabline#formatter  = 'unique_tail'
 let g:airline#extensions#virtualenv#enabled = 1

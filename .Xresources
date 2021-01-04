@@ -11,7 +11,7 @@ Xft.lcdfilter: lcdfilter
 
 XTerm*renderFont: true
 XTerm*faceName: xft:Fantasque Sans Mono Nerd Font
-XTerm*faceSize: 14
+XTerm*faceSize: 12
 XTerm*utf8: 2
 XTerm*locale: true
 
@@ -19,43 +19,43 @@ XTerm*locale: true
 XTerm*loginshell: true
 
 ! I like a LOT of scrollback...
-XTerm*savelines: 16384
+XTerm*savelines: 50000
 
 ! double-click to select whole URLs :D
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
 ! special
-XTerm*foreground:   #D8DEE9
-XTerm*background:   #282c34
+XTerm*foreground: #D8DEE9
+XTerm*background: #282c34
 
 ! black
-*.color0:       #3B4252
-*.color8:       #3B4252
+*.color0:  #3B4252
+*.color8:  #3B4252
 
 ! red
-*.color1:       #BF616A
-*.color9:       #BF616A
+*.color1:  #BF616A
+*.color9:  #BF616A
 
 ! green
-*.color2:       #A3BE8C
-*.color10:      #A3BE8C
+*.color2:   #A3BE8C
+*.color10:  #A3BE8C
 
 ! yellow
-*.color3:       #EBCB8B
-*.color11:      #EBCB8B
+*.color3:  #EBCB8B
+*.color11: #EBCB8B
 
 ! blue
-*.color4:       #81A1C1
-*.color12:      #81A1C1
+*.color4:  #81A1C1
+*.color12: #81A1C1
 
 ! magenta
-*.color5:       #B48EAD
-*.color13:      #B48EAD
+*.color5:  #B48EAD
+*.color13: #B48EAD
 
 ! cyan
-*.color6:       #88C0D0
-*.color14:      #88C0D0
+*.color6:  #88C0D0
+*.color14: #88C0D0
 
 ! white
-*.color7:       #E5E9F0
-*.color15:      #E5E9F0
+*.color7:  #E5E9F0
+*.color15: #E5E9F0
