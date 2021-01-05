@@ -2,7 +2,7 @@ configuration {
 	modi: "";
 	font: "Ubuntu Sans 14";
 	terminal: "alacritty";
-	m: "eDP-1";
+	m: "eDP1";
 	show-icons: true;
 	icon-theme: "Papirus";
 	theme: "applauncher";

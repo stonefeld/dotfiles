@@ -175,6 +175,7 @@ alias fgrep='fgrep --color=auto'
 # -------- ENV VARIABLES --------- #
 export BAT_THEME="Nord"
 export EDITOR="nvim"
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 # ------ END ENV VARIABLES ------- #
 
 # --------- MANPAGES COLORS ------ #

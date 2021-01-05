@@ -39,11 +39,11 @@
 
 #"pactl set-sink-volume @DEFAULT_SINK@ +10%"
 #"amixer set Master 5%+"
-"current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && pactl set-sink-volume @DEFAULT_SINK@ +10%"
+"current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && pactl set-sink-volume @DEFAULT_SINK@ +10%; canberra-gtk-play -i audio-volume-change"
    XF86AudioRaiseVolume
 
 #"amixer set Master 5%-"
-"pactl set-sink-volume @DEFAULT_SINK@ -10%"
+"pactl set-sink-volume @DEFAULT_SINK@ -10%; canberra-gtk-play -i audio-volume-change"
    XF86AudioLowerVolume
 
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"

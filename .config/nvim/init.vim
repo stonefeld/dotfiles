@@ -45,8 +45,7 @@ set scrolloff=8
 set noswapfile
 set nobackup
 set nowritebackup
-set undodir=~/.local/share/nvim/site/undodir
-set undofile
+set noundofile
 
 set wildmenu
 set incsearch

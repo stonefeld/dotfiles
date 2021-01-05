@@ -29,7 +29,7 @@ qtile_root    = os.path.join(home, '.config/qtile')
 qtile_scripts = os.path.join(qtile_root, 'scripts')
 
 # Colors
-colors_inherited = colors.monokai_pro()
+colors_inherited = colors.nord()
 colors_standard = colors.standard()
 
 keys = [
@@ -98,7 +98,7 @@ keys = [
     Key(['mod1'],         'Tab',    lazy.spawn('rofi -show windowcd')),
 
     # Launch Utilities
-    Key([mod],            'r',      lazy.spawn('dmenu_run -b -m eDP-1')),
+    Key([mod],            'r',      lazy.spawn('dmenu_run -b -m eDP1')),
     Key([mod],            'c',      lazy.spawn('galculator')),
 
     # Playerctl commands  
@@ -131,9 +131,9 @@ group_names = [
 scratchpads = [
     ScratchPad(
         'scratchpad', [
-            DropDown('term', myTerm,                                            opacity=1, warp_pointer=False),
-            DropDown('mpd',  f'{myTerm} -e {qtile_scripts}/mpd.sh', height=0.8, opacity=1, warp_pointer=False),
+            DropDown('term', myTerm,                                height=0.5, opacity=1, warp_pointer=False),
             DropDown('spt',  f'{myTerm} -e {qtile_scripts}/spt.sh', height=0.8, opacity=1, warp_pointer=False),
+            DropDown('mpd',  f'{myTerm} -e {qtile_scripts}/mpd.sh', height=0.8, opacity=1, warp_pointer=False),
             DropDown('mutt', f'{myTerm} -e neomutt',                height=0.8, opacity=1, warp_pointer=False),
             DropDown('htop', f'{myTerm} -e htop',                   height=0.8, opacity=1, warp_pointer=False)
         ]
@@ -153,14 +153,14 @@ layout_theme = {
     'border_focus_stack':  colors_inherited[1][0],
     'border_normal_stack': colors_standard[0][0],
     'border_width':        2,
-    'margin':              6,
     'change_size':         10,
+    'grow_amount':         5,
+    'margin':              6
 }
 
 layouts = [
-    layout.Columns   (**layout_theme, num_columns=2, autosplit=True),
+    layout.Columns   (**layout_theme, border_on_single=True, num_columns=2, autosplit=True, insert_position=1),
     layout.MonadTall (**layout_theme),
-    layout.Stack     (**layout_theme, num_stacks=2),
     layout.Tile      (**layout_theme),
     layout.Bsp       (**layout_theme),
     layout.Floating  (**layout_theme),
@@ -169,10 +169,10 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font       = 'Fantasque Sans Mono Nerd Font',
-    fontsize   = 16,
-    padding    = 2,
-    background = colors_standard[1]
+    font        = 'Fantasque Sans Mono Nerd Font',
+    fontsize    = 16,
+    padding     = 2,
+    background  = colors_standard[1]
 )
 extension_defaults = widget_defaults.copy()
 
