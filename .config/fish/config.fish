@@ -45,17 +45,10 @@ function fish_mode_prompt
   set_color normal
 end
 
-set fish_vi_force_cursor
-set fish_cursor_default block
-set fish_cursor_insert line
-set fish_cursor_replace_one underscore
-set fish_cursor_visual block blink
-
 function fish_user_key_bindings
   for mode in insert default visual
     bind -M $mode \cf forward-char
   end
-  fish_vi_key_bindings
 end
 
 function _git_ahead
