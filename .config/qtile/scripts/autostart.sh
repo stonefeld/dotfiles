@@ -1,6 +1,6 @@
 #!/bin/sh
 
-polkit-dumb-agent &
+lxpolkit &
 nitrogen --restore &
 picom &
 xbindkeys &

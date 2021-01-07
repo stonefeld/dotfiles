@@ -28,7 +28,6 @@ set smarttab
 set expandtab
 set smartindent
 set autoindent
-set autochdir
 
 set splitbelow
 set splitright
@@ -67,6 +66,7 @@ endif
 set noshowmode
 set colorcolumn=0
 
+"set rtp+=~/.local/share/nvim/site/plugged/nordokai/
 call plug#begin('~/.local/share/nvim/site/plugged')
 
 " NERDTree
@@ -113,6 +113,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'arcticicestudio/nord-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/sonokai'
+Plug 'TheoStanfield/nordokai'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -146,7 +147,7 @@ augroup END
 
 " Colorscheme selection
 set termguicolors
-colorscheme sonokai
+colorscheme nordokai
 set background=dark
 
 highlight Normal  guibg=none
@@ -154,9 +155,10 @@ highlight NonText guibg=none
 highlight EndOfBuffer guibg=none
 highlight LineNr gui=bold guibg=none
 highlight SignColumn guibg=none
+highlight FloatermBorder guibg=none
 
 " Airline setup
-let g:airline_theme                         = 'sonokai'
+let g:airline_theme                         = 'nord'
 let g:airline#extensions#tabline#enabled    = 1
 let g:airline#extensions#tabline#formatter  = 'unique_tail'
 let g:airline#extensions#virtualenv#enabled = 1

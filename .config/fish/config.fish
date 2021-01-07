@@ -1,42 +1,8 @@
 # ------------ PROMPT ------------ #
-function fish_prompt
-  set -l last_status $status
-  set -l yellow ( set_color -o bryellow )
-  set -g red    ( set_color -o brred    )
-  set -g blue   ( set_color -o brblue   )
-  set -g cyan   ( set_color -o brcyan   )
-  set -l green  ( set_color -o brgreen  )
-  set -g white  ( set_color -o brwhite  )
-  set -l normal ( set_color    brwhite  )
-
-  set -l ahead (_git_ahead)
-  set -g whitespace ' '
-
-  if test $last_status = 0
-    set status_indicator "$green>>$normal"
-  else
-    set status_indicator "$red>>$normal"
-  end
-  set -l cwd $white"[ "$blue(basename (prompt_pwd))$white" ]"
-
-  if [ (_git_branch_name) ]
-    set -l git_branch (_git_branch_name)
-    set git_info "$white ($cyan$git_branch$white)"
-    if [ (_is_git_dirty) ]
-      set -l dirty " $yellow✗"
-      set git_info "$git_info$dirty"
-    else
-      set git_info "$white ($blue$git_branch$white)"
-    end
-  end
-  echo -n -s $cwd $git_info $whitespace $ahead $status_indicator
-  set_color normal
-  echo $whitespace
-end
-
 function fish_mode_prompt
   switch $fish_bind_mode
     case default
+      echo -en "\e[2 q"
       set_color -o brwhite
       echo "[ "
       set_color -o brred
@@ -44,6 +10,7 @@ function fish_mode_prompt
       set_color -o brwhite
       echo " ]"
     case insert
+      echo -en "\e[6 q"
       set_color -o brwhite
       echo "[ "
       set_color -o brgreen
@@ -51,6 +18,7 @@ function fish_mode_prompt
       set_color -o brwhite
       echo " ]"
     case replace_one
+      echo -en "\e[4 q"
       set_color -o brwhite
       echo "[ "
       set_color -o bryellow
@@ -58,6 +26,7 @@ function fish_mode_prompt
       set_color -o brwhite
       echo " ]"
     case visual
+      echo -en "\e[2 q"
       set_color -o brwhite
       echo "[ "
       set_color -o brmagenta
@@ -65,6 +34,7 @@ function fish_mode_prompt
       set_color -o brwhite
       echo " ]"
     case '*'
+      echo -en "\e[2 q"
       set_color -o brwhite
       echo "[ "
       set_color -o brred
@@ -75,10 +45,17 @@ function fish_mode_prompt
   set_color normal
 end
 
+set fish_vi_force_cursor
+set fish_cursor_default block
+set fish_cursor_insert line
+set fish_cursor_replace_one underscore
+set fish_cursor_visual block blink
+
 function fish_user_key_bindings
   for mode in insert default visual
     bind -M $mode \cf forward-char
   end
+  fish_vi_key_bindings
 end
 
 function _git_ahead
@@ -122,6 +99,41 @@ end
 function _is_git_dirty
   echo (command git status -s --ignore-submodules=dirty ^/dev/null)
 end
+
+function fish_prompt
+  set -l last_status $status
+  set -l yellow ( set_color -o bryellow )
+  set -g red    ( set_color -o brred    )
+  set -g blue   ( set_color -o brblue   )
+  set -g cyan   ( set_color -o brcyan   )
+  set -l green  ( set_color -o brgreen  )
+  set -g white  ( set_color -o brwhite  )
+  set -l normal ( set_color    brwhite  )
+
+  set -l ahead (_git_ahead)
+  set -g whitespace ' '
+
+  if test $last_status = 0
+    set status_indicator "$green>>$normal"
+  else
+    set status_indicator "$red>>$normal"
+  end
+  set -l cwd $white"[ "$blue(basename (prompt_pwd))$white" ]"
+
+  if [ (_git_branch_name) ]
+    set -l git_branch (_git_branch_name)
+    set git_info "$white ($cyan$git_branch$white)"
+    if [ (_is_git_dirty) ]
+      set -l dirty " $yellow✗"
+      set git_info "$git_info$dirty"
+    else
+      set git_info "$white ($blue$git_branch$white)"
+    end
+  end
+  echo -n -s $cwd $git_info $whitespace $ahead $status_indicator
+  set_color normal
+  echo $whitespace
+end
 # ---------- END PROMPT ---------- #
 
 # ------------ ALIASES ----------- #
@@ -157,7 +169,7 @@ alias pacinstall="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -
 alias pacremove="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 
 # Pip3 Package Update Shortcut
-alias pip3_update="sudo pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U"
+alias pip3update="sudo pip3 list --outdated | awk '{print $1}' | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade"
 
 # Overwrite confirm
 alias cp='cp -i'

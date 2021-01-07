@@ -17,8 +17,10 @@ function update_count {
 function notify {
     if [ $# -eq 2 ]; then
         dunstify -a $appName -i cloud-download -r $messageID "Package Upgrade" "$2 new upgrades available ($1 from last time)"
+        canberra-gtk-play -i dialog-warning
     else
         dunstify -a $appName -i cloud-download -r $messageID "Package Upgrade" "There are $1 packages to upgrade"
+        canberra-gtk-play -i dialog-warning
     fi
 }
 
@@ -41,7 +43,6 @@ if [ $count -gt 0 ]; then
     if [ $last_available == true ]; then
         if [ $last_count -lt $count ]; then
             notify $count $((count-last_count))
-            canberra-gtk-play -i dialog-warning
             echo $count > $cache_file
         else
             notify $count
@@ -53,4 +54,6 @@ if [ $count -gt 0 ]; then
     fi
 else
     dunstify -a $appName -i cloud-download -r $messageID "Package Upgrade" "There are no packages to upgrade"
+    canberra-gtk-play -i dialog-warning
+    echo 0 > $cache_file
 fi

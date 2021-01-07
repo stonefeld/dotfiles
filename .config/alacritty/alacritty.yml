@@ -13,8 +13,8 @@ window:
 
   title: terminal
   class:
-    instance: Alacritty
-    general: Alacritty
+    instance: alacritty
+    general: alacritty
 
   gtk_theme_variant: None
 
@@ -24,23 +24,31 @@ scrolling:
 
 font:
   normal:
-    #family: Fantasque Sans Mono Nerd Font
-    family: Ubuntu Mono Nerd Font
+    family: Fantasque Sans Mono Nerd Font
+    #family: Ubuntu Mono Nerd Font
+    #family: Mononoki Nerd Font
+    #family: Roboto Mono Nerd Font
     style: Regular
 
   bold:
-    #family: Fantasque Sans Mono Nerd Font
-    family: Ubuntu Mono Nerd Font
+    family: Fantasque Sans Mono Nerd Font
+    #family: Ubuntu Mono Nerd Font
+    #family: Mononoki Nerd Font
+    #family: Roboto Mono Nerd Font
     style: Bold
 
   italic:
-    #family: Fantasque Sans Mono Nerd Font
-    family: Ubuntu Mono Nerd Font
+    family: Fantasque Sans Mono Nerd Font
+    #family: Ubuntu Mono Nerd Font
+    #family: Mononoki Nerd Font
+    #family: Roboto Mono Nerd Font
     style: Italic
 
   bold_italic:
-    #family: Fantasque Sans Mono Nerd Font
-    family: Ubuntu Mono Nerd Font
+    family: Fantasque Sans Mono Nerd Font
+    #family: Ubuntu Mono Nerd Font
+    #family: Mononoki Nerd Font
+    #family: Roboto Mono Nerd Font
     style: Bold Italic
 
   size: 12.0
@@ -49,11 +57,11 @@ font:
     y: 2
 
   glyph_offset:
-    x: 1
-    y: 1
+    x: 0
+    y: 0
 
 draw_bold_text_with_bright_colors: false
-background_opacity: 0.85
+background_opacity: 0.9
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -385,28 +393,53 @@ colors:
   #  white:        '#a0a1a7'
 
   # Colors (Monokai)
+  #primary:
+  #  background: '#2D2A2E'
+  #  foreground: '#FCFCFA'
+  #
+  #normal:
+  #  black:   '#403E41'
+  #  red:     '#FF6188'
+  #  green:   '#A9DC76'
+  #  yellow:  '#FFD866'
+  #  blue:    '#78DCE8'
+  #  magenta: '#AB9DF2'
+  #  cyan:    '#FC9867'
+  #  white:   '#FCFCFA'
+  #
+  #bright:
+  #  black:   '#727072'
+  #  red:     '#FF6188'
+  #  green:   '#A9DC76'
+  #  yellow:  '#FFD866'
+  #  blue:    '#78DCE8'
+  #  magenta: '#AB9DF2'
+  #  cyan:    '#FC9867'
+  #  white:   '#FCFCFA'
+
+  # Colors (Nord)
   primary:
-    background: '#2D2A2E'
-    foreground: '#FCFCFA'
-  
+    background:     '#2e3440'
+    foreground:     '#d8dee9'
+
   normal:
-    black:   '#403E41'
-    red:     '#FF6188'
-    green:   '#A9DC76'
-    yellow:  '#FFD866'
-    blue:    '#78DCE8'
-    magenta: '#AB9DF2'
-    cyan:    '#FC9867'
-    white:   '#FCFCFA'
+    black:          '#3b4252'
+    red:            '#bf616a'
+    green:          '#a3be8c'
+    yellow:         '#ebcb8b'
+    blue:           '#81a1c1'
+    magenta:        '#b48ead'
+    cyan:           '#d08770'
+    white:          '#e5e9f0'
   
   bright:
-    black:   '#727072'
-    red:     '#FF6188'
-    green:   '#A9DC76'
-    yellow:  '#FFD866'
-    blue:    '#78DCE8'
-    magenta: '#AB9DF2'
-    cyan:    '#FC9867'
-    white:   '#FCFCFA'
+    black:          '#4c566a'
+    red:            '#bf616a'
+    green:          '#a3be8c'
+    yellow:         '#ebcb8b'
+    blue:           '#81a1c1'
+    magenta:        '#b48ead'
+    cyan:           '#9fbcbb'
+    white:          '#eceff4'
 
 WINiT_X11_SCALE_FACTOR: 1
