@@ -1,23 +1,30 @@
+!.config/
 /*
 
-# Files
-!.gitignore
+# Include Files
 !.config/autorandr/postswitch
+!.config/autorandr/preswitch
 !.config/nvim/init.vim
 !.config/picom/picom.conf
-!.config/qtile/autostart.sh
-!.config/qtile/config.py
 !.config/scripts/checkupdates.sh
-!.config/xmenu/run.sh
-!.bashrc
-!.xbindkeysrc
+!.config/rofi/config.rasi
+!.config/rofi/themes/applauncher.rasi
+!.config/rofi/themes/colors.rasi
+!.config/rofi/themes/powermenu.rasi
 !.Xresources
+!.bashrc
+!.gitignore
+!.xbindkeysrc
 !.zshrc
+!README.md
 
-# Folders
+# Include Folders
 !.config/alacritty/
 !.config/dunst/
 !.config/firefox/
 !.config/fish/
-!.config/qtile/icons/
-!.config/rofi/
+!.config/qtile/
+!.config/rofi/scripts/
+
+# Ignore Folders
+.config/qtile/__pycache__/*
