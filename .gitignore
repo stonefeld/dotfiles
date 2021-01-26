@@ -7,16 +7,6 @@
 !.zshrc
 !README.md
 
-# Include Folders from .config
-!.config/
-.config/*
-!.config/alacritty/
-!.config/dunst/
-!.config/firefox/
-!.config/fish/
-!.config/qtile/
-!.config/rofi/scripts/
-
 # Include Files from .config
 !.config/autorandr/
 .config/autorandr/*
@@ -44,6 +34,19 @@
 !.config/rofi/themes/applauncher.rasi
 !.config/rofi/themes/colors.rasi
 !.config/rofi/themes/powermenu.rasi
+
+# Include Folders from .config
+!.config/
+.config/*
+!.config/alacritty/
+!.config/dunst/
+!.config/firefox/
+!.config/fish/
+!.config/qtile/
+
+!.config/rofi/
+.config/rofi/*
+!.config/rofi/scripts/
 
 # Ignore Folders from .config
 .config/qtile/__pycache__/
