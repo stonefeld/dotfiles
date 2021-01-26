@@ -61,7 +61,7 @@ font:
     y: 0
 
 draw_bold_text_with_bright_colors: false
-background_opacity: 0.9
+background_opacity: 0.85
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -123,8 +123,8 @@ mouse:
 # And optionally:
 #
 # - `mods` (see key bindings)
-#mouse_bindings:
-#  - { mouse: Middle, action: PasteSelection }
+mouse_bindings:
+  - { mouse: Middle, action: None }
 
 # Key bindings
 #
@@ -417,7 +417,7 @@ colors:
   #  cyan:    '#FC9867'
   #  white:   '#FCFCFA'
 
-  # Colors (Nord)
+  # Colors (Nordokai)
   primary:
     background:     '#2e3440'
     foreground:     '#d8dee9'

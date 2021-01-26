@@ -42,7 +42,7 @@ sleep 2
 if [ $count -gt 0 ]; then
     if [ $last_available == true ]; then
         if [ $last_count -lt $count ]; then
-            notify $count $((count-last_count))
+            notify $last_count $((count-last_count))
             echo $count > $cache_file
         else
             notify $count

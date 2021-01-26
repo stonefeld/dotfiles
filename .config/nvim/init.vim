@@ -12,12 +12,14 @@
 "
 
 syntax on
-
 set nospell
+
 set encoding=utf-8
 set fileencoding=utf-8
+
 set pumheight=10
 set noerrorbells
+
 set iskeyword+=-
 set formatoptions-=cro
 set ruler
@@ -38,7 +40,6 @@ set cursorline
 set nu
 set relativenumber
 set nowrap
-set smartcase
 set scrolloff=8
 
 set noswapfile
@@ -47,12 +48,14 @@ set nowritebackup
 set noundofile
 
 set wildmenu
+set nohlsearch
 set incsearch
 set mouse=a
 set clipboard=unnamedplus
 
 set shell=/usr/bin/fish
 set cmdheight=2
+set signcolumn=yes
 
 set autoread
 set hidden
@@ -66,7 +69,6 @@ endif
 set noshowmode
 set colorcolumn=0
 
-"set rtp+=~/.local/share/nvim/site/plugged/nordokai/
 call plug#begin('~/.local/share/nvim/site/plugged')
 
 " NERDTree
@@ -100,10 +102,6 @@ Plug 'lyuts/rtags'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-" Git
-Plug 'tpope/vim-fugitive'
-Plug 'stsewd/fzf-checkout.vim'
 
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'
@@ -141,8 +139,8 @@ let g:nord_italic                        = 1
 let g:nord_italic_comments               = 1
 let g:nord_underline                     = 1
 augroup nord-theme-overrides
-  autocmd!
-  autocmd ColorScheme nord highlight vimCommentTitle ctermfg=14 guifg=#8FBCBB
+    autocmd!
+    autocmd ColorScheme nord highlight vimCommentTitle ctermfg=14 guifg=#8FBCBB
 augroup END
 
 " Colorscheme selection
@@ -150,11 +148,11 @@ set termguicolors
 colorscheme nordokai
 set background=dark
 
-highlight Normal  guibg=none
-highlight NonText guibg=none
-highlight EndOfBuffer guibg=none
-highlight LineNr gui=bold guibg=none
-highlight SignColumn guibg=none
+highlight Normal         guibg=none
+highlight NonText        guibg=none
+highlight EndOfBuffer    guibg=none
+highlight LineNr         guibg=none
+highlight SignColumn     guibg=none
 highlight FloatermBorder guibg=none
 
 " Airline setup
@@ -188,12 +186,6 @@ let NERDTreeAutoDeleteBuffer      = 1
 let NERDTreeWinSize               = 40
 
 " NERDTree syntax highlight
-let g:NERDTreeLimitedSyntax       = 1
-let g:NERDTreeHighlightCursorline = 0
-
-let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
-let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile  = 1
-
 let s:brown       = "#905532"
 let s:aqua        = "#3AFFDB"
 let s:blue        = "#689FB6"
@@ -213,14 +205,8 @@ let s:white       = "#FFFFFF"
 let s:rspec_red   = "#FE405F"
 let s:git_orange  = "#F54D27"
 
-let g:NERDTreeExtensionHighlightColor        = {}
-let g:NERDTreeExtensionHighlightColor['css'] = s:blue
-
-let g:NERDTreeExactMatchHighlightColor               = {}
-let g:NERDTreeExactMatchHighlightColor['.gitignore'] = s:git_orange
-
-let g:NERDTreePatternMatchHighlightColor                 = {}
-let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red
+let g:NERDTreeLimitedSyntax       = 1
+let g:NERDTreeHighlightCursorline = 0
 
 let g:WebDevIconsDefaultFolderSymbolColor = s:beige
 let g:WebDevIconsDefaultFileSymbolColor   = s:blue
@@ -244,7 +230,7 @@ let g:floaterm_shell      = '/usr/bin/fish'
 " Keyboard Shortcuts
 let mapleader = " "
 call which_key#register('<Space>', "g:which_key_map")
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent><leader> :WhichKey '<Space>'<CR>
 set timeoutlen=500
 
 let g:which_key_map = {}
@@ -292,6 +278,8 @@ let g:which_key_map['b'] = {
 silent! unmap <leader>tc
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-o> :History<CR>
+nnoremap <silent> <C-i> :Lines<CR>
+nnoremap <silent> <C-u> :Marks<CR>
 
 let g:which_key_map['t'] = {
       \ 'name' :                          '+Terminal',
@@ -325,56 +313,29 @@ let g:which_key_map['c'] = {
 let g:which_key_map['g'] = {
       \ 'name':                  '+Git',
       \ 'f'   : [':GFiles',      'files'      ],
-      \ 's'   : [':G',           'status'     ],
-      \ 'b'   : [':GBranches',   'branches'   ],
-      \ 'h'   : [':diffget //3', 'merge left' ],
-      \ 'l'   : [':diffget //2', 'merge right'],
       \ }
 
 " fzf setup
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.75 } }
-let $FZF_DEFAULT_OPTS = '--reverse'
+let g:fzf_preview_window = ['down:40%:hidden', 'ctrl-/']
+let $FZF_DEFAULT_OPTS = '--info=inline --layout=reverse'
 let g:fzf_colors = {
-      \ 'fg':      ['fg', 'Normal'                              ],
-      \ 'bg':      ['bg', 'Normal'                              ],
-      \ 'hl':      ['fg', 'Comment'                             ],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'          ],
-      \ 'hl+':     ['fg', 'Statement'                           ],
-      \ 'info':    ['fg', 'PreProc'                             ],
-      \ 'border':  ['fg', 'Normal'                              ],
-      \ 'prompt':  ['fg', 'Conditional'                         ],
-      \ 'pointer': ['fg', 'Exception'                           ],
-      \ 'marker':  ['fg', 'Keyword'                             ],
-      \ 'spinner': ['fg', 'Label'                               ],
-      \ 'header':  ['fg', 'Comment'                             ],
-      \ } 
-let g:fzf_branch_actions = {
-      \ 'rebase': {
-      \   'prompt':   'Rebase> ',
-      \   'execute':  'echo system("{git} rebase {branch}")',
-      \   'multiple': v:false,
-      \   'keymap':   'ctrl-r',
-      \   'required': ['branch'],
-      \   'confirm':  v:false,
-      \ },
-      \ 'track': {
-      \   'prompt':   'Track> ',
-      \   'execute':  'echo system("{git} checkout --track {branch}")',
-      \   'multiple': v:false,
-      \   'keymap':   'ctrl-t',
-      \   'required': ['branch'],
-      \   'confirm':  v:false,
-      \ },
+      \ 'fg':      [ 'fg', 'Normal'                               ],
+      \ 'bg':      [ 'bg', 'Normal'                               ],
+      \ 'hl':      [ 'fg', 'Comment'                              ],
+      \ 'fg+':     [ 'fg', 'CursorLine', 'CursorColumn', 'Normal' ],
+      \ 'bg+':     [ 'bg', 'CursorLine', 'CursorColumn'           ],
+      \ 'hl+':     [ 'fg', 'Statement'                            ],
+      \ 'info':    [ 'fg', 'PreProc'                              ],
+      \ 'border':  [ 'fg', 'Normal'                               ],
+      \ 'prompt':  [ 'fg', 'Conditional'                          ],
+      \ 'pointer': [ 'fg', 'Exception'                            ],
+      \ 'marker':  [ 'fg', 'Keyword'                              ],
+      \ 'spinner': [ 'fg', 'Label'                                ],
+      \ 'header':  [ 'fg', 'Comment'                              ],
       \ }
 
 " COC Setup
-if has("patch-8.1.1564")
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -399,7 +360,6 @@ else
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-" Use K to show documentation in preview window.
 nnoremap <silent> # :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -422,13 +382,13 @@ augroup mygroup
 augroup end
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ca  <Plug>(coc-codeaction)
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold   :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
       \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

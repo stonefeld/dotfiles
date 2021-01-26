@@ -1,15 +1,27 @@
+# 
+#  ██████╗ ████████╗██╗██╗     ███████╗
+# ██╔═══██╗╚══██╔══╝██║██║     ██╔════╝
+# ██║   ██║   ██║   ██║██║     █████╗  
+# ██║▄▄ ██║   ██║   ██║██║     ██╔══╝  
+# ╚██████╔╝   ██║   ██║███████╗███████╗
+#  ╚══▀▀═╝    ╚═╝   ╚═╝╚══════╝╚══════╝
+#                                      
+# Author: Theo Stanfield
+# Date: 23/09/2020
+# Git: https://github.com/TheoStanfield/dotfiles.git
+#
+
 def standard():
-    standard = [
+    return [
         ["#1d2330", "#1d2330"], # 0
         ["#292d3e", "#292d3e"], # 1
         ["#434758", "#434758"], # 2
         ["#ff5555", "#ff5555"], # 3
         ["#8d62a9", "#8d62a9"]  # 4
     ]
-    return standard
 
 def nord():
-    nord = [
+    return [
         ["#3b4252", "#3b4252"], # 0
         ["#bd616a", "#bd616a"], # 1
         ["#a3be8c", "#a3be8c"], # 2
@@ -27,10 +39,9 @@ def nord():
         ["#8fbcbb", "#8fbcbb"], # 14
         ["#eceff4", "#eceff4"]  # 15
     ]
-    return nord
 
 def gruvbox():
-    gruvbox = [
+    return [
         ["#282828", "#282828"], # 0
         ["#fb4934", "#fb4934"], # 1
         ["#b8bb26", "#b8bb26"], # 2
@@ -48,10 +59,9 @@ def gruvbox():
         ["#689d6a", "#689d6a"], # 14
         ["#a89984", "#a89984"]  # 15
     ]
-    return gruvbox
 
 def monokai_pro():
-    monokai_pro = [
+    return [
         ["#403E41", "#403E41"], # 0
         ["#FF6188", "#FF6188"], # 1
         ["#A9DC76", "#A9DC76"], # 2
@@ -69,5 +79,7 @@ def monokai_pro():
         ["#78DCE8", "#78DCE8"], # 14
         ["#FCFCFA", "#FCFCFA"]  # 15
     ]
-    return monokai_pro
+
+colors_standard = standard()
+colors_custom   = nord()
 

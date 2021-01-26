@@ -1,54 +1,38 @@
 # ------------ PROMPT ------------ #
 function fish_mode_prompt
+  set_color -o brwhite
+  echo "[ "
   switch $fish_bind_mode
     case default
       echo -en "\e[2 q"
-      set_color -o brwhite
-      echo "[ "
       set_color -o brred
       echo "N"
-      set_color -o brwhite
-      echo " ]"
+
     case insert
       echo -en "\e[6 q"
-      set_color -o brwhite
-      echo "[ "
       set_color -o brgreen
       echo "I"
-      set_color -o brwhite
-      echo " ]"
+
     case replace_one
       echo -en "\e[4 q"
-      set_color -o brwhite
-      echo "[ "
       set_color -o bryellow
       echo "R"
-      set_color -o brwhite
-      echo " ]"
+
     case visual
       echo -en "\e[2 q"
-      set_color -o brwhite
-      echo "[ "
       set_color -o brmagenta
       echo "V"
-      set_color -o brwhite
-      echo " ]"
+
     case '*'
       echo -en "\e[2 q"
-      set_color -o brwhite
-      echo "[ "
       set_color -o brred
       echo "?"
-      set_color -o brwhite
-      echo " ]"
-  end
-  set_color normal
-end
 
-function fish_user_key_bindings
-  for mode in insert default visual
-    bind -M $mode \cf forward-char
   end
+  set_color -o brwhite
+  echo " ]"
+  echo " "
+  set_color normal
 end
 
 function _git_ahead
@@ -95,21 +79,21 @@ end
 
 function fish_prompt
   set -l last_status $status
-  set -l yellow ( set_color -o bryellow )
+  set -g yellow ( set_color -o bryellow )
   set -g red    ( set_color -o brred    )
   set -g blue   ( set_color -o brblue   )
   set -g cyan   ( set_color -o brcyan   )
-  set -l green  ( set_color -o brgreen  )
+  set -g green  ( set_color -o brgreen  )
   set -g white  ( set_color -o brwhite  )
-  set -l normal ( set_color    brwhite  )
+  set -g normal ( set_color    normal   )
 
   set -l ahead (_git_ahead)
   set -g whitespace ' '
 
   if test $last_status = 0
-    set status_indicator "$green>>$normal"
+    set status_indicator "$green>>"
   else
-    set status_indicator "$red>>$normal"
+    set status_indicator "$red>>"
   end
   set -l cwd $white"[ "$blue(basename (prompt_pwd))$white" ]"
 
@@ -129,6 +113,15 @@ function fish_prompt
 end
 # ---------- END PROMPT ---------- #
 
+# ---------- KEY BINDINGS ----------- #
+function fish_user_key_bindings
+  fzf_key_bindings
+  for mode in insert default visual
+    bind -M $mode \cf forward-char
+  end
+end
+# -------- END KEY BINDINGS --------- #
+
 # ------------ ALIASES ----------- #
 # Power functions
 alias sn='shutdown now'
@@ -145,7 +138,7 @@ alias lf='ranger'
 # NeoVim shortcut
 alias v='nvim'
 alias v.='nvim .'
-alias vf="fzf --preview 'bat --theme Nord {1}' | xargs -ro nvim"
+alias vf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'| xargs -ro nvim"
 
 # Fish keybindings shortcut
 alias vk='fish_vi_key_bindings'
@@ -157,12 +150,12 @@ alias lgit='lazygit'
 # Python3 shortcut
 alias py='python3'
 
-# Pacman
-alias pacinstall="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias pacremove="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-
-# Pip3 Package Update Shortcut
+# Pip3 Package Update
 alias pip3update="sudo pip3 list --outdated | awk '{print $1}' | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade"
+
+# Pacman
+alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 
 # Overwrite confirm
 alias cp='cp -i'
@@ -178,9 +171,9 @@ alias fgrep='fgrep --color=auto'
 # ---------- END ALIASES --------- #
 
 # -------- ENV VARIABLES --------- #
-export BAT_THEME="Nord"
-export EDITOR="nvim"
-export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+export PATH="~/.local/bin/:$PATH"
+export EDITOR='nvim'
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse"
 # ------ END ENV VARIABLES ------- #
 
 # --------- MANPAGES COLORS ------ #
