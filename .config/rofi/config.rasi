@@ -1,0 +1,70 @@
+configuration {
+	modi: "";
+	font: "Ubuntu Sans 14";
+	terminal: "alacritty";
+	m: "eDP1";
+	show-icons: true;
+	icon-theme: "Papirus";
+	theme: "applauncher";
+
+	combi-modi: "";
+	sort: false;
+	sorting-method: "normal";
+	case-sensitive: false;
+	sidebar-mode: false;
+	matching: "normal";
+	hide-scrollbar: false;
+	fullscreen: false;
+	scrollbar-width: 8;
+	scroll-method: 0;
+
+	run-command: "{cmd}";
+	run-list-command: "";
+	run-shell-command: "{terminal} -e {cmd}";
+
+	window-command: "wmctrl -i -R {window}";
+	window-match-fields: "all";
+	window-thumbnail: true;
+	window-format: "{w}    {c}    {t}";
+	
+	drun-match-fields: "name,generic,exec,categories,keywords";
+	drun-categories: "";
+	drun-show-actions: false;
+	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	drun-url-launcher: "xdg-open";
+	drun-use-desktop-cache: false;
+	drun-reload-desktop-cache: false;
+
+	click-to-exit: true;
+	show-match: true;
+
+	disable-history: false;
+	max-history-size: 25;
+
+	display-window: "Windows";
+	display-windowcd: "Windows";
+	display-run: "Run";
+	display-drun: "Apps";
+
+	kb-primary-paste: "Control+V,Shift+Insert";
+	kb-clear-line: "Control+w";
+	kb-move-front: "Control+a";
+	kb-move-end: "Control+e";
+	kb-move-word-back: "Alt+b";
+	kb-move-word-forward: "Alt+f";
+	kb-move-char-back: "Control+b";
+	kb-move-char-forward: "Control+f";
+	kb-remove-char-back: "BackSpace,Shift+BackSpace";
+	kb-remove-to-eol: "";
+	kb-accept-entry: "Control+m,Return,KP_Enter";
+	kb-row-left: "Left,Control+h";
+	kb-row-right: "Right,Control+l";
+	kb-row-up: "Up,Control+k";
+	kb-row-down: "Down,Control+j";
+	ml-row-left: "ScrollLeft";
+	ml-row-right: "ScrollRight";
+	ml-row-up: "ScrollUp";
+	ml-row-down: "ScrollDown";
+	me-select-entry: "MouseDPrimary";
+	me-accept-entry: "MousePrimary";
+}

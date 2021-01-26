@@ -1,0 +1,58 @@
+configuration {
+    theme: "powermenu";
+    show-icons: true;
+    font: "Ubuntu Sans 12";
+    scroll-method: 0;
+}
+
+@import "colors.rasi"
+
+#window {
+    width: 500px;
+    height: 140px;
+    background-color: transparent;
+}
+
+#mainbox {
+    border: 5px;
+    border-radius: 15px;
+    border-color: @powermenu-border;
+    children: [listview];
+    background-color: @powermenu-bg;
+}
+
+#listview {
+    columns: 4;
+    layout: vertical;
+    background-color: transparent;
+}
+
+element {
+    padding: 20px;
+    orientation: vertical;
+}
+
+element-icon {
+    size: 58px;
+    margin: 2px;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+#element.selected.normal {
+    background-color: transparent;
+    text-color: @powermenu-sel-fg;
+}
+
+#element.normal.normal {
+    background-color: transparent;
+    text-color: @powermenu-nor-fg;
+}
+
+#element.alternate.normal {
+    background-color: transparent;
+    text-color: @powermenu-nor-fg;
+}

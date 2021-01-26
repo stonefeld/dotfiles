@@ -1,16 +1,5 @@
-!.config/
+#Include Files from root
 /*
-
-# Include Files
-!.config/autorandr/postswitch
-!.config/autorandr/preswitch
-!.config/nvim/init.vim
-!.config/picom/picom.conf
-!.config/scripts/checkupdates.sh
-!.config/rofi/config.rasi
-!.config/rofi/themes/applauncher.rasi
-!.config/rofi/themes/colors.rasi
-!.config/rofi/themes/powermenu.rasi
 !.Xresources
 !.bashrc
 !.gitignore
@@ -18,7 +7,9 @@
 !.zshrc
 !README.md
 
-# Include Folders
+# Include Folders from .config
+!.config/
+.config/*
 !.config/alacritty/
 !.config/dunst/
 !.config/firefox/
@@ -26,5 +17,33 @@
 !.config/qtile/
 !.config/rofi/scripts/
 
-# Ignore Folders
-.config/qtile/__pycache__/*
+# Include Files from .config
+!.config/autorandr/
+.config/autorandr/*
+!.config/autorandr/postswitch
+!.config/autorandr/preswitch
+
+!.config/nvim/
+.config/nvim/*
+!.config/nvim/init.vim
+
+!.config/picom/
+.config/picom/*
+!.config/picom/picom.conf
+
+!.config/scripts/
+.config/scripts/*
+!.config/scripts/checkupdates.sh
+
+!.config/rofi/
+.config/rofi/*
+!.config/rofi/config.rasi
+
+!.config/rofi/themes/
+.config/rofi/themes/*
+!.config/rofi/themes/applauncher.rasi
+!.config/rofi/themes/colors.rasi
+!.config/rofi/themes/powermenu.rasi
+
+# Ignore Folders from .config
+.config/qtile/__pycache__/
