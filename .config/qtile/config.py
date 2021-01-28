@@ -65,25 +65,30 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod],          str(i), lazy.group[name].toscreen()))
     keys.append(Key([mod, 'shift'], str(i), lazy.window.togroup(name)))
 
+# Layouts
 layout_theme = {
-    'border_focus':        colors_custom[6][0],
-    'border_normal':       colors_standard[0][0],
-    'border_focus_stack':  colors_custom[1][0],
-    'border_normal_stack': colors_standard[0][0],
-    'border_width':        2,
-    'change_size':         10,
-    'grow_amount':         5,
-    'margin':              6
+    'border_focus'        : colors_custom[6][0],
+    'border_normal'       : colors_standard[0][0],
+    'border_focus_stack'  : colors_custom[1][0],
+    'border_normal_stack' : colors_standard[0][0],
+    'border_width'        : 2,
+    'change_size'         : 10,
+    'grow_amount'         : 5,
+    'margin'              : 6
 }
 
 layouts = [
-    layout.Columns   (**layout_theme, border_on_single=True, num_columns=2, autosplit=True, insert_position=1),
-    layout.MonadTall (**layout_theme                                                                         ),
-    layout.Tile      (**layout_theme                                                                         ),
-    layout.Bsp       (**layout_theme                                                                         ),
-    layout.Floating  (**layout_theme                                                                         ),
-    layout.Zoomy     (**layout_theme                                                                         ),
-    layout.Max       (**layout_theme                                                                         )
+    layout.Columns   (**layout_theme,
+                      autosplit        = True,
+                      border_on_single = True,
+                      insert_position  = 1,
+                      num_columns      = 2),
+    layout.MonadTall (**layout_theme),
+    layout.Tile      (**layout_theme),
+    layout.Bsp       (**layout_theme),
+    layout.Floating  (**layout_theme),
+    layout.Zoomy     (**layout_theme),
+    layout.Max       (**layout_theme)
 ]
 
 widget_defaults = dict(
@@ -100,9 +105,11 @@ if __name__ in ['config', '__main__']:
 
 # Drag floating layouts.
 mouse = [
-    Drag ( [mod], 'Button1', lazy.window.set_position_floating(), start=lazy.window.get_position() ),
-    Drag ( [mod], 'Button3', lazy.window.set_size_floating(), start=lazy.window.get_size()         ),
-    Click( [mod], 'Button2', lazy.window.bring_to_front()                                          )
+    Drag([mod], 'Button1', lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], 'Button3', lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
+    Click([mod], 'Button2', lazy.window.bring_to_front())
 ]
 
 dgroups_key_binder = None
@@ -113,43 +120,47 @@ bring_front_click  = True
 cursor_warp        = False
 
 floating_layout_theme = {
-    'border_focus':        colors_custom[3][0],
-    'border_normal':       colors_standard[0][0],
-    'border_width':        2,
+    'border_focus' : colors_custom[3][0],
+    'border_normal': colors_standard[0][0],
+    'border_width' : 2
 }
 
 floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
-    { 'role':    'pop-up'                },
-    { 'wname':   'branchdialog'          },
-    { 'wname':   'pinentry'              },
-    { 'wname':   'Discord Updater'       },
-    { 'wmclass': 'confirm'               },
-    { 'wmclass': 'dialog'                },
-    { 'wmclass': 'download'              },
-    { 'wmclass': 'error'                 },
-    { 'wmclass': 'file_progress'         },
-    { 'wmclass': 'notification'          },
-    { 'wmclass': 'splash'                },
-    { 'wmclass': 'toolbar'               },
-    { 'wmclass': 'confirmreset'          },
-    { 'wmclass': 'makebranch'            },
-    { 'wmclass': 'maketag'               },
-    { 'wmclass': 'ssh-askpass'           },
-    { 'wmclass': 'VirtualBox Manager'    },
-    { 'wmclass': 'lxappearance'          },
-    { 'wmclass': 'lxpolkit'              },
-    { 'wmclass': 'Thunar'                },
-    { 'wmclass': 'pavucontrol'           },
-    { 'wmclass': 'Msgcompose'            },
-    { 'wmclass': 'nitrogen'              },
-    { 'wmclass': 'xarchiver'             },
-    { 'wmclass': 'gpicview'              },
-    { 'wmclass': 'Leafpad'               },
-    { 'wmclass': 'Galculator'            },
-    { 'wmclass': 'qutebrowser'           },
-    { 'wmclass': 'system-config-printer' },
-    { 'wmclass': 'nm-connection-editor'  },
+
+    # Default rules
+    { 'role'    : 'pop-up'                },
+    { 'wname'   : 'branchdialog'          },
+    { 'wname'   : 'pinentry'              },
+    { 'wmclass' : 'confirm'               },
+    { 'wmclass' : 'confirmreset'          },
+    { 'wmclass' : 'dialog'                },
+    { 'wmclass' : 'download'              },
+    { 'wmclass' : 'error'                 },
+    { 'wmclass' : 'file_progress'         },
+    { 'wmclass' : 'makebranch'            },
+    { 'wmclass' : 'maketag'               },
+    { 'wmclass' : 'notification'          },
+    { 'wmclass' : 'splash'                },
+    { 'wmclass' : 'ssh-askpass'           },
+    { 'wmclass' : 'toolbar'               },
+    
+    # Own rules
+    { 'wname'   : 'Discord Updater'       },
+    { 'wmclass' : 'gpicview'              },
+    { 'wmclass' : 'lxappearance'          },
+    { 'wmclass' : 'lxpolkit'              },
+    { 'wmclass' : 'nitrogen'              },
+    { 'wmclass' : 'nm-connection-editor'  },
+    { 'wmclass' : 'pavucontrol'           },
+    { 'wmclass' : 'qutebrowser'           },
+    { 'wmclass' : 'system-config-printer' },
+    { 'wmclass' : 'xarchiver'             },
+    { 'wmclass' : 'Galculator'            },
+    { 'wmclass' : 'Leafpad'               },
+    { 'wmclass' : 'Msgcompose'            },
+    { 'wmclass' : 'Thunar'                },
+    { 'wmclass' : 'VirtualBox Manager'    }
 ])
 
 auto_fullscreen            = True

@@ -85,7 +85,7 @@ def myKeys():
         Key(['mod1'],         'Tab',    lazy.spawn('rofi -show windowcd')),
     
         # Launch Utilities
-        Key([mod],            'r',      lazy.spawn('dmenu_run -b -m eDP1')),
+        Key([mod],            'r',      lazy.spawncmd()),
         Key([mod],            'c',      lazy.spawn('galculator')),
     
         # Playerctl commands  
@@ -102,5 +102,8 @@ def myKeys():
         Key([mod],            'o',      lazy.group['scratchpad'].dropdown_toggle('mpd')),
         Key([mod],            'i',      lazy.group['scratchpad'].dropdown_toggle('mutt')),
         Key([mod],            'u',      lazy.group['scratchpad'].dropdown_toggle('htop')),
+
+        # Disable Touchpad
+        Key(['shift'],        'F6',     lazy.spawn(f'{qtile_scripts}/touchpad.sh'))
     ]
 

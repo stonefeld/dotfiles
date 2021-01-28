@@ -60,6 +60,10 @@ def myWidgets():
             linewidth                   = 0,
             padding                     = 20
         ),
+        widget.Prompt(
+            foreground                  = colors_custom[7],
+            prompt                      = ': '
+        ),
         widget.Spacer(bar.STRETCH),
         widget.Sep(
             background                  = colors_standard[1],

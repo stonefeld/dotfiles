@@ -65,6 +65,6 @@ configuration {
 	ml-row-right: "ScrollRight";
 	ml-row-up: "ScrollUp";
 	ml-row-down: "ScrollDown";
-	me-select-entry: "MouseDPrimary";
+	me-select-entry: "MouseSecondary";
 	me-accept-entry: "MousePrimary";
 }
