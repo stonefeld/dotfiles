@@ -3,7 +3,7 @@
 This are my configuration files. I initially uploaded them here on GitHub in case of an accident, but now I decided to make my repository open to the GitHub community in case any of you had interest in trying my configuration. I spent more than two months writing this files and I'm still improving them.<br />
 This is the result:
 
-![](https://github.com/TheoStanfield/dotfiles/blob/stored-images/screenshot3.png)
+![](https://github.com/TheoStanfield/dotfiles/blob/stored-images/screenshot4.png)
 
 You will see here the configuration files for:
 * Alacritty terminal emulator
