@@ -12,6 +12,7 @@
   --snow_color1: #D8DEE9;
   --snow_color2: #E5E9F0;
   --snow_color3: #ECEFF4;
+  --snow_color4: #E0FBFC;
   
   --frost_color1: #8FBCBB;
   --frost_color2: #88C0D0;
@@ -24,39 +25,39 @@
   --aurora_color4: #A3BE8C;
   --aurora_color5: #B48EAD;
 
-  /* Minimal Functional Fox variables*/
+  /* Universal set of variables */
   --mff-bg: var(--night_color1);
   --mff-urlbar-bg: var(--night_color3);
-  --mff-icon-color: #fefefa;
+  --mff-icon-color: var(--snow_color3);
   --mff-nav-toolbar-padding: 8px;
 
   --mff-sidebar-bg: var(--mff-bg);
-  --mff-sidebar-color: #e0fbfc;
+  --mff-sidebar-color: var(--snow_color4);
 
   --mff-tab-border-radius: 5px;
-  --mff-tab-color: #fefefa;
+  --mff-tab-color: var(--snow_color3);
   --mff-tab-font-family: "Cantarell", sans;
   --mff-tab-font-size: 11pt;
   --mff-tab-font-weight: 400;
   --mff-tab-height: 32px;
   --mff-tab-pinned-bg: #70c1b3;
   --mff-tab-selected-bg: var(--frost_color1);
-  --mff-tab-soundplaying-bg: var(--aurora_color2);
+  --mff-tab-soundplaying-bg: var(--frost_color4);
 
   --mff-urlbar-color: #98c1d9;
-  --mff-urlbar-focused-color: #e0fbfc;
+  --mff-urlbar-focused-color: var(--snow_color4);
   --mff-urlbar-font-family: "Cantarell", sans;
   --mff-urlbar-font-size: 12pt;
   --mff-urlbar-font-weight: 500;
-  --mff-urlbar-results-color: #e0fbfc;
-  --mff-urlbar-results-font-family: "mononoki Nerd Font", sans;
+  --mff-urlbar-results-color: var(--snow_color4);
+  --mff-urlbar-results-font-family: "Mononoki Nerd Font", sans;
   --mff-urlbar-results-font-size: 12pt;
   --mff-urlbar-results-font-weight: 500;
   --mff-urlbar-results-url-color: #98c1d9;
 
   /* Overriden Firefox variables */
   --autocomplete-popup-background: var(--mff-bg) !important;
-  --default-arrowpanel-background: #595f66 !important;
+  --default-arrowpanel-background: var(--night_color4) !important;
   --default-arrowpanel-color: #fefefa !important;
   --lwt-toolbarbutton-icon-fill: var(--mff-icon-color) !important;
   --panel-disabled-color: #f9f9fa80;
@@ -171,6 +172,7 @@ hbox.tab-content[pinned=true] .tab-text {
 .toolbarbutton-text {
   color: var(--mff-icon-color)  !important;
 }
+
 .urlbar-icon {
   color: var(--mff-icon-color)  !important;
 }

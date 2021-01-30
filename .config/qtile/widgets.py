@@ -83,7 +83,7 @@ def myWidgets():
             fontsize                    = 16,
             foreground                  = '#000000',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop &'),
+                'Button1': lambda qtile: qtile.cmd_spawn(f'${myTerm} -e htop &'),
                 'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
             },
             padding                     = 0,
@@ -94,7 +94,7 @@ def myWidgets():
             foreground                  = '#000000',
             format                      = 'RAM: {MemPercent}%',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop &'),
+                'Button1': lambda qtile: qtile.cmd_spawn(f'{myTerm} -e htop &'),
                 'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
             },
             padding                     = 0,
@@ -105,7 +105,7 @@ def myWidgets():
             foreground                  = '#000000',
             format                      = ' | CPU: {load_percent}%',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(myTerm + ' -e htop &'),
+                'Button1': lambda qtile: qtile.cmd_spawn(f'{myTerm} -e htop &'),
                 'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
             },
             padding                     = 0,
