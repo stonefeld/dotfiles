@@ -1,29 +1,30 @@
 # DotFiles
 
-This are my configuration files. I initially uploaded them here on GitHub in case of an accident, but now I decided to make my repository open to the GitHub community in case any of you had interest in trying my configuration. I spent more than two months writing this files and I'm still improving them.<br />
-This is the result:
+Welcome to my dotfiles. In this GitHub repository you will find configuration files for:
+* <code>alacritty</code> terminal emulator
+* <code>qtile</code> window manager
+* <code>bash</code>, <code>zsh</code> and <code>fish</code> shells
+* <code>firefox</code> web browser
+* <code>neovim</code> text editor
+* <code>rofi</code> app launcher
+* <code>dunst</code> notification service daemon
+
+There are also other configuration files for
+In the next picture
 
 ![](https://github.com/TheoStanfield/dotfiles/blob/stored-images/screenshot4.png)
 
-You will see here the configuration files for:
-* Alacritty terminal emulator
-* Qtile desktop environment
-* Neovim
-* Rofi
-* Bash
-* Zsh
-* And some other less important files
-
 ### **General Recommendation**
 Before trying this files out, there are many points to take into consideration:
-* You will see that I use many font families in my config files that in Linux Distros like Arch are not included in the base installation so you may need to install:
+* First of all, you will need to install the following fonts:
+  * <code>nerd-fonts-fantasque-sans-mono</code> in the [AUR](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FantasqueSansMono)
   * <code>ttf-fantasque-sans-mono</code>
-  * <code>ttf-font-icons</code>
-  * <code>ttf-unifont</code>
-  * <code>ttf-dejavu</code>
+  * <code>ttf-font-icons</code> in the AUR
   * <code>ttf-ubuntu-font-family</code>
   
-*Font families are listed in relevance and usage order. Many of this fonts are not available in the official package respositories from Arch Linux, so you may need to use the [AUR](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using yay AUR helper since the beginning.*
+*Font families are listed in relevance and usage order. Many of this fonts are not available in the official package respositories from Arch Linux, so you may need to use the [AUR](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) in the last time.*
+
+*There is also the alternative of downloading the* <code>.ttf</code> *from GitHub and locate them in* <code>~/.local/share/fonts</code> *folder instead of installing them with the package manager.*
 
 * To get NeoVim running:
   * You firstly need to install a Plugin Manager. My NeoVim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run 
