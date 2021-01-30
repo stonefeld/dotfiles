@@ -9,8 +9,9 @@ Welcome to my dotfiles. In this GitHub repository you will find configuration fi
 * <code>rofi</code> app launcher
 * <code>dunst</code> notification service daemon
 
-There are also other configuration files for
-In the next picture
+In addition I have written and pushed some other files like the configuration file for the <code>picom</code> compositor, <code>postswitch</code> and <code>preswitch</code> scripts for the <code>autorandr</code> utility, a bash script that checks for <code>pacman udpates</code> and is invoked with a <code>system timer unit</code>, among other files.
+
+In the next picture there's a small recopilation of the visual aspect from my desktop environment and the applications I'm using.
 
 ![](https://github.com/TheoStanfield/dotfiles/blob/stored-images/screenshot4.png)
 
