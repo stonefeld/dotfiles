@@ -33,7 +33,7 @@ set autoindent
 
 set splitbelow
 set splitright
-set showtabline=2
+set showtabline=0
 set showmatch
 
 set cursorline
@@ -76,28 +76,14 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'jmcantrell/vim-virtualenv'
-
-" Appereance
-Plug 'lilydjwg/colorizer'
-Plug 'ryanoasis/vim-devicons'
-Plug 'Yggdroot/indentLine'
+" Lightline
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
 
 " Utils
 Plug 'liuchengxu/vim-which-key'
 Plug 'voldikss/vim-floaterm'
-Plug 'voldikss/vim-skylight'
 Plug 'jiangmiao/auto-pairs'
-
-" Debugging
-Plug 'puremourning/vimspector'
-Plug 'szw/vim-maximizer'
-
-Plug 'jremmen/vim-ripgrep'
-Plug 'lyuts/rtags'
 
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -115,61 +101,92 @@ Plug 'TheoStanfield/nordokai'
 
 " Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'antoinemadec/coc-fzf', { 'branch': 'release' }
 Plug 'honza/vim-snippets'
+
+" Appereance
+Plug 'lilydjwg/colorizer'
+Plug 'Yggdroot/indentLine'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-" Gruvbox colorscheme setup
-let g:gruvbox_contrast_dark    = 'hard'
-if exists('+termguicolors')
-    let &t_8f                  = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b                  = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-let g:gruvbox_invert_selection = 0
-let g:gruvbox_italic           = 1
-
-" Nord colorscheme setup
-let g:nord_uniform_status_lines          = 1
-let g:nord_cursor_line_number_background = 1
-let g:nord_uniform_status_lines          = 1
-let g:nord_bold_vertical_split_line      = 1
-let g:nord_uniform_diff_background       = 1
-let g:nord_bold                          = 0
-let g:nord_italic                        = 1
-let g:nord_italic_comments               = 1
-let g:nord_underline                     = 1
-augroup nord-theme-overrides
-    autocmd!
-    autocmd ColorScheme nord highlight vimCommentTitle ctermfg=14 guifg=#8FBCBB
-augroup END
+" Nordokai colorscheme setup
+let g:nordokai_enable_italic             = 1
+let g:nordokai_transparent_background    = 1
 
 " Colorscheme selection
 set termguicolors
 colorscheme nordokai
 set background=dark
 
-highlight Normal         guibg=none
-highlight NonText        guibg=none
-highlight EndOfBuffer    guibg=none
-highlight LineNr         guibg=none
-highlight SignColumn     guibg=none
+" Highlight overrides
 highlight FloatermBorder guibg=none
 
-" Airline setup
-let g:airline_theme                         = 'nord'
-let g:airline#extensions#tabline#enabled    = 1
-let g:airline#extensions#tabline#formatter  = 'unique_tail'
-let g:airline#extensions#virtualenv#enabled = 1
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#branch#enabled     = 1
-let g:airline_left_sep                      = ''
-let g:airline_left_alt_sep                  = '|'
-let g:airline_right_sep                     = ''
-let g:airline_right_alt_sep                 = '|'
-let g:airline_powerline_fonts               = 1
-let g:airline_symbols_ascii                 = 0
-let g:airline_detect_spell                  = 0
-let g:airline_detect_spelllang              = 0
+" Lightline setup
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'coc_error', 'coc_warning', 'coc_hint', 'coc_info' ] ],
+      \   'right': [ [ 'lineinfo' ],
+	  \              [ 'percent' ],
+	  \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+	  \ },
+      \ 'component_function': {
+      \   'filetype': 'DeviconsFileType',
+      \   'fileformat': 'DeviconsFileFormat',
+      \   'gitbranch': 'FugitiveHead',
+      \ },
+      \ 'component_expand': {
+      \   'coc_error'        : 'LightlineCocErrors',
+      \   'coc_warning'      : 'LightlineCocWarnings',
+      \   'coc_info'         : 'LightlineCocInfos',
+      \   'coc_hint'         : 'LightlineCocHints',
+      \   'coc_fix'          : 'LightlineCocFixes',
+      \ },
+      \ }
+
+let g:lightline.component_type = {
+      \   'coc_error'        : 'error',
+      \   'coc_warning'      : 'warning',
+      \   'coc_info'         : 'tabsel',
+      \   'coc_hint'         : 'middle',
+      \   'coc_fix'          : 'middle',
+      \ }
+
+function! DeviconsFileType()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+function! DeviconsFileFormat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+function! s:lightline_coc_diagnostic(kind, sign) abort
+    let info = get(b:, 'coc_diagnostic_info', 0)
+    if empty(info) || get(info, a:kind, 0) == 0
+        return ''
+    endif
+    return printf('%s %d', a:sign, info[a:kind])
+endfunction
+function! LightlineCocErrors() abort
+    "return s:lightline_coc_diagnostic('error', '✘')
+    return s:lightline_coc_diagnostic('error', '')
+endfunction
+function! LightlineCocWarnings() abort
+    "return s:lightline_coc_diagnostic('warning', '')
+    return s:lightline_coc_diagnostic('warning', '')
+endfunction
+function! LightlineCocInfos() abort
+    "return s:lightline_coc_diagnostic('information', '')
+    return s:lightline_coc_diagnostic('information', '')
+endfunction
+function! LightlineCocHints() abort
+    "return s:lightline_coc_diagnostic('hints', '')
+    return s:lightline_coc_diagnostic('hints', '')
+endfunction
+
+autocmd User CocDiagnosticChange call lightline#update()
 
 " Python setup
 let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
@@ -177,7 +194,6 @@ let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
 " NERDTree setup
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <silent><C-n> :NERDTreeToggle<CR>
-
 let g:NERDTreeDirArrowExpandable  = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let g:NERDTreeWinPos              = 'right'
@@ -186,38 +202,21 @@ let NERDTreeAutoDeleteBuffer      = 1
 let NERDTreeWinSize               = 40
 
 " NERDTree syntax highlight
-let s:brown       = "#905532"
-let s:aqua        = "#3AFFDB"
-let s:blue        = "#689FB6"
-let s:darkBlue    = "#44788E"
-let s:purple      = "#834F79"
-let s:lightPurple = "#834F79"
-let s:red         = "#AE403F"
-let s:beige       = "#F5C06F"
-let s:yellow      = "#F09F17"
-let s:orange      = "#D4843E"
-let s:darkOrange  = "#F16529"
-let s:pink        = "#CB6F6F"
-let s:salmon      = "#EE6E73"
-let s:green       = "#8FAA54"
-let s:lightGreen  = "#31B53E"
-let s:white       = "#FFFFFF"
-let s:rspec_red   = "#FE405F"
-let s:git_orange  = "#F54D27"
-
-let g:NERDTreeLimitedSyntax       = 1
-let g:NERDTreeHighlightCursorline = 0
-
-let g:WebDevIconsDefaultFolderSymbolColor = s:beige
-let g:WebDevIconsDefaultFileSymbolColor   = s:blue
-
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile  = 1
+let g:NERDTreeFileExtensionHighlightFullName                    = 1
+let g:NERDTreeExactMatchHighlightFullName                       = 1
+let g:NERDTreePatternMatchHighlightFullName                     = 1
+let g:NERDTreeHighlightFolders                                  = 1
+let g:NERDTreeHighlightFoldersFullName                          = 1
+let g:NERDTreeHighlightCursorline                               = 0
+let g:NERDTreeLimitedSyntax                                     = 1
+ 
 " NERDTree Git
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F1>'
-"tnoremap <silent><A-space> <C-\><C-n>:FloatermToggle<CR>
-
 let g:floaterm_gitcommit  = 'floaterm'
 let g:floaterm_title      = ''
 let g:floaterm_autoinsert = 1
@@ -230,13 +229,13 @@ let g:floaterm_shell      = '/usr/bin/fish'
 " Keyboard Shortcuts
 let mapleader = " "
 call which_key#register('<Space>', "g:which_key_map")
-nnoremap <silent><leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 set timeoutlen=500
 
 let g:which_key_map = {}
 
-nnoremap <silent><leader>q :q<CR>
-nnoremap <silent><C-q> :q!<CR>
+nnoremap <silent> <leader>q :q<CR>
+nnoremap <silent> <C-q> :q!<CR>
 
 let g:which_key_map = {
       \ 'w' : [':w',                  'save file'             ],
@@ -249,8 +248,8 @@ let g:which_key_map = {
       \ '-' : [':vertical resize -5', 'vertical resize shrink'],
       \ }
 
-nnoremap <silent><leader>sv :vsp<CR>
-nnoremap <silent><leader>sh :sp<CR>
+nnoremap <silent> <leader>sv :vsp<CR>
+nnoremap <silent> <leader>sh :sp<CR>
 
 let g:which_key_map['s'] = {
       \ 'name' : '+Splits',
@@ -258,28 +257,17 @@ let g:which_key_map['s'] = {
       \ 'h'    : 'horizontal',
       \ }
 
-nnoremap <silent><C-l> :bnext<CR>
-nnoremap <silent><C-h> :bprevious<CR>
-nnoremap <silent><C-x> :bprevious<CR>:bd #<CR>
-nnoremap <silent><C-t> :enew<CR>
+nnoremap <silent> <C-l> :bnext<CR>
+nnoremap <silent> <C-h> :bprevious<CR>
+nnoremap <silent> <C-x> :bprevious<CR>:bd #<CR>
+nnoremap <silent> <C-t> :enew<CR>
 
-let g:which_key_map['b'] = {
-      \ 'name' :               '+Buffers',
-      \ '1'    : ['b1',        'buffer 1'       ],
-      \ '2'    : ['b2',        'buffer 2'       ],
-      \ 'd'    : ['bd',        'delete buffer'  ],
-      \ 'f'    : ['bfirst',    'first buffer'   ],
-      \ 'l'    : ['blast',     'last buffer'    ],
-      \ 'n'    : ['bnext',     'next buffer'    ],
-      \ 'p'    : ['bprevious', 'previous buffer'],
-      \ '?'    : ['Buffers',   'fzf buffer'     ],
-      \ }
-
-silent! unmap <leader>tc
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-o> :History<CR>
+nnoremap <silent> <C-o> :Buffers<CR>
 nnoremap <silent> <C-i> :Lines<CR>
 nnoremap <silent> <C-u> :Marks<CR>
+
+silent! unmap <leader>tc
 
 let g:which_key_map['t'] = {
       \ 'name' :                          '+Terminal',
@@ -292,67 +280,46 @@ let g:which_key_map['t'] = {
       \ 'b'    : [':FloatermNew bpytop',  'bpytop'],
       \ }
 
-nnoremap <silent><nowait> <leader>ce :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <leader>ce :<C-u>CocFzfList diagnostics --current-buf<CR>
 nmap <leader>cr <Plug>(coc-rename)
+nmap <leader>ca <Plug>(coc-codeaction)
 nnoremap <silent> <leader>cf :CocFix<CR>
-nnoremap <silent><nowait> gd :Skylight! tag<CR>
-nnoremap <silent><nowait> gp :Skylight tag<CR>
-nnoremap <silent><expr> <S-j> skylight#float#has_scroll() ? skylight#float#scroll(1, 1) : "\<S-j>"
-nnoremap <silent><expr> <S-k> skylight#float#has_scroll() ? skylight#float#scroll(0, 1) : "\<S-k>"
-nnoremap <silent><expr> <S-l> skylight#float#has_scroll() ? skylight#float#scroll(1) : "\<S-l>"
-nnoremap <silent><expr> <S-h> skylight#float#has_scroll() ? skylight#float#scroll(0) : "\<S-h>"
 
 let g:which_key_map['c'] = {
-      \ 'name' : '+COC/Skylight',
+      \ 'name' : '+COC',
+      \ 'a'    : 'actions',
       \ 'e'    : 'errors',
       \ 'r'    : 'rename',
       \ 'f'    : 'fix',
-      \ 'p'    : 'preview',
       \ }
 
 let g:which_key_map['g'] = {
       \ 'name':                  '+Git',
-      \ 'f'   : [':GFiles',      'files'      ],
+      \ 'f'   : [':GFiles',      'files'],
       \ }
 
 " fzf setup
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.75 } }
-let g:fzf_preview_window = ['down:40%:hidden', 'ctrl-/']
+let g:fzf_preview_window = ['down:40%:hidden', '?']
 let $FZF_DEFAULT_OPTS = '--info=inline --layout=reverse'
-let g:fzf_colors = {
-      \ 'fg':      [ 'fg', 'Normal'                               ],
-      \ 'bg':      [ 'bg', 'Normal'                               ],
-      \ 'hl':      [ 'fg', 'Comment'                              ],
-      \ 'fg+':     [ 'fg', 'CursorLine', 'CursorColumn', 'Normal' ],
-      \ 'bg+':     [ 'bg', 'CursorLine', 'CursorColumn'           ],
-      \ 'hl+':     [ 'fg', 'Statement'                            ],
-      \ 'info':    [ 'fg', 'PreProc'                              ],
-      \ 'border':  [ 'fg', 'Normal'                               ],
-      \ 'prompt':  [ 'fg', 'Conditional'                          ],
-      \ 'pointer': [ 'fg', 'Exception'                            ],
-      \ 'marker':  [ 'fg', 'Keyword'                              ],
-      \ 'spinner': [ 'fg', 'Label'                                ],
-      \ 'header':  [ 'fg', 'Comment'                              ],
-      \ }
+
+" COC-fzf setup
+let g:coc_fzf_preview = 'down:40%'
+let g:coc_fzf_opts = ['--info=inline', '--layout=reverse']
 
 " COC Setup
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-else
-    inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
 
 if exists('*complete_info')
     inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -370,25 +337,15 @@ function! s:show_documentation()
     endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup mygroup
     autocmd!
-    " Setup formatexpr specified filetype(s).
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder.
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ca  <Plug>(coc-codeaction)
-" Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold   :call CocAction('fold', <f-args>)
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR     :call CocAction('runCommand', 'editor.action.organizeImport')
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
       \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
