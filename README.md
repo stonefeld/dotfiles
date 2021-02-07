@@ -17,15 +17,18 @@ In the next picture there's a small recopilation of the visual aspect from my de
 
 ### **General Recommendation**
 Before trying this files out, there are many points to take into consideration:
-* First of all, you will need to install the following fonts:
-  * <code>nerd-fonts-fantasque-sans-mono</code> in the [AUR](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FantasqueSansMono)
+* First of all, you will need to install every package mentioned and the following fonts:
+  * <code>nerd-fonts-fantasque-sans-mono</code> available in the [AUR](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FantasqueSansMono)
   * <code>ttf-fantasque-sans-mono</code>
-  * <code>ttf-font-icons</code> in the AUR
+  * <code>ttf-font-icons</code> available in the AUR
   * <code>ttf-ubuntu-font-family</code>
   
-*Font families are listed in relevance and usage order. Many of this fonts are not available in the official package respositories from Arch Linux, so you may need to use the [AUR](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) in the last time.*
+*Font families are listed in relevance and usage order. Many of this fonts are not available in the official package respositories from Arch Linux, so you may need to use an [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) in the last time.*
 
-*There is also the alternative of downloading the* <code>.ttf</code> *from GitHub and locate them in* <code>~/.local/share/fonts</code> *folder instead of installing them with the package manager.*
+*There is also the alternative of downloading the* <code>.ttf</code> *from GitHub and locate them in* <code>~/.local/share/fonts</code> *folder and then running* <code>fc-cache</code> *instead of installing them with the package manager.*
+
+* To get Qtile running:
+ * You will need
 
 * To get NeoVim running:
   * You firstly need to install a Plugin Manager. My NeoVim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run 
