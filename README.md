@@ -28,8 +28,10 @@ Before trying this files out, there are many points to take into consideration:
 *There is also the alternative of downloading the* <code>.ttf</code> *from GitHub and locate them in* <code>~/.local/share/fonts</code> *folder and then running* <code>fc-cache</code> *instead of installing them with the package manager.*
 
 * To get Qtile running:
- * You will need
-
+  * You will need the following python packages: <code>iwlib</code> <code>psutil</code>
+  * Except for that everything else should work out of the box. The only one thing I recommend doing is checking that every bash script in the [scripts folder](https://github.com/TheoStanfield/dotfiles/tree/master/.config/qtile/scripts) have execution permission by running <code>sudo chmod +x ~/.config/qtile/scripts/*</code> .
+    * There are some bash scripts that are meant for laptops such as the <code>[touchpad.sh](https://github.com/TheoStanfield/dotfiles/blob/master/.config/qtile/scripts/touchpad.sh)</code> and <code>[touchscreen.sh](https://github.com/TheoStanfield/dotfiles/blob/master/.config/qtile/scripts/touchscreen.sh)</code>. You are free to remove them if you like.
+  * Also you may need to install [xmenu](https://github.com/phillbush/xmenu).
 * To get NeoVim running:
   * You firstly need to install a Plugin Manager. My NeoVim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run 
     ```bash
@@ -37,9 +39,6 @@ Before trying this files out, there are many points to take into consideration:
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
       ```
   * Then you need to run <code>:PlugInstall</code> within NeoVim after running <code>:w</code> and <code>:source %</code> in the NeoVim config file
-* To get Qtile running:
-  * There are some Python modules required to get Qtile running that are listed in the [Qtile Documentation](http://docs.qtile.org/en/latest/) which is very well explained. The packages are mentioned in every **widget** section so you may need to explore the documentation to find out which modules are required.
-  * Also you may need to install [xmenu](https://github.com/phillbush/xmenu).
 * To get Alacritty running you just need to install **Alacritty** from your package manager and the configuration file will be loaded automatically since it's located in the default location.
 * To get Bash running you need to install some packages from  your package manager to get every <code>.bashrc</code> feature working:
   * <code>Git</code>
