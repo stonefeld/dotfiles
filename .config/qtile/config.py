@@ -144,7 +144,7 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     { 'wmclass' : 'splash'                },
     { 'wmclass' : 'ssh-askpass'           },
     { 'wmclass' : 'toolbar'               },
-    
+
     # Own rules
     { 'wname'   : 'Discord Updater'       },
     { 'wmclass' : 'gpicview'              },
@@ -165,23 +165,6 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
 
 auto_fullscreen            = True
 focus_on_window_activation = 'smart'
-
-floating_types = [
-    'notification', 'toolbar', 'splash', 'dialog', 'utility',
-    'menu', 'dropdown_menu', 'popup_menu', 'tooltip' ,'dock',
-]
-
-@hook.subscribe.client_new
-def set_floating(window):
-    if (window.window.get_wm_transient_for() or window.window.get_wm_type() in floating_types):
-        window.floating = True
-
-@hook.subscribe.client_new
-def floating_dialogs(window):
-    dialog = window.window.get_wm_type() == 'dialog'
-    transient = window.window.get_wm_transient_for()
-    if dialog or transient:
-        window.floating = True
 
 @hook.subscribe.startup
 def startup():

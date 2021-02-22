@@ -61,6 +61,7 @@ def myWidgets():
             padding                     = 20
         ),
         widget.Prompt(
+            font                        = 'Consolas',
             foreground                  = colors_custom[7],
             prompt                      = ': '
         ),

@@ -149,9 +149,9 @@ alias lgit='lazygit'
 
 # Python3 shortcut
 alias py='python3'
-
-# Pip3 Package Update
+alias pyenvinit='pyenv init - | source'
 alias pip3update="sudo pip3 list --outdated | awk '{print $1}' | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade"
+alias pe='pipenv'
 
 # Pacman
 alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
@@ -174,6 +174,7 @@ alias fgrep='fgrep --color=auto'
 export PATH="~/.local/bin/:$PATH"
 export EDITOR='nvim'
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse"
+export LESSHISTFILE=/dev/null
 # ------ END ENV VARIABLES ------- #
 
 # --------- MANPAGES COLORS ------ #
