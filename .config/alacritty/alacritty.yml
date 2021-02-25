@@ -23,32 +23,33 @@ scrolling:
 
 font:
   normal:
-    family: Consolas
+    family: Consolas NF
     style: Regular
 
   bold:
-    family: Consolas
+    family: Consolas NF
     style: Bold
 
   italic:
-    family: Consolas
+    family: Consolas NF
     style: Italic
 
   bold_italic:
-    family: Consolas
+    family: Consolas NF
     style: Bold Italic
 
-  size: 12.0
+  size: 14.0
   offset:
     x: 0
-    y: 2
+    y: 0
 
   glyph_offset:
     x: 0
     y: 0
 
 draw_bold_text_with_bright_colors: false
-background_opacity: 0.85
+# background_opacity: 0.95
+background_opacity: 1
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -69,7 +70,7 @@ cursor:
 live_config_reload: true
 
 shell:
-  program: /usr/bin/fish
+  program: /bin/fish
   args:
     - --login
 
@@ -304,29 +305,28 @@ colors:
       background:   '#434c5e'
       foreground:   '#d8dee9'
 
-  # Colors (Nordokai)
   primary:
-    background:     '#2e3440'
-    foreground:     '#d8dee9'
+    background:   '#2e3440'
+    foreground:   '#d8dee9'
 
   normal:
-    black:          '#3b4252'
-    red:            '#bf616a'
-    green:          '#a3be8c'
-    yellow:         '#ebcb8b'
-    blue:           '#81a1c1'
-    magenta:        '#b48ead'
-    cyan:           '#d08770'
-    white:          '#e5e9f0'
+    black:        '#3b4252'
+    red:          '#bf616a'
+    green:        '#a3be8c'
+    yellow:       '#ebcb8b'
+    blue:         '#81a1c1'
+    magenta:      '#b48ead'
+    cyan:         '#8fbcbb'
+    white:        '#e5e9f0'
   
   bright:
-    black:          '#4c566a'
-    red:            '#bf616a'
-    green:          '#a3be8c'
-    yellow:         '#ebcb8b'
-    blue:           '#81a1c1'
-    magenta:        '#b48ead'
-    cyan:           '#9fbcbb'
-    white:          '#eceff4'
+    black:        '#4c566a'
+    red:          '#bf616a'
+    green:        '#a3be8c'
+    yellow:       '#ebcb8b'
+    blue:         '#81a1c1'
+    magenta:      '#b48ead'
+    cyan:         '#88c0d0'
+    white:        '#eceff4'
 
 WINiT_X11_SCALE_FACTOR: 1

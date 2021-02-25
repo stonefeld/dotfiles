@@ -1,4 +1,4 @@
-#Include Files from root
+# Include Files from root
 /*
 !.Xresources
 !.bashrc
@@ -6,6 +6,23 @@
 !.xbindkeysrc
 !.zshrc
 !README.md
+
+# Include Folders from .config
+!.config/
+.config/*
+
+!.config/alacritty/
+!.config/dunst/
+!.config/firefox/
+!.config/fish/
+!.config/qtile/
+
+!.config/rofi/
+.config/rofi/*
+!.config/rofi/scripts/
+
+# Ignore Folders from .config
+.config/qtile/__pycache__/
 
 # Include Files from .config
 !.config/autorandr/
@@ -16,6 +33,7 @@
 !.config/nvim/
 .config/nvim/*
 !.config/nvim/init.vim
+!.config/nvim/full_featured.vim
 
 !.config/picom/
 .config/picom/*
@@ -34,19 +52,3 @@
 !.config/rofi/themes/applauncher.rasi
 !.config/rofi/themes/colors.rasi
 !.config/rofi/themes/powermenu.rasi
-
-# Include Folders from .config
-!.config/
-.config/*
-!.config/alacritty/
-!.config/dunst/
-!.config/firefox/
-!.config/fish/
-!.config/qtile/
-
-!.config/rofi/
-.config/rofi/*
-!.config/rofi/scripts/
-
-# Ignore Folders from .config
-.config/qtile/__pycache__/

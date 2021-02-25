@@ -92,7 +92,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font        = 'Fantasque Sans Mono Nerd Font',
+    font        = 'FantasqueSansMono Nerd Font',
     fontsize    = 16,
     padding     = 2,
     background  = colors_standard[1]
@@ -147,6 +147,7 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
 
     # Own rules
     { 'wname'   : 'Discord Updater'       },
+    { 'wname'   : 'Select a Template'     },
     { 'wmclass' : 'gpicview'              },
     { 'wmclass' : 'lxappearance'          },
     { 'wmclass' : 'lxpolkit'              },
