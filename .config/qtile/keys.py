@@ -97,9 +97,12 @@ def myKeys():
         Key([mod],            'p',      lazy.group['scratchpad'].dropdown_toggle('spt')),
         Key([mod],            'o',      lazy.group['scratchpad'].dropdown_toggle('mpd')),
         Key([mod],            'i',      lazy.group['scratchpad'].dropdown_toggle('mutt')),
-        Key([mod],            'u',      lazy.group['scratchpad'].dropdown_toggle('htop')),
+        Key([mod],            'u',      lazy.group['scratchpad'].dropdown_toggle('top')),
 
         # Disable Touchpad
-        Key(['shift'],        'F6',     lazy.spawn(f'{qtile_scripts}/touchpad.sh'))
+        Key(['shift'],        'F6',     lazy.spawn(f'{qtile_scripts}/touchpad.sh')),
+
+        # Activate password manager
+        Key([mod, 'shift'],   'p',      lazy.spawn('passmenu -b -fn Sans -p "Password Store"'))
     ]
 

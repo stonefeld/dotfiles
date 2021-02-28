@@ -53,7 +53,7 @@ scratchpads = [
             DropDown('spt',  f'{myTerm} -e {qtile_scripts}/spt.sh', height=0.8, opacity=1, warp_pointer=False),
             DropDown('mpd',  f'{myTerm} -e {qtile_scripts}/mpd.sh', height=0.8, opacity=1, warp_pointer=False),
             DropDown('mutt', f'{myTerm} -e neomutt',                height=0.8, opacity=1, warp_pointer=False),
-            DropDown('htop', f'{myTerm} -e htop',                   height=0.8, opacity=1, warp_pointer=False)
+            DropDown('top',  f'{myTerm} -e bpytop',                 height=0.8, opacity=1, warp_pointer=False)
         ]
     )
 ]
@@ -116,7 +116,7 @@ dgroups_key_binder = None
 dgroups_app_rules  = []    # type: List
 main               = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
-bring_front_click  = True
+bring_front_click  = False
 cursor_warp        = False
 
 floating_layout_theme = {
@@ -154,6 +154,7 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     { 'wmclass' : 'nitrogen'              },
     { 'wmclass' : 'nm-connection-editor'  },
     { 'wmclass' : 'pavucontrol'           },
+    { 'wmclass' : 'pinentry-gtk-2'        },
     { 'wmclass' : 'qutebrowser'           },
     { 'wmclass' : 'system-config-printer' },
     { 'wmclass' : 'xarchiver'             },
@@ -180,4 +181,3 @@ def startup():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = 'LG3D'
-

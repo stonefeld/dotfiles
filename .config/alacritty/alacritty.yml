@@ -23,19 +23,23 @@ scrolling:
 
 font:
   normal:
-    family: Consolas NF
+    # family: Consolas NF
+    family: SauceCodePro Nerd Font
     style: Regular
 
   bold:
-    family: Consolas NF
+    # family: Consolas NF
+    family: SauceCodePro Nerd Font
     style: Bold
 
   italic:
-    family: Consolas NF
+    # family: Consolas NF
+    family: SauceCodePro Nerd Font
     style: Italic
 
   bold_italic:
-    family: Consolas NF
+    # family: Consolas NF
+    family: SauceCodePro Nerd Font
     style: Bold Italic
 
   size: 14.0
@@ -259,10 +263,10 @@ mouse_bindings:
 key_bindings:
   - { key: Paste,                                action: Paste            }
   - { key: Copy,                                 action: Copy             }
-  - { key: PageUp,    mods: Shift,   mode: ~Alt, action: ScrollPageUp,    }
-  - { key: PageDown,  mods: Shift,   mode: ~Alt, action: ScrollPageDown   }
-  - { key: Home,      mods: Shift,   mode: ~Alt, action: ScrollToTop,     }
-  - { key: End,       mods: Shift,   mode: ~Alt, action: ScrollToBottom   }
+  - { key: PageUp,    mods: Control|Shift,       action: ScrollPageUp,    }
+  - { key: PageDown,  mods: Control|Shift,       action: ScrollPageDown   }
+  - { key: Home,      mods: Control|Shift,       action: ScrollToTop,     }
+  - { key: End,       mods: Control|Shift,       action: ScrollToBottom   }
   - { key: V,         mods: Control|Shift,       action: Paste            }
   - { key: C,         mods: Control|Shift,       action: Copy             }
   - { key: F,         mods: Control|Shift,       action: SearchForward    }
@@ -288,22 +292,22 @@ debug:
   print_events: false
 
 colors:
-  cursor:
-    text:           '#2e3440'
-    cursor:         '#d8dee9'
+  # cursor:
+  #   text:           '#2e3440'
+  #   cursor:         '#d8dee9'
   
-  selection:
-    text:           CellForeground
-    background:     '#4c566a'
+  # selection:
+  #   text:           CellForeground
+  #   background:     '#4c566a'
 
-  search:
-    matches:
-      foreground:   CellBackground
-      background:   '#88c0d0'
+  # search:
+  #   matches:
+  #     foreground:   CellBackground
+  #     background:   '#88c0d0'
 
-    bar:
-      background:   '#434c5e'
-      foreground:   '#d8dee9'
+  #   bar:
+  #     background:   '#434c5e'
+  #     foreground:   '#d8dee9'
 
   primary:
     background:   '#2e3440'

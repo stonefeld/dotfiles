@@ -12,7 +12,7 @@
 #
 
 # LibQtile
-from   libqtile  import bar, widget
+from   libqtile  import bar, widget, qtile
 
 # Python-scpecific
 import os
@@ -21,6 +21,21 @@ import os
 from   variables import *
 from   colors    import *
 
+def nm_applet():
+    qtile.cmd_spawn(f'{qtile_scripts}/openfiles.sh 1')
+
+def close_nm_applet():
+    qtile.cmd_spawn(f'{qtile_scripts}/openfiles.sh 2')
+
+def open_htop():
+    qtile.cmd_spawn(f'{qtile_scripts}/openfiles.sh 3')
+
+def close_htop():
+    qtile.cmd_spawn(f'{qtile_scripts}/openfiles.sh 4')
+
+def xmenu():
+    qtile.cmd_spawn(f'{qtile_scripts}/xmenu.sh')
+
 def myWidgets():
     return [
         widget.TextBox(
@@ -28,8 +43,8 @@ def myWidgets():
             fontsize                    = 16,
             foreground                  = colors_custom[1],
             mouse_callbacks             = {
-                'Button1': lambda qtile: qtile.cmd_spawn(f'{qtile_scripts}/xmenu.sh'),
-                'Button3': lambda qtile: qtile.cmd_spawn(f'{qtile_scripts}/xmenu.sh')
+                'Button1': xmenu,
+                'Button3': xmenu
             },
             padding                     = 10,
             text                        = '\U0000F111 '
@@ -84,8 +99,8 @@ def myWidgets():
             fontsize                    = 16,
             foreground                  = '#000000',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(f'${myTerm} -e htop &'),
-                'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
+                'Button1': open_htop,
+                'Button3': close_htop
             },
             padding                     = 0,
             text                        = '\U0000F109  '
@@ -95,8 +110,8 @@ def myWidgets():
             foreground                  = '#000000',
             format                      = 'RAM: {MemPercent}%',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(f'{myTerm} -e htop &'),
-                'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
+                'Button1': open_htop,
+                'Button3': close_htop
             },
             padding                     = 0,
             update_interval             = 1
@@ -106,8 +121,8 @@ def myWidgets():
             foreground                  = '#000000',
             format                      = ' | CPU: {load_percent}%',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn(f'{myTerm} -e htop &'),
-                'Button3': lambda qtile: qtile.cmd_spawn('killall htop')
+                'Button1': open_htop,
+                'Button3': close_htop
             },
             padding                     = 0,
             update_interval             = 1
@@ -154,8 +169,8 @@ def myWidgets():
             fontsize                    = 14,
             foreground                  = '#000000',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn('nm-applet'),
-                'Button3': lambda qtile: qtile.cmd_spawn('killall nm-applet')
+                'Button1': nm_applet,
+                'Button3': close_nm_applet,
             },
             padding                     = 0,
             text                        = '\U0000F09E  '
@@ -165,8 +180,8 @@ def myWidgets():
             foreground                  = '#000000',
             interface                   = 'wlp1s0',
             mouse_callbacks = {
-                'Button1': lambda qtile: qtile.cmd_spawn('nm-applet'),
-                'Button3': lambda qtile: qtile.cmd_spawn('killall nm-applet')
+                'Button1': nm_applet,
+                'Button3': close_nm_applet,
             },
             padding                    = 0
         ),

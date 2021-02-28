@@ -49,8 +49,7 @@ set shortmess+=c
 set mouse=a
 set clipboard=unnamedplus
 
-" Disable hightlight search
-set nohlsearch
+" Enable incremental search
 set incsearch
 
 " Autocomplete options
@@ -92,16 +91,10 @@ Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
 
-" Nordokai colorscheme config
-let g:nordokai_enable_italic=1
-let ayucolor="dark"
-
 " Colorscheme setup
 set termguicolors
 colorscheme nordokai
 set background=dark
-
-highlight Normal guibg=none
 
 " Netrw
 let g:netrw_banner=0
@@ -125,14 +118,16 @@ autocmd TermLeave * setlocal scrolloff=8
 let mapleader=" "
 let g:floaterm_keymap_toggle='<F1>'
 
-" Resizing
+" Open file tree
 nnoremap <silent> <leader>e :Vex!<CR>
+
+" Resizing
 nnoremap <C-Left> :vertical resize +5<CR>
 nnoremap <C-Right> :vertical resize -5<CR>
 nnoremap <C-Up> :resize +1<CR>
 nnoremap <C-Down> :resize -1<CR>
 
-" Autocomplete keybindings
+" Autocompletition
 imap <C-o> <Plug>(completion_trigger)
 inoremap <expr> <Tab> pumvisible() ? "<C-y>" : "<Tab>"
 inoremap <expr> <Down> pumvisible() ? "<C-n>" :"<Down>"
@@ -144,7 +139,7 @@ inoremap <expr> <Left> pumvisible() ? "<C-e>" : "<Left>"
 nnoremap <silent> <leader>tt :FloatermToggle<CR>
 nnoremap <silent> <leader>tg :FloatermNew lazygit<CR>
 
-" Telescope keybindings
+" Telescope
 nnoremap <leader>ps :lua require('telescope.builtin')
     \ .grep_string({ search = vim.fn.input("Grep For > ") })<CR>
 nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
