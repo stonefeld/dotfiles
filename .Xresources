@@ -10,7 +10,7 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
 XTerm*renderFont: true
-XTerm*faceName: xft:Consolas NF
+XTerm*faceName: xft:SauceCodePro Nerd Font
 XTerm*faceSize: 12
 XTerm*utf8: 2
 XTerm*locale: true
@@ -26,7 +26,7 @@ XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
 ! special
 XTerm*foreground: #D8DEE9
-XTerm*background: #282c34
+XTerm*background: #2e3440
 
 ! black
 *.color0:  #3B4252

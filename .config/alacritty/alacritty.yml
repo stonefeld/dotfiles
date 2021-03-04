@@ -292,22 +292,22 @@ debug:
   print_events: false
 
 colors:
-  # cursor:
-  #   text:           '#2e3440'
-  #   cursor:         '#d8dee9'
-  
-  # selection:
-  #   text:           CellForeground
-  #   background:     '#4c566a'
+  cursor:
+    text:         '#2e3440'
+    cursor:       '#d8dee9'
 
-  # search:
-  #   matches:
-  #     foreground:   CellBackground
-  #     background:   '#88c0d0'
+  selection:
+    text:         CellForeground
+    background:   '#4c566a'
 
-  #   bar:
-  #     background:   '#434c5e'
-  #     foreground:   '#d8dee9'
+  search:
+    matches:
+      foreground: CellBackground
+      background: '#88c0d0'
+
+    bar:
+      background: '#434c5e'
+      foreground: '#d8dee9'
 
   primary:
     background:   '#2e3440'
@@ -320,9 +320,9 @@ colors:
     yellow:       '#ebcb8b'
     blue:         '#81a1c1'
     magenta:      '#b48ead'
-    cyan:         '#8fbcbb'
+    cyan:         '#88c0d0'
     white:        '#e5e9f0'
-  
+
   bright:
     black:        '#4c566a'
     red:          '#bf616a'
@@ -330,7 +330,7 @@ colors:
     yellow:       '#ebcb8b'
     blue:         '#81a1c1'
     magenta:      '#b48ead'
-    cyan:         '#88c0d0'
+    cyan:         '#8fbcbb'
     white:        '#eceff4'
 
 WINiT_X11_SCALE_FACTOR: 1
