@@ -12,11 +12,11 @@
 #
 
 # LibQtile
-from   libqtile        import bar, widget, layout, hook, extension
-from   libqtile.config import Click, Drag, Group, Key, Screen, ScratchPad, DropDown
+from   libqtile        import bar, extension, hook, layout, widget
+from   libqtile.config import Click, Drag, DropDown, Group, Key, Match, Screen, ScratchPad
 from   libqtile.lazy   import lazy
 
-# Python-scpecific
+# Python
 import os
 import re
 import socket
@@ -129,40 +129,41 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
 
     # Default rules
-    { 'role'    : 'pop-up'                },
-    { 'wname'   : 'branchdialog'          },
-    { 'wname'   : 'pinentry'              },
-    { 'wmclass' : 'confirm'               },
-    { 'wmclass' : 'confirmreset'          },
-    { 'wmclass' : 'dialog'                },
-    { 'wmclass' : 'download'              },
-    { 'wmclass' : 'error'                 },
-    { 'wmclass' : 'file_progress'         },
-    { 'wmclass' : 'makebranch'            },
-    { 'wmclass' : 'maketag'               },
-    { 'wmclass' : 'notification'          },
-    { 'wmclass' : 'splash'                },
-    { 'wmclass' : 'ssh-askpass'           },
-    { 'wmclass' : 'toolbar'               },
+    *layout.Floating.default_float_rules,
+    Match(title='branchdialog'),
+    Match(title='pinentry'),
+    Match(wm_class='confirm'),
+    Match(wm_class='confirmreset'),
+    Match(wm_class='dialog'),
+    Match(wm_class='download'),
+    Match(wm_class='error'),
+    Match(wm_class='file_progress'),
+    Match(wm_class='makebranch'),
+    Match(wm_class='maketag'),
+    Match(wm_class='notification'),
+    Match(wm_class='splash'),
+    Match(wm_class='ssh-askpass'),
+    Match(wm_class='toolbar'),
+    Match(wm_type='pop-up'),
 
     # Own rules
-    { 'wname'   : 'Discord Updater'       },
-    { 'wname'   : 'Select a Template'     },
-    { 'wmclass' : 'gpicview'              },
-    { 'wmclass' : 'lxappearance'          },
-    { 'wmclass' : 'lxpolkit'              },
-    { 'wmclass' : 'nitrogen'              },
-    { 'wmclass' : 'nm-connection-editor'  },
-    { 'wmclass' : 'pavucontrol'           },
-    { 'wmclass' : 'pinentry-gtk-2'        },
-    { 'wmclass' : 'qutebrowser'           },
-    { 'wmclass' : 'system-config-printer' },
-    { 'wmclass' : 'xarchiver'             },
-    { 'wmclass' : 'Galculator'            },
-    { 'wmclass' : 'Leafpad'               },
-    { 'wmclass' : 'Msgcompose'            },
-    { 'wmclass' : 'Thunar'                },
-    { 'wmclass' : 'VirtualBox Manager'    }
+    Match(title='Discord Updater'),
+    Match(title='Select a Template'),
+    Match(wm_class='gpicview'),
+    Match(wm_class='lxappearance'),
+    Match(wm_class='lxpolkit'),
+    Match(wm_class='nitrogen'),
+    Match(wm_class='nm-connection-editor'),
+    Match(wm_class='pavucontrol'),
+    Match(wm_class='pinentry-gtk-2'),
+    Match(wm_class='qutebrowser'),
+    Match(wm_class='system-config-printer'),
+    Match(wm_class='xarchiver'),
+    Match(wm_class='Galculator'),
+    Match(wm_class='Leafpad'),
+    Match(wm_class='Msgcompose'),
+    Match(wm_class='Thunar'),
+    Match(wm_class='VirtualBox Manager'),
 ])
 
 auto_fullscreen            = True

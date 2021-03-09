@@ -65,6 +65,29 @@ set clipboard=unnamedplus
 
 " Enable incremental search.
 set incsearch
+set nohlsearch
+
+" Building custom statusline.
+set statusline=
+set statusline+=\ %{toupper(g:currentmode[mode()])}
+set statusline+=\ %m\ %r
+set statusline+=%=%f
+set statusline+=%=%-8.(%l,%c%)
+set statusline+=\ %P
+set statusline+=\  
+set noshowmode
+let g:currentmode={
+      \ "n": "NORMAL",
+      \ "v": "VISUAL",
+      \ "V": "V-LINE",
+      \ "\<C-V>": "V-BLOCK",
+      \ "i": "INSERT",
+      \ "R": "REPLACE",
+      \ "Rv": "V-REPLACE",
+      \ "c": "COMMAND",
+      \ "t": "TERMINAL"
+      \ }
+
 
 " Autocomplete options.
 set complete+=kspell
@@ -85,7 +108,6 @@ Plug 'voldikss/vim-floaterm'
 " LSP.
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'anott03/nvim-lspinstall'
 
 " Quick commentaries.
 Plug 'tpope/vim-commentary'
@@ -104,13 +126,18 @@ Plug 'sheerun/vim-polyglot'
 
 " Colorschemes.
 Plug 'stonefeld/nordokai'
+Plug 'stonefeld/nordiy'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
 " ---------- Colorscheme ---------- "
 set termguicolors
-colorscheme nordokai
+colorscheme nordiy
 set background=dark
+
+" ---------- Highlights ---------- "
+highlight FloatermBorder guibg=none
 
 " ---------- Netrw ---------- "
 " Disable Netrw default 'help message'.
@@ -119,7 +146,7 @@ let g:netrw_winsize=25
 
 " ---------- Tabline ---------- "
 " Show buftabline only when more than 1 buffer is open
-let g:buftabline_show=1
+let g:buftabline_show=0
 
 " ---------- Floaterm ---------- "
 let g:floaterm_autoclose=2
@@ -130,8 +157,19 @@ let g:floaterm_title=''
 
 " ---------- Terminal ---------- "
 " Disable scrolloff on terminal to avoid glitch.
-autocmd TermEnter * setlocal scrolloff=0
-autocmd TermLeave * setlocal scrolloff=8
+augroup Terminal
+  autocmd!
+
+  autocmd TermEnter * set scrolloff=0
+  autocmd TermEnter * set nocursorline
+  autocmd TermEnter * set nonu
+  autocmd TermEnter * set norelativenumber
+
+  autocmd TermLeave * set scrolloff=8
+  autocmd TermLeave * set cursorline
+  autocmd TermLeave * set nu
+  autocmd TermLeave * set relativenumber
+augroup END
 
 " ---------- Keybindings ---------- "
 " Map the leader key.
@@ -140,7 +178,7 @@ let mapleader=" "
 let g:floaterm_keymap_toggle='<F1>'
 
 " Open file explorer.
-nnoremap <silent> <leader>e :Vex!<CR>
+nnoremap <silent> <leader>e :vs<CR> :vertical resize 40<CR> :Explore<CR>
 
 " Resizing panes.
 nnoremap <C-Left> :vertical resize +5<CR>
@@ -159,12 +197,13 @@ inoremap <expr> <Left> pumvisible() ? "<C-e>" : "<Left>"
 " Open a floating terminal.
 nnoremap <silent> <leader>tt :FloatermToggle<CR>
 nnoremap <silent> <leader>tg :FloatermNew lazygit<CR>
+nnoremap <silent> <leader>tf :FloatermNew ranger<CR>
 
 " Open Telescope instance.
-nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
-" Search string in files with telescope's builtin grep.
-nnoremap <leader>ps :lua require('telescope.builtin')
-    \ .grep_string({ search = vim.fn.input("Grep For > ") })<CR>
+nnoremap <silent> <C-p> :lua require('telescope.builtin').find_files()<CR>
+nnoremap <silent> <leader>ps :lua require('telescope.builtin').live_grep()<CR>
+nnoremap <silent> <leader>pa :lua require('telescope.builtin').buffers()<CR>
+nnoremap <silent> <leader>pd :lua require('telescope.builtin').lsp_document_diagnostics()<CR>
 
 " Move between window panes.
 nnoremap <silent> <C-l> :wincmd l<CR>
@@ -190,32 +229,33 @@ nnoremap <silent> <leader>fc :foldclose<CR>
 " ---------- LSP ---------- "
 let g:completion_matching_strategy_list=[ 'exact', 'substring', 'fuzzy' ]
 let g:completion_enable_auto_popup=0
-" Run :LspInstall tsserver or npm i -g typescript-language-server.
+let g:completion_confirm_key="\<C-y>"
+" Run npm i -g typescript-language-server.
 lua require('lspconfig')
-    \ .tsserver
-    \ .setup{ on_attach=require('completion').on_attach }
+      \ .tsserver
+      \ .setup{ on_attach=require('completion').on_attach }
 " Run 'pip3 install python-language-server[all]'.
 lua require('lspconfig')
-    \ .pyls
-    \ .setup{ on_attach=require('completion').on_attach }
+      \ .pyls
+      \ .setup{ on_attach=require('completion').on_attach }
 " Install clangd with your package manager.
 lua require('lspconfig')
-    \ .clangd
-    \ .setup{ on_attach=require('completion').on_attach }
+      \ .clangd
+      \ .setup{ on_attach=require('completion').on_attach }
 
 " ---------- Telescopre ---------- "
 lua require('telescope')
-    \ .setup({ 
-    \   defaults = {
-    \       file_sorter = require('telescope.sorters').get_fzy_sorter
-    \   }
-    \ })
+      \ .setup({ 
+      \   defaults = {
+      \       file_sorter = require('telescope.sorters').get_fzy_sorter
+      \   }
+      \ })
 
 " ---------- Functions ---------- "
 " A simple function to print active buffers and display a prompt to type the
 " corresponding nummber of the buffer the user wants to jump to.
 function! GoToBuffer()
-    :buffers
-    let b:num = input('Enter buffer number: ')
-    :execute 'b' . b:num
+  :buffers
+  let b:num = input('Enter buffer number: ')
+  :execute 'b' . b:num
 endfunction

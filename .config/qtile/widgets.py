@@ -76,7 +76,8 @@ def myWidgets():
             padding                     = 20
         ),
         widget.Prompt(
-            font                        = 'Consolas',
+            font                        = 'SourceCodePro',
+            fontsize                    = 16,
             foreground                  = colors_custom[7],
             prompt                      = ': '
         ),

@@ -12,6 +12,7 @@
 #
 
 # LibQtile
+from   libqtile        import extension
 from   libqtile.config import Key
 from   libqtile.lazy   import lazy
 
@@ -66,12 +67,14 @@ def myKeys():
         Key([mod, 'control'], 'h',      lazy.layout.grow_left(), lazy.layout.shrink(), lazy.layout.decrease_ratio(), lazy.layout.add()),
         Key([mod, 'control'], 'k',      lazy.layout.grow_up(), lazy.layout.grow(), lazy.layout.decrease_nmaster()),
         Key([mod, 'control'], 'j',      lazy.layout.grow_down(), lazy.layout.shrink(), lazy.layout.increase_nmaster()),
-    
+
+        # Toggle fullscreen and floating
         Key([mod, 'shift'],   'f',      lazy.window.toggle_floating()),
         Key([mod, 'shift'],   'm',      lazy.window.toggle_fullscreen()),
 
-        Key([mod],            'n',      lazy.layout.normalize()),
+        # Toggle maximized and normalize pane sizes
         Key([mod],            'm',      lazy.window.toggle_maximize()),
+        Key([mod],            'n',      lazy.layout.normalize()),
 
         # Open file manager
         Key([mod],            'e',      lazy.spawn('Thunar')),
@@ -103,6 +106,5 @@ def myKeys():
         Key(['shift'],        'F6',     lazy.spawn(f'{qtile_scripts}/touchpad.sh')),
 
         # Activate password manager
-        Key([mod, 'shift'],   'p',      lazy.spawn('passmenu -b -fn Sans -p "Password Store"'))
+        Key([mod, 'shift'],   'p',      lazy.spawn('passmenu -b -p "Password Store"'))
     ]
-
