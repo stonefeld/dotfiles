@@ -71,7 +71,7 @@ set nohlsearch
 set statusline=
 set statusline+=\ %{toupper(g:currentmode[mode()])}
 set statusline+=\ %m\ %r
-set statusline+=%=%f
+set statusline+=%=%{expand('%:~:.')}
 set statusline+=%=%-8.(%l,%c%)
 set statusline+=\ %P
 set statusline+=\  
@@ -107,7 +107,8 @@ Plug 'voldikss/vim-floaterm'
 
 " LSP.
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
+Plug 'onsails/lspkind-nvim'
 
 " Quick commentaries.
 Plug 'tpope/vim-commentary'
@@ -122,18 +123,18 @@ Plug 'ap/vim-buftabline'
 Plug 'tpope/vim-fugitive'
 
 " Syntax highlighting.
-Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/playground'
 
 " Colorschemes.
 Plug 'stonefeld/nordokai'
-Plug 'stonefeld/nordiy'
-Plug 'arcticicestudio/nord-vim'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
 " ---------- Colorscheme ---------- "
 set termguicolors
-colorscheme nordiy
+colorscheme nordokai
 set background=dark
 
 " ---------- Highlights ---------- "
@@ -146,7 +147,7 @@ let g:netrw_winsize=25
 
 " ---------- Tabline ---------- "
 " Show buftabline only when more than 1 buffer is open
-let g:buftabline_show=0
+let g:buftabline_show=1
 
 " ---------- Floaterm ---------- "
 let g:floaterm_autoclose=2
@@ -178,7 +179,7 @@ let mapleader=" "
 let g:floaterm_keymap_toggle='<F1>'
 
 " Open file explorer.
-nnoremap <silent> <leader>e :vs<CR> :vertical resize 40<CR> :Explore<CR>
+nnoremap <silent> <leader>e :Vex!<CR>
 
 " Resizing panes.
 nnoremap <C-Left> :vertical resize +5<CR>
@@ -187,12 +188,18 @@ nnoremap <C-Up> :resize +1<CR>
 nnoremap <C-Down> :resize -1<CR>
 
 " Autocompletion.
-imap <C-o> <Plug>(completion_trigger)
-inoremap <expr> <Tab> pumvisible() ? "<C-y>" : "<Tab>"
-inoremap <expr> <Down> pumvisible() ? "<C-n>" :"<Down>"
-inoremap <expr> <Up> pumvisible() ? "<C-p>" : "<Up>"
-inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
-inoremap <expr> <Left> pumvisible() ? "<C-e>" : "<Left>"
+inoremap <silent><expr> <C-o> compe#complete()
+
+" Lsp actions.
+nnoremap <silent> <C-]> :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <C-[> :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> g0 :lua vim.lsp.buf.document_symbol()<CR>
+
+" Lspsaga utils.
+nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>ld :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>ca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>re :lua vim.lsp.buf.rename()<CR>
 
 " Open a floating terminal.
 nnoremap <silent> <leader>tt :FloatermToggle<CR>
@@ -204,6 +211,7 @@ nnoremap <silent> <C-p> :lua require('telescope.builtin').find_files()<CR>
 nnoremap <silent> <leader>ps :lua require('telescope.builtin').live_grep()<CR>
 nnoremap <silent> <leader>pa :lua require('telescope.builtin').buffers()<CR>
 nnoremap <silent> <leader>pd :lua require('telescope.builtin').lsp_document_diagnostics()<CR>
+nnoremap <silent> gr :lua require('telescope.builtin').lsp_references()<CR>
 
 " Move between window panes.
 nnoremap <silent> <C-l> :wincmd l<CR>
@@ -226,22 +234,46 @@ vnoremap <silent> <leader>f :fold<CR>
 nnoremap <silent> <leader>fi :foldopen<CR>
 nnoremap <silent> <leader>fc :foldclose<CR>
 
+
 " ---------- LSP ---------- "
-let g:completion_matching_strategy_list=[ 'exact', 'substring', 'fuzzy' ]
-let g:completion_enable_auto_popup=0
-let g:completion_confirm_key="\<C-y>"
-" Run npm i -g typescript-language-server.
-lua require('lspconfig')
-      \ .tsserver
-      \ .setup{ on_attach=require('completion').on_attach }
+" Autocompletion.
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 0
+let g:compe.documentation = v:false
+
+" Autocompletion sources.
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+
 " Run 'pip3 install python-language-server[all]'.
-lua require('lspconfig')
-      \ .pyls
-      \ .setup{ on_attach=require('completion').on_attach }
+let	g:python3_host_prog='~/.pyenv/versions/neovim3.9.1/bin/python'
+lua require('lspconfig').pyls.setup { }
+
+" Run npm i -g typescript typescript-language-server.
+lua require('lspconfig').tsserver.setup { }
+
+" Run npm i -g vscode-html-languague-server.
+lua require('lspconfig').html.setup { }
+
+" Run npm i -g vscode-css-languague-server.
+lua require('lspconfig').cssls.setup { }
+
+" Run npm i -g vscode-json-languague-server.
+lua require('lspconfig').jsonls.setup { }
+
 " Install clangd with your package manager.
-lua require('lspconfig')
-      \ .clangd
-      \ .setup{ on_attach=require('completion').on_attach }
+lua require('lspconfig').clangd.setup { }
+
+" Run npm i -g vim-language-server.
+lua require('lspconfig').vimls.setup { }
 
 " ---------- Telescopre ---------- "
 lua require('telescope')
@@ -250,6 +282,12 @@ lua require('telescope')
       \       file_sorter = require('telescope.sorters').get_fzy_sorter
       \   }
       \ })
+
+" ---------- Treesitter ---------- "
+lua require('nvim-treesitter.configs').setup { highlight = { enable = true } }
+
+" ---------- Lspkind ---------- "
+luafile ~/.config/nvim/plugins/lspkind.lua
 
 " ---------- Functions ---------- "
 " A simple function to print active buffers and display a prompt to type the

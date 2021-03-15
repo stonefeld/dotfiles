@@ -19,7 +19,7 @@ from   libqtile.lazy   import lazy
 # Own
 from   variables       import *
 
-def myKeys():
+def my_keys():
     return [
         # Launch terminal
         Key([mod],            'Return', lazy.spawn(myTerm)),

@@ -31,7 +31,7 @@ from   widgets         import *
 from   screens         import *
 
 # Keys
-keys = myKeys()
+keys = my_keys()
 
 # Groups
 group_names = [
@@ -97,11 +97,15 @@ widget_defaults = dict(
     padding     = 2,
     background  = colors_standard[1]
 )
+
+if option == 2:
+    widget_defaults['font'] = 'FantasqueSansMono Nerd Font Bold'
+
 extension_defaults = widget_defaults.copy()
 
 # Initialize Qtile
 if __name__ in ['config', '__main__']:
-    screens = myScreen()
+    screens = my_screen()
 
 # Drag floating layouts.
 mouse = [
