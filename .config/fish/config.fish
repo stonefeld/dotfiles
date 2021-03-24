@@ -43,9 +43,9 @@ alias lgit='lazygit'
 
 # Python3 shortcut
 alias py='python3'
+alias pe='pipenv'
 alias pyenvinit='pyenv init - | source'
 alias pip3update="sudo pip3 list --outdated | awk '{print $1}' | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade"
-alias pe='pipenv'
 
 # Pacman
 alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"

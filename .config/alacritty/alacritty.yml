@@ -19,7 +19,7 @@ window:
 
 scrolling:
   history: 5000
-  multiplier: 1
+  multiplier: 5
 
 font:
   normal:
@@ -74,7 +74,7 @@ cursor:
 live_config_reload: true
 
 shell:
-  program: /bin/fish
+  program: /bin/zsh
   args:
     - --login
 

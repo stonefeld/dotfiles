@@ -17,6 +17,11 @@
 !.config/fish/
 !.config/qtile/
 
+!.config/nvim/
+.config/nvim/*
+!.config/nvim/plugin/
+!.config/nvim/lua/
+
 !.config/rofi/
 .config/rofi/*
 !.config/rofi/scripts/
@@ -30,8 +35,6 @@
 !.config/autorandr/postswitch
 !.config/autorandr/preswitch
 
-!.config/nvim/
-.config/nvim/*
 !.config/nvim/init.vim
 !.config/nvim/full_featured.vim
 

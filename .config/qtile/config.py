@@ -151,6 +151,7 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     Match(wm_type='pop-up'),
 
     # Own rules
+    Match(title='Connect to MySQL Server'),
     Match(title='Discord Updater'),
     Match(title='Select a Template'),
     Match(wm_class='gpicview'),
