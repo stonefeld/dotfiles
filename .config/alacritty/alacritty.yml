@@ -23,22 +23,18 @@ scrolling:
 
 font:
   normal:
-    # family: Consolas NF
     family: SauceCodePro Nerd Font
     style: Regular
 
   bold:
-    # family: Consolas NF
     family: SauceCodePro Nerd Font
     style: Bold
 
   italic:
-    # family: Consolas NF
     family: SauceCodePro Nerd Font
     style: Italic
 
   bold_italic:
-    # family: Consolas NF
     family: SauceCodePro Nerd Font
     style: Bold Italic
 
@@ -70,7 +66,6 @@ cursor:
   unfocused_hollow: true
   thickness: 0.15
 
-# Live config reload (changes require restart)
 live_config_reload: true
 
 shell:
@@ -93,178 +88,16 @@ mouse:
 
     modifiers: None
 
-# Mouse bindings
-#
-# Mouse bindings are specified as a list of objects, much like the key
-# bindings further below.
-#
-# To trigger mouse bindings when an application running within Alacritty captures the mouse, the
-# `Shift` modifier is automatically added as a requirement.
-#
-# Each mouse binding will specify a:
-#
-# - `mouse`:
-#
-#   - Middle
-#   - Left
-#   - Right
-#   - Numeric identifier such as `5`
-#
-# - `action` (see key bindings)
-#
-# And optionally:
-#
-# - `mods` (see key bindings)
 mouse_bindings:
   - { mouse: Middle, action: None }
 
-# Key bindings
-#
-# Key bindings are specified as a list of objects. For example, this is the
-# default paste binding:
-#
-# `- { key: V, mods: Control|Shift, action: Paste }`
-#
-# Each key binding will specify a:
-#
-# - `key`: Identifier of the key pressed
-#
-#    - A-Z
-#    - F1-F24
-#    - Key0-Key9
-#
-#    A full list with available key codes can be found here:
-#    https://docs.rs/glutin/*/glutin/event/enum.VirtualKeyCode.html#variants
-#
-#    Instead of using the name of the keys, the `key` field also supports using
-#    the scancode of the desired key. Scancodes have to be specified as a
-#    decimal number. This command will allow you to display the hex scancodes
-#    for certain keys:
-#
-#       `showkey --scancodes`.
-#
-# Then exactly one of:
-#
-# - `chars`: Send a byte sequence to the running application
-#
-#    The `chars` field writes the specified string to the terminal. This makes
-#    it possible to pass escape sequences. To find escape codes for bindings
-#    like `PageUp` (`"\x1b[5~"`), you can run the command `showkey -a` outside
-#    of tmux. Note that applications use terminfo to map escape sequences back
-#    to keys. It is therefore required to update the terminfo when changing an
-#    escape sequence.
-#
-# - `action`: Execute a predefined action
-#
-#   - ToggleViMode
-#   - SearchForward
-#   - SearchBackward
-#   - Copy
-#   - Paste
-#   - PasteSelection
-#   - IncreaseFontSize
-#   - DecreaseFontSize
-#   - ResetFontSize
-#   - ScrollPageUp
-#   - ScrollPageDown
-#   - ScrollHalfPageUp
-#   - ScrollHalfPageDown
-#   - ScrollLineUp
-#   - ScrollLineDown
-#   - ScrollToTop
-#   - ScrollToBottom
-#   - ClearHistory
-#   - Hide
-#   - Minimize
-#   - Quit
-#   - ToggleFullscreen
-#   - SpawnNewInstance
-#   - ClearLogNotice
-#   - ClearSelection
-#   - ReceiveChar
-#   - None
-#
-#   (`mode: Vi` only):
-#   - Open
-#   - Up
-#   - Down
-#   - Left
-#   - Right
-#   - First
-#   - Last
-#   - FirstOccupied
-#   - High
-#   - Middle
-#   - Low
-#   - SemanticLeft
-#   - SemanticRight
-#   - SemanticLeftEnd
-#   - SemanticRightEnd
-#   - WordRight
-#   - WordLeft
-#   - WordRightEnd
-#   - WordLeftEnd
-#   - Bracket
-#   - ToggleNormalSelection
-#   - ToggleLineSelection
-#   - ToggleBlockSelection
-#   - ToggleSemanticSelection
-#   - SearchNext
-#   - SearchPrevious
-#   - SearchStart
-#   - SearchEnd
-#
-#   (macOS only):
-#   - ToggleSimpleFullscreen: Enters fullscreen without occupying another space
-#
-#   (Linux/BSD only):
-#   - CopySelection: Copies into selection buffer
-#
-# - `command`: Fork and execute a specified command plus arguments
-#
-#    The `command` field must be a map containing a `program` string and an
-#    `args` array of command line parameter strings. For example:
-#       `{ program: "alacritty", args: ["-e", "vttest"] }`
-#
-# And optionally:
-#
-# - `mods`: Key modifiers to filter binding actions
-#
-#    - Command
-#    - Control
-#    - Option
-#    - Super
-#    - Shift
-#    - Alt
-#
-#    Multiple `mods` can be combined using `|` like this:
-#       `mods: Control|Shift`.
-#    Whitespace and capitalization are relevant and must match the example.
-#
-# - `mode`: Indicate a binding for only specific terminal reported modes
-#
-#    This is mainly used to send applications the correct escape sequences
-#    when in different modes.
-#
-#    - AppCursor
-#    - AppKeypad
-#    - Alt
-#
-#    A `~` operator can be used before a mode to apply the binding whenever
-#    the mode is *not* active, e.g. `~Alt`.
-#
-# Bindings are always filled by default, but will be replaced when a new
-# binding with the same triggers is defined. To unset a default binding, it can
-# be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
-# a no-op if you do not wish to receive input characters for that binding.
-#
-# If the same trigger is assigned to multiple actions, all of them are executed
-# in the order they were defined in.
 key_bindings:
   - { key: Paste,                                action: Paste            }
   - { key: Copy,                                 action: Copy             }
   - { key: PageUp,    mods: Control|Shift,       action: ScrollPageUp,    }
   - { key: PageDown,  mods: Control|Shift,       action: ScrollPageDown   }
+  - { key: K,         mods: Control|Alt,         action: ScrollLineUp,    }
+  - { key: J,         mods: Control|Alt,         action: ScrollLineDown   }
   - { key: Home,      mods: Control|Shift,       action: ScrollToTop,     }
   - { key: End,       mods: Control|Shift,       action: ScrollToBottom   }
   - { key: V,         mods: Control|Shift,       action: Paste            }
@@ -275,6 +108,9 @@ key_bindings:
   - { key: Key0,      mods: Control,             action: ResetFontSize    }
   - { key: Equals,    mods: Control,             action: IncreaseFontSize }
   - { key: Minus,     mods: Control,             action: DecreaseFontSize }
+  - { key: N,         mods: Alt,                 action: ResetFontSize    }
+  - { key: K,         mods: Alt,                 action: IncreaseFontSize }
+  - { key: J,         mods: Alt,                 action: DecreaseFontSize }
   - { key: Return,    mods: Control|Shift,       action: SpawnNewInstance }
 
 debug:

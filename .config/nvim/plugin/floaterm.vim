@@ -12,6 +12,6 @@ let g:floaterm_title=''
 let g:floaterm_keymap_toggle='<F1>'
 
 " Keybindings.
-nnoremap <silent> <leader>tt :FloatermToggle<CR>
-nnoremap <silent> <leader>tg :FloatermNew lazygit<CR>
-nnoremap <silent> <leader>tf :FloatermNew ranger<CR>
+" nnoremap <silent> <leader>tt :FloatermToggle<CR>
+" nnoremap <silent> <leader>tg :FloatermNew lazygit<CR>
+" nnoremap <silent> <leader>tf :FloatermNew ranger<CR>

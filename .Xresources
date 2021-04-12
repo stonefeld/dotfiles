@@ -28,9 +28,11 @@ XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*foreground: #D8DEE9
 XTerm*background: #2e3440
 
+*.font: SauceCodePro Nerd Font:size=12
+
 ! black
 *.color0:  #3B4252
-*.color8:  #3B4252
+*.color8:  #4c566a
 
 ! red
 *.color1:  #BF616A
@@ -54,8 +56,11 @@ XTerm*background: #2e3440
 
 ! cyan
 *.color6:  #88C0D0
-*.color14: #88C0D0
+*.color14: #8fbcbb
 
 ! white
 *.color7:  #E5E9F0
 *.color15: #E5E9F0
+
+*.color256: #D8DEE9
+*.color257: #2e3440

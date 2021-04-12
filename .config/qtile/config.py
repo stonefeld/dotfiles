@@ -8,7 +8,7 @@
 #                                      
 # Author: Theo Stanfield
 # Date: 23/09/2020
-# Git: https://github.com/TheoStanfield/dotfiles.git
+# Git: https://github.com/stonefeld/dotfiles.git
 #
 
 # LibQtile
@@ -154,6 +154,7 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     Match(title='Connect to MySQL Server'),
     Match(title='Discord Updater'),
     Match(title='Select a Template'),
+    Match(title='RuneLite Launcher'),
     Match(wm_class='gpicview'),
     Match(wm_class='lxappearance'),
     Match(wm_class='lxpolkit'),
@@ -161,7 +162,6 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     Match(wm_class='nm-connection-editor'),
     Match(wm_class='pavucontrol'),
     Match(wm_class='pinentry-gtk-2'),
-    Match(wm_class='qutebrowser'),
     Match(wm_class='system-config-printer'),
     Match(wm_class='xarchiver'),
     Match(wm_class='Galculator'),
@@ -177,6 +177,7 @@ focus_on_window_activation = 'smart'
 @hook.subscribe.startup
 def startup():
     subprocess.call([f'{qtile_scripts}/autostart.sh'])
+    subprocess.call([f'{qtile_scripts}/touchscreen.sh'])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

@@ -38,7 +38,6 @@ if [ $last_count -ne 0 ]; then
 fi
 
 count=$(update_count)
-sleep 2
 
 if [ $count -gt 0 ]; then
     if [ "$last_available" = true ]; then

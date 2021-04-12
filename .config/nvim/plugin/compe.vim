@@ -8,7 +8,7 @@ let g:compe.enabled = v:true
 let g:compe.autocomplete = v:true
 let g:compe.throttle_time = 80
 let g:compe.source_timeout = 200
-let g:compe.documentation = v:false
+let g:compe.documentation = v:true
 
 " Sources setup.
 let g:compe.source = {}

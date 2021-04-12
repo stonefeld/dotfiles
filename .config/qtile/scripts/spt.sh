@@ -2,7 +2,7 @@
 
 if pgrep -x spotifyd
 then
-    spt
+    spt && killall spotifyd
 else
-    spotifyd && spt
+    spotifyd && spt && killall spotifyd
 fi

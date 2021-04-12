@@ -15,11 +15,11 @@ alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
 alias ss="systemctl suspend"
 
-alias ls="exa -lag -a --color=always --group-directories-first"
-alias la="exa -a --color=always --group-directories-first"
-alias ll="exa -lg --color=always --group-directories-first"
-alias lt="exa -aT --color=always --group-directories-first"
-alias lf="ranger"
+alias ls="ls --color=always --group-directories-first"
+# alias la="exa -a --color=always --group-directories-first"
+# alias ll="exa -lg --color=always --group-directories-first"
+# alias lt="exa -aT --color=always --group-directories-first"
+# alias lf="ranger"
 
 alias v='nvim'
 alias v.='nvim .'
@@ -42,6 +42,7 @@ alias rm='rm -i'
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'
 alias dmesg='dmesg --color=always'
+alias less='less -r'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'

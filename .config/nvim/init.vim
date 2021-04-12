@@ -55,28 +55,10 @@ Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 " ---------- Autocommands ---------- "
-" Disable scrolloff on terminal to avoid glitch.
-augroup Terminal
-  autocmd!
-
-  autocmd TermEnter * set scrolloff=0
-  autocmd TermEnter * set sidescrolloff=0
-  autocmd TermEnter * set nocursorline
-  autocmd TermEnter * set nonu
-  autocmd TermEnter * set norelativenumber
-  autocmd TermEnter * set scrollback=458
-
-  autocmd TermLeave * set scrolloff=8
-  autocmd TermEnter * set sidescrolloff=8
-  autocmd TermLeave * set cursorline
-  autocmd TermLeave * set nu
-  autocmd TermLeave * set relativenumber
-augroup END
-
 " Higlight the line for a short period of time to indicate yanked line.
 augroup HighlightYank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+    autocmd TextYankPost * silent! lua require('vim.highlight').on_yank({timeout = 40})
 augroup END
 
 " ---------- Keybindings ---------- "
@@ -85,6 +67,10 @@ let mapleader=" "
 
 " Open file explorer.
 nnoremap <silent> <leader>e :Vex!<CR>
+
+" The idea is to open html files directly from neovim with a minimalistic
+" browser like surf for a quick response.
+nnoremap <silent> <F12> :exe ':silent !surf %'<CR>
 
 " Resizing panes.
 nnoremap <A-C-h> :vertical resize +5<CR>
@@ -106,7 +92,7 @@ vnoremap <silent> K :m '<-2<CR>gv=gv
 nnoremap <silent> <M-l> :bnext<CR>
 nnoremap <silent> <M-h> :bprevious<CR>
 nnoremap <silent> <M-w> :bdelete<CR>
-nnoremap <silent> <leader>o :call GoToBuffer()<CR>
+nnoremap <silent> <leader>o :call JumpToBuffer()<CR>
 
 " Fold code blocks.
 vnoremap <silent> <leader>f :fold<CR>
@@ -116,7 +102,7 @@ nnoremap <silent> <leader>fc :foldclose<CR>
 " ---------- Functions ---------- "
 " A simple function to print active buffers and display a prompt to type the
 " corresponding nummber of the buffer the user wants to jump to.
-function! GoToBuffer()
+function! JumpToBuffer()
   :buffers
   let b:num = input('Enter buffer number: ')
   :execute 'b' . b:num

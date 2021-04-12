@@ -2,7 +2,7 @@
 
 if pgrep -x mpd
 then
-    ncmpcpp
+    ncmpcpp && killall mpd
 else
-    mpd && ncmpcpp
+    mpd && ncmpcpp && killall mpd
 fi
