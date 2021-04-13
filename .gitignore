@@ -14,7 +14,6 @@
 !.config/alacritty/
 !.config/dunst/
 !.config/firefox/
-!.config/fish/
 !.config/qtile/
 
 !.config/nvim/
@@ -30,11 +29,6 @@
 .config/qtile/__pycache__/
 
 # Include Files from .config
-!.config/autorandr/
-.config/autorandr/*
-!.config/autorandr/postswitch
-!.config/autorandr/preswitch
-
 !.config/nvim/init.vim
 !.config/nvim/full_featured.vim
 
