@@ -49,11 +49,10 @@ group_names = [
 scratchpads = [
     ScratchPad(
         'scratchpad', [
-            DropDown('term', myTerm,                                height=0.5, opacity=1, warp_pointer=False),
-            DropDown('spt',  f'{myTerm} -e {qtile_scripts}/spt.sh', height=0.8, opacity=1, warp_pointer=False),
-            DropDown('mpd',  f'{myTerm} -e {qtile_scripts}/mpd.sh', height=0.8, opacity=1, warp_pointer=False),
-            DropDown('mutt', f'{myTerm} -e neomutt',                height=0.8, opacity=1, warp_pointer=False),
-            DropDown('top',  f'{myTerm} -e bpytop',                 height=0.8, opacity=1, warp_pointer=False)
+            DropDown('term', my_term,                                height=0.5, opacity=1, warp_pointer=False),
+            DropDown('mpd',  f'{my_term} -e {qtile_scripts}/mpd.sh', height=0.8, opacity=1, warp_pointer=False),
+            DropDown('mutt', f'{my_term} -e neomutt',                height=0.8, opacity=1, warp_pointer=False),
+            DropDown('top',  f'{my_term} -e bpytop',                 height=0.8, opacity=1, warp_pointer=False)
         ]
     )
 ]

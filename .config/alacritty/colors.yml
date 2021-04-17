@@ -66,7 +66,7 @@ colors:
     cyan:         '#8ec07c'
     white:        '#ebdbb2'
 
-# Colors (Ayu Mirage)
+  # Colors (Ayu Mirage)
   primary:
     background:   '#202734'
     foreground:   '#CBCCC6'
@@ -91,28 +91,53 @@ colors:
     cyan:         '#95E6CB'
     white:        '#FFFFFF'
 
-    # Colors (Monokai Pro)
-    colors:
-        primary:
-            background: '#2D2A2E'
-            foreground: '#FCFCFA'
+  # Colors (Monokai Pro)
+  primary:
+    background:  '#2D2A2E'
+    foreground:  '#FCFCFA'
 
-        normal:
-            black:   '#403E41'
-            red:     '#FF6188'
-            green:   '#A9DC76'
-            yellow:  '#FFD866'
-            blue:    '#FC9867'
-            magenta: '#AB9DF2'
-            cyan:    '#78DCE8'
-            white:   '#FCFCFA'
+  normal:
+    black:       '#403E41'
+    red:         '#FF6188'
+    green:       '#A9DC76'
+    yellow:      '#FFD866'
+    blue:        '#FC9867'
+    magenta:     '#AB9DF2'
+    cyan:        '#78DCE8'
+    white:       '#FCFCFA'
 
-        bright:
-            black:   '#727072'
-            red:     '#FF6188'
-            green:   '#A9DC76'
-            yellow:  '#FFD866'
-            blue:    '#FC9867'
-            magenta: '#AB9DF2'
-            cyan:    '#78DCE8'
-            white:   '#FCFCFA'
+  bright:
+    black:       '#727072'
+    red:         '#FF6188'
+    green:       '#A9DC76'
+    yellow:      '#FFD866'
+    blue:        '#FC9867'
+    magenta:     '#AB9DF2'
+    cyan:        '#78DCE8'
+    white:       '#FCFCFA'
+
+  # Colors (One Dark)
+  primary:
+    background:  '#282c34'
+    foreground:  '#abb2bf'
+
+  normal:
+    black:       '#5c6370'
+    red:         '#e06c75'
+    green:       '#98c379'
+    yellow:      '#e5c07b'
+    blue:        '#61afef'
+    magenta:     '#c678dd'
+    cyan:        '#56b6c2'
+    white:       '#828997'
+
+  bright:
+    normal:
+    black:       '#696c77'
+    red:         '#e45649'
+    green:       '#50a14f'
+    yellow:      '#c18401'
+    blue:        '#4078f2'
+    magenta:     '#a626a4'
+    cyan:        '#0184bc'
+    white:       '#a0a1a7'

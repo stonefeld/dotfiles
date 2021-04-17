@@ -18,7 +18,7 @@ import os
 mod           = 'mod4'
 
 # Terminal of choice
-myTerm        = 'alacritty'
+my_term        = 'alacritty'
 
 # Some relevant paths
 home          = os.path.expanduser('~')

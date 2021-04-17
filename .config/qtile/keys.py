@@ -22,7 +22,7 @@ from   variables       import *
 def my_keys():
     return [
         # Launch terminal
-        Key([mod],            'Return', lazy.spawn(myTerm)),
+        Key([mod],            'Return', lazy.spawn(f'{my_term} -e zsh')),
 
         # Toggle between different layouts as defined below
         Key([mod],            'Tab',    lazy.next_layout()),
@@ -85,6 +85,7 @@ def my_keys():
 
         # Launch Utilities
         Key([mod],            'r',      lazy.spawncmd()),
+        Key([mod],            'p',      lazy.spawn('dmenu_run -c -l 20 -bw 2')),
         Key([mod],            'c',      lazy.spawn('galculator')),
 
         # Playerctl commands  
@@ -97,7 +98,6 @@ def my_keys():
 
         # DropDown
         Key([mod],            'd',      lazy.group['scratchpad'].dropdown_toggle('term')),
-        Key([mod],            'p',      lazy.group['scratchpad'].dropdown_toggle('spt')),
         Key([mod],            'o',      lazy.group['scratchpad'].dropdown_toggle('mpd')),
         Key([mod],            'i',      lazy.group['scratchpad'].dropdown_toggle('mutt')),
         Key([mod],            'u',      lazy.group['scratchpad'].dropdown_toggle('top')),

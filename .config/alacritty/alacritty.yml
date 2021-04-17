@@ -3,12 +3,12 @@ env:
 
 window:
   padding:
-    x: 4
-    y: 5
+    x: 2
+    y: 2
 
   dynamic_padding: true
   decorations: full
-  startup_mode: Windowed
+  startup_mode: Maximized
 
   title: terminal
   class:
@@ -55,7 +55,7 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: false
 
-window.dynamic_title: true
+# window.dynamic_title: true
 
 cursor:
   # Values for `style`:

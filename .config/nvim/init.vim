@@ -21,18 +21,12 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-" Floating Terminal.
-Plug 'voldikss/vim-floaterm'
-
 " LSP.
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 
 " Quick commentaries.
 Plug 'tpope/vim-commentary'
-
-" Debugging
-Plug 'puremourning/vimspector'
 
 " Show color preview.
 Plug 'lilydjwg/colorizer'
@@ -42,6 +36,9 @@ Plug 'ap/vim-buftabline'
 
 " Git integration.
 Plug 'tpope/vim-fugitive'
+
+" Auto Pairs.
+Plug 'jiangmiao/auto-pairs'
 
 " Syntax highlighting.
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }

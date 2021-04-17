@@ -79,6 +79,7 @@ alias lgit='lazygit'
 
 alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+alias pacupdate="sudo pacman -Syy && sudo pacman -Su"
 
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'
@@ -89,6 +90,8 @@ alias fgrep='fgrep --color=auto'
 
 alias sys='systemctl'
 alias jou='journalctl'
+
+alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
 
 export EDITOR='nvim'
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#bf616a,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
