@@ -49,3 +49,12 @@
 !.config/rofi/themes/applauncher.rasi
 !.config/rofi/themes/colors.rasi
 !.config/rofi/themes/powermenu.rasi
+
+# Include Folders from .config
+!.local/
+.local/*
+
+!.local/share/
+.local/share/*
+
+!.local/share/dwm/

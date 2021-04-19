@@ -1,33 +1,43 @@
+# System variables control
 #"pactl set-sink-volume @DEFAULT_SINK@ +10%"
-"current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && /usr/bin/canberra-gtk-play -i audio-volume-change"
+"current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && $HOME/.local/bin/statusline"
     XF86AudioRaiseVolume
 
-"/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && /usr/bin/canberra-gtk-play -i audio-volume-change"
+"/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && $HOME/.local/bin/statusline"
     XF86AudioLowerVolume
 
-"/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
+"/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle && $HOME/.local/bin/statusline"
     XF86AudioMute
 
-"/usr/bin/xbacklight -inc 10"
+"/usr/bin/xbacklight -inc 10 && $HOME/.local/bin/statusline"
     XF86MonBrightnessUp
 
-"/usr/bin/xbacklight -dec 10"
+"/usr/bin/xbacklight -dec 10 && $HOME/.local/bin/statusline"
     XF86MonBrightnessDown
 
 "/usr/bin/playerctl --player=spotify play-pause"
     Pause
 
+# Utilities
+"~/.local/bin/touchpad"
+    Shift + F6
+
+"rfkill unblock wifi && st -c NmTui -e nmtui"
+    Shift + F7
+
+
+# Launch applications
 "/usr/local/bin/st -c PulseMixer -e pulsemixer"
     Shift+Mod4 + p
 
 "/usr/local/bin/st -c Ranger -e ranger"
     Mod4 + e
 
+"tabbed -c surf -e"
+    Shift+Mod4 + i
+
 "~/.local/bin/surfhistory"
     Shift+Mod4 + o
 
 "/usr/local/bin/dmenu_run -c -l 20 -bw 2"
     Mod4 + p
-
-"~/.local/bin/touchpad"
-    Shift + F6

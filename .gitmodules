@@ -1,0 +1,3 @@
+[submodule ".local/share/dwm"]
+	path = .local/share/dwm
+	url = https://github.com/stonefeld/dwm
