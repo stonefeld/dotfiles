@@ -1,0 +1,31 @@
+#!/bin/sh
+
+cpu=$(mpstat | awk 'NR==4{print $4}')
+ram=$(free | awk 'NR==2{print 100-$4/$2*100}')
+ram=$(printf '%0.2f' $ram)
+
+wifi=$(nmcli | awk 'NR==1{print$4}')
+if [ -z "$wifi" ]; then
+    wifi='Disconnected'
+fi
+
+brightness=$(xbacklight -get)
+
+volume=$(pacmd dump-volumes | awk 'NR==1{print $8}')
+mute=$(amixer | grep 'Front Left:' | awk '{print $6}')
+if [ $mute = "[off]" ]; then
+    volume='Mute'
+fi
+
+battery=$(acpi | grep 'Battery 0:' | awk '{print $4}' | cut -d ',' -f 1)
+batstate='Bat'
+charging=$(acpi | grep 'Battery 0:' | awk '{print $3}' | cut -d ',' -f 1)
+if [ $charging = 'Charging' ]; then
+    batstate='Char'
+fi
+
+date=$(date '+%a, %b %d - %H:%M')
+
+statusline="CPU: $cpu% - RAM: $ram% | WiFi: $wifi | Bri: $brightness% - Vol: $volume - $batstate: $battery | $date"
+
+xsetroot -name " $statusline "

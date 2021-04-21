@@ -50,7 +50,7 @@
 !.config/rofi/themes/colors.rasi
 !.config/rofi/themes/powermenu.rasi
 
-# Include Folders from .config
+# Include Folders from .local/share
 !.local/
 .local/*
 
@@ -58,3 +58,9 @@
 .local/share/*
 
 !.local/share/dwm/
+
+# Include Files from .local/bin
+!.local/bin/
+.local/bin/*
+
+!.local/bin/statusline
