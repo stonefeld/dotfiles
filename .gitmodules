@@ -4,3 +4,6 @@
 [submodule ".local/share/st"]
 	path = .local/share/st
 	url = https://github.com/stonefeld/st
+[submodule ".local/share/dmenu"]
+	path = .local/share/dmenu
+	url = https://github.com/stonefeld/dmenu

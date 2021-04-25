@@ -23,7 +23,7 @@
 "~/.local/bin/touchpad"
     Shift + F6
 
-"rfkill unblock wifi && st -c NmTui -e nmtui"
+"rfkill unblock all && st -c NmTui -e nmtui"
     Shift + F7
 
 

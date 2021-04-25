@@ -59,6 +59,7 @@
 
 !.local/share/dwm/
 !.local/share/st/
+!.local/share/dmenu/
 
 # Include Files from .local/bin
 !.local/bin/
