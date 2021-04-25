@@ -1,18 +1,18 @@
 # System variables control
 #"pactl set-sink-volume @DEFAULT_SINK@ +10%"
-"current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && $HOME/.local/bin/statusline"
+"current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && $HOME/.local/bin/statusline/status-init"
     XF86AudioRaiseVolume
 
-"/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && $HOME/.local/bin/statusline"
+"/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && $HOME/.local/bin/statusline/status-init"
     XF86AudioLowerVolume
 
-"/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle && $HOME/.local/bin/statusline"
+"/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle && $HOME/.local/bin/statusline/status-init"
     XF86AudioMute
 
-"/usr/bin/xbacklight -inc 10 && $HOME/.local/bin/statusline"
+"/usr/bin/xbacklight -inc 10 && $HOME/.local/bin/statusline/status-init"
     XF86MonBrightnessUp
 
-"/usr/bin/xbacklight -dec 10 && $HOME/.local/bin/statusline"
+"/usr/bin/xbacklight -dec 10 && $HOME/.local/bin/statusline/status-init"
     XF86MonBrightnessDown
 
 "/usr/bin/playerctl --player=spotify play-pause"
@@ -33,6 +33,9 @@
 
 "/usr/local/bin/st -c PulseMixer -e pulsemixer"
     Shift+Mod4 + p
+
+"/usr/local/bin/st -c Music -g 120x34 -e $HOME/.local/bin/mpcf"
+    Shift+Mod4 + m
 
 "/usr/local/bin/st -c Ranger -g 120x34 -e ranger"
     Mod4 + e

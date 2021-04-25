@@ -40,6 +40,9 @@ Plug 'tpope/vim-fugitive'
 " Auto Pairs.
 Plug 'jiangmiao/auto-pairs'
 
+" LaTeX compiler.
+Plug 'lervag/vimtex'
+
 " Syntax highlighting.
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/playground'

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+volume=$(pacmd dump-volumes | awk 'NR==1{print $8}')
+icon=""
+mute=$(amixer | grep "Front Left:" | awk '{print $6}')
+[ $mute = "[off]" ] && volume="Mute" && icon=""
+
+echo "$icon $volume"

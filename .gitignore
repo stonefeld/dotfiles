@@ -58,9 +58,10 @@
 .local/share/*
 
 !.local/share/dwm/
+!.local/share/st/
 
 # Include Files from .local/bin
 !.local/bin/
 .local/bin/*
 
-!.local/bin/statusline
+!.local/bin/statusline/

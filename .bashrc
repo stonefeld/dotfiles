@@ -4,10 +4,10 @@
 
 [[ $- != *i* ]] && return
 
-PS1="\[\e[0;37m\][\[\e[0;32m\]\u\[\e[0;37m\]@\h \W]\$ "
+PS1="\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\W\[\e[1;31m\]]\[\e[0;37m\] "
 
-alias ssn="sudo shutdown now"
-alias sr="sudo reboot"
+alias sn="shutdown now"
+alias re="reboot"
 alias ss="systemctl suspend"
 
 alias ls="ls --color=always --group-directories-first"

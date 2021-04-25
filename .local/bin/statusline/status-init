@@ -1,0 +1,18 @@
+#!/bin/sh
+
+cpu=$(mpstat | awk 'NR==4{print $4}')
+ram=$(free | awk 'NR==2{print 100-$4/$2*100}')
+ram=$(printf "%0.2f" $ram)
+
+wifi=$(nmcli | awk 'NR==1{print$4}')
+[ -z "$wifi" ] && wifi="Disconnected"
+
+brightness=$(xbacklight -get)
+
+volume=$($HOME/.local/bin/statusline/status-volume)
+battery=$($HOME/.local/bin/statusline/status-battery)
+date=$($HOME/.local/bin/statusline/status-clock)
+
+statusline="CPU: $cpu% - RAM: $ram% |  $wifi |   $brightness% - $volume - $battery | $date"
+
+xsetroot -name "$statusline"
