@@ -1,6 +1,6 @@
 # DotFiles
 
-### **First of all***
+### **First of all**
 To clone this whole repository you have to run <code>git clone --recursive</code> since every suckless utility present in this repo is added as a submodule. If you have already cloned it without the <code>--recursive</code> flag you can run <code>git submodule update --init</code> to pull every submodule at once.
 
 Welcome to my dotfiles. In this GitHub repository you will find configuration files for:
