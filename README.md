@@ -1,19 +1,25 @@
 # DotFiles
 
+### **First of all***
+To clone this whole repository you have to run <code>git clone --recursive</code> since every suckless utility present in this repo is added as a submodule. If you have already cloned it without the <code>--recursive</code> flag you can run <code>git submodule update --init</code> to pull every submodule at once.
+
 Welcome to my dotfiles. In this GitHub repository you will find configuration files for:
 * <code>alacritty</code> terminal emulator
+* <code>st</code> terminal emulator
 * <code>qtile</code> window manager
-* <code>bash</code>, <code>zsh</code> and <code>fish</code> shells
+* <code>dwm</code> window manager
+* <code>bash</code> and <code>zsh</code> shells
 * <code>firefox</code> web browser
 * <code>neovim</code> text editor
 * <code>rofi</code> app launcher
+* <code>dwm</code> app launcher
 * <code>dunst</code> notification service daemon
 
-In addition I have written and pushed some other files like the configuration file for the <code>picom</code> compositor, <code>postswitch</code> and <code>preswitch</code> scripts for the <code>autorandr</code> utility, a bash script that checks for <code>pacman udpates</code> and is invoked with a <code>system timer unit</code>, among other files.
+In addition I have written and pushed some other files like the configuration file for the <code>picom</code> compositor, a shell script that checks for <code>pacman udpates</code> and is invoked with a <code>system timer unit</code>, among other files.
 
 In the next picture there's a small recopilation of the visual aspect from my desktop environment and the applications I'm using.
 
-![](https://github.com/TheoStanfield/dotfiles/blob/stored-images/screenshot4.png)
+![](https://github.com/stonefeld/dotfiles/blob/stored-images/screenshot4.png)
 
 ### **General Recommendation**
 Before trying this files out, there are many points to take into consideration:
@@ -29,8 +35,8 @@ Before trying this files out, there are many points to take into consideration:
 
 * To get **Qtile** running:
   * You will need the following python packages: <code>iwlib</code> <code>psutil</code>
-  * Except for that everything else should work out of the box. The only one thing I recommend doing is checking that every bash script in the [scripts folder](https://github.com/TheoStanfield/dotfiles/tree/master/.config/qtile/scripts) have execution permission by running <code>sudo chmod +x ~/.config/qtile/scripts/*</code> .
-    * There are some bash scripts that are meant for laptops such as the <code>[touchpad.sh](https://github.com/TheoStanfield/dotfiles/blob/master/.config/qtile/scripts/touchpad.sh)</code> and <code>[touchscreen.sh](https://github.com/TheoStanfield/dotfiles/blob/master/.config/qtile/scripts/touchscreen.sh)</code>. You are free to remove them if you like.
+  * Except for that everything else should work out of the box. The only one thing I recommend doing is checking that every bash script in the [scripts folder](https://github.com/stonefeld/dotfiles/tree/master/.config/qtile/scripts) have execution permission by running <code>sudo chmod +x ~/.config/qtile/scripts/*</code> .
+    * There are some bash scripts that are meant for laptops such as the <code>[touchpad.sh](https://github.com/stonefeld/dotfiles/blob/master/.config/qtile/scripts/touchpad.sh)</code> and <code>[touchscreen.sh](https://github.com/stonefeld/dotfiles/blob/master/.config/qtile/scripts/touchscreen.sh)</code>. You are free to remove them if you like.
   * Also you may need to install [xmenu](https://github.com/phillbush/xmenu).
 * To get **NeoVim** running:
   * You firstly need to install a Plugin Manager. My NeoVim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run 
