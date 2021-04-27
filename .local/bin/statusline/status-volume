@@ -1,8 +1,8 @@
 #!/bin/sh
 
-volume=$(pacmd dump-volumes | awk 'NR==1{print $8}')
+volume=$(pacmd dump-volumes | sed "1!d" | sed -n "s/ \+/ /gp" | cut -d " " -f 8)
 icon=""
-mute=$(amixer | grep "Front Left:" | awk '{print $6}')
+mute=$(amixer | grep "Front Left:" | sed -n "s/ \+/ /gp" | cut -d " " -f 7)
 [ $mute = "[off]" ] && volume="Mute" && icon=""
 
 echo "$icon $volume"

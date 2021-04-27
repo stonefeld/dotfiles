@@ -7,3 +7,6 @@
 [submodule ".local/share/dmenu"]
 	path = .local/share/dmenu
 	url = https://github.com/stonefeld/dmenu
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/stonefeld/nvim

@@ -1,21 +1,21 @@
 # System variables control
 #"pactl set-sink-volume @DEFAULT_SINK@ +10%"
-"current=$(pacmd dump-volumes | awk 'NR==1{print $8}' | sed 's/\%//') && [ $current -lt 200 ] && /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +10% && $HOME/.local/bin/statusline/status-init"
+"current=$(pacmd dump-volumes | sed '1!d;s/ \+/ /g;s/\%//' | cut -d ' ' -f 8) && [ $current -lt 200 ] && pactl set-sink-volume @DEFAULT_SINK@ +10% && $HOME/.local/bin/statusline/status-init"
     XF86AudioRaiseVolume
 
-"/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -10% && $HOME/.local/bin/statusline/status-init"
+"pactl set-sink-volume @DEFAULT_SINK@ -10% && $HOME/.local/bin/statusline/status-init"
     XF86AudioLowerVolume
 
-"/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle && $HOME/.local/bin/statusline/status-init"
+"pactl set-sink-mute @DEFAULT_SINK@ toggle && $HOME/.local/bin/statusline/status-init"
     XF86AudioMute
 
-"/usr/bin/xbacklight -inc 10 && $HOME/.local/bin/statusline/status-init"
+"xbacklight -inc 10 && $HOME/.local/bin/statusline/status-init"
     XF86MonBrightnessUp
 
-"/usr/bin/xbacklight -dec 10 && $HOME/.local/bin/statusline/status-init"
+"xbacklight -dec 10 && $HOME/.local/bin/statusline/status-init"
     XF86MonBrightnessDown
 
-"/usr/bin/playerctl --player=spotify play-pause"
+"playerctl --player=spotify play-pause"
     Pause
 
 
@@ -31,17 +31,23 @@
 "/usr/local/bin/dmenu_run -c -l 20 -bw 2"
     Mod4 + p
 
-"/usr/local/bin/st -c PulseMixer -e pulsemixer"
+"/usr/local/bin/st -c Floating -e pulsemixer"
     Shift+Mod4 + p
 
-"/usr/local/bin/st -c Music -g 120x34 -e $HOME/.local/bin/mpcf"
+"/usr/local/bin/st -c Floating -g 120x34 -e $HOME/.local/bin/mpcf"
     Shift+Mod4 + m
 
-"/usr/local/bin/st -c Ranger -g 120x34 -e ranger"
+"/usr/local/bin/st -c Floating -g 120x34 -e htop"
+    Shift+Mod4 + h
+
+"/usr/local/bin/st -c Floating -g 120x34 -e ranger"
     Mod4 + e
 
-"tabbed -c surf -e"
+"firefox"
     Shift+Mod4 + i
 
 "~/.local/bin/surfhistory"
     Shift+Mod4 + o
+
+"~/.local/bin/dmlogout"
+    Shift+Mod4 + l

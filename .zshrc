@@ -8,15 +8,31 @@ bindkey -v
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ts/.zshrc'
 
-autoload -Uz compinit
+autoload -Uz compinit promptinit
 compinit
+promptinit
 # End of lines added by compinstall
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 [[ $- != *i* ]] && return
 
-PROMPT=$'\n''%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%3~%f%F{red}]%f%b%F{white} '
+setopt prompt_subst
+
+virtualenv_info() {
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        venv="$(cut -d "-" -f 1 <<< ${VIRTUAL_ENV##*/})"
+    else
+        venv=""
+    fi
+    [[ -n "$venv" ]] && echo "($venv)"
+}
+
+gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3 }
+
+echo $(zsh --version)
+PROMPT=$'\n''%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white} '
+RPROMPT='%B%F{yellow}$(virtualenv_info)%f%b'
 
 alias sn="shutdown now"
 alias re="reboot"
@@ -71,10 +87,11 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f
 export LESSHISTFILE=/dev/null
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
-bindkey '^F' autosuggest-accept
+# bindkey '^F' autosuggest-accept
 
 function zle-keymap-select () {
     case $KEYMAP in

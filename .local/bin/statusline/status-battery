@@ -1,25 +1,25 @@
 #!/bin/sh
 
-bat=$(acpi | grep "Battery 0:" | awk '{print $4/10}' | cut -d "," -f 1)
-bat=$(printf "%0.0f" $bat)
+batinfo=$(acpi | grep "Battery 0:")
+batper=$(echo $batinfo | cut -d " " -f 4 | sed 's/\,//;s/\%//')
+bat=$(( $batper / 10 ))
+
 icon=""
 
 case $bat in
-    "1") icon="";;
-    "2") icon="";;
-    "3") icon="";;
-    "4") icon="";;
-    "5") icon="";;
-    "6") icon="";;
-    "7") icon="";;
-    "8") icon="";;
-    "9") icon="";;
+    "1")  icon="";;
+    "2")  icon="";;
+    "3")  icon="";;
+    "4")  icon="";;
+    "5")  icon="";;
+    "6")  icon="";;
+    "7")  icon="";;
+    "8")  icon="";;
+    "9")  icon="";;
     "10") icon="";;
 esac
 
-char=$(acpi | grep "Battery 0:" | awk '{print $3}' | cut -d "," -f 1)
+char=$(echo $batinfo | cut -d " " -f 3 | sed 's/\,//')
 [ $char = "Charging" ] && icon=""
 
-battery=$(acpi | grep "Battery 0:" | awk '{print $4}' | cut -d "," -f 1)
-
-echo "$icon $battery"
+echo "$icon $batper%"

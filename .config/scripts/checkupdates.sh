@@ -57,3 +57,5 @@ else
     canberra-gtk-play -i dialog-warning
     echo 0 > $cache_file
 fi
+
+$HOME/.local/bin/statusline/status-init
