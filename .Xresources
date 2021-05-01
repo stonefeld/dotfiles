@@ -1,4 +1,3 @@
-Xcursor.theme: oxy-wonton
 Xcursor.size: 32
 
 Xft.dpi: 105
@@ -21,41 +20,41 @@ XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 *.font: SauceCodePro Nerd Font:size=12
 
 /* Colors (Nord) */
-*.color0:   #3b4252
-*.color8:   #4c566a
-*.color1:   #bf616a
-*.color9:   #bf616a
-*.color2:   #a3be8c
-*.color10:  #a3be8c
-*.color3:   #ebcb8b
-*.color11:  #ebcb8b
-*.color4:   #81a1c1
-*.color12:  #81a1c1
-*.color5:   #b48ead
-*.color13:  #b48ead
-*.color6:   #88c0d0
-*.color14:  #8fbcbb
-*.color7:   #e5e9f0
-*.color15:  #eceff4
-*.color256: #d8dee9
-*.color257: #2e3440
+*.color0:     #3b4252
+*.color8:     #4c566a
+*.color1:     #bf616a
+*.color9:     #bf616a
+*.color2:     #a3be8c
+*.color10:    #a3be8c
+*.color3:     #ebcb8b
+*.color11:    #ebcb8b
+*.color4:     #81a1c1
+*.color12:    #81a1c1
+*.color5:     #b48ead
+*.color13:    #b48ead
+*.color6:     #88c0d0
+*.color14:    #8fbcbb
+*.color7:     #e5e9f0
+*.color15:    #eceff4
+*.foreground: #d8dee9
+*.background: #2e3440
 
 /* Colors (OneDark) */
-/* *.color0:   #5c6370 */
-/* *.color8:   #696c77 */
-/* *.color1:   #e06c75 */
-/* *.color9:   #e45649 */
-/* *.color2:   #98c379 */
-/* *.color10:  #50a14f */
-/* *.color3:   #e5c07b */
-/* *.color11:  #c18401 */
-/* *.color4:   #61afef */
-/* *.color12:  #4078f2 */
-/* *.color5:   #c678dd */
-/* *.color13:  #a626a4 */
-/* *.color6:   #56b6c2 */
-/* *.color14:  #0184bc */
-/* *.color7:   #828997 */
-/* *.color15:  #a0a1a7 */
-/* *.color256: #abb2bf */
-/* *.color257: #282c34 */
+/* *.color0:     #5c6370 */
+/* *.color8:     #696c77 */
+/* *.color1:     #e06c75 */
+/* *.color9:     #e45649 */
+/* *.color2:     #98c379 */
+/* *.color10:    #50a14f */
+/* *.color3:     #e5c07b */
+/* *.color11:    #c18401 */
+/* *.color4:     #61afef */
+/* *.color12:    #4078f2 */
+/* *.color5:     #c678dd */
+/* *.color13:    #a626a4 */
+/* *.color6:     #56b6c2 */
+/* *.color14:    #0184bc */
+/* *.color7:     #828997 */
+/* *.color15:    #a0a1a7 */
+/* *.foreground: #abb2bf */
+/* *.background: #282c34 */

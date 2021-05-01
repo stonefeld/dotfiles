@@ -1,22 +1,23 @@
-# Lines configured by zsh-newuser-install
+#
+# ~/.zshrc
+#
+
+[[ $- != *i* ]] && return
+
 HISTFILE=~/.zshhistory
 HISTSIZE=5000
 SAVEHIST=10000
-setopt autocd
+
 bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
 zstyle :compinstall filename '/home/ts/.zshrc'
 
 autoload -Uz compinit promptinit
 compinit
 promptinit
-# End of lines added by compinstall
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
-[[ $- != *i* ]] && return
-
+setopt autocd
 setopt prompt_subst
 
 virtualenv_info() {
@@ -64,7 +65,10 @@ alias pip3update="sudo pip3 list --outdated | awk '{print $1}' | tail -n+3 | xar
 alias pepyls='pipenv install --dev python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
 alias pippyls='pip install python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
 
+alias mans='man -k . | fzf | sed "s/ \+/ /g" | cut -d " " -f 1 | xargs -r man'
+
 alias lgit='lazygit'
+alias ldocker='lazydocker'
 
 alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
@@ -82,12 +86,14 @@ alias jou='journalctl'
 
 alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
 
-export EDITOR='nvim'
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#bf616a,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
-export LESSHISTFILE=/dev/null
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/
+export EDITOR='nvim'
+export LESSHISTFILE=/dev/null
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#bf616a,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_THEME='Nord'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export PYTHONSTARTUP=~/.config/python/pythonrc
 
 bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
@@ -95,7 +101,7 @@ bindkey '^N' down-line-or-history
 
 function zle-keymap-select () {
     case $KEYMAP in
-        vicmd) echo -ne '\e[1 q';;
+        vicmd)      echo -ne '\e[1 q';;
         viins|main) echo -ne '\e[5 q';;
     esac
 }

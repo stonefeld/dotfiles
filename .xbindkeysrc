@@ -23,13 +23,16 @@
 "~/.local/bin/touchpad"
     Shift + F6
 
-"rfkill unblock all && st -c NmTui -e nmtui"
+"rfkill unblock all && st -c Floating -e nmtui"
     Shift + F7
 
 
 # Launch applications
-"/usr/local/bin/dmenu_run -c -l 20 -bw 2"
+"/usr/local/bin/dmenu_run -c -l 20 -bw 2 -i"
     Mod4 + p
+
+"passmenu -c -l 20 -bw 2 -i"
+    Shift+Mod4 + k
 
 "/usr/local/bin/st -c Floating -e pulsemixer"
     Shift+Mod4 + p
@@ -51,3 +54,6 @@
 
 "~/.local/bin/dmlogout"
     Shift+Mod4 + l
+
+"~/.local/bin/dmrecord"
+    Shift+Mod4 + r

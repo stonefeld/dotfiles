@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# cpu=$(mpstat | sed "4!d" | sed -n "s/ \+/ /gp" | cut -d " " -f 4)
-# ram=$(free | sed "2!d" | sed -n "s/ \+/ /gp" | cut -d " " -f 2,4)
-# ram=$(printf "%0.2f" "$(bc -l <<< 100-${ram##* }/${ram%% *}*100)")
 pacupgrade=$(cat $HOME/.config/scripts/updates)
 
 wifi=$(nmcli | sed "1!d" | cut -d " " -f 4)
@@ -15,6 +12,6 @@ volume=$($HOME/.local/bin/statusline/status-volume)
 battery=$($HOME/.local/bin/statusline/status-battery)
 date=$($HOME/.local/bin/statusline/status-clock)
 
-statusline=" $pacupgrade |  $wifi |   $brightness% - $volume - $battery | $date"
+statusline=" 0 -  $pacupgrade |  $wifi |   $brightness% - $volume - $battery | $date"
 
 xsetroot -name "$statusline"
