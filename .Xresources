@@ -1,6 +1,6 @@
 Xcursor.size: 32
 
-Xft.dpi: 105
+Xft.dpi: 118
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
@@ -17,7 +17,11 @@ XTerm*loginshell: true
 XTerm*savelines: 50000
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
-*.font: SauceCodePro Nerd Font:size=12
+*.font: SauceCodePro Nerd Font:size=11
+/* *.font: Source Code Pro:size=11 */
+*.font2: JoyPixels:size=12
+*.alpha: 0.95
+/* *.alpha: 1 */
 
 /* Colors (Nord) */
 *.color0:     #3b4252

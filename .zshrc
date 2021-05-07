@@ -11,7 +11,7 @@ SAVEHIST=10000
 bindkey -v
 zstyle :compinstall filename '/home/ts/.zshrc'
 
-autoload -Uz compinit promptinit
+autoload -Uz compinit promptinit add-zsh-hook
 compinit
 promptinit
 
@@ -43,6 +43,7 @@ alias ls="exa -lag -a --color=always --group-directories-first"
 alias la="exa -a --color=always --group-directories-first"
 alias ll="exa -lg --color=always --group-directories-first"
 alias lt="exa -aT --color=always --group-directories-first"
+# alias ls="ls -h --color=always --group-directories-first"
 alias lf="ranger"
 
 alias grep='grep --color=auto'
@@ -72,7 +73,7 @@ alias ldocker='lazydocker'
 
 alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm"
+alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > $XDG_CONFIG_HOME/scripts/updates && status-init"
 
 alias ip='ip -color=auto'
 alias diff='diff --color=auto'
@@ -86,18 +87,8 @@ alias jou='journalctl'
 
 alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
 
-export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/
-export EDITOR='nvim'
-export LESSHISTFILE=/dev/null
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#bf616a,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export BAT_THEME='Nord'
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PYTHONSTARTUP=~/.config/python/pythonrc
-
 bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
-# bindkey '^F' autosuggest-accept
 
 function zle-keymap-select () {
     case $KEYMAP in
@@ -115,3 +106,18 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q'
 preexec() { echo -ne '\e[5 q' ;}
+
+title_precmd() {
+	print -Pn -- '\e]2;%n@%m %~\a'
+	[[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
+}
+
+title_preexec () {
+	print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
+	[[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
+}
+
+if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*|st*) ]]; then
+	add-zsh-hook -Uz precmd title_precmd
+	add-zsh-hook -Uz preexec title_preexec
+fi

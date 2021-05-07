@@ -167,6 +167,7 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
     Match(wm_class='Leafpad'),
     Match(wm_class='Msgcompose'),
     Match(wm_class='Thunar'),
+    Match(wm_class='Pcmanfm'),
     Match(wm_class='VirtualBox Manager'),
 ])
 

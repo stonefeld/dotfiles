@@ -4,13 +4,16 @@
 
 [[ $- != *i* ]] && return
 
-PS1="\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\W\[\e[1;31m\]]\[\e[0;37m\] "
+echo $(bash --version | sed '1!d' | cut -d ' ' -f 1-4)
+PS1=$'\n'"\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\W\[\e[1;31m\]]\[\e[0;37m\] "
 
 alias sn="shutdown now"
 alias re="reboot"
 alias ss="systemctl suspend"
 
 alias ls="ls --color=always --group-directories-first"
+
+alias vim="vim -i NONE"
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -27,8 +30,5 @@ alias fgrep='fgrep --color=auto'
 alias sys='systemctl'
 alias jou='journalctl'
 
-export EDITOR='nvim'
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#bf616a,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
-export LESSHISTFILE=/dev/null
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export LC_COLLATE="C"
+alias edwm='startx ~/.xinitrc dwm'
+alias eqtile='startx ~/.xinitrc qtile'

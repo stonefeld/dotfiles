@@ -77,7 +77,7 @@ def my_keys():
         Key([mod],            'n',      lazy.layout.normalize()),
 
         # Open file manager
-        Key([mod],            'e',      lazy.spawn('Thunar')),
+        Key([mod],            'e',      lazy.spawn(my_filemanager)),
 
         # Rofi commands
         Key([mod],            's',      lazy.spawn('rofi -show drun')),

@@ -435,7 +435,7 @@ def my_widgets2():
         widget.Clock(
             background                  = colors_standard[1],
             foreground                  = colors_custom[3],
-            format                      = '%a, %b %d - %Y',
+            format                      = '%a, %b %d (%Y)',
             padding                     = 0
         ),
         widget.TextBox(

@@ -58,4 +58,4 @@ else
     echo 0 > $cache_file
 fi
 
-$HOME/.local/bin/statusline/status-init
+status-init

@@ -3,7 +3,7 @@
 !.Xresources
 !.bashrc
 !.gitignore
-!.xbindkeysrc
+!.profile
 !.zshrc
 !README.md
 
@@ -49,6 +49,10 @@
 !.config/rofi/themes/applauncher.rasi
 !.config/rofi/themes/colors.rasi
 !.config/rofi/themes/powermenu.rasi
+
+!.config/xbindkeys/
+.config/xbindkeys/*
+!.config/xbindkeys/config
 
 # Include Folders from .local/share
 !.local/

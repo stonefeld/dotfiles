@@ -1,0 +1,62 @@
+# System variables control
+#"pactl set-sink-volume @DEFAULT_SINK@ +10%"
+"current=$(pacmd dump-volumes | sed '1!d;s/ \+/ /g;s/\%//' | cut -d ' ' -f 8) && [ $current -lt 200 ] && pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
+    XF86AudioRaiseVolume
+
+"pactl set-sink-volume @DEFAULT_SINK@ -10% && status-init"
+    XF86AudioLowerVolume
+
+"pactl set-sink-mute @DEFAULT_SINK@ toggle && status-init"
+    XF86AudioMute
+
+"xbacklight -inc 10 && status-init"
+    XF86MonBrightnessUp
+
+"xbacklight -dec 10 && status-init"
+    XF86MonBrightnessDown
+
+"playerctl --player=spotify play-pause"
+    Pause
+
+
+# Utilities
+"touchpad"
+    Shift + F6
+
+"rfkill unblock all && st -c Floating -e nmtui"
+    Shift + F7
+
+
+# Launch applications
+"dmenu_run -c -l 20 -bw 2 -i"
+    Mod4 + p
+
+"brave"
+    Shift+Mod4 + i
+
+"passmenu -c -l 20 -bw 2 -i"
+    Shift+Mod4 + k
+
+"st -c Floating -e pulsemixer"
+    Shift+Mod4 + p
+
+"st -c Floating -g 120x34 -e mpdf"
+    Shift+Mod4 + m
+
+"st -c Floating -g 120x34 -e htop"
+    Shift+Mod4 + h
+
+"st -c Floating -g 120x34 -e ranger"
+    Mod4 + e
+
+"st -c Floating -g 120x34 -e newsboat"
+    Shift+Mod4+ n
+
+"cat $XDG_DATA_HOME/emoji | dmenu -c -l 20 -bw 2 -i | cut -d ' ' -f 1 | xclip -selection clipboard -rmlastnl"
+    Shift+Mod4 + e
+
+"dmlogout"
+    Shift+Mod4 + l
+
+"dmrecord"
+    Shift+Mod4 + r
