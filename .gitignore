@@ -51,6 +51,13 @@
 !.config/rofi/themes/colors.rasi
 !.config/rofi/themes/powermenu.rasi
 
+!.config/vifm/
+.config/vifm/*
+!.config/vifm/vifmrc
+!.config/vifm/colors/
+.config/vifm/colors/*
+!.config/vifm/colors/Custom.vifm
+
 !.config/xbindkeys/
 .config/xbindkeys/*
 !.config/xbindkeys/config
@@ -66,8 +73,12 @@
 !.local/share/st/
 !.local/share/dmenu/
 
+# Include Files from .local/share
+!.local/share/emoji
+
 # Include Files from .local/bin
 !.local/bin/
 .local/bin/*
 
+!.local/bin/dm*
 !.local/bin/statusline/
