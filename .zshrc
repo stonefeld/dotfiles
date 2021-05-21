@@ -44,15 +44,15 @@ alias la="exa -a --color=always --group-directories-first"
 alias ll="exa -lg --color=always --group-directories-first"
 alias lt="exa -aT --color=always --group-directories-first"
 # alias ls="ls -h --color=always --group-directories-first"
-alias lf="ranger"
+alias lf="vifm"
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -iv'
 
 alias v='nvim'
 alias v.='nvim .'

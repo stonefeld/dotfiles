@@ -46,7 +46,7 @@
 "st -c Floating -g 120x34 -e htop"
     Shift+Mod4 + h
 
-"st -c Floating -g 120x34 -e ranger"
+"st -c Floating -g 120x34 -e vifm"
     Mod4 + e
 
 "st -c Floating -g 120x34 -e newsboat"
