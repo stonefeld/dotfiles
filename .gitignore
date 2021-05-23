@@ -26,6 +26,8 @@
 .config/rofi/*
 !.config/rofi/scripts/
 
+!.config/tmux/
+
 # Ignore Folders from .config
 .config/qtile/__pycache__/
 
@@ -33,13 +35,14 @@
 !.config/nvim/init.vim
 !.config/nvim/full_featured.vim
 
+!.config/ncmpcpp/
+.config/ncmpcpp/*
+!.config/ncmpcpp/config
+!.config/ncmpcpp/bindings
+
 !.config/picom/
 .config/picom/*
 !.config/picom/picom.conf
-
-!.config/scripts/
-.config/scripts/*
-!.config/scripts/checkupdates.sh
 
 !.config/rofi/
 .config/rofi/*
@@ -81,4 +84,5 @@
 .local/bin/*
 
 !.local/bin/dm*
+!.local/bin/pacupdatecheck
 !.local/bin/statusline/

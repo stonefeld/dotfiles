@@ -4,6 +4,7 @@ volume=$(pacmd dump-volumes | sed "1!d" | sed -n "s/ \+/ /gp" | cut -d " " -f 8 
 [ `echo "$volume >= 50" | bc` -eq 1 ] && icon="" || icon=""
 [ `echo "$volume == 0" | bc` -eq 1 ] && icon=""
 volume=$(echo "$volume%")
+
 mute=$(amixer | grep "Front Left:" | sed -n "s/ \+/ /gp" | cut -d " " -f 7)
 [ $mute = "[off]" ] && volume="Mute" && icon=""
 

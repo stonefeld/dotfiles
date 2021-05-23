@@ -23,7 +23,7 @@
 "touchpad"
     Shift + F6
 
-"rfkill unblock all && st -c Floating -e nmtui"
+"rfkill unblock all && st -c Floating -e nmtui-connect"
     Shift + F7
 
 
@@ -31,7 +31,7 @@
 "dmenu_run -c -l 20 -bw 2 -i"
     Mod4 + p
 
-"brave"
+"$BROWSER"
     Shift+Mod4 + i
 
 "passmenu -c -l 20 -bw 2 -i"

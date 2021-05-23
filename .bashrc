@@ -4,8 +4,7 @@
 
 [[ $- != *i* ]] && return
 
-echo $(bash --version | sed '1!d' | cut -d ' ' -f 1-4)
-PS1=$'\n'"\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\W\[\e[1;31m\]]\[\e[0;37m\] "
+PS1="\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\W\[\e[1;31m\]]\[\e[0;37m\] "
 
 alias sn="shutdown now"
 alias re="reboot"

@@ -9,7 +9,7 @@ screencast_full () {
 	-f alsa -i default \
 	-r 30 \
  	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
-	"$HOME/Videos/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
 	echo $! > /tmp/recordingpid
     status-init
 }
@@ -23,7 +23,7 @@ screencast_single () {
 	-f alsa -i default \
 	-r 30 \
  	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
-	"$HOME/Videos/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
 	echo $! > /tmp/recordingpid
     status-init
 }
@@ -36,7 +36,7 @@ webcam () {
 	-i /dev/video0 \
 	-f alsa -i default \
  	-c:v libx264 -preset ultrafast -c:a aac \
-	"$HOME/Videos/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
 	echo $! > /tmp/recordingpid
     status-init
 }

@@ -4,8 +4,11 @@ colorscheme Custom
 
 set syscalls
 set trash
+set shell=/bin/zsh
+
 set history=100
 set nofollowlinks
+set nowrap
 
 set sortnumbers
 set undolevels=100
@@ -14,7 +17,6 @@ set vimhelp
 set norunexec
 
 set timefmt=%m/%d/%y\ %H:%M
-" set statusline=" %A %10u:%-7g %= %15s %20d  "
 set statusline=" %A %10u:%-7g %= %15s %18d  "
 
 set wildmenu
@@ -35,8 +37,10 @@ if !has('win')
 endif
 
 mark h ~/ Home
-mark d ~/Documents Docs
-mark u ~/Documents/files/Uni/ITBA/2021/Primer\ Cuatrimestre/ Uni
+mark d ~/docs Docs
+mark p ~/docs/projects Projects
+mark c ~/docs/code Code
+mark u ~/docs/files/Uni/ITBA/2021/Primer\ Cuatrimestre/ Uni
 mark b ~/.local/bin/ Bin
 
 " :com[mand][!] command_name action
@@ -52,6 +56,7 @@ mark b ~/.local/bin/ Bin
 " %m run the command in a menu window
 
 command! df df -h %m 2> /dev/null
+command! du du -h . %m 2> /dev/null
 command! top htop 2> /dev/null
 command! zip zip -r %f.zip %f
 command! run !! ./%f
