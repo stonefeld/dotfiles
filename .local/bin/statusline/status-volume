@@ -1,11 +1,12 @@
 #!/bin/sh
 
-volume=$(pacmd dump-volumes | sed "1!d" | sed -n "s/ \+/ /gp" | cut -d " " -f 8 | sed "s/%//")
+vol=$(amixer sget Master | sed "6!d;s/%//;s/\[//g;s/\]//g;s/\ \+/ /g")
+volume=$(echo $vol | cut -d " " -f 5)
 [ `echo "$volume >= 50" | bc` -eq 1 ] && icon="" || icon=""
 [ `echo "$volume == 0" | bc` -eq 1 ] && icon=""
 volume=$(echo "$volume%")
 
-mute=$(amixer | grep "Front Left:" | sed -n "s/ \+/ /gp" | cut -d " " -f 7)
-[ $mute = "[off]" ] && volume="Mute" && icon=""
+mute=$(echo $vol | cut -d " " -f 6)
+[ $mute = "off" ] && volume="Mute" && icon=""
 
 echo "$icon $volume"

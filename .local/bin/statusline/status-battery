@@ -4,6 +4,22 @@ batinfo=$(acpi | grep "Battery 0:")
 batper=$(echo $batinfo | cut -d " " -f 4 | sed 's/\,//;s/\%//')
 bat=$(( $batper / 10 ))
 
+if [ "$bat" -le 1 ]; then
+    if [ ! -f /tmp/batwarning ]; then
+        echo 1 > /tmp/batwarning
+        dunstify -a "system" -i battery-empty -r "90909090" "Battery critical" "Your battery level is 10%, please consider charging"
+        canberra-gtk-play -i dialog-warning
+    fi
+elif [ "$bat" -le 2 ]; then
+    if [ ! -f /tmp/batwarning ]; then
+        echo 1 > /tmp/batwarning
+        dunstify -a "system" -i battery-low -r "90909090" "Battery warning" "Your battery level is 20%, please consider charging"
+        canberra-gtk-play -i dialog-warning
+    fi
+else
+    rm -f /tmp/batwarning
+fi
+
 icon=""
 
 case $bat in

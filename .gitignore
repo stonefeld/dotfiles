@@ -40,6 +40,10 @@
 !.config/ncmpcpp/config
 !.config/ncmpcpp/bindings
 
+!.config/newsboat/
+.config/newsboat/*
+!.config/newsboat/config
+
 !.config/picom/
 .config/picom/*
 !.config/picom/picom.conf

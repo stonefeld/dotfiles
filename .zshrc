@@ -40,24 +40,25 @@ alias sn="shutdown now"
 alias re="reboot"
 alias ss="systemctl suspend"
 
-alias ls="exa -lag -a --color=always --group-directories-first"
-alias la="exa -a --color=always --group-directories-first"
-alias ll="exa -lg --color=always --group-directories-first"
-alias lt="exa -aT --color=always --group-directories-first"
-# alias ls="ls -h --color=always --group-directories-first"
-alias lf="vifm"
+# alias ls="exa -lag -a --color=always --group-directories-first"
+# alias la="exa -a --color=always --group-directories-first"
+# alias ll="exa -lg --color=always --group-directories-first"
+# alias lt="exa -aT --color=always --group-directories-first"
+alias ls="ls -h --color=always --group-directories-first"
+alias lf="vifm ."
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -iv'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
 
 alias v='nvim'
 alias v.='nvim .'
-alias vf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'| xargs -ro nvim"
+# alias vf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'| xargs -ro nvim"
+alias vf="fzf --preview 'cat {}'| xargs -ro nvim"
 alias vim="vim -i NONE"
 
 alias py='python3'
@@ -107,18 +108,3 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q'
 preexec() { echo -ne '\e[5 q' ;}
-
-# title_precmd() {
-# 	print -Pn -- '\e]2;%n@%m %~\a'
-# 	[[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-}\e\\'
-# }
-
-# title_preexec () {
-# 	print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
-# 	[[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005{g}%n\005{-}@\005{m}%m\005{-} \005{B}%~\005{-} %# ' && print -n -- "${(q)1}\e\\"; }
-# }
-
-# if [[ "$TERM" == (alacritty*|gnome*|konsole*|putty*|rxvt*|screen*|tmux*|xterm*|st*) ]]; then
-# 	add-zsh-hook -Uz precmd title_precmd
-# 	add-zsh-hook -Uz preexec title_preexec
-# fi

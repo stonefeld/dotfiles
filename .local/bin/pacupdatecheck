@@ -3,7 +3,7 @@
 messageID="69696969"
 appName="pacman"
 
-dunstify -a $appName -i cloud-download -r $messageID "Package Upgrade" "Checking for any package to upgrade"
+dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "Checking for any package to upgrade"
 canberra-gtk-play -i dialog-warning
 
 cache_file=$XDG_DATA_HOME/updates
@@ -23,10 +23,10 @@ update_count () {
 
 notify () {
     if [ $# -eq 2 ]; then
-        dunstify -a $appName -i cloud-download -r $messageID "Package Upgrade" "$2 new upgrades available ($1 from last time)"
+        dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "$2 new upgrades available ($1 from last time)"
         canberra-gtk-play -i dialog-warning
     else
-        dunstify -a $appName -i cloud-download -r $messageID "Package Upgrade" "There are $1 packages to upgrade"
+        dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "There are $1 packages to upgrade"
         canberra-gtk-play -i dialog-warning
     fi
 }
@@ -53,7 +53,7 @@ if [ $count -gt 0 ]; then
         echo $count > $cache_file
     fi
 else
-    dunstify -a $appName -i cloud-download -r $messageID "Package Upgrade" "There are no packages to upgrade"
+    dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "There are no packages to upgrade"
     canberra-gtk-play -i dialog-warning
     echo 0 > $cache_file
 fi
