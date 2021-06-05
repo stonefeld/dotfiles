@@ -8,18 +8,7 @@ canberra-gtk-play -i dialog-warning
 
 cache_file=$XDG_DATA_HOME/updates
 
-if [ ! -f $cache_file ]; then
-    touch $cache_file
-    echo 0 > $cache_file
-fi
-
-read_cache_file () {
-    cat $cache_file
-}
-
-update_count () {
-    checkupdates | wc -l; return $?
-}
+[ ! -f $cache_file ] && (touch $cache_file && echo 0 > $cache_file)
 
 notify () {
     if [ $# -eq 2 ]; then
@@ -31,31 +20,28 @@ notify () {
     fi
 }
 
-last_count=$(read_cache_file)
-last_available=false
-if [ $last_count -ne 0 ]; then
-    last_available=true
-fi
+last_count=$(cat $cache_file)
+[ $last_count -ne 0 ] && last_available=true || last_available=false
 
-count=$(update_count)
+count=$(checkupdates | wc -l)
 
 if [ $count -gt 0 ]; then
     if [ "$last_available" = true ]; then
         if [ $last_count -lt $count ]; then
-            notify $last_count $((count-last_count))
             echo $count > $cache_file
+            notify $last_count $(( $count - $last_count ))
         else
-            notify $count
             echo $count > $cache_file
+            notify $count
         fi
     else
-        notify $count
         echo $count > $cache_file
+        notify $count
     fi
 else
+    echo 0 > $cache_file
     dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "There are no packages to upgrade"
     canberra-gtk-play -i dialog-warning
-    echo 0 > $cache_file
 fi
 
 status-init

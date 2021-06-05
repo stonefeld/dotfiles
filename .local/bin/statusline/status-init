@@ -1,17 +1,21 @@
 #!/bin/sh
 
-[ -f /tmp/recordingpid ] && recording="  | " || recording=""
+COLORED_EMOJIS=true
+
+recording=""
+[ -f /tmp/recordingpid ] && ([ ! "$COLORED_EMOJIS" = true ] && recording="  | " || recording="🎤 | ")
 pacupgrade=$(cat $XDG_DATA_HOME/updates)
 
-wifi=$(nmcli | sed "1!d" | cut -d " " -f 4)
+wifi=$(iwgetid -r)
 [ -z "$wifi" ] && wifi="Disconnected"
-[ "$wifi" = "to" ] && wifi="Connecting"
 
-brightness=$(status-brightness)
-volume=$(status-volume)
-battery=$(status-battery)
-date=$(status-clock)
+brightness=$(status-brightness $COLORED_EMOJIS)
+volume=$(status-volume $COLORED_EMOJIS)
+battery=$(status-battery $COLORED_EMOJIS)
+date=$(status-clock $COLORED_EMOJIS)
 
-statusline="$recording 0 -  $pacupgrade -  $wifi - $brightness - $volume - $battery - $date"
+[ ! "$COLORED_EMOJIS" = true ] &&
+    statusline="$recording 0 -  $pacupgrade -  $wifi - $brightness - $volume - $battery - $date" ||
+    statusline="$recording📧 0 📦 $pacupgrade | 📶 $wifi | $brightness | $volume | $battery | $date"
 
 xsetroot -name "$statusline"

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+selected=$(cat $XDG_DATA_HOME/emoji | dmenu -c -l 20 -bw 2 -i | cut -d " " -f 1)
+[ ! -z "$selected" ] && (echo $selected | xclip -sel clip && dunstify -a xclip -i editcopy "Copied to clipboard" "Emoji $selected copied to clipboard" && canberra-gtk-play -i device-added)

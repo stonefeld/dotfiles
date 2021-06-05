@@ -89,4 +89,6 @@
 
 !.local/bin/dm*
 !.local/bin/pacupdatecheck
+!.local/bin/screenshot
+!.local/bin/rofi*
 !.local/bin/statusline/

@@ -36,7 +36,7 @@ if !has('win')
     set slowfs=curlftpfs
 endif
 
-source bookmarks.vifm
+source ~/.config/vifm/bookmarks.vifm
 
 " :com[mand][!] command_name action
 " The following macros can be used in a command
@@ -168,7 +168,7 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
     \ {View in sxiv}
-    \ sxiv %d,
+    \ sxiv %d -n $(ls | sed '/%c/q' | wc -l),
     \ {View in gpicview}
     \ gpicview %c,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>

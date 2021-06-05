@@ -1,12 +1,21 @@
 #!/bin/sh
 
+COLORED_EMOJIS=$1
+
 vol=$(amixer sget Master | sed "6!d;s/%//;s/\[//g;s/\]//g;s/\ \+/ /g")
 volume=$(echo $vol | cut -d " " -f 5)
-[ `echo "$volume >= 50" | bc` -eq 1 ] && icon="" || icon=""
-[ `echo "$volume == 0" | bc` -eq 1 ] && icon=""
+
+if [ "$COLORED_EMOJIS" = true ]; then
+    [ `echo "$volume >= 50" | bc` -eq 1 ] && icon="🔊" || icon="🔉"
+    [ `echo "$volume == 0" | bc` -eq 1 ] && icon="🔈"
+else
+    [ `echo "$volume >= 50" | bc` -eq 1 ] && icon="" || icon=""
+    [ `echo "$volume == 0" | bc` -eq 1 ] && icon=""
+fi
+
 volume=$(echo "$volume%")
 
 mute=$(echo $vol | cut -d " " -f 6)
-[ $mute = "off" ] && volume="Mute" && icon=""
+[ $mute = "off" ] && ([ ! "$COLORED_EMOJIS" = true ] && (volume="Mute" ; icon="") || (volume="Mute" ; icon="🔇"))
 
 echo "$icon $volume"

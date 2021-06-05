@@ -44,7 +44,7 @@
     history_length = 20
 
     ### Misc/Advanced ###
-    dmenu = dmenu -b -m eDP-1 -p dunst:
+    dmenu = dmenu -m eDP-1 -l 10 -p Actions:
     browser = brave
     always_run_script = true
     title = Dunst

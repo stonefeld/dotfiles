@@ -21,11 +21,11 @@
     Shift + F6
 "rfkill unblock all && [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet"
     Shift + F7
-"scrot $HOME/imgs/screenshots/screenshot_%Y_%m_%d_%H_%S.png ; canberra-gtk-play -i device-added"
+"screenshot"
     Print
-"scrot -d 5 $HOME/imgs/screenshots/screenshot_%Y_%m_%d_%H_%S.png ; canberra-gtk-play -i device-added"
+"screenshot 5"
     Shift + Print
-"scrot -s -f $HOME/imgs/screenshots/screenshot_%Y_%m_%d_%H_%S.png ; canberra-gtk-play -i device-added"
+"screenshot -s"
     Shift+Mod4 + s
 
 # Launch applications
@@ -45,7 +45,7 @@
     Mod4 + e
 "st -c Floating -g 120x34 -e newsboat"
     Shift+Mod4+ n
-"cat $XDG_DATA_HOME/emoji | dmenu -c -l 20 -bw 2 -i | cut -d ' ' -f 1 | xclip -selection clipboard -rmlastnl"
+"dmemoji"
     Shift+Mod4 + e
 "dmlogout"
     Shift+Mod4 + l

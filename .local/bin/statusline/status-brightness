@@ -1,20 +1,25 @@
 #!/bin/sh
 
+COLORED_EMOJIS=$1
+
 brightness=$(xbacklight -get)
 
-icon=""
-case $brightness in
-    "0")   icon="";;
-    "10")  icon="";;
-    "20")  icon="";;
-    "30")  icon="";;
-    "40")  icon="";;
-    "50")  icon="";;
-    "60")  icon="";;
-    "70")  icon="";;
-    "80")  icon="";;
-    "90")  icon="";;
-    "100") icon="";;
-esac
+if [ "$COLORED_EMOJIS" = true ]; then
+    icon="🔆"
+else
+    case $brightness in
+        "0")   icon="";;
+        "10")  icon="";;
+        "20")  icon="";;
+        "30")  icon="";;
+        "40")  icon="";;
+        "50")  icon="";;
+        "60")  icon="";;
+        "70")  icon="";;
+        "80")  icon="";;
+        "90")  icon="";;
+        "100") icon="";;
+    esac
+fi
 
 echo "$icon $brightness%"
