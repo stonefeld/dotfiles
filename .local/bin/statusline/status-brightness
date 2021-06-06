@@ -2,24 +2,35 @@
 
 COLORED_EMOJIS=$1
 
-brightness=$(xbacklight -get)
+br=$(cat /sys/class/backlight/*/actual_brightness | sed "1!d")
+max=$(cat /sys/class/backlight/*/max_brightness | sed "1!d")
+per=$(( $br * 100 / $max ))
 
 if [ "$COLORED_EMOJIS" = true ]; then
     icon="🔆"
 else
-    case $brightness in
+    case $per in
         "0")   icon="";;
+        "9")   icon="";;
         "10")  icon="";;
+        "19")  icon="";;
         "20")  icon="";;
+        "29")  icon="";;
         "30")  icon="";;
+        "39")  icon="";;
         "40")  icon="";;
+        "49")  icon="";;
         "50")  icon="";;
+        "59")  icon="";;
         "60")  icon="";;
+        "69")  icon="";;
         "70")  icon="";;
+        "79")  icon="";;
         "80")  icon="";;
+        "89")  icon="";;
         "90")  icon="";;
         "100") icon="";;
     esac
 fi
 
-echo "$icon $brightness%"
+echo "$icon $per%"

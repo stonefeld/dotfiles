@@ -1,11 +1,9 @@
 # Include Files from root
 /*
-!.Xresources
 !.bashrc
 !.bash_profile
 !.gitignore
 !.profile
-!.zshrc
 !README.md
 
 # Include Folders from .config
@@ -32,6 +30,10 @@
 .config/qtile/__pycache__/
 
 # Include Files from .config
+!.config/X11/
+.config/X11/*
+!.config/X11/xresources
+
 !.config/nvim/init.vim
 !.config/nvim/full_featured.vim
 
@@ -68,6 +70,10 @@
 !.config/xbindkeys/
 .config/xbindkeys/*
 !.config/xbindkeys/config
+
+!.config/zsh
+.config/zsh/*
+!.config/zsh/.zshrc
 
 # Include Folders from .local/share
 !.local/

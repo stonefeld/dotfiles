@@ -4,15 +4,14 @@
 
 [[ $- != *i* ]] && return
 
-HISTFILE=~/.zshhistory
 HISTSIZE=5000
 SAVEHIST=10000
 
 bindkey -v
-zstyle :compinstall filename '/home/ts/.zshrc'
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
-autoload -Uz compinit promptinit add-zsh-hook
-compinit
+autoload -Uz compinit promptinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 promptinit
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
@@ -31,8 +30,6 @@ virtualenv_info() {
 
 gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3 }
 
-# echo $(zsh --version)
-# PROMPT=$'\n''%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white} '
 PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white} '
 RPROMPT='%B%F{yellow}$(virtualenv_info)%f%b'
 
@@ -40,10 +37,6 @@ alias sn="shutdown now"
 alias re="reboot"
 alias ss="systemctl suspend"
 
-# alias ls="exa -lag -a --color=always --group-directories-first"
-# alias la="exa -a --color=always --group-directories-first"
-# alias ll="exa -lg --color=always --group-directories-first"
-# alias lt="exa -aT --color=always --group-directories-first"
 alias ls="ls -h --color=always --group-directories-first"
 alias lf="vifm ."
 
@@ -57,7 +50,6 @@ alias rm='rm -i'
 
 alias v='nvim'
 alias v.='nvim .'
-# alias vf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'| xargs -ro nvim"
 alias vf="fzf --preview 'cat {}'| xargs -ro nvim"
 alias vim="vim -i NONE"
 

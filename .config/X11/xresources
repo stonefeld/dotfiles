@@ -17,7 +17,7 @@ XTerm*loginshell: true
 XTerm*savelines: 50000
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
-*.font: SauceCodePro Nerd Font:size=10
+*.font: monospace:size=10
 *.font2: JoyPixels:size=10
 *.alpha: 1.0
 

@@ -1,5 +1,5 @@
 # Export important global variables.
-export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/
+export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/:~/.local/share/cargo/env
 export SHELL=/bin/zsh
 export EDITOR='nvim'
 export BROWSER='brave'
@@ -12,13 +12,21 @@ export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Cleaning home directory.
+export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
+export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
+export HISTFILE="$XDG_DATA_HOME"/history
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 export TEXMFHOME=$XDG_DATA_HOME/texmf
 export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
+export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter

@@ -37,10 +37,12 @@
     Shift+Mod4 + k
 "st -c Floating -e pulsemixer"
     Shift+Mod4 + p
-"st -c Floating -g 120x34 -e mpdf"
-    Shift+Mod4 + m
+"st -c Floating -g 120x34 -e music"
+    Mod4 + o
 "st -c Floating -g 120x34 -e htop"
-    Shift+Mod4 + h
+    Mod4 + i
+"galculator"
+    Mod4 + u
 "st -c Floating -g 120x34 -e vifm"
     Mod4 + e
 "st -c Floating -g 120x34 -e newsboat"

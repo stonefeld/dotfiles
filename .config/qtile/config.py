@@ -1,11 +1,11 @@
-# 
+#
 #  ██████╗ ████████╗██╗██╗     ███████╗
 # ██╔═══██╗╚══██╔══╝██║██║     ██╔════╝
-# ██║   ██║   ██║   ██║██║     █████╗  
-# ██║▄▄ ██║   ██║   ██║██║     ██╔══╝  
+# ██║   ██║   ██║   ██║██║     █████╗
+# ██║▄▄ ██║   ██║   ██║██║     ██╔══╝
 # ╚██████╔╝   ██║   ██║███████╗███████╗
 #  ╚══▀▀═╝    ╚═╝   ╚═╝╚══════╝╚══════╝
-#                                      
+#
 # Author: Theo Stanfield
 # Date: 23/09/2020
 # Git: https://github.com/stonefeld/dotfiles.git
@@ -49,10 +49,10 @@ group_names = [
 scratchpads = [
     ScratchPad(
         'scratchpad', [
-            DropDown('term', my_term,                                height=0.5, opacity=1, warp_pointer=False),
-            DropDown('mpd',  f'{my_term} -e {qtile_scripts}/mpd.sh', height=0.8, opacity=1, warp_pointer=False),
-            DropDown('mutt', f'{my_term} -e neomutt',                height=0.8, opacity=1, warp_pointer=False),
-            DropDown('top',  f'{my_term} -e bpytop',                 height=0.8, opacity=1, warp_pointer=False)
+            DropDown('term', my_term,                 height=0.5, opacity=1, warp_pointer=False),
+            DropDown('mpd',  f'{my_term} -e music',   height=0.8, opacity=1, warp_pointer=False),
+            DropDown('mutt', f'{my_term} -e neomutt', height=0.8, opacity=1, warp_pointer=False),
+            DropDown('top',  f'{my_term} -e bpytop',  height=0.8, opacity=1, warp_pointer=False)
         ]
     )
 ]
@@ -120,7 +120,7 @@ dgroups_app_rules  = []    # type: List
 main               = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click  = False
-cursor_warp        = False
+cursor_warp        = True
 
 floating_layout_theme = {
     'border_focus' : colors_custom[3][0],
@@ -177,7 +177,6 @@ focus_on_window_activation = 'smart'
 @hook.subscribe.startup
 def startup():
     subprocess.call([f'{qtile_scripts}/autostart.sh'])
-    subprocess.call([f'{qtile_scripts}/touchscreen.sh'])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

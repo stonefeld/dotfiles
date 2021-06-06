@@ -28,7 +28,7 @@ def close_nm_applet():
     qtile.cmd_spawn('killall nm-applet')
 
 def xmenu():
-    qtile.cmd_spawn(f'{qtile_scripts}/xmenu.sh')
+    qtile.cmd_spawn('xmenurun')
 
 def my_sep(b=colors_standard[1], p=20):
     return widget.Sep(background=b, linewidth=0, padding=p)
@@ -332,7 +332,7 @@ def my_widgets2():
         my_sep(b=colors_standard[1], p=10),
         widget.CurrentLayoutIcon(
             background                  = colors_standard[1],
-            custom_icon_paths           = [ os.path.join(qtile_root, 'icons_nord_outline/') ],
+            custom_icon_paths           = [ os.path.join(qtile_root, 'icons_cyan_outline/') ],
             foreground                  = '#000000',
             padding                     = 0,
             scale                       = 0.5

@@ -22,7 +22,7 @@ from   variables       import *
 def my_keys():
     return [
         # Launch terminal
-        Key([mod],            'Return', lazy.spawn(f'{my_term} -e zsh')),
+        Key([mod],            'Return', lazy.spawn(my_term)),
 
         # Toggle between different layouts as defined below
         Key([mod],            'Tab',    lazy.next_layout()),
@@ -85,26 +85,15 @@ def my_keys():
 
         # Launch Utilities
         Key([mod],            'r',      lazy.spawncmd()),
-        Key([mod],            'p',      lazy.spawn('dmenu_run -c -l 20 -bw 2')),
         Key([mod],            'c',      lazy.spawn('galculator')),
 
         # Playerctl commands  
         Key([mod, 'shift'],   'period', lazy.spawn('playerctl next')),
         Key([mod, 'shift'],   'comma',  lazy.spawn('playerctl previous')),
 
-        # Screenshot
-        Key([],               'Print',  lazy.spawn(f'{qtile_scripts}/scrot.sh')),
-        Key(['shift'],        'Print',  lazy.spawn(f'{qtile_scripts}/scrot.sh 5')),
-
         # DropDown
         Key([mod],            'd',      lazy.group['scratchpad'].dropdown_toggle('term')),
         Key([mod],            'o',      lazy.group['scratchpad'].dropdown_toggle('mpd')),
         Key([mod],            'i',      lazy.group['scratchpad'].dropdown_toggle('mutt')),
         Key([mod],            'u',      lazy.group['scratchpad'].dropdown_toggle('top')),
-
-        # Disable Touchpad
-        Key(['shift'],        'F6',     lazy.spawn(f'{qtile_scripts}/touchpad.sh')),
-
-        # Activate password manager
-        Key([mod, 'shift'],   'p',      lazy.spawn('passmenu -b -p "Password Store"'))
     ]

@@ -29,5 +29,5 @@ alias fgrep='fgrep --color=auto'
 alias sys='systemctl'
 alias jou='journalctl'
 
-alias edwm='startx ~/.xinitrc dwm'
-alias eqtile='startx ~/.xinitrc qtile'
+alias edwm='startx $XDG_CONFIG_HOME/X11/xinitrc dwm'
+alias eqtile='startx $XDG_CONFIG_HOME/X11/xinitrc qtile'
