@@ -1,3 +1,5 @@
+/* Cursor setup */
+Xcursor.theme: Adwaita
 Xcursor.size: 32
 
 Xft.dpi: 118
@@ -8,75 +10,57 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
-XTerm*renderFont: true
-XTerm*faceName: xft:SauceCodePro Nerd Font
-XTerm*faceSize: 12
-XTerm*utf8: 2
-XTerm*locale: true
-XTerm*loginshell: true
-XTerm*savelines: 50000
-XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+/* XTerm setup */
+XTerm*.faceName: monospace:size=21
+XTerm*.background: #000000
+XTerm*.foreground: #ffaa00
 
-*.font: monospace:size=10
-*.font2: JoyPixels:size=10
-*.alpha: 1.0
+/* Dmenu setup */
+dmenu*.font: monospace:size=10
+dmenu*.background: #2e3440
+dmenu*.foreground: #d8dee9
+dmenu*.selbackground: #88c0d0
+dmenu*.selforeground: #3b4252
 
+/* St setup */
+st*.font: monospace:size=10
+st*.font2: JoyPixels:size=10
+st*.alpha: 0.95
 /* Colors (Nord) */
-*.color0:     #3b4252
-*.color8:     #4c566a
-*.color1:     #bf616a
-*.color9:     #bf616a
-*.color2:     #a3be8c
-*.color10:    #a3be8c
-*.color3:     #ebcb8b
-*.color11:    #ebcb8b
-*.color4:     #81a1c1
-*.color12:    #81a1c1
-*.color5:     #b48ead
-*.color13:    #b48ead
-*.color6:     #88c0d0
-*.color14:    #8fbcbb
-*.color7:     #e5e9f0
-*.color15:    #eceff4
-*.foreground: #d8dee9
-*.background: #2e3440
-
+st*.color0:     #3b4252
+st*.color8:     #4c566a
+st*.color1:     #bf616a
+st*.color9:     #bf616a
+st*.color2:     #a3be8c
+st*.color10:    #a3be8c
+st*.color3:     #ebcb8b
+st*.color11:    #ebcb8b
+st*.color4:     #81a1c1
+st*.color12:    #81a1c1
+st*.color5:     #b48ead
+st*.color13:    #b48ead
+st*.color6:     #88c0d0
+st*.color14:    #8fbcbb
+st*.color7:     #e5e9f0
+st*.color15:    #eceff4
+st*.foreground: #d8dee9
+st*.background: #2e3440
 /* Colors (Gruvbox) */
-/* *.color0:     #282828 */
-/* *.color8:     #928374 */
-/* *.color1:     #cc241d */
-/* *.color9:     #fb4934 */
-/* *.color2:     #98971a */
-/* *.color10:    #b8bb26 */
-/* *.color3:     #d79921 */
-/* *.color11:    #fabd2f */
-/* *.color4:     #458588 */
-/* *.color12:    #83a598 */
-/* *.color5:     #b16286 */
-/* *.color13:    #d3869b */
-/* *.color6:     #689d6a */
-/* *.color14:    #8ec07c */
-/* *.color7:     #a89984 */
-/* *.color15:    #ebdbb2 */
-/* *.foreground: #ebdbb2 */
-/* *.background: #282828 */
-
-/* Colors (OneDark) */
-/* *.color0:     #5c6370 */
-/* *.color8:     #696c77 */
-/* *.color1:     #e06c75 */
-/* *.color9:     #e45649 */
-/* *.color2:     #98c379 */
-/* *.color10:    #50a14f */
-/* *.color3:     #e5c07b */
-/* *.color11:    #c18401 */
-/* *.color4:     #61afef */
-/* *.color12:    #4078f2 */
-/* *.color5:     #c678dd */
-/* *.color13:    #a626a4 */
-/* *.color6:     #56b6c2 */
-/* *.color14:    #0184bc */
-/* *.color7:     #828997 */
-/* *.color15:    #a0a1a7 */
-/* *.foreground: #abb2bf */
-/* *.background: #282c34 */
+/* st*.color0:     #282828 */
+/* st*.color8:     #928374 */
+/* st*.color1:     #cc241d */
+/* st*.color9:     #fb4934 */
+/* st*.color2:     #98971a */
+/* st*.color10:    #b8bb26 */
+/* st*.color3:     #d79921 */
+/* st*.color11:    #fabd2f */
+/* st*.color4:     #458588 */
+/* st*.color12:    #83a598 */
+/* st*.color5:     #b16286 */
+/* st*.color13:    #d3869b */
+/* st*.color6:     #689d6a */
+/* st*.color14:    #8ec07c */
+/* st*.color7:     #a89984 */
+/* st*.color15:    #ebdbb2 */
+/* st*.foreground: #ebdbb2 */
+/* st*.background: #282828 */

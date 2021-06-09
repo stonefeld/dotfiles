@@ -7,7 +7,7 @@ max=$(cat /sys/class/backlight/*/max_brightness | sed "1!d")
 per=$(( $br * 100 / $max ))
 
 if [ "$COLORED_EMOJIS" = true ]; then
-    icon="🔆"
+    icon="💡"
 else
     case $per in
         "0")   icon="";;

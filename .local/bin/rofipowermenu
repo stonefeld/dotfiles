@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -z "$@" ]; then
     echo -en "Shutdown\0icon\x1fsystem-shutdown\n"

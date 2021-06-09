@@ -9,22 +9,6 @@ batinfo=$(cat /sys/class/power_supply/BAT0/capacity)
 batper=$(echo $batinfo | cut -d " " -f 4 | sed 's/\,//;s/\%//')
 bat=$(( $batper / 10 ))
 
-if [ "$bat" -le 1 ]; then
-    if [ ! -f /tmp/batwarning ]; then
-        echo 1 > /tmp/batwarning
-        dunstify -a $messapp -r $messid -i battery-empty "Battery critical" "Your battery level is 10%, please consider charging"
-        canberra-gtk-play -i dialog-warning
-    fi
-elif [ "$bat" -le 2 ]; then
-    if [ ! -f /tmp/batwarning ]; then
-        echo 1 > /tmp/batwarning
-        dunstify -a $messapp -r $messid -i battery-low "Battery warning" "Your battery level is 20%, please consider charging"
-        canberra-gtk-play -i dialog-warning
-    fi
-else
-    rm -f /tmp/batwarning
-fi
-
 [ ! "$COLORED_EMOJIS" = true ] && icon="" || icon="🔋"
 
 if [ ! "$COLORED_EMOJIS" = true ]; then
@@ -45,6 +29,25 @@ fi
 char=$(cat /sys/class/power_supply/BAT0/status)
 if [ "$char" = "Full" ] || [ "$char" = "Charging" ]; then
     [ ! "$COLORED_EMOJIS" = true ] && icon="" || icon="🔌"
+else
+    if [ "$bat" -le 1 ]; then
+        rm -f /tmp/batwarning
+        if [ ! -f /tmp/batcritical ]; then
+            echo 1 > /tmp/batcritical
+            dunstify -a $messapp -r $messid -i battery-empty "Battery critical" "Your battery level is 10%, please consider charging"
+            canberra-gtk-play -i dialog-warning
+        fi
+    elif [ "$bat" -le 2 ]; then
+        rm -f /tmp/batcritical
+        if [ ! -f /tmp/batwarning ]; then
+            echo 1 > /tmp/batwarning
+            dunstify -a $messapp -r $messid -i battery-low "Battery warning" "Your battery level is 20%, please consider charging"
+            canberra-gtk-play -i dialog-warning
+        fi
+    else
+        rm -f /tmp/batcritical
+        rm -f /tmp/batwarning
+    fi
 fi
 
 echo "$icon $batper%"

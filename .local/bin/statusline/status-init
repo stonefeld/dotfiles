@@ -3,7 +3,9 @@
 COLORED_EMOJIS=true
 
 recording=""
-[ -f /tmp/recordingpid ] && ([ ! "$COLORED_EMOJIS" = true ] && recording="  | " || recording="🎤 | ")
+if [ -f /tmp/recordingpid ]; then
+    [ ! "$COLORED_EMOJIS" = true ] && recording="  | " || recording="⏺️ 🎤 | "
+fi
 klayout=$(xkblayout-state print "%s")
 pacupgrade=$(cat $XDG_DATA_HOME/updates)
 

@@ -11,7 +11,6 @@ alias re="reboot"
 alias ss="systemctl suspend"
 
 alias ls="ls --color=always --group-directories-first"
-
 alias vim="vim -i NONE"
 
 alias cp='cp -i'
