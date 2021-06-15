@@ -11,6 +11,7 @@ This are my personal dotfiles. If you want to clone the whole repository you hav
   * [Neovim](#neovim)
   * [Qtile](#qtile)
   * [Firefox](#firefox)
+  * [Suckless software](#suckless-software)
 
 # First some example pictures
 *Pictures coming soon!!! For now check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch.*
@@ -29,6 +30,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `bash`/`zsh`
   * `neovim` nightly version *(\*\*)*
   * `firefox`
+  * `brave`
   * `vifm`
   * `pcmanfm`
   * `rofi`
@@ -39,6 +41,12 @@ Most of the following packages should be in your distro's repository. In case of
   * `tmux`
   * `xbindkeys`
   * `newsboat`
+
+* Tools:
+  * `make`
+  * `fzf`
+  * `ripgrep`
+  * `fd`
 
 * Fonts:
   * `adobe-source-code-pro-fonts`
@@ -76,6 +84,7 @@ Most of the following packages should be in your distro's repository. In case of
 
 # To get things working
 Here I will give you some basic steps to get things working correctly. First of all you have to make sure that every package from the [dependencies list](#dependencies) is correctly installed and running accordingly.
+
 ## Neovim
 To get neovim running you need to install a Plugin Manager. My neovim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run 
 ```bash
@@ -93,3 +102,10 @@ Then you need to run `:PlugInstall` within neovim after sourcing the [init.vim](
 * First you need to locate your *Root Directory* by opening `about:profiles` in Firefox.
 * Then create a folder named *chrome* inside the *Root Directory* and place every file in the [firefox configs folder](https://github.com/stonfeld/dotfiles/tree/master/.config/firefox) inside the *chrome* folder.
 * Lastly you need to navigate to `about:config` in Firefox and search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set the value to `True`.
+
+## Suckless software
+As many of you may already know, the suckless utilities have to be compiled to run them, so I created three separated repositories for all three programs I run, which are [dwm](https://github.com/stonefeld/dwm), [st](https://github.com/stonefeld/st) and [dmenu](https://github.com/stonefeld/dmenu). I separated them from this repository since they have their own source files and licences I have to keep attention to.
+
+Now, to get my customized suckless's utilities you have to pull the every repository into your machine. If you have already run `git clone --recursive` you won't have to do this, because this programs are added as submodules from the current repository and they will be located in the `~/.local/share/` folder.
+
+Now you simply have to go into the corresponding directory and simply run `sudo make install` on each one of them to install them into your system.
