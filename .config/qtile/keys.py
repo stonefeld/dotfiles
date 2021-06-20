@@ -1,16 +1,3 @@
-# 
-#  ██████╗ ████████╗██╗██╗     ███████╗
-# ██╔═══██╗╚══██╔══╝██║██║     ██╔════╝
-# ██║   ██║   ██║   ██║██║     █████╗  
-# ██║▄▄ ██║   ██║   ██║██║     ██╔══╝  
-# ╚██████╔╝   ██║   ██║███████╗███████╗
-#  ╚══▀▀═╝    ╚═╝   ╚═╝╚══════╝╚══════╝
-#                                      
-# Author: Theo Stanfield
-# Date: 23/09/2020
-# Git: https://github.com/TheoStanfield/dotfiles.git
-#
-
 # LibQtile
 from   libqtile        import extension
 from   libqtile.config import Key
@@ -87,7 +74,7 @@ def my_keys():
         Key([mod],            'r',      lazy.spawncmd()),
         Key([mod],            'c',      lazy.spawn('galculator')),
 
-        # Playerctl commands  
+        # Playerctl commands
         Key([mod, 'shift'],   'period', lazy.spawn('playerctl next')),
         Key([mod, 'shift'],   'comma',  lazy.spawn('playerctl previous')),
 

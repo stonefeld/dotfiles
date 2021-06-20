@@ -45,9 +45,9 @@ killrecording () {
 	recpid="$(cat /tmp/recordingpid)"
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
+    status-init
 	sleep 3
 	kill -9 "$recpid"
-    status-init
 	exit
 }
 

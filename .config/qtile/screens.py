@@ -1,16 +1,3 @@
-# 
-#  ██████╗ ████████╗██╗██╗     ███████╗
-# ██╔═══██╗╚══██╔══╝██║██║     ██╔════╝
-# ██║   ██║   ██║   ██║██║     █████╗  
-# ██║▄▄ ██║   ██║   ██║██║     ██╔══╝  
-# ╚██████╔╝   ██║   ██║███████╗███████╗
-#  ╚══▀▀═╝    ╚═╝   ╚═╝╚══════╝╚══════╝
-#                                      
-# Author: Theo Stanfield
-# Date: 23/09/2020
-# Git: https://github.com/TheoStanfield/dotfiles.git
-#
-
 # LibQtile
 from libqtile        import bar, widget
 from libqtile.config import Screen

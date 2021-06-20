@@ -13,17 +13,13 @@ else
     [ `echo "$volume == 0" | bc` -eq 1 ] && icon=""
 fi
 
-volume=$(echo "$volume%")
-
 mute=$(echo $vol | cut -d " " -f 6)
 if [ $mute = "off" ]; then
     if [ ! "$COLORED_EMOJIS" = true ]; then
-        volume="Mute"
-        icon=""
+        echo " Mute"
     else
-        volume="Mute"
-        icon="🔇"
+        echo "🔇 Mute"
     fi
+else
+    echo "$icon $volume%"
 fi
-
-echo "$icon $volume"

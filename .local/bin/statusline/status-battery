@@ -6,7 +6,7 @@ messid="90909090"
 messapp="system"
 
 batinfo=$(cat /sys/class/power_supply/BAT0/capacity)
-batper=$(echo $batinfo | cut -d " " -f 4 | sed 's/\,//;s/\%//')
+batper=$(echo $batinfo | cut -d " " -f 4 | sed "s/\,//;s/\%//")
 bat=$(( $batper / 10 ))
 
 [ ! "$COLORED_EMOJIS" = true ] && icon="" || icon="🔋"

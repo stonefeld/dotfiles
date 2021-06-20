@@ -1,3 +1,9 @@
+/* __  __                                             */
+/* \ \/ /_ __ ___  ___  ___  _   _ _ __ ___ ___  ___  */
+/*  \  /| '__/ _ \/ __|/ _ \| | | | '__/ __/ _ \/ __| */
+/*  /  \| | |  __/\__ \ (_) | |_| | | | (_|  __/\__ \ */
+/* /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/ */
+
 /* Cursor setup */
 Xcursor.theme: Adwaita
 Xcursor.size: 32
@@ -15,6 +21,20 @@ XTerm*.faceName: monospace:size=21
 XTerm*.background: #000000
 XTerm*.foreground: #ffaa00
 
+/* Dwm setup */
+dwm.normbordercolor: #3b4252
+dwm.normbgcolor: #2e3440
+dwm.normfgcolor: #d8dee9
+dwm.selbordercolor: #88c0d0
+dwm.selbgcolor: #88c0d0
+dwm.selfgcolor: #3b4252
+/* dwm.normbordercolor: #444444 */
+/* dwm.normbgcolor: #222222 */
+/* dwm.normfgcolor: #bbbbbb */
+/* dwm.selbordercolor: #005577 */
+/* dwm.selbgcolor: #005577 */
+/* dwm.selfgcolor: #eeeeee */
+
 /* Dmenu setup */
 dmenu*.font: monospace:size=10
 dmenu*.background: #2e3440
@@ -23,9 +43,9 @@ dmenu*.selbackground: #88c0d0
 dmenu*.selforeground: #3b4252
 
 /* St setup */
-st*.font: monospace:size=10
+st*.font: nerdfont:size=10
 st*.font2: JoyPixels:size=10
-st*.alpha: 0.95
+st*.alpha: 1
 /* Colors (Nord) */
 st*.color0:     #3b4252
 st*.color8:     #4c566a

@@ -1,14 +1,16 @@
 #!/bin/sh
 
+export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/
+
 messageID="69696969"
 appName="pacman"
 
 dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "Checking for any package to upgrade"
 canberra-gtk-play -i dialog-warning
 
-cache_file=$XDG_DATA_HOME/updates
+cache_file=~/.local/share/updates
 
-[ ! -f $cache_file ] && (touch $cache_file && echo 0 > $cache_file)
+[ ! -f "$cache_file" ] && (touch $cache_file && echo 0 > $cache_file)
 
 notify () {
     if [ $# -eq 2 ]; then
@@ -21,11 +23,11 @@ notify () {
 }
 
 last_count=$(cat $cache_file)
-[ $last_count -ne 0 ] && last_available=true || last_available=false
+[ "$last_count" -eq 0 ] && last_available=false || last_available=true
 
-count=$(checkupdates | wc -l)
+count=$(checkupdates 2>/dev/null | wc -l)
 
-if [ $count -gt 0 ]; then
+if [ "$count" -gt 0 ]; then
     if [ "$last_available" = true ]; then
         if [ $last_count -lt $count ]; then
             echo $count > $cache_file

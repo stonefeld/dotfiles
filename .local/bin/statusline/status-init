@@ -6,8 +6,8 @@ recording=""
 if [ -f /tmp/recordingpid ]; then
     [ ! "$COLORED_EMOJIS" = true ] && recording="  | " || recording="⏺️ 🎤 | "
 fi
-klayout=$(xkblayout-state print "%s")
-pacupgrade=$(cat $XDG_DATA_HOME/updates)
+klayout=$(setxkbmap -query | grep layout | sed 's/\s\+/ /g' | cut -d ' ' -f 2)
+pacupgrade=$(cat ~/.local/share/updates)
 
 wifi=$(iwgetid -r)
 [ -z "$wifi" ] && wifi="Disconnected"

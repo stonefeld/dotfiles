@@ -29,7 +29,7 @@ color listfocus_unread yellow color8 bold
 color info red black bold
 color article white default bold
 
-highlight all "---.*---" yellow color8
+highlight all "----.*----" yellow black
 highlight feedlist ".*(0/0))" black
 highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
 highlight article "(^Link:.*|^Date:.*)" default default

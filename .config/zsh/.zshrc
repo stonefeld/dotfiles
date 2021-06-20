@@ -1,6 +1,8 @@
-#
-# ~/.config/zsh/.zshrc
-#
+#          _
+#  _______| |__
+# |_  / __| '_ \
+#  / /\__ \ | | |
+# /___|___/_| |_|
 
 [[ $- != *i* ]] && return
 
@@ -9,24 +11,18 @@
 setopt prompt_subst
 
 # Small function to detect an active virtual environment and return the name.
-virtualenv_info() {
-    if [[ -n "$VIRTUAL_ENV" ]]; then
-        venv="$(cut -d "-" -f 1 <<< ${VIRTUAL_ENV##*/})"
-    else
-        venv=""
-    fi
-    [[ -n "$venv" ]] && echo "($venv)"
-}
+# Avoid creating virtual environments with dashes inside the name.
+virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{red}(%f%F{cyan}$(cut -d '-' -f 1 <<< ${VIRTUAL_ENV##*/})%f%F{red})%f%b" 2>/dev/null }
 
 # Small function to detect if the directory is a git repository and change
 # prompt's current working directory length to 1.
 gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3 }
 
-# Setting up the normal.
+# Setting up the normal prompt.
 PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white} '
 
 # The right prompt displays the virtual environment's name.
-RPROMPT='%B%F{yellow}$(virtualenv_info)%f%b'
+RPROMPT='$(virtualenv_info)'
 
 # ---------- ALIASES ---------- #
 # System power.
@@ -39,6 +35,9 @@ alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1
 alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > $XDG_DATA_HOME/updates && status-init"
 
+# Quickly move to another directory.
+alias md='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
+
 # Some ls command replacements.
 alias ls="ls -h --color=always --group-directories-first"
 alias lf="vifm ."
@@ -48,10 +47,14 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+# Pass aliases to sudo.
+alias sudo='sudo '
+
 # Neovim shortcuts.
-alias v='nvim'
-alias v.='nvim .'
-alias vf="fzf --preview 'cat {}'| xargs -ro nvim"
+alias e="$EDITOR"
+alias e.="$EDITOR ."
+alias ef="fzf --preview 'cat {}'| xargs -ro $EDITOR"
+alias vim="echo -ne '\e[1 q'; vim -i 'NONE'"
 
 # Python and pip shortcuts
 alias py='python3'

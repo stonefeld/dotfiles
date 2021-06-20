@@ -1,14 +1,24 @@
+#                   __ _ _
+#  _ __  _ __ ___  / _(_) | ___
+# | '_ \| '__/ _ \| |_| | |/ _ \
+# | |_) | | | (_) |  _| | |  __/
+# | .__/|_|  \___/|_| |_|_|\___|
+# |_|
+
 # Export important global variables.
 export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/:~/.local/share/cargo/bin/
 export SHELL=/bin/zsh
 export EDITOR='nvim'
+export TERMINAL='st'
+export TERM='xterm-256color'
 export BROWSER='brave'
 export LC_COLLATE="C"
 
 # Some default option.
 export LESSHISTFILE=-
 export QT_QPA_PLATFORMTHEME=qt5ct
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#bf616a,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#81a1c1,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={.git,.venv,node_modules}"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Cleaning home directory.

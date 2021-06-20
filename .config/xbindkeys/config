@@ -53,3 +53,7 @@
     Shift+Mod4 + l
 "dmrecord"
     Shift+Mod4 + r
+"klayout ; status-init"
+    Mod4 + a
+"klayout inverted ; status-init"
+    Shift+Mod4 + a
