@@ -1,0 +1,18 @@
+#!/bin/sh
+
+variant=$(setxkbmap -query | grep variant | sed 's/\s\+/ /g' | cut -d ' ' -f 2)
+current=$(setxkbmap -query | grep layout | sed 's/\s\+/ /g' | cut -d ' ' -f 2)
+
+if [ ! "$1" = "inverted" ]; then
+    case $current in
+        "us") [ "$variant" = "dvorak" ] && setxkbmap es || setxkbmap us -variant dvorak;;
+        "es") setxkbmap de;;
+        "de") setxkbmap us;;
+    esac
+else
+    case $current in
+        "us") [ "$variant" = "dvorak" ] && setxkbmap us || setxkbmap de;;
+        "es") setxkbmap us -variant dvorak;;
+        "de") setxkbmap es;;
+    esac
+fi

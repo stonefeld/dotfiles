@@ -10,8 +10,8 @@
     separator_height = 2
     padding = 15
     horizontal_padding = 15
-    frame_width = 2
-    frame_color = "#e0e0e0"
+    frame_width = 4
+    frame_color = "#4c566a"
     separator_color = frame
     sort = no
     idle_threshold = 0
@@ -35,7 +35,7 @@
     icon_position = left
     min_icon_size = 32
     max_icon_size = 64
-    icon_path = /usr/share/icons/Papirus-Dark/16x16/actions/:/usr/share/icons/Papirus-Dark/16x16/apps/:/usr/share/icons/Papirus-Dark/16x16/categories/:/usr/share/icons/Papirus-Dark/16x16/devices/:/usr/share/icons/Papirus-Dark/16x16/emblems/:/usr/share/icons/Papirus-Dark/16x16/emotes/:/usr/share/icons/Papirus-Dark/16x16/mimetypes/:/usr/share/icons/Papirus-Dark/16x16/panel/:/usr/share/icons/Papirus-Dark/16x16/places/:/usr/share/icons/Papirus-Dark/16x16/status/
+    icon_path = /usr/share/icons/Papirus-Light/16x16/actions/:/usr/share/icons/Papirus-Light/16x16/apps/:/usr/share/icons/Papirus-Light/16x16/categories/:/usr/share/icons/Papirus-Light/16x16/devices/:/usr/share/icons/Papirus-Light/16x16/emblems/:/usr/share/icons/Papirus-Light/16x16/emotes/:/usr/share/icons/Papirus-Light/16x16/mimetypes/:/usr/share/icons/Papirus-Light/16x16/panel/:/usr/share/icons/Papirus-Light/16x16/places/:/usr/share/icons/Papirus-Light/16x16/status/
 
     ### History ###
     sticky_history = yes
@@ -43,7 +43,7 @@
 
     ### Misc/Advanced ###
     dmenu = dmenu -m eDP-1 -l 10 -p Actions:
-    browser = /usr/bin/firefox -new-tab
+    browser = brave
     always_run_script = true
     title = Dunst
     class = Dunst
@@ -70,17 +70,16 @@
     context = ctrl+shift+period
 
 [urgency_low]
-    background = "#292d3e"
-    foreground = "#e0e0e0"
+    background = "#d8dee9"
+    foreground = "#4c566a"
     timeout = 5
 
 [urgency_normal]
-    background = "#292d3e"
-    foreground = "#e0e0e0"
+    background = "#d8dee9"
+    foreground = "#4c566a"
     timeout = 5
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#ffffff"
-    frame_color = "#ff0000"
+    background = "#d8dee9"
+    foreground = "#4c566a"
     timeout = 0

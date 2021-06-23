@@ -17,7 +17,7 @@ export LC_COLLATE="C"
 # Some default option.
 export LESSHISTFILE=-
 export QT_QPA_PLATFORMTHEME=qt5ct
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color fg:#eceff4,hl:#7f8490,fg+:#eceff4,bg+:#3b4252,hl+:#bf616a,info:#81a1c1,border:#eceff4,prompt:#bf616a,pointer:#bf616a,marker:#bf616a,spinner:#b48ead,header:#7f8490"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=16"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={.git,.venv,node_modules}"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 

@@ -10,6 +10,11 @@
 # Required line to automatically update the prompt.
 setopt prompt_subst
 
+# Load advanced completion system.
+autoload -U compinit
+compinit
+zstyle ':completion:*' menu select
+
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
 virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{red}(%f%F{cyan}$(cut -d '-' -f 1 <<< ${VIRTUAL_ENV##*/})%f%F{red})%f%b" 2>/dev/null }

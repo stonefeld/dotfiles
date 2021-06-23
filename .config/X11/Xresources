@@ -17,9 +17,9 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
 /* XTerm setup */
-XTerm*.faceName: monospace:size=21
+XTerm*.faceName: monospace:size=10
 XTerm*.background: #000000
-XTerm*.foreground: #ffaa00
+XTerm*.foreground: #ffffff
 
 /* Dwm setup */
 dwm.normbordercolor: #3b4252
@@ -36,7 +36,7 @@ dwm.selfgcolor: #3b4252
 /* dwm.selfgcolor: #eeeeee */
 
 /* Dmenu setup */
-dmenu*.font: monospace:size=10
+dmenu*.font: monospace:size=11
 dmenu*.background: #2e3440
 dmenu*.foreground: #d8dee9
 dmenu*.selbackground: #88c0d0
@@ -46,6 +46,7 @@ dmenu*.selforeground: #3b4252
 st*.font: nerdfont:size=10
 st*.font2: JoyPixels:size=10
 st*.alpha: 1
+st*.shell: /bin/zsh
 /* Colors (Nord) */
 st*.color0:     #3b4252
 st*.color8:     #4c566a

@@ -94,7 +94,8 @@
 .local/bin/*
 
 !.local/bin/dm*
+!.local/bin/klayout
 !.local/bin/pacupdatecheck
-!.local/bin/screenshot
 !.local/bin/rofi*
+!.local/bin/screenshot
 !.local/bin/statusline/

@@ -4,7 +4,6 @@ colorscheme Custom
 
 set syscalls
 set trash
-set shell=/bin/zsh
 
 set history=100
 set nofollowlinks
@@ -60,6 +59,7 @@ command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart full
 
+nnoremap e :!
 nnoremap s :shell<CR>
 nnoremap S :sort<CR>
 

@@ -14,4 +14,4 @@ qtile_root     = os.path.join(home, '.config/qtile')
 qtile_scripts  = os.path.join(qtile_root, 'scripts')
 
 # Select option for style
-option         = 2
+option         = 3

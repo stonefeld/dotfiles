@@ -25,8 +25,6 @@ def my_keys():
         # Switch keyboard focus from monitors
         Key([mod],            'q',      lazy.to_screen(1)),
         Key([mod],            'w',      lazy.to_screen(0)),
-        Key([mod],            'period', lazy.next_screen()),
-        Key([mod],            'comma',  lazy.prev_screen()),
 
         # Switch window focus to other pane(s) of stack
         Key([mod],            'space',  lazy.layout.next()),
@@ -73,10 +71,6 @@ def my_keys():
         # Launch Utilities
         Key([mod],            'r',      lazy.spawncmd()),
         Key([mod],            'c',      lazy.spawn('galculator')),
-
-        # Playerctl commands
-        Key([mod, 'shift'],   'period', lazy.spawn('playerctl next')),
-        Key([mod, 'shift'],   'comma',  lazy.spawn('playerctl previous')),
 
         # DropDown
         Key([mod],            'd',      lazy.group['scratchpad'].dropdown_toggle('term')),

@@ -1,12 +1,8 @@
 # System variables control
-# "current=$(pacmd dump-volumes | sed '1!d;s/ \+/ /g;s/\%//' | cut -d ' ' -f 8) && [ $current -lt 200 ] && pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
-# "amixer sset Master 2+ && status-init"
 "pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
     XF86AudioRaiseVolume
-# "amixer sset Master 2- && status-init"
 "pactl set-sink-volume @DEFAULT_SINK@ -10% && status-init"
     XF86AudioLowerVolume
-# "amixer sset Master toggle && status-init"
 "pactl set-sink-mute @DEFAULT_SINK@ toggle && status-init"
     XF86AudioMute
 "xbacklight -inc 10 && status-init"

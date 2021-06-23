@@ -94,6 +94,10 @@ widget_defaults = dict(
 if option == 2:
     widget_defaults['font'] = 'FantasqueSansMono Nerd Font Bold'
 
+if option == 3:
+    widget_defaults['font'] = 'FantasqueSansMono Nerd Font Bold'
+    widget_defaults['background'] = colors_standard[5]
+
 extension_defaults = widget_defaults.copy()
 
 # Initialize Qtile
@@ -145,7 +149,6 @@ floating_layout = layout.Floating(**floating_layout_theme, float_rules=[
 
     # Own rules
     Match(title='Connect to MySQL Server'),
-    Match(title='Discord Updater'),
     Match(title='Select a Template'),
     Match(title='RuneLite Launcher'),
     Match(wm_class='gpicview'),

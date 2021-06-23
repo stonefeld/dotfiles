@@ -447,3 +447,114 @@ def my_widgets2():
         ),
         my_sep(b=colors_standard[1], p=5),
     ]
+
+def my_widgets3():
+    return [
+        widget.GroupBox(
+            active                      = colors_custom[7],
+            background                  = colors_standard[5],
+            borderwidth                 = 4,
+            font                        = 'Sans Mono Bold',
+            fontsize                    = 12,
+            highlight_color             = colors_standard[6],
+            highlight_method            = 'line',
+            inactive                    = colors_custom[6],
+            margin_x                    = 0,
+            margin_y                    = 4,
+            other_current_screen_border = colors_standard[1],
+            other_screen_border         = colors_standard[1],
+            padding_x                   = 3,
+            padding_y                   = 5,
+            rounded                     = False,
+            this_current_screen_border  = colors_custom[6],
+            this_screen_border          = colors_standard[6],
+            use_mouse_wheel             = False
+        ),
+        my_sep(b=colors_custom[0]),
+        widget.Prompt(
+            background                  = colors_custom[0],
+            font                        = 'SourceCodePro',
+            fontsize                    = 16,
+            foreground                  = colors_custom[7],
+            prompt                      = ': '
+        ),
+        widget.Spacer(bar.STRETCH, background=colors_custom[0]),
+        widget.Systray(
+            background                  = colors_custom[0],
+            icon_size                   = 20,
+            padding                     = 2
+        ),
+        my_sep(b=colors_custom[0], p=5),
+        my_sep(b=colors_standard[5], p=10),
+        widget.TextBox(
+            foreground                  = colors_custom[4],
+            mouse_callbacks = {
+                'Button1': nm_applet,
+                'Button3': close_nm_applet,
+            },
+            padding                     = 0,
+            text                        = 'Wifi: '
+        ),
+        widget.Wlan(
+            foreground                  = colors_custom[7],
+            format                      = '{essid}',
+            interface                   = 'wlp1s0',
+            mouse_callbacks = {
+                'Button1': nm_applet,
+                'Button3': close_nm_applet,
+            },
+            padding                     = 0
+        ),
+        widget.TextBox(
+            fontsize                    = 16,
+            foreground                  = colors_custom[4],
+            padding                     = 0,
+            text                        = '  Brightness: '
+        ),
+        widget.Backlight(
+            backlight_name              = 'intel_backlight',
+            foreground                  = colors_custom[7],
+            format                      = '{percent:2.0%}',
+            padding                     = 0
+        ),
+        widget.TextBox(
+            fontsize                    = 16,
+            foreground                  = colors_custom[4],
+            padding                     = 0,
+            text                        = '  Volume: '
+        ),
+        widget.Volume(
+            foreground                  = colors_custom[7],
+            volume_app                  = 'alsamixer',
+            update_interval             = 0.1
+        ),
+        widget.TextBox(
+            fontsize                    = 16,
+            foreground                  = colors_custom[4],
+            padding                     = 0,
+            text                        = '  Battery: '
+        ),
+        widget.Battery(
+            foreground                  = colors_custom[7],
+            format                      = '{percent:2.0%}',
+            fontsize                    = 16,
+            low_percentage              = 0.21,
+            padding                     = 0,
+            show_short_text             = False,
+            update_interval             = 1,
+        ),
+        my_sep(b=colors_standard[5], p=10),
+        my_sep(b=colors_custom[6], p=10),
+        widget.Clock(
+            background                  = colors_custom[6],
+            foreground                  = colors_custom[0],
+            format                      = '%a, %b %d (%Y) %H:%M ',
+            padding                     = 0
+        ),
+        widget.CurrentLayoutIcon(
+            # custom_icon_paths           = [ os.path.join(qtile_root, 'icons_cyan_outline/') ],
+            foreground                  = '#000000',
+            padding                     = 0,
+            scale                       = 0.5
+        ),
+    ]
