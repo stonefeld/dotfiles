@@ -53,6 +53,10 @@ command! df df -h %m 2> /dev/null
 command! du du -h . %m 2> /dev/null
 command! top htop 2> /dev/null
 command! zip zip -r %f.zip %f
+command! comp tar -czf %f.tar.gz %f
+command! arch tar -cf %f.tar %f
+command! decomp tar -xzf %f
+command! unarch tar -xf %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
@@ -137,7 +141,7 @@ filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
     \*.as[fx]},
     \<video/*>
     \ {View using mpv}
-    \ mpv %f,
+    \ mpv %f 2>/dev/null &,
     \ {View using ffplay}
     \ ffplay -fs -autoexit %f,
     \ {View using Dragon}
@@ -268,7 +272,7 @@ filextype {*.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx,*.ppt},
     \<application/vnd.openxmlformats-officedocument.*,
     \application/msword,
     \application/vnd.ms-excel>
-    \ libreoffice %f &
+    \ libreoffice %f 2>/dev/null &
 fileviewer {*.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx,*.ppt},
     \<application/msword>
     \ file %c

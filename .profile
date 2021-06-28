@@ -8,11 +8,16 @@
 # Export important global variables.
 export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/:~/.local/share/cargo/bin/
 export SHELL=/bin/zsh
-export EDITOR='nvim'
-export TERMINAL='st'
-export TERM='xterm-256color'
-export BROWSER='brave'
+export EDITOR="nvim"
+export TERMINAL="st"
+export TERM="xterm-256color"
+export BROWSER="brave"
 export LC_COLLATE="C"
+
+# XDG directories.
+export XDG_CACHE_HOME="$HOME"/.cache/
+export XDG_CONFIG_HOME="$HOME"/.config/
+export XDG_DATA_HOME="$HOME"/.local/share/
 
 # Some default option.
 export LESSHISTFILE=-
@@ -31,8 +36,8 @@ export HISTFILE="$XDG_DATA_HOME"/history
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
-export TEXMFHOME=$XDG_DATA_HOME/texmf
-export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
+export TEXMFHOME="$XDG_DATA_HOME"/texmf
+export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc

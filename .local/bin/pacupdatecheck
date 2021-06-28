@@ -8,7 +8,7 @@ appName="pacman"
 dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "Checking for any package to upgrade"
 canberra-gtk-play -i dialog-warning
 
-cache_file=~/.local/share/updates
+cache_file="${XDG_DATA_HOME:-$HOME/.local/share/}updates"
 
 [ ! -f "$cache_file" ] && (touch $cache_file && echo 0 > $cache_file)
 

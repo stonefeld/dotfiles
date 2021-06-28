@@ -25,11 +25,11 @@
     Shift+Mod4 + s
 
 # Launch applications
-"dmenu_run -c -l 20 -bw 2 -i"
+"dmenu_run -i"
     Mod4 + p
 "$BROWSER"
     Shift+Mod4 + i
-"passmenu -c -l 20 -bw 2 -i"
+"passmenu -c -l 20 -bw 4 -i"
     Shift+Mod4 + k
 "st -c Floating -e pulsemixer"
     Shift+Mod4 + p
@@ -49,7 +49,7 @@
     Shift+Mod4 + l
 "dmrecord"
     Shift+Mod4 + r
-"klayout ; status-init"
+"xkb-switch -n ; status-init"
     Mod4 + a
-"klayout inverted ; status-init"
-    Shift+Mod4 + a
+"setxkbmap us,us,es,de -variant ,dvorak"
+    Mod4 + grave

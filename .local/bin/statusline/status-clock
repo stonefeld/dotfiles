@@ -38,4 +38,4 @@ else
     esac
 fi
 
-[ ! "$COLORED_EMOJIS" = true ] && date "+ %a, %b %d (%Y) $icon %H:%M" || date "+📅 %a, %b %d (%Y) $icon %H:%M"
+[ "$COLORED_EMOJIS" = true ] && date "+📅 %a, %b %d (%Y) $icon %H:%M" || date "+ %a, %b %d (%Y) $icon %H:%M"

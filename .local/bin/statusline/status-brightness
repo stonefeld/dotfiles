@@ -2,9 +2,7 @@
 
 COLORED_EMOJIS=$1
 
-br=$(cat /sys/class/backlight/*/actual_brightness | sed "1!d")
-max=$(cat /sys/class/backlight/*/max_brightness | sed "1!d")
-per=$(( $br * 100 / $max ))
+per=$(( $(sed '1!d' /sys/class/backlight/*/actual_brightness) * 100 / $(sed '1!d' /sys/class/backlight/*/max_brightness) ))
 
 if [ "$COLORED_EMOJIS" = true ]; then
     icon="💡 "

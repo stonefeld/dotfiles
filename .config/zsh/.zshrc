@@ -90,13 +90,6 @@ alias fgrep='fgrep --color=auto'
 alias sys='systemctl'
 alias jou='journalctl'
 
-# Relevant folders shortcuts.
-alias pro="cd ~/docs/projects/"
-alias cod="cd ~/docs/code/"
-alias rep="cd ~/docs/reports/"
-alias pre="cd ~/docs/presentations/"
-alias bin="cd ~/.local/bin/"
-
 # Monkiflip.
 alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
 

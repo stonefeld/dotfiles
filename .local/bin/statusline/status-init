@@ -4,11 +4,10 @@ COLORED_EMOJIS=false
 
 recording=""
 if [ -f /tmp/recordingpid ]; then
-    [ ! "$COLORED_EMOJIS" = true ] && recording="[  ] " || recording="⏺️ 🎤 | "
+    [ "$COLORED_EMOJIS" = true ] && recording="⏺️ 🎤 | " || recording="[    ] "
 fi
-variant=$(setxkbmap -query | grep variant | sed 's/\s\+/ /g' | cut -d ' ' -f 2)
-[ -z "$variant" ] && klayout=$(setxkbmap -query | grep layout | sed 's/\s\+/ /g' | cut -d ' ' -f 2) || klayout="dvorak"
-pacupgrade=$(cat ~/.local/share/updates)
+klayout=$(xkb-switch -p)
+pacupgrade=$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)
 
 wifi=$(iwgetid -r)
 [ -z "$wifi" ] && wifi="Disconnected"
@@ -18,8 +17,8 @@ volume=$(status-volume $COLORED_EMOJIS)
 battery=$(status-battery $COLORED_EMOJIS)
 date=$(status-clock $COLORED_EMOJIS)
 
-[ ! "$COLORED_EMOJIS" = true ] &&
-    statusline="$recording[  $klayout] [ $pacupgrade] [ $wifi] [$brightness] [$volume] [$battery] [$date]" ||
-    statusline="$recording⌨️ $klayout 📦 $pacupgrade | 📶 $wifi | $brightness | $volume | $battery | $date"
+[ "$COLORED_EMOJIS" = true ] &&
+    statusline="$recording⌨️ $klayout 📦 $pacupgrade | 📶 $wifi | $brightness | $volume | $battery | $date" ||
+    statusline="$recording[  $klayout] [ $pacupgrade] [ $wifi] [$brightness] [$volume] [$battery] [$date]"
 
 xsetroot -name "$statusline"

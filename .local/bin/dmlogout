@@ -1,7 +1,7 @@
 #!/bin/sh
 
-option=$(printf "Lock\\nLog out\\nSuspend\\nShutdown\\nReboot" | dmenu -c -l 5 -bw 2 -i)
-[ -z "$option" ] || confirmation=$(printf "Yes\\nNo" | dmenu -c -l 5 -bw 2 -i -p "Sure?")
+option=$(printf "Lock\\nLog out\\nSuspend\\nShutdown\\nReboot" | dmenu -c -l 5 -bw 4 -i)
+[ -z "$option" ] || confirmation=$(printf "Yes\\nNo" | dmenu -c -l 5 -bw 4 -i -p "Sure?")
 
 if [ "$confirmation" = "Yes" ]; then
     case $option in

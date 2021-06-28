@@ -22,25 +22,19 @@ XTerm*.background: #000000
 XTerm*.foreground: #ffffff
 
 /* Dwm setup */
+dwm.normbgcolor:     #2e3440
+dwm.normfgcolor:     #d8dee9
 dwm.normbordercolor: #3b4252
-dwm.normbgcolor: #2e3440
-dwm.normfgcolor: #d8dee9
-dwm.selbordercolor: #88c0d0
-dwm.selbgcolor: #88c0d0
-dwm.selfgcolor: #3b4252
-/* dwm.normbordercolor: #444444 */
-/* dwm.normbgcolor: #222222 */
-/* dwm.normfgcolor: #bbbbbb */
-/* dwm.selbordercolor: #005577 */
-/* dwm.selbgcolor: #005577 */
-/* dwm.selfgcolor: #eeeeee */
+dwm.selbgcolor:      #4c566a
+dwm.selfgcolor:      #88c0d0
+dwm.selbordercolor:  #88c0d0
 
 /* Dmenu setup */
-dmenu*.font: monospace:size=11
-dmenu*.background: #2e3440
-dmenu*.foreground: #d8dee9
-dmenu*.selbackground: #88c0d0
-dmenu*.selforeground: #3b4252
+dmenu*.font: FiraCode:size=9
+dmenu*.background:    #2e3440
+dmenu*.foreground:    #d8dee9
+dmenu*.selbackground: #4c566a
+dmenu*.selforeground: #88c0d0
 
 /* St setup */
 st*.font: nerdfont:size=10
@@ -85,3 +79,8 @@ st*.background: #2e3440
 /* st*.color15:    #ebdbb2 */
 /* st*.foreground: #ebdbb2 */
 /* st*.background: #282828 */
+
+/* Sxiv setup */
+Sxiv*.background: #2e3440
+Sxiv*.foreground: #d8dee9
+Sxiv*.font: monospace:size=8
