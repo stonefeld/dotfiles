@@ -2,8 +2,7 @@
 This are my personal dotfiles. If you want to clone the whole repository you have to run `git clone --recursive` since every suckless utility is a submodule. If you have already cloned it or just forgot the `--recurse` flag, to pull the submodules, you can run `git submodule update --init`.
 
 # Table of Contents
-* [First some example pictures](#first-some-example-pictures)
-* [What are Dotfiles?](#what-are-dotfiles)
+* [Example pictures](#Example-pictures)
 * [Dependencies](#dependencies)
 * [Essential config files](#essential-config-files)
 * [Personal scripts](#personal-scripts)
@@ -13,11 +12,8 @@ This are my personal dotfiles. If you want to clone the whole repository you hav
   * [Firefox](#firefox)
   * [Suckless software](#suckless-software)
 
-# First some example pictures
+# Example pictures
 *Pictures coming soon!!! For now check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch.*
- 
-# What are Dotfiles?
-*Info coming soon!!!*
 
 # Dependencies
 Most of the following packages should be in your distro's repository. In case of arch-users there are some packages that must be installed from the AUR. I recommend install some kind of [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) and works really well.
