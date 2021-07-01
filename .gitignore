@@ -49,6 +49,7 @@
 !.config/picom/
 .config/picom/*
 !.config/picom/picom.conf
+!.config/picom/picom_dwm.conf
 
 !.config/rofi/
 .config/rofi/*

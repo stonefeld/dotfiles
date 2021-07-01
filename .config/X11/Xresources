@@ -8,7 +8,8 @@
 Xcursor.theme: Adwaita
 Xcursor.size: 32
 
-Xft.dpi: 118
+/* Xft.dpi: 118 */
+Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
@@ -17,7 +18,7 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
 /* XTerm setup */
-XTerm*.faceName: monospace:size=10
+XTerm*.faceName: monospace:size=12
 XTerm*.background: #000000
 XTerm*.foreground: #ffffff
 
@@ -30,15 +31,15 @@ dwm.selfgcolor:      #88c0d0
 dwm.selbordercolor:  #88c0d0
 
 /* Dmenu setup */
-dmenu*.font: FiraCode:size=9
+dmenu*.font: FiraCode:size=11
 dmenu*.background:    #2e3440
 dmenu*.foreground:    #d8dee9
 dmenu*.selbackground: #4c566a
 dmenu*.selforeground: #88c0d0
 
 /* St setup */
-st*.font: nerdfont:size=10
-st*.font2: JoyPixels:size=10
+st*.font: nerdfont:size=12
+st*.font2: JoyPixels:size=11
 st*.alpha: 1
 st*.shell: /bin/zsh
 /* Colors (Nord) */
