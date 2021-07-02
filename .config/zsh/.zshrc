@@ -93,6 +93,9 @@ alias jou='journalctl'
 # Monkiflip.
 alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
 
+# Manage dotfiles.
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
+
 # ---------- KEYBINDINGS ---------- #
 bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history

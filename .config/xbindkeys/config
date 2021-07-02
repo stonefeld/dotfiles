@@ -9,8 +9,6 @@
     XF86MonBrightnessUp
 "xbacklight -dec 10 && status-init"
     XF86MonBrightnessDown
-"playerctl --player=spotify play-pause"
-    Pause
 
 # Utilities
 "touchpad"
@@ -49,6 +47,8 @@
     Shift+Mod4 + l
 "dmrecord"
     Shift+Mod4 + r
+"dmnotes"
+    Shift+Mod4 + o
 "xkb-switch -n ; status-init"
     Mod4 + a
 "setxkbmap us,us,es,de -variant ,dvorak"

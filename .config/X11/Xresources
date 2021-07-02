@@ -38,7 +38,7 @@ dmenu*.selbackground: #4c566a
 dmenu*.selforeground: #88c0d0
 
 /* St setup */
-st*.font: nerdfont:size=12
+st*.font: SauceCodePro Nerd Font:size=12
 st*.font2: JoyPixels:size=11
 st*.alpha: 1
 st*.shell: /bin/zsh

@@ -1,0 +1,51 @@
+#!/bin/sh
+
+type=$(printf "LaTeX\\nMarkdown" | dmenu -i -p "Select filetype")
+if [ ! -z "$type" ]; then
+    option=$(printf "New empty note\\nChoose existing note\\nDelete note" | dmenu -i -p "Choose an option")
+    case $option in
+        "New empty note")
+            name=$(dmenu -i -p "Enter the name")
+            [ -z $name ] && exit
+            case $type in
+                "LaTeX")
+                    mkdir "${NOTES_FOLDER:-$HOME/docs/notes}/$name"
+                    touch "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
+                    st -e $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
+                    exit;;
+                "Markdown")
+                    touch "${NOTES_FOLDER:-$HOME/docs/notes}/$name.md"
+                    st -e $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$name.md"
+                    exit;;
+            esac
+            exit;;
+        "Choose existing note")
+            case $type in
+                "LaTeX")
+                    selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.tex" -printf "%f\n" | sed "s/.tex//g" | dmenu -i -p "Select a file")
+                    [ -z $selected ] && exit
+                    st -e $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$selected/$selected.tex"
+                    exit;;
+                "Markdown")
+                    selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.md" -printf "%f\n" | sed "s/.md//g" | dmenu -i -p "Select a file")
+                    [ -z $selected ] && exit
+                    st -e $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$selected.md"
+                    exit;;
+            esac
+            exit;;
+        "Delete note")
+            case $type in
+                "LaTeX")
+                    selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.tex" -printf "%f\n" | sed "s/.tex//g" | dmenu -i -p "Select a file")
+                    [ -z $selected ] && exit
+                    rm -rf "${NOTES_FOLDER:-$HOME/docs/notes}/$selected/"
+                    exit;;
+                "Markdown")
+                    selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.md" -printf "%f\n" | sed "s/.md//g" | dmenu -i -p "Select a file")
+                    [ -z $selected ] && exit
+                    rm -f $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$selected.md"
+                    exit;;
+            esac
+            exit;;
+    esac
+fi

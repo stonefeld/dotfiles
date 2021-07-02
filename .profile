@@ -12,6 +12,7 @@ export EDITOR="nvim"
 export TERMINAL="st"
 export TERM="xterm-256color"
 export BROWSER="brave"
+export NOTES_FOLDER="$HOME/docs/notes"
 export LC_COLLATE="C"
 
 # XDG directories.
@@ -46,11 +47,12 @@ export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 
 # Setting less colors.
 export LESS=-R
