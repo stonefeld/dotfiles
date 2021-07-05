@@ -44,7 +44,11 @@ alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > $XD
 alias md='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 
 # Some ls command replacements.
-alias ls="ls -h --color=always --group-directories-first"
+if [ $(exa -v 2>/dev/null | echo $?) -eq 0 ]; then
+    alias ls="exa --color=always --group-directories-first"
+else
+    alias ls="ls -h --color=always --group-directories-first"
+fi
 alias lf="vifm ."
 
 # Avoid overriding.
