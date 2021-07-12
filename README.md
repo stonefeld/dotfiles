@@ -2,7 +2,7 @@
 This are my personal dotfiles. If you want to clone the whole repository you have to run `git clone --recursive` since every suckless utility is a submodule. If you have already cloned it or just forgot the `--recurse` flag, to pull the submodules, you can run `git submodule update --init`.
 
 # Table of Contents
-* [Example pictures](#Example-pictures)
+* [Example pictures](#example-pictures)
 * [Dependencies](#dependencies)
 * [Essential config files](#essential-config-files)
 * [Personal scripts](#personal-scripts)
@@ -13,7 +13,28 @@ This are my personal dotfiles. If you want to clone the whole repository you hav
   * [Suckless software](#suckless-software)
 
 # Example pictures
-*Pictures coming soon!!! For now check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch.*
+
+### Qtile - Option 1
+
+![qtile option 1](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-3.png)
+
+### Qtile - Option 2
+
+![qtile option 2](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-4.png)
+
+### Qtile - Option 3
+
+![qtile option 3](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-5.png)
+
+### Dwm - No color emojis statusline
+
+![dwm no color statusline](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-1.png)
+
+### Dwm - Colored emojis statusline
+
+![dwm colored statusline](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-2.png)
+
+*This are the most recent pictures from my current setup. For older pictures check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch.*
 
 # Dependencies
 Most of the following packages should be in your distro's repository. In case of arch-users there are some packages that must be installed from the AUR. I recommend install some kind of [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) and works really well.
@@ -27,6 +48,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `neovim` nightly version *(\*\*)*
   * `firefox`
   * `brave`
+  * `qutebrowser`
   * `vifm`
   * `pcmanfm`
   * `rofi`
@@ -37,17 +59,22 @@ Most of the following packages should be in your distro's repository. In case of
   * `tmux`
   * `xbindkeys`
   * `newsboat`
+  * `xmenu`
 
 * Tools:
   * `make`
   * `fzf`
   * `ripgrep`
   * `fd`
+  * `latex suite`
+  * `pandoc`
+  * `scrot`
 
 * Fonts:
   * `adobe-source-code-pro-fonts`
   * `ttf-joypixels`
   * `ttf-fantasque-sans-mono`
+  * `ttf-fira-code`
   * `ttf-font-icons` *(\*\*)*
 
 * Nerd Fonts:
