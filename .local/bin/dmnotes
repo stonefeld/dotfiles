@@ -15,7 +15,11 @@ if [ ! -z "$type" ]; then
                         exit;;
                     "LaTeX")
                         mkdir "${NOTES_FOLDER:-$HOME/docs/notes}/$name"
-                        touch "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
+                        if [ -d ${TEMPLATES_FOLDER:-${XDG_DATA_DIR:-$HOME/.local/share}/templates} ]; then
+                            cp "${TEMPLATES_FOLDER:-${XDG_DATA_DIR:-$HOME/.local/share}/templates}/basic_latex_template.tex" "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
+                        else
+                            touch "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
+                        fi
                         st -e $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
                         exit;;
                 esac
@@ -59,7 +63,7 @@ if [ ! -z "$type" ]; then
     else
         selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.pdf" -printf "%f\n" | sed "s/.pdf//g" | dmenu -i -p "Select a file")
         [ -z $selected ] && exit
-        if [ -z $(find ${NOTES_FOLDER:-$HOME/docs/notes}/$selected -type d 2>/dev/null) ]; then
+        if [ -d $(find ${NOTES_FOLDER:-$HOME/docs/notes}/$selected) ]; then
             ${PDF_READER:-zathura} "${NOTES_FOLDER:-$HOME/docs/notes}/$selected.pdf"
         else
             ${PDF_READER:-zathura} "${NOTES_FOLDER:-$HOME/docs/notes}/$selected/$selected.pdf"
