@@ -38,6 +38,7 @@ This are my personal dotfiles. If you want to clone the whole repository you hav
 
 # Dependencies
 Most of the following packages should be in your distro's repository. In case of arch-users there are some packages that must be installed from the AUR. I recommend install some kind of [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) and works really well.
+
 * Essentials:
   * `qtile`
   * `dwm` *(\*)*
@@ -45,7 +46,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `st` *(\*)*
   * `dunst`
   * `bash`/`zsh`
-  * `neovim` nightly version *(\*\*)*
+  * `neovim` version 0.5 or above
   * `firefox`
   * `brave`
   * `qutebrowser`
@@ -81,11 +82,16 @@ Most of the following packages should be in your distro's repository. In case of
   * `nerd-fonts-source-code-pro` *(\*\*) (\*\*\*)*
   * `nerd-fonts-fantasque-sans-mono` *(\*\*) (\*\*\*)*
 
+* Themes:
+  * `nordic-theme` *(\*\*)*
+  * `papirus-icon-theme`
+  * `papirus-folders-git` and configured to use the `nordic` colors *(\*\*)*
+
 *(\*) = has to be compiled from source*
 
 *(\*\*) = availabe in the AUR*
 
-*(\*\*\*) = could be installed manually from the [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts) repository and placed in* `~/.local/share/fonts` *and run* `fc-cache -fv`
+*(\*\*\*) = can be manually installed from the [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts) repository and placed in* `~/.local/share/fonts` *or* `/usr/share/fonts` *and run* `fc-cache -fv`
 
 # Essential config files
 * [Qtile](https://github.com/stonefeld/dotfiles/tree/master/.config/qtile)
