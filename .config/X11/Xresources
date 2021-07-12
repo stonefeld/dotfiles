@@ -5,8 +5,8 @@
 /* /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/ */
 
 /* Cursor setup */
-Xcursor.theme: Adwaita
-Xcursor.size: 32
+Xcursor.theme: breeze_cursors
+Xcursor.size: 16
 
 /* Xft.dpi: 118 */
 Xft.dpi: 96

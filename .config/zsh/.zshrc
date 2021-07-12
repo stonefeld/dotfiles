@@ -17,14 +17,18 @@ zstyle ':completion:*' menu select
 
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
-virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{red}(%f%F{cyan}$(cut -d '-' -f 1 <<< ${VIRTUAL_ENV##*/})%f%F{red})%f%b" 2>/dev/null }
+virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{yellow}($(cut -d '-' -f 1 <<< ${VIRTUAL_ENV##*/}))%f%b" 2>/dev/null }
 
 # Small function to detect if the directory is a git repository and change
 # prompt's current working directory length to 1.
 gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3 }
 
 # Setting up the normal prompt.
-PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white} '
+if [ "$COLORSCHEME" = "nord" ]; then
+    PROMPT='%B%F{blue}[%f%F{cyan}%n%f%F{blue}@%f%F{cyan}%m%f %F{yellow}%$(gitdir)~%f%F{blue}]%f%b%F{white} '
+else
+    PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white} '
+fi
 
 # The right prompt displays the virtual environment's name.
 RPROMPT='$(virtualenv_info)'
@@ -38,16 +42,16 @@ alias ss="systemctl suspend"
 # Pacman shortcuts.
 alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > $XDG_DATA_HOME/updates && status-init"
+alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > ${XDG_DATA_HOME:-$HOME/.local/share}/updates && status-init"
 
 # Quickly move to another directory.
 alias md='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 
 # Some ls command replacements.
-if [ $(exa -v 2>/dev/null | echo $?) -eq 0 ]; then
-    alias ls="exa --color=always --group-directories-first"
-else
+if ! command -v exa &>/dev/null; then
     alias ls="ls -h --color=always --group-directories-first"
+else
+    alias ls="exa -g --color=always --group-directories-first"
 fi
 alias lf="vifm ."
 

@@ -11,8 +11,9 @@ export SHELL=/bin/zsh
 export EDITOR="nvim"
 export TERMINAL="st"
 export TERM="xterm-256color"
-export BROWSER="brave"
+export BROWSER="qutebrowser"
 export NOTES_FOLDER="$HOME/docs/notes"
+export PDF_READER="zathura"
 export LC_COLLATE="C"
 
 # XDG directories.
@@ -39,9 +40,9 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 export TEXMFHOME="$XDG_DATA_HOME"/texmf
 export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
-export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
+export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
-export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
+export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
@@ -53,6 +54,7 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+export PLATFORMIO_HOME_DIR="$XDG_DATA_HOME"/platformio
 
 # Setting less colors.
 export LESS=-R
