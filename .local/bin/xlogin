@@ -1,0 +1,27 @@
+#!/bin/sh
+
+echo "\nWelcome back $USER\nAvailable options:\n\t[1] dwm\n\t[2] qtile\n\t[3] gnome\n\t[4] kde-plasma\n"
+read -p "Enter your choice: " choice
+
+case $choice in
+    1)
+        echo "\nYou have selected dwm."
+        startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc dwm
+        exit;;
+    2)
+        echo "\nYou have selected qtile."
+        startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc qtile
+        exit;;
+    3)
+        echo "\nYou have selected gnome."
+        XDG_SESSION_TYPE=wayland dbus-run-session gnome-session
+        exit;;
+    4)
+        echo "\nYou have selected kde-plasma."
+        DESKTOP_SESSION=plasma; startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc plasma
+        exit;;
+    *)
+        echo "\nThis option is not available"
+        sleep 4
+        exit;;
+esac

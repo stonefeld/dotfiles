@@ -11,8 +11,9 @@ export SHELL=/bin/zsh
 export EDITOR="nvim"
 export TERMINAL="st"
 export TERM="xterm-256color"
-export BROWSER="qutebrowser"
+export BROWSER="brave"
 export NOTES_FOLDER="$HOME/docs/notes"
+export TEMPLATES_FOLDER="$XDG_DATA_HOME"/templates
 export PDF_READER="zathura"
 export LC_COLLATE="C"
 

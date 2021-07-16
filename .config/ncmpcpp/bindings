@@ -46,7 +46,7 @@ def_key "G"
     move_end
 def_key "U"
     update_database
-def_key "f"
+def_key "/"
     show_search_engine
 def_key "m"
     show_media_library

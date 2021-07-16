@@ -5,7 +5,7 @@
 /* /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/ */
 
 /* Cursor setup */
-Xcursor.theme: breeze_cursors
+Xcursor.theme: Breeze
 Xcursor.size: 16
 
 /* Xft.dpi: 118 */

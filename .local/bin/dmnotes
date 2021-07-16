@@ -15,8 +15,8 @@ if [ ! -z "$type" ]; then
                         exit;;
                     "LaTeX")
                         mkdir "${NOTES_FOLDER:-$HOME/docs/notes}/$name"
-                        if [ -d ${TEMPLATES_FOLDER:-${XDG_DATA_DIR:-$HOME/.local/share}/templates} ]; then
-                            cp "${TEMPLATES_FOLDER:-${XDG_DATA_DIR:-$HOME/.local/share}/templates}/basic_latex_template.tex" "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
+                        if [ -d ${TEMPLATES_FOLDER:-${XDG_DATA_HOME:-$HOME/.local/share}/templates} ]; then
+                            cp "${TEMPLATES_FOLDER:-${XDG_DATA_HOME:-$HOME/.local/share}/templates}/basic_latex_template.tex" "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
                         else
                             touch "${NOTES_FOLDER:-$HOME/docs/notes}/$name/$name.tex"
                         fi

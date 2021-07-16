@@ -72,6 +72,8 @@
 .config/xbindkeys/*
 !.config/xbindkeys/config
 
+!.config/zathura/
+
 !.config/zsh
 .config/zsh/*
 !.config/zsh/.zshrc
@@ -100,3 +102,4 @@
 !.local/bin/rofi*
 !.local/bin/screenshot
 !.local/bin/statusline/
+!.local/bin/xlogin

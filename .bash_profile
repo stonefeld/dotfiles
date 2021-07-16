@@ -7,3 +7,8 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 [[ -f ~/.profile ]] && . ~/.profile
+
+if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+    xlogin
+    exit
+fi

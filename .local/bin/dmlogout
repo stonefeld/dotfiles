@@ -6,7 +6,7 @@ option=$(printf "Lock\\nLog out\\nSuspend\\nShutdown\\nReboot" | dmenu -c -l 5 -
 if [ "$confirmation" = "Yes" ]; then
     case $option in
         "Lock")     slock;;
-        "Log out")  kill -9 -1;;
+        "Log out")  pkill -15 -t tty"$XDG_VTNR" Xorg;;
         "Suspend")  systemctl suspend;;
         "Shutdown") shutdown now;;
         "Reboot")   reboot;;

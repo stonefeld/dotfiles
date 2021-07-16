@@ -1,0 +1,6 @@
+set selection-clipboard clipboard
+set recolor-lightcolor \#3b4252
+set recolor-darkcolor \#d8dee9
+set recolor-keephue
+set default-bg \#2e3440
+set font "monospace normal 10"
