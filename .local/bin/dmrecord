@@ -53,9 +53,9 @@ killrecording () {
 
 askrecording () {
     if [ $(xrandr --listactivemonitors | sed '1d' | wc -l) -eq 2 ]; then
-        choice=$(printf "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 4 -bw 2)
+        choice=$(printf "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 4 -bw 4)
     else
-        choice=$(printf "Screencast\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 3 -bw 2)
+        choice=$(printf "Screencast\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 3 -bw 4)
     fi
 
 	case "$choice" in
@@ -68,7 +68,7 @@ askrecording () {
 }
 
 asktoend () {
-	choice=$(printf "Stop Recording\\nLaunch Webcam" | dmenu -i -c -l 2 -bw 2)
+	choice=$(printf "Stop Recording\\nLaunch Webcam" | dmenu -i -c -l 2 -bw 4)
     case "$choice" in
         Stop\ Recording) response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?");;
         Launch\ Webcam)  qvidcap -W 640 -H 480 --video-aspect=4x3 --fps=25;;

@@ -156,13 +156,11 @@ fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 
 " Web
 filextype {*.html,*.htm},<text/html>
-    \ {Open with dwb}
-    \ dwb %f %i &,
+    \ {Open with brave}
+    \ brave %f &,
     \ {Open with firefox}
     \ firefox %f &,
-    \ {Open with uzbl}
-    \ uzbl-browser %f %i &,
-filetype {*.html,*.htm},<text/html> links, lynx
+filetype {*.html,*.htm},<text/html> links
 
 " Object
 filetype {*.o},<application/x-object> nm %f | less

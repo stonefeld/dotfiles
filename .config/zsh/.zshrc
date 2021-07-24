@@ -12,8 +12,8 @@ setopt prompt_subst
 
 # Load advanced completion system.
 autoload -U compinit
-compinit
-zstyle ':completion:*' menu select
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+zstyle ':completion:*' menu select cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
@@ -67,7 +67,6 @@ alias sudo='sudo '
 alias e="$EDITOR"
 alias e.="$EDITOR ."
 alias ef="fzf --preview 'cat {}'| xargs -ro $EDITOR"
-alias vim="echo -ne '\e[1 q'; vim -i 'NONE'"
 
 # Python and pip shortcuts
 alias py='python3'
@@ -105,12 +104,28 @@ alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
 # ---------- KEYBINDINGS ---------- #
-bindkey '^P' up-line-or-history
-bindkey '^N' down-line-or-history
+bindkey '^P' up-line-or-history      # Ctrl+p
+bindkey '^N' down-line-or-history    # Ctrl+n
+bindkey '^[[A' up-line-or-history    # Up arrow
+bindkey '^[[B' down-line-or-history  # Down arrow
+bindkey '^[[D' backward-char         # Left arrow
+bindkey '^[[C' forward-char          # Right arrow
+bindkey '^[[1;5D' backward-word      # Ctrl+Left arrow
+bindkey '^[[1;5C' forward-word       # Ctrl+Right arrow
+bindkey '^[[H' beginning-of-line     # Home
+bindkey '^[[4~' end-of-line          # End
+bindkey '^[[4h' overwrite-mode       # Insert
+bindkey '^[[P' delete-char           # Delete
+bindkey '^[[Z' reverse-menu-complete # Shift+Tab
 
-# ---------- FUNCTIONS ---------- #
-# Some small functions to change the cursor style when changing from INSERT
-# to NORMAL mode with vi keybdindings
+# ---------- VI MODE ---------- #
+# Activate vi mode.
+bindkey -v
+
+# Remove mode switching delay.
+KEYTIMEOUT=5
+
+# Change cursor shape for different vi modes.
 function zle-keymap-select () {
     case $KEYMAP in
         vicmd)      echo -ne '\e[1 q';;
@@ -118,13 +133,25 @@ function zle-keymap-select () {
     esac
 }
 zle -N zle-keymap-select
-zle-line-init() {
-    zle -K viins
-    echo -ne "\e[5 q"
-}
-zle -N zle-line-init
-echo -ne '\e[5 q'
-preexec() { echo -ne '\e[5 q' ;}
 
+# Use beam shape cursor on startup.
+echo -ne '\e[5 q'
+
+# Use beam shape for each new prompt.
+fix_cursor() {
+    echo -ne '\e[5 q'
+}
+precmd_functions+=(fix_cursor)
+
+# ---------- TITLE ---------- #
+# Print the username, the hostname and the path.
+function set_title () {
+    print -Pn -- '\e]2;%n@%m %~\a'
+}
+
+# Rewrite the title for each new prompt.
+precmd_functions+=(set_title)
+
+# ---------- EXTRAS ---------- #
 # Get syntax highlighting while writiing.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh

@@ -8,17 +8,22 @@ import os
 from   variables import *
 from   colors    import *
 
+
 def nm_applet():
     qtile.cmd_spawn('nm-applet')
+
 
 def close_nm_applet():
     qtile.cmd_spawn('killall nm-applet')
 
+
 def xmenu():
     qtile.cmd_spawn('xmenurun')
 
+
 def my_sep(b=colors_standard[1], p=20):
     return widget.Sep(background=b, linewidth=0, padding=p)
+
 
 def my_widgets():
     return [
@@ -252,6 +257,7 @@ def my_widgets():
         my_sep(b=colors_custom[3], p=5),
     ]
 
+
 def my_widgets2():
     return [
         widget.TextBox(
@@ -447,6 +453,7 @@ def my_widgets2():
         ),
         my_sep(b=colors_standard[1], p=5),
     ]
+
 
 def my_widgets3():
     return [

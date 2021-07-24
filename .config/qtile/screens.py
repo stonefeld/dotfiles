@@ -7,6 +7,7 @@ from colors          import *
 from variables       import *
 from widgets         import *
 
+
 def my_main_screen():
     if option == 1:
         screen_main = my_widgets()
@@ -26,6 +27,7 @@ def my_main_screen():
 
     return screen_main
 
+
 def my_secondary_screen():
     if option == 1:
         screen_secondary = my_widgets()
@@ -37,8 +39,10 @@ def my_secondary_screen():
 
     elif option == 3:
         screen_secondary = my_widgets3()
+        screen_secondary.remove(screen_secondary[4])
 
     return screen_secondary
+
 
 def my_screen():
     if option == 1:

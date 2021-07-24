@@ -6,10 +6,12 @@ read -p "Enter your choice: " choice
 case $choice in
     1)
         echo "\nYou have selected dwm."
+        export FILEMANAGER="st -c Floating -g 120x34 -e vifm"
         startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc dwm
         exit;;
     2)
         echo "\nYou have selected qtile."
+        export FILEMANAGER="pcmanfm"
         startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc qtile
         exit;;
     3)
