@@ -3,10 +3,9 @@
 lxpolkit &
 nitrogen --restore &
 picom &
-xbindkeys -f "$XDG_CONFIG_HOME"/xbindkeys/config &
+xbindkeys -f "${XDG_CONFIG_HOME:-$HOME/.config}"/xbindkeys/config &
 dunst &
-setxkbmap us,us,es,de -variant ,dvorak
-xss-lock xsecurelock &
+xss-lock slock &
 xset r rate 220 30
 xset s off
 touchscreen

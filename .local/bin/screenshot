@@ -1,11 +1,13 @@
 #!/bin/sh
 
+filename=$(echo "screenshot_$(date '+%Y_%m_%d_%H_%M_%S').png")
+
 (if [ $# -eq 1 ]; then
     if [ "$1" = "-s" ]; then
-        scrot -s -f $HOME/imgs/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png
+        scrot -s -f "$HOME/imgs/screenshots/$filename"
     else
-        scrot -d $1 $HOME/imgs/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png
+        scrot -d $1 "$HOME/imgs/screenshots/$filename"
     fi
 else
-    scrot $HOME/imgs/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png
-fi) && canberra-gtk-play -i device-added
+    scrot "$HOME/imgs/screenshots/$filename"
+fi) && canberra-gtk-play -i device-added && xclip -se c -t image/png -i "$HOME/imgs/screenshots/$filename" && dunstify -a scrot -i editcopy "Copied to clipboard" "Screenshot $filename copied to clipboard"

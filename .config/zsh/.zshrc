@@ -12,8 +12,11 @@ setopt prompt_subst
 
 # Load advanced completion system.
 autoload -U compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
-zstyle ':completion:*' menu select cache-path $XDG_CACHE_HOME/zsh/zcompcache
+compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
+zstyle ':completion:*' menu select cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache-$ZSH_VERSION
+
+# Save most recent 1000 lines on history file.
+SAVEHIST=1000
 
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
@@ -117,6 +120,8 @@ bindkey '^[[4~' end-of-line          # End
 bindkey '^[[4h' overwrite-mode       # Insert
 bindkey '^[[P' delete-char           # Delete
 bindkey '^[[Z' reverse-menu-complete # Shift+Tab
+bindkey '^[[5~' beginning-of-history # PageUp
+bindkey '^[[6~' end-of-history       # PageDown
 
 # ---------- VI MODE ---------- #
 # Activate vi mode.
@@ -138,16 +143,12 @@ zle -N zle-keymap-select
 echo -ne '\e[5 q'
 
 # Use beam shape for each new prompt.
-fix_cursor() {
-    echo -ne '\e[5 q'
-}
+fix_cursor() { echo -ne '\e[5 q'; }
 precmd_functions+=(fix_cursor)
 
 # ---------- TITLE ---------- #
 # Print the username, the hostname and the path.
-function set_title () {
-    print -Pn -- '\e]2;%n@%m %~\a'
-}
+function set_title () { print -Pn -- '\e]2;%n@%m %~\a'; }
 
 # Rewrite the title for each new prompt.
 precmd_functions+=(set_title)
