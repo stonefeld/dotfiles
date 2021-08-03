@@ -1,7 +1,8 @@
 # Dotfiles
-This are my personal dotfiles. If you want to clone the whole repository you have to run `git clone --recursive` since every suckless utility is a submodule. If you have already cloned it or just forgot the `--recurse` flag, to pull the submodules, you can run `git submodule update --init`.
+Theo Stanfield's personal dotfiles.
 
 # Table of Contents
+* [Instalation](#instalation)
 * [Example pictures](#example-pictures)
 * [Dependencies](#dependencies)
 * [Essential config files](#essential-config-files)
@@ -11,6 +12,21 @@ This are my personal dotfiles. If you want to clone the whole repository you hav
   * [Qtile](#qtile)
   * [Firefox](#firefox)
   * [Suckless software](#suckless-software)
+
+# Instalation
+I recommend clonning the repository as a git bare repository and locate it in `~/.local/share/dotfiles`. To do so you have to run:
+
+```bash
+$ git clone --bare https://github.com/stonefeld/dotfiles $HOME/.local/share/dotfiles
+$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
+$ dotfiles checkout
+```
+
+Make sure your home directory is completely empty before running it. Otherwise you will get an error.
+
+Another way is to simply clone the repository into a temporary folder and the copy and replace all files on your home directory with the ones on the repo's folder.
+
+There are also links to other git repositories for my custom [dwm](https://github.com/stonefeld/dwm), [st](https://github.com/stonefeld/st) and [dmenu](https://github.com/stonefeld/dmenu) builds and my [neovim setup](https://github.com/stonefeld/nvim). You should clone this respos into their respectively folders. All this explained in [To get things working](#to-get-things-working) section.
 
 # Example pictures
 
@@ -61,6 +77,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `xbindkeys`
   * `newsboat`
   * `xmenu`
+  * `mplayer`
 
 * Tools:
   * `make`
@@ -115,11 +132,15 @@ Most of the following packages should be in your distro's repository. In case of
 Here I will give you some basic steps to get things working correctly. First of all you have to make sure that every package from the [dependencies list](#dependencies) is correctly installed and running accordingly.
 
 ## Neovim
-To get neovim running you need to install a Plugin Manager. My neovim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run 
+First of all, as I explained before, you have to clone the [neovim setup](https://github.com/stonefeld/nvim) repo into `~/.config/nvim`.
+
+Next you need to install a Plugin Manager. My neovim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run
+
 ```bash
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
+
 Then you need to run `:PlugInstall` within neovim after sourcing the [init.vim](https://github.com/stonefeld/nvim/tree/master/init.vim). This will install every package needed to get my neovim configuration, including my self-made vim/neovim colorscheme [nordokai](https://github.com/stonefeld/nordokai), if you want to check it out. ;)
 
 ## Qtile
@@ -135,6 +156,6 @@ Then you need to run `:PlugInstall` within neovim after sourcing the [init.vim](
 ## Suckless software
 As many of you may already know, the suckless utilities have to be compiled to run them, so I created three separated repositories for all three programs I run, which are [dwm](https://github.com/stonefeld/dwm), [st](https://github.com/stonefeld/st) and [dmenu](https://github.com/stonefeld/dmenu). I separated them from this repository since they have their own source files and licences I have to keep attention to.
 
-Now, to get my customized suckless's utilities you have to pull every repository into your machine. If you have already run `git clone --recursive` you won't have to do this, because this programs are added as submodules from the current repository and they will be located in the `~/.local/share/` folder.
+Now, to get my custom suckless's builds you have to pull every repository into your machine. Usually, repos are located in `~/.local/share` folder. My recommendation, use which folder location comes handy to you.
 
 Now you simply have to go into the corresponding directory and simply run `sudo make install` on each one of them to install them into your system.

@@ -56,6 +56,8 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PLATFORMIO_HOME_DIR="$XDG_DATA_HOME"/platformio
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/config
+export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 
 # Setting less colors.
 export LESS=-R
