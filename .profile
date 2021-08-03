@@ -39,15 +39,16 @@ export HISTFILE="$XDG_CACHE_HOME"/history
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/config
+export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 export TEXMFHOME="$XDG_DATA_HOME"/texmf
 export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
-export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
-export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
@@ -56,8 +57,6 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PLATFORMIO_HOME_DIR="$XDG_DATA_HOME"/platformio
-export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch/config
-export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
 
 # Setting less colors.
 export LESS=-R

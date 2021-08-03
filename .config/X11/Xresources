@@ -22,19 +22,33 @@ XTerm*.background: #000000
 XTerm*.foreground: #ffffff
 
 /* Dwm setup */
+/* Colors (Nord) */
 dwm.normbgcolor:     #2e3440
 dwm.normfgcolor:     #d8dee9
 dwm.normbordercolor: #3b4252
 dwm.selbgcolor:      #4c566a
 dwm.selfgcolor:      #88c0d0
 dwm.selbordercolor:  #88c0d0
+/* Colors (Gruvbox) */
+/* dwm.normbgcolor:     #282828 */
+/* dwm.normfgcolor:     #ebdbb2 */
+/* dwm.normbordercolor: #2e3440 */
+/* dwm.selfgcolor:      #2e3440 */
+/* dwm.selbgcolor:      #689d6a */
+/* dwm.selbordercolor:  #689d6a */
 
 /* Dmenu setup */
 dmenu*.font: FiraCode:size=11
+/* Colors (Nord) */
 dmenu*.background:    #2e3440
 dmenu*.foreground:    #d8dee9
 dmenu*.selbackground: #4c566a
 dmenu*.selforeground: #88c0d0
+/* Colors (Gruvbox) */
+/* dmenu*.background:    #282828 */
+/* dmenu*.foreground:    #ebdbb2 */
+/* dmenu*.selbackground: #689d6a */
+/* dmenu*.selforeground: #2e3440 */
 
 /* St setup */
 st*.font: SauceCodePro Nerd Font:size=12
@@ -61,7 +75,7 @@ st*.color15:    #eceff4
 st*.foreground: #d8dee9
 st*.background: #2e3440
 /* Colors (Gruvbox) */
-/* st*.color0:     #282828 */
+/* st*.color0:     #383838 */
 /* st*.color8:     #928374 */
 /* st*.color1:     #cc241d */
 /* st*.color9:     #fb4934 */
