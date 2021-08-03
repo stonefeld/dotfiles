@@ -2,7 +2,7 @@
 Theo Stanfield's personal dotfiles.
 
 # Table of Contents
-* [Instalation](#instalation)
+* [Installation](#installation)
 * [Example pictures](#example-pictures)
 * [Dependencies](#dependencies)
 * [Essential config files](#essential-config-files)
@@ -13,7 +13,7 @@ Theo Stanfield's personal dotfiles.
   * [Firefox](#firefox)
   * [Suckless software](#suckless-software)
 
-# Instalation
+# Installation
 I recommend clonning the repository as a git bare repository and locate it in `~/.local/share/dotfiles`. To do so you have to run:
 
 ```bash
