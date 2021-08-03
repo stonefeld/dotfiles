@@ -2,7 +2,7 @@
 Theo Stanfield's personal dotfiles.
 
 # Table of Contents
-* [Instalation](#instalation)
+* [Installation](#installation)
 * [Example pictures](#example-pictures)
 * [Dependencies](#dependencies)
 * [Essential config files](#essential-config-files)
@@ -13,7 +13,7 @@ Theo Stanfield's personal dotfiles.
   * [Firefox](#firefox)
   * [Suckless software](#suckless-software)
 
-# Instalation
+# Installation
 I recommend clonning the repository as a git bare repository and locate it in `~/.local/share/dotfiles`. To do so you have to run:
 
 ```bash
@@ -26,7 +26,7 @@ Make sure your home directory is completely empty before running it. Otherwise y
 
 Another way is to simply clone the repository into a temporary folder and the copy and replace all files on your home directory with the ones on the repo's folder.
 
-There are also links to other git repositories for my custom [dwm](https://github.com/stonefeld/dwm), [st](https://github.com/stonefeld/st) and [dmenu](https://github.com/stonefeld/dmenu) builds and my [neovim setup](https://github.com/stonefeld/nvim). You should clone this respos into their respectively folders. All this explained in [To get things working](#to-get-things-working) section.
+There are also links to other git repositories for my custom [dwm](https://github.com/stonefeld/dwm), [st](https://github.com/stonefeld/st) and [dmenu](https://github.com/stonefeld/dmenu) builds and my [neovim setup](https://github.com/stonefeld/nvim). You should clone this respos into their corresponding folders. All this is explained in [To get things working](#to-get-things-working) section.
 
 # Example pictures
 
