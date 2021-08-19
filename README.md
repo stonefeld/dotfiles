@@ -78,6 +78,8 @@ Most of the following packages should be in your distro's repository. In case of
   * `newsboat`
   * `xmenu`
   * `mplayer`
+  * `xss-lock`
+  * `slock`
 
 * Tools:
   * `make`
@@ -87,6 +89,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `latex suite`
   * `pandoc`
   * `scrot`
+  * `python-pygame` or install pygame by running `pip install pygame`
 
 * Fonts:
   * `adobe-source-code-pro-fonts`

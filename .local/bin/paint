@@ -1,0 +1,126 @@
+#!/usr/bin/env python
+import pygame as pg
+from datetime import datetime
+
+pg.init()
+
+
+class Paint(object):
+    def __init__(self, width, height, title):
+        self.size = (width, height)
+        self.title = title
+        self.screen = pg.display.set_mode(self.size, pg.RESIZABLE)
+        self.clock = pg.time.Clock()
+        self.running = True
+
+        self.clicking = False
+        self.clean = False
+        self.erase = False
+
+        self.mx, self.my = 0, 0
+        self.prevmx, self.prevmy = 0, 0
+        self.colors = [
+            [ (255, 255, 255), 'white'   ],
+            [ (255,   0,   0), 'red'     ],
+            [ (  0, 255,   0), 'green'   ],
+            [ (  0,   0, 255), 'blue'    ],
+            [ (255, 255,   0), 'yellow'  ],
+            [ (  0, 255, 255), 'cyan'    ],
+            [ (255,   0, 255), 'pink'    ],
+        ]
+        self.color_index = 0
+        self.background = (0, 0, 0)
+
+    def update(self):
+        self.prevmx, self.prevmy = self.mx, self.my
+        self.mx, self.my = pg.mouse.get_pos()
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                self.running = False
+
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.clicking = True
+
+                if event.button == 3:
+                    self.erase = True
+
+            elif event.type == pg.MOUSEBUTTONUP:
+                if event.button == 1:
+                    self.clicking = False
+
+                if event.button == 3:
+                    self.erase = False
+
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_q:
+                    self.running = False
+
+                if event.key == pg.K_c:
+                    self.clean = True
+
+                if event.key == pg.K_b:
+                    if self.background == (0, 0, 0):
+                        self.background = (255, 255, 255)
+                        self.colors[0] = [ (0, 0, 0), 'black' ]
+
+                    elif self.background == (255, 255, 255):
+                        self.background = (0, 0, 0)
+                        self.colors[0] = [ (255, 255, 255), 'white' ]
+
+                    self.screen.fill(self.background)
+
+                if event.key == pg.K_s:
+                    pg.image.save(self.screen, f'paint-screenshot-{datetime.today().strftime("%M_%d_%Y_%H_%M")}.jpeg')
+
+                if event.key == pg.K_TAB:
+                    if event.mod == 0:
+                        self.color_index += 1
+                        if self.color_index >= len(self.colors):
+                            self.color_index = 0
+
+                    elif event.mod == 1:
+                        self.color_index -= 1
+                        if self.color_index < 0:
+                            self.color_index = len(self.colors) - 1
+
+            elif event.type == pg.KEYUP:
+                if event.key == pg.K_c:
+                    self.clean = False
+
+            if event.type == pg.MOUSEWHEEL:
+                if event.y == 1:
+                    self.color_index += 1
+                    if self.color_index >= len(self.colors):
+                        self.color_index = 0
+
+                elif event.y == -1:
+                    self.color_index -= 1
+                    if self.color_index < 0:
+                        self.color_index = len(self.colors) - 1
+
+    def render(self):
+        if self.clean:
+            self.screen.fill(self.background)
+
+        if self.clicking:
+            pg.draw.line(self.screen, self.colors[self.color_index][0], (self.prevmx, self.prevmy), (self.mx, self.my), 2)
+
+        if self.erase:
+            pg.draw.circle(self.screen, self.background, (self.mx, self.my), 20)
+
+        pg.display.update()
+        pg.display.set_caption(f'{self.title} - {int(self.clock.get_fps())} fps - Selected color: {self.colors[self.color_index][1]}')
+
+
+def main():
+    window = Paint(800, 600, 'Paint')
+    while window.running:
+        window.clock.tick(60)
+        window.update()
+        window.render()
+
+
+if __name__ == '__main__':
+    main()

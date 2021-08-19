@@ -20,7 +20,7 @@ SAVEHIST=1000
 
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
-virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{yellow}($(cut -d '-' -f 1 <<< ${VIRTUAL_ENV##*/}))%f%b" 2>/dev/null }
+virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{yellow}($(sed 's/\-[a-zA-Z0-9]*$//' <<< ${VIRTUAL_ENV##*/}))%f%b" 2>/dev/null }
 
 # Small function to detect if the directory is a git repository and change
 # prompt's current working directory length to 1.
@@ -84,6 +84,10 @@ alias mans='man -k . | fzf | sed "s/ \+/ /g" | cut -d " " -f 1 | xargs -r man'
 
 # Lazygit shortctut.
 alias lgit='lazygit'
+
+# NetworkManager commands shortcuts.
+alias wcon='nmcli device wifi connect'
+alias wls='nmcli device wifi list'
 
 # Open irssi and specify the config and data folder.
 alias irssi='irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi'

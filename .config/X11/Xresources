@@ -8,6 +8,7 @@
 Xcursor.theme: Breeze
 Xcursor.size: 16
 
+/* Display setup */
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true

@@ -3,7 +3,7 @@
 screencast_full () {
 	ffmpeg -y \
 	-f x11grab \
-	-framerate 60 \
+	-framerate 30 \
 	-s "$(xdpyinfo | grep dimensions | sed 's/ \+/ /g' | cut -d ' ' -f 3)" \
 	-i "$DISPLAY" \
 	-f alsa -i default \
@@ -17,7 +17,7 @@ screencast_full () {
 screencast_single () {
 	ffmpeg -y \
 	-f x11grab \
-	-framerate 60 \
+	-framerate 30 \
 	-s "1920x1080" \
 	-i "$DISPLAY" \
 	-f alsa -i default \
