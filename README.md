@@ -55,57 +55,59 @@ There are also links to other git repositories for my custom [dwm](https://githu
 # Dependencies
 Most of the following packages should be in your distro's repository. In case of arch-users there are some packages that must be installed from the AUR. I recommend install some kind of [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) and works really well.
 
-* Essentials:
-  * `qtile`
-  * `dwm` *(\*)*
+* Programs with configurations:
   * `alacritty`
-  * `st` *(\*)*
-  * `dunst`
-  * `bash`/`zsh`
-  * `neovim` version 0.5 or above
-  * `firefox`
-  * `brave`
-  * `qutebrowser`
-  * `vifm`
-  * `pcmanfm`
-  * `rofi`
+  * `bash`
   * `dmenu` *(\*)*
-  * `mpd`
+  * `dunst`
+  * `dwm` *(\*)*
+  * `firefox`
   * `ncmpcpp`
-  * `picom`
-  * `tmux`
-  * `xbindkeys`
+  * `neovim` version 0.5 or above
   * `newsboat`
-  * `xmenu`
-  * `mplayer`
-  * `xss-lock`
-  * `slock`
+  * `picom`
+  * `qtile`
+  * `rofi`
+  * `st` *(\*)*
+  * `tmux`
+  * `vifm`
+  * `xbindkeys`
+  * `zathura`
+  * `zsh`
 
-* Tools:
-  * `make`
-  * `fzf`
-  * `ripgrep`
+* Required to get the configurations above working:
+  * `brave`
   * `fd`
+  * `fzf`
   * `latex suite`
+  * `libxft-bgra` *(\*\*)*
+  * `make`
+  * `mpd`
+  * `mplayer`
   * `pandoc`
-  * `scrot`
+  * `pcmanfm`
   * `python-pygame` or install pygame by running `pip install pygame`
+  * `ripgrep`
+  * `scrot`
+  * `slock`
+  * `xmenu`
+  * `xss-lock`
 
-* Fonts:
+* Required fonts:
   * `adobe-source-code-pro-fonts`
-  * `ttf-joypixels`
   * `ttf-fantasque-sans-mono`
   * `ttf-fira-code`
   * `ttf-font-icons` *(\*\*)*
+  * `ttf-joypixels`
 
-* Nerd Fonts:
-  * `nerd-fonts-source-code-pro` *(\*\*) (\*\*\*)*
+* Required nerd-fonts:
   * `nerd-fonts-fantasque-sans-mono` *(\*\*) (\*\*\*)*
+  * `nerd-fonts-source-code-pro` *(\*\*) (\*\*\*)*
 
 * Themes:
-  * `nordic-theme` *(\*\*)*
-  * `papirus-icon-theme`
   * `papirus-folders-git` and configured to use the `nordic` colors *(\*\*)*
+  * `papirus-icon-theme`
+  * `nordic-theme` *(\*\*)*
 
 *(\*) = has to be compiled from source*
 

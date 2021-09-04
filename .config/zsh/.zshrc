@@ -47,8 +47,9 @@ alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1
 alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > ${XDG_DATA_HOME:-$HOME/.local/share}/updates && status-init"
 
-# Quickly move to another directory.
+# Utilities with fzf
 alias md='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
+alias sr='less "$(find ~ -maxdepth 5 -type f | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 
 # Some ls command replacements.
 if ! command -v exa &>/dev/null; then
@@ -66,9 +67,24 @@ alias rm='rm -i'
 # Pass aliases to sudo.
 alias sudo='sudo '
 
+# Git shortcuts.
+alias gis='git status'
+alias gid='git diff'
+alias gio='git show'
+alias gia='git add'
+alias gic='git commit'
+alias gil='git log --graph'
+alias gib='git branch'
+alias gih='git checkout'
+alias gip='git push'
+alias giu='git pull'
+alias gif='git fetch'
+alias gim='git merge'
+alias gir='git remote'
+
 # Neovim shortcuts.
 alias e="$EDITOR"
-alias e.="$EDITOR ."
+alias ee="$EDITOR ."
 alias ef="fzf --preview 'cat {}'| xargs -ro $EDITOR"
 
 # Python and pip shortcuts
