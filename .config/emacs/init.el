@@ -13,8 +13,10 @@
 (setq mouse-wheel-follow-mouse 't)    
 (setq scroll-step 1)
 
-;; Set up visible bell
+;; Set up visible bell, disable visual selection on ctrl+space and avoid linewrapping
 (setq visible-bell t)
+(setq-default transient-mark-mode nil)
+(setq-default truncate-lines t)
 
 ;; Set default tab size to 4
 (setq-default tab-width 4)
@@ -44,30 +46,34 @@
 (defvar my-keys-minor-mode-map
   (let ((map (make-sparse-keymap)))
 	(define-key map (kbd "C-s") 'save-buffer)
+	(define-key map (kbd "C-S-s") (lambda () (interactive) (save-some-buffers "!")))
 	(define-key map (kbd "C-o") 'find-file)
 	(define-key map (kbd "C-S-o") 'find-file-other-window)
 	(define-key map (kbd "C-p") 'switch-to-buffer)
 	(define-key map (kbd "C-S-p") 'switch-to-buffer-other-window)
 	(define-key map (kbd "C-,") 'other-window)
+	(define-key map (kbd "C-.") 'exchange-point-and-mark)
 	(define-key map (kbd "C-k") 'kill-buffer)
 	(define-key map (kbd "C-f") 'isearch-forward)
 	(define-key map (kbd "C-d") 'delete-region)
 	(define-key map (kbd "C-S-d") 'kill-whole-line)
+	(define-key map (kbd "C-<backspace>") 'my-backward-kill-word)
 	(define-key map (kbd "C-z") 'undo)
 	(define-key map (kbd "C-c") 'kill-ring-save)
 	(define-key map (kbd "C-x") 'kill-region)
 	(define-key map (kbd "C-v") 'clipboard-yank)
-	(define-key map (kbd "M-<f4>") 'kill-emacs)
-	(define-key map (kbd "<f1>") 'recompile)
+	(define-key map (kbd "<tab>") 'dabbrev-expand)
+	(define-key map (kbd "C-<tab>") 'indent-for-tab-command)
 	(define-key map (kbd "M-m") (lambda () (interactive) (if (file-exists-p "build.bat") (compile "build.bat") (if (file-exists-p "build.sh") (compile "build.sh") (call-interactively 'compile)))))
+	(define-key map (kbd "<f1>") 'recompile)
+	(define-key map (kbd "M-<f4>") 'kill-emacs)
 	map)
   "my-keys-minor-mode keymap.")
 
 ;; Override any annoying mayor modes
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying mayor modes."
-  :init-value t
-  :lighter "")
+  :init-value t)
 (my-keys-minor-mode 1)
 
 ;; Disable the minor mode on the minibuffer
@@ -112,6 +118,17 @@
 (smart-tabs-advice c-indent-region c-basic-offset)
 (provide 'smarttabs)
 
+;; Avoid deleting too large amounts of text on ctrl+backspace
+(defun my-backward-kill-word ()
+  (interactive)
+  (cond
+   ((looking-back (rx (char word)) 1)
+	(backward-kill-word 1))
+   ((looking-back (rx (char blank)) 1)
+	(delete-horizontal-space t))
+   (t
+	(backward-delete-char 1))))
+
 ;; Avoid weird indentation on c and c++ code
 (defun my-c-mode-common-hook ()
   (c-set-offset 'substatement-open 0))
@@ -125,5 +142,3 @@
 (split-window-right)
 (switch-to-buffer-other-window "*Messages*")
 (switch-to-buffer-other-window "*scratch*")
-(setq-default transient-mark-mode nil)
-(setq-default truncate-lines t)
