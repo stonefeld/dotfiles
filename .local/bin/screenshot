@@ -10,4 +10,4 @@ filename=$(echo "screenshot_$(date '+%Y_%m_%d_%H_%M_%S').png")
     fi
 else
     scrot "$HOME/imgs/screenshots/$filename"
-fi) && canberra-gtk-play -i device-added && xclip -se c -t image/png -i "$HOME/imgs/screenshots/$filename" && dunstify -a scrot -i editcopy "Copied to clipboard" "Screenshot $filename copied to clipboard"
+fi) && canberra-gtk-play -i device-added && xclip -se c -t image/png -i "$HOME/imgs/screenshots/$filename" && dunstify -a scrot -I $HOME/imgs/screenshots/$filename "Copied to clipboard" "Screenshot $filename copied to clipboard"

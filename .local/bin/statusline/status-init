@@ -1,11 +1,6 @@
 #!/bin/sh
 
-COLORED_EMOJIS=false
-
-recording=""
-if [ -f /tmp/recordingpid ]; then
-	[ "$COLORED_EMOJIS" = true ] && recording="⏺️ 🎤 | " || recording="[    ] "
-fi
+[ -f /tmp/recordingpid ] && recording=" 󰝥󰍬 " || recording=""
 klayout=$(xkb-switch -p)
 unread_mails=$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/unread)
 pacupgrade=$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)
@@ -13,13 +8,65 @@ pacupgrade=$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)
 wifi=$(iwgetid -r)
 [ -z "$wifi" ] && wifi="Disconnected"
 
-brightness=$(status-brightness $COLORED_EMOJIS)
-volume=$(status-volume $COLORED_EMOJIS)
-battery=$(status-battery $COLORED_EMOJIS)
-date=$(status-clock $COLORED_EMOJIS)
+brightness() {
+	echo "$(( $(sed '1!d' /sys/class/backlight/*/actual_brightness) * 100 / $(sed '1!d' /sys/class/backlight/*/max_brightness) ))%"
+}
 
-[ "$COLORED_EMOJIS" = true ] &&
-	statusline="$recording⌨️ $klayout 📦 $pacupgrade | 📶 $wifi | $brightness | $volume | $battery | $date" ||
-	statusline="$recording[  $klayout] [ $unread_mails] [ $pacupgrade] [ $wifi] [$brightness] [$volume] [$battery] [$date]"
+volume() {
+	vol=$(amixer sget Master | sed "6!d;s/%//;s/\[//g;s/\]//g;s/\s\+/ /g")
+	volume=$(echo $vol | cut -d " " -f 5)
 
+	[ `echo "$volume >= 100" | bc` -eq 1 ] && icon="󰕾" || icon="󰖀"
+	[ `echo "$volume == 0" | bc` -eq 1 ] && icon=""
+
+	mute=$(echo $vol | cut -d " " -f 6)
+	[ $mute = "off" ] && echo "󰖁 Mute" || echo "$icon $volume%"
+}
+
+brightness=$(brightness)
+volume=$(volume)
+battery=$(status-battery)
+date=$(date "+%a, %b %d (%Y) %H:%M")
+
+color() {
+	case "$1" in
+		"bg") fg="^c#2e3440^" ;;
+		"g1") fg="^c#3b4252^" ;;
+		"g2") fg="^c#4c566a^" ;;
+		"g3") fg="^c#616e88^" ;;
+		"w1") fg="^c#d8dee9^" ;;
+		"w2") fg="^c#e5e9f0^" ;;
+		"w3") fg="^c#eceff4^" ;;
+		"cy") fg="^c#88c0d0^" ;;
+		"bl") fg="^c#81a1c1^" ;;
+		"re") fg="^c#bf616a^" ;;
+		"or") fg="^c#d08770^" ;;
+		"ye") fg="^c#ebcb8b^" ;;
+		"gr") fg="^c#a3be8c^" ;;
+		"ma") fg="^c#b48ead^" ;;
+		"pi") fg="^c#828dd1^" ;;
+		"vi") fg="^c#6c77bb^" ;;
+	esac
+	case "$2" in
+		"bg") bg="^b#2e3440^" ;;
+		"g1") bg="^b#3b4252^" ;;
+		"g2") bg="^b#4c566a^" ;;
+		"g3") bg="^b#616e88^" ;;
+		"w1") bg="^b#d8dee9^" ;;
+		"w2") bg="^b#e5e9f0^" ;;
+		"w3") bg="^b#eceff4^" ;;
+		"cy") bg="^b#88c0d0^" ;;
+		"bl") bg="^b#81a1c1^" ;;
+		"re") bg="^b#bf616a^" ;;
+		"or") bg="^b#d08770^" ;;
+		"ye") bg="^b#ebcb8b^" ;;
+		"gr") bg="^b#a3be8c^" ;;
+		"ma") bg="^b#b48ead^" ;;
+		"pi") bg="^b#828dd1^" ;;
+		"vi") bg="^b#6c77bb^" ;;
+	esac
+	echo "$fg$bg"
+}
+
+statusline="$(color bg ye)$recording$(color bg bg) $(color re bg)󰌌 $klayout $(color ye bg)󰇮 $unread_mails $(color gr bg)󰬦 $pacupgrade $(color bg vi) 󰤨 $(color bg pi) $wifi $(color w1 bg) $(color re bg)󱎖 $brightness $(color ye bg)$volume $(color gr bg)$battery $(color bg vi) 󱑂 $(color bg pi) $date "
 xsetroot -name "$statusline"

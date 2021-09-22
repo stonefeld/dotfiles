@@ -90,6 +90,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `ripgrep`
   * `scrot`
   * `slock`
+  * `xkb-switch` *(\*\*)*
   * `xmenu`
   * `xss-lock`
 
@@ -98,9 +99,10 @@ Most of the following packages should be in your distro's repository. In case of
   * `ttf-fantasque-sans-mono`
   * `ttf-fira-code`
   * `ttf-font-icons` *(\*\*)*
-  * `ttf-joypixels`
+  * `ttf-material-design-icons` *(\*\*)*
 
 * Required nerd-fonts:
+  * `nerd-fonts-cascadia-code` *(\*\*) (\*\*\*)*
   * `nerd-fonts-fantasque-sans-mono` *(\*\*) (\*\*\*)*
   * `nerd-fonts-source-code-pro` *(\*\*) (\*\*\*)*
 

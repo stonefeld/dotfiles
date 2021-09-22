@@ -1,8 +1,8 @@
-#          _
-#  _______| |__
-# |_  / __| '_ \
-#  / /\__ \ | | |
-# /___|___/_| |_|
+#            _
+#    _______| |__  _ __ ___
+#   |_  / __| '_ \| '__/ __|
+#  _ / /\__ \ | | | | | (__
+# (_)___|___/_| |_|_|  \___|
 
 [[ $- != *i* ]] && return
 
@@ -139,6 +139,7 @@ bindkey '^[[H' beginning-of-line     # Home
 bindkey '^[[4~' end-of-line          # End
 bindkey '^[[4h' overwrite-mode       # Insert
 bindkey '^[[P' delete-char           # Delete
+bindkey '^H' backward-delete-word    # Ctrl+Backspace
 bindkey '^[[Z' reverse-menu-complete # Shift+Tab
 bindkey '^[[5~' beginning-of-history # PageUp
 bindkey '^[[6~' end-of-history       # PageDown

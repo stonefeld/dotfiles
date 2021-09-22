@@ -16,9 +16,9 @@
 "rfkill unblock all && [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet"
     Shift + F7
 "screenshot"
-    Print
+    Mod4 + Print
 "screenshot 5"
-    Shift + Print
+    Shift+Mod4 + Print
 "screenshot -s"
     Shift+Mod4 + s
 

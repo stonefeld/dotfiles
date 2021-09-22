@@ -11,7 +11,11 @@
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
 (setq mouse-wheel-progressive-speed nil)    
 (setq mouse-wheel-follow-mouse 't)    
+(setq redisplay-dont-pause t)
+(setq scroll-margin 1)
 (setq scroll-step 1)
+(setq scroll-conservatively 10000)
+(setq scroll-preserver-screen-position 1)
 
 ;; Set up visible bell, disable visual selection on ctrl+space and avoid linewrapping
 (setq visible-bell t)
@@ -30,6 +34,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+(setq package-selected-packages '(gruvbox-theme))
 
 ;; Change default appereance
 (setq default-frame-alist
@@ -37,7 +42,8 @@
 		(cursor-color . "DarkOrange")))
 
 ;; Load gruvbox theme
-(load-theme 'gruvbox-dark-medium t)
+(when (require 'gruvbox-theme nil 'noerror)
+  (load-theme 'gruvbox t))
 
 ;; Set default compile command
 (setq compilation-scroll-output t)

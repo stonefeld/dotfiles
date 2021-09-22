@@ -1,13 +1,15 @@
-#                   __ _ _
-#  _ __  _ __ ___  / _(_) | ___
-# | '_ \| '__/ _ \| |_| | |/ _ \
-# | |_) | | | (_) |  _| | |  __/
-# | .__/|_|  \___/|_| |_|_|\___|
-# |_|
+#                     __ _ _
+#    _ __  _ __ ___  / _(_) | ___
+#   | '_ \| '__/ _ \| |_| | |/ _ \
+#  _| |_) | | | (_) |  _| | |  __/
+# (_) .__/|_|  \___/|_| |_|_|\___|
+#   |_|
 
-# Export important global variables.
+# Relevant global variables.
 export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/:~/.local/share/cargo/bin/
-export SHELL=/bin/zsh
+if command -v zsh &>/dev/null; then
+	export SHELL=/bin/zsh
+fi
 export EDITOR="nvim"
 export TERMINAL="st"
 export TERM="xterm-256color"
@@ -22,7 +24,7 @@ export XDG_CACHE_HOME="$HOME"/.cache/
 export XDG_CONFIG_HOME="$HOME"/.config/
 export XDG_DATA_HOME="$HOME"/.local/share/
 
-# Some default option.
+# Some default options.
 export LESSHISTFILE=-
 export QT_QPA_PLATFORMTHEME=qt5ct
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=16"

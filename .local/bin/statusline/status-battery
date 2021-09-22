@@ -1,34 +1,29 @@
 #!/bin/sh
 
-COLORED_EMOJIS=$1
-
 messid="90909090"
 messapp="system"
 
 batper=$(cat /sys/class/power_supply/BAT0/capacity)
 bat=$(( $batper / 10 ))
 
-[ "$COLORED_EMOJIS" = true ] && icon="🔋" || icon="?"
-
-if [ ! "$COLORED_EMOJIS" = true ]; then
-	case $bat in
-		"0")  icon=" ";;
-		"1")  icon=" ";;
-		"2")  icon=" ";;
-		"3")  icon=" ";;
-		"4")  icon=" ";;
-		"5")  icon=" ";;
-		"6")  icon=" ";;
-		"7")  icon=" ";;
-		"8")  icon=" ";;
-		"9")  icon=" ";;
-		"10") icon=" ";;
-	esac
-fi
+icon="󰂃"
+case $bat in
+	"0")  icon="󰂎";;
+	"1")  icon="󰁺";;
+	"2")  icon="󰁻";;
+	"3")  icon="󰁼";;
+	"4")  icon="󰁽";;
+	"5")  icon="󰁾";;
+	"6")  icon="󰁿";;
+	"7")  icon="󰂀";;
+	"8")  icon="󰂁";;
+	"9")  icon="󰂂";;
+	"10") icon="󰁹";;
+esac
 
 char=$(cat /sys/class/power_supply/BAT0/status)
 if [ "$char" = "Full" ] || [ "$char" = "Charging" ]; then
-	[ "$COLORED_EMOJIS" = true ] && echo "🔌 $batper%" || echo "$icon  $batper%"
+	echo "󰂄 $batper%"
 else
 	if [ "$batper" -le 10 ]; then
 		rm -f /tmp/batwarning
