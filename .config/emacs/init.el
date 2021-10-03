@@ -30,20 +30,21 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;; Initialize packages
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-(setq package-selected-packages '(gruvbox-theme))
-
 ;; Change default appereance
-(setq default-frame-alist
-	  '((font . "-*-Liberation Mono-normal-r-*-*-15-*-*-*-c-*-iso8859-1")
-		(cursor-color . "DarkOrange")))
-
-;; Load gruvbox theme
-(when (require 'gruvbox-theme nil 'noerror)
-  (load-theme 'gruvbox t))
+(add-to-list 'default-frame-alist '(font . "Liberation Mono-9"))
+(set-face-attribute 'default t :font "Liberation Mono-9" :foreground "burlywood3" :background "#161616")
+(set-face-attribute 'cursor nil :background "green")
+(set-face-attribute 'font-lock-warning-face nil :foreground "red")
+(set-face-attribute 'font-lock-function-name-face nil :foreground "burlywood3")
+(set-face-attribute 'font-lock-variable-name-face nil :foreground "burlywood3")
+(set-face-attribute 'font-lock-keyword-face nil :foreground "DarkGoldenrod3")
+(set-face-attribute 'font-lock-comment-face nil :foreground "dim gray")
+(set-face-attribute 'font-lock-type-face nil :foreground "DarkGoldenrod3")
+(set-face-attribute 'font-lock-constant-face nil :foreground "burlywood3")
+(set-face-attribute 'font-lock-builtin-face nil :foreground "burlywood3")
+(set-face-attribute 'font-lock-string-face nil :foreground "olive drab")
+(set-face-attribute 'font-lock-preprocessor-face nil :foreground "khaki")
+(set-face-attribute 'font-lock-doc-face nil :foreground "green" :weight 'bold)
 
 ;; Set default compile command
 (setq compilation-scroll-output t)
@@ -60,6 +61,7 @@
 	(define-key map (kbd "C-,") 'other-window)
 	(define-key map (kbd "C-.") 'exchange-point-and-mark)
 	(define-key map (kbd "C-k") 'kill-buffer)
+	(define-key map (kbd "C-S-k") (lambda () (interactive) (kill-buffer (current-buffer))))
 	(define-key map (kbd "C-f") 'isearch-forward)
 	(define-key map (kbd "C-d") 'delete-region)
 	(define-key map (kbd "C-S-d") 'kill-whole-line)
@@ -70,6 +72,7 @@
 	(define-key map (kbd "C-v") 'clipboard-yank)
 	(define-key map (kbd "<tab>") 'dabbrev-expand)
 	(define-key map (kbd "C-<tab>") 'indent-for-tab-command)
+	(define-key map (kbd "C-S-<tab>") 'indent-region)
 	(define-key map (kbd "M-m") (lambda () (interactive) (if (file-exists-p "build.bat") (compile "build.bat") (if (file-exists-p "build.sh") (compile "build.sh") (call-interactively 'compile)))))
 	(define-key map (kbd "<f1>") 'recompile)
 	(define-key map (kbd "M-<f4>") 'kill-emacs)
@@ -135,16 +138,25 @@
    (t
 	(backward-delete-char 1))))
 
-;; Avoid weird indentation on c and c++ code
+;; Add standard c and c++ styles as well as some comment keywords highlight
 (defun my-c-mode-common-hook ()
-  (c-set-offset 'substatement-open 0))
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'brace-list-open 0)
+  (c-set-offset 'case-label '+)
+  (c-set-offset 'statement-case-open 0)
+  (c-set-offset 'access-label '-)
+  (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\)[(:]" 1 font-lock-warning-face t)))
+  (font-lock-add-keywords nil '(("\\<\\(NOTE\\)[(:]" 1 font-lock-doc-face t)))
+  (font-lock-add-keywords nil '(("\\<\\(true\\|false\\|[0-9]+\\)" 1 font-lock-string-face t))))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; Detect .h files as C++ header files by default
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; Avoid changing default-directory value when using find-file command
 (setq current-working-directory default-directory)
 (add-hook 'find-file-hook #'(lambda () (setq default-directory (expand-file-name current-working-directory))))
 
 ;; Init commands
+(electric-pair-mode)
 (split-window-right)
-(switch-to-buffer-other-window "*Messages*")
-(switch-to-buffer-other-window "*scratch*")
