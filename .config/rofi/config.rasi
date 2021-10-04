@@ -13,9 +13,9 @@ configuration {
 	case-sensitive: false;
 	sidebar-mode: false;
 	matching: "normal";
-	hide-scrollbar: false;
-	fullscreen: false;
-	scrollbar-width: 8;
+	/* hide-scrollbar: false; */
+	/* fullscreen: false; */
+	/* scrollbar-width: 8; */
 	scroll-method: 0;
 
 	run-command: "{cmd}";
@@ -26,7 +26,7 @@ configuration {
 	window-match-fields: "all";
 	window-thumbnail: true;
 	window-format: "{c}    {t}";
-	
+
 	drun-match-fields: "name,generic,exec,categories,keywords";
 	drun-categories: "";
 	drun-show-actions: false;
@@ -36,7 +36,7 @@ configuration {
 	drun-reload-desktop-cache: false;
 
 	click-to-exit: true;
-	show-match: true;
+	/* show-match: true; */
 
 	disable-history: false;
 	max-history-size: 25;
@@ -58,7 +58,7 @@ configuration {
 	kb-remove-to-eol: "";
 	kb-accept-entry: "Control+m,Return,KP_Enter";
 	kb-row-left: "Left,Control+h";
-	kb-row-right: "Right,Control+l";
+	/* kb-row-right: "Right,Control+l"; */
 	kb-row-up: "Up,Control+k";
 	kb-row-down: "Down,Control+j";
 	ml-row-left: "ScrollLeft";

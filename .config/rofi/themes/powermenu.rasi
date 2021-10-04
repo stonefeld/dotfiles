@@ -30,16 +30,22 @@ configuration {
 element {
     padding: 20px;
     orientation: vertical;
+	background-color: transparent;
 }
 
 element-icon {
     size: 58px;
     margin: 2px;
+	horizontal-align: 0.5;
+	vertical-align: 0.5;
+	background-color: transparent;
 }
 
 element-text {
     horizontal-align: 0.5;
     vertical-align: 0.5;
+	text-color: @applauncher-fg;
+	background-color: transparent;
 }
 
 #element.selected.normal {
