@@ -70,7 +70,7 @@ askrecording () {
 asktoend () {
 	choice=$(printf "Stop Recording\\nLaunch Webcam" | dmenu -i -c -l 2 -bw 4)
     case "$choice" in
-        Stop\ Recording) response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?");;
+        Stop\ Recording) response=$(printf "No\\nYes" | dmenu -i -c -l 2 -bw 4 -p "Recording still active. End recording?");;
         Launch\ Webcam)  mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot;;
     esac
 	[ "$response" = "Yes" ] && killrecording || exit

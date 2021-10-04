@@ -1,29 +1,45 @@
 #!/bin/sh
 
-echo "\nWelcome back $USER\nAvailable options:\n\t[1] dwm\n\t[2] qtile\n\t[3] gnome\n\t[4] kde-plasma\n"
-read -p "Enter your choice: " choice
+# Use this variable to for loop.
+READY=false
 
-case $choice in
-    1)
-        echo "\nYou have selected dwm."
-        export FILEMANAGER="st -c Floating -g 120x34 -e vifm"
-        startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc dwm
-        exit;;
-    2)
-        echo "\nYou have selected qtile."
-        export FILEMANAGER="pcmanfm"
-        startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc qtile
-        exit;;
-    3)
-        echo "\nYou have selected gnome."
-        XDG_SESSION_TYPE=wayland dbus-run-session gnome-session
-        exit;;
-    4)
-        echo "\nYou have selected kde-plasma."
-        DESKTOP_SESSION=plasma; startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc plasma
-        exit;;
-    *)
-        echo "\nThis option is not available"
-        sleep 4
-        exit;;
-esac
+select_env () {
+	# Prompt for choice.
+	echo "\nWelcome back $USER. Select your environment:"
+	echo " [1] dwm\n [2] qtile\n [3] gnome\n [4] kde-plasma\n"
+	read -p "Enter your choice: " choice
+
+	# By default mark as ok.
+	READY=true
+
+	case $choice in
+		1)
+			export FILEMANAGER="st -c Floating -g 120x34 -e vifm"
+			startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc dwm;;
+
+		2)
+			export FILEMANAGER="pcmanfm"
+			startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc qtile;;
+
+		3)
+			XDG_SESSION_TYPE=wayland dbus-run-session gnome-session;;
+
+		4)
+			DESKTOP_SESSION=plasma; startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc plasma;;
+
+		*)
+			echo "\nThis option is not available"
+			# If environment doesn't exist mark it as not ready.
+			READY=false
+			sleep 2;;
+	esac
+}
+
+# If no valid environment was selected repeat the loop.
+while ! $READY; do
+	clear
+	select_env
+done
+
+# When done exit the session.
+exit

@@ -9,6 +9,8 @@
 export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/:~/.local/share/cargo/bin/
 if command -v zsh &>/dev/null; then
 	export SHELL=/bin/zsh
+else
+	export SHELL=/bin/bash
 fi
 export EDITOR="nvim"
 export TERMINAL="st"

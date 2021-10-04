@@ -1,12 +1,12 @@
 #!/bin/sh
 
-type=$(printf "Markdown\\nLaTeX\\nOpen compiled note" | dmenu -i -p "Select filetype")
+type=$(printf "Markdown\\nLaTeX\\nOpen compiled note" | dmenu -i -c -l 3 -bw 4 -p "Select filetype")
 if [ ! -z "$type" ]; then
     if [ ! "$type" = "Open compiled note" ]; then
-        option=$(printf "New empty note\\nChoose existing note\\nDelete note" | dmenu -i -p "Choose an option")
+        option=$(printf "New empty note\\nChoose existing note\\nDelete note" | dmenu -i -c -l 3 -bw 4 -p "Choose an option")
         case $option in
             "New empty note")
-                name=$(dmenu -i -p "Enter the name")
+                name=$(dmenu -i -c -l 3 -bw 4 -p "Enter the name")
                 [ -z $name ] && exit
                 case $type in
                     "Markdown")
@@ -27,12 +27,12 @@ if [ ! -z "$type" ]; then
             "Choose existing note")
                 case $type in
                     "Markdown")
-                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.md" -printf "%f\n" | sed "s/.md//g" | dmenu -i -p "Select a file")
+                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.md" -printf "%f\n" | sed "s/.md//g" | dmenu -i -c -l 3 -bw 4 -p "Select a file")
                         [ -z $selected ] && exit
                         st -e $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$selected.md"
                         exit;;
                     "LaTeX")
-                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.tex" -printf "%f\n" | sed "s/.tex//g" | dmenu -i -p "Select a file")
+                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.tex" -printf "%f\n" | sed "s/.tex//g" | dmenu -i -c -l 3 -bw 4 -p "Select a file")
                         [ -z $selected ] && exit
                         st -e $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$selected/$selected.tex"
                         exit;;
@@ -41,18 +41,18 @@ if [ ! -z "$type" ]; then
             "Delete note")
                 case $type in
                     "Markdown")
-                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.md" -printf "%f\n" | sed "s/.md//g" | dmenu -i -p "Select a file")
+                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.md" -printf "%f\n" | sed "s/.md//g" | dmenu -i -c -l 3 -bw 4 -p "Select a file")
                         [ -z $selected ] && exit
-                        option=$(printf "Yes\\nNo" | dmenu -i -p "Sure?")
+                        option=$(printf "Yes\\nNo" | dmenu -i -c -l 3 -bw 4 -p "Sure?")
                         [ -z $option ] && exit
                         [ "$option" = "No" ] && exit
                         rm -f $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$selected.md"
                         rm -f $EDITOR "${NOTES_FOLDER:-$HOME/docs/notes}/$selected.pdf"
                         exit;;
                     "LaTeX")
-                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.tex" -printf "%f\n" | sed "s/.tex//g" | dmenu -i -p "Select a file")
+                        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.tex" -printf "%f\n" | sed "s/.tex//g" | dmenu -i -c -l 3 -bw 4 -p "Select a file")
                         [ -z $selected ] && exit
-                        option=$(printf "Yes\\nNo" | dmenu -i -p "Sure?")
+                        option=$(printf "Yes\\nNo" | dmenu -i -c -l 3 -bw 4 -p "Sure?")
                         [ -z $option ] && exit
                         [ "$option" = "No" ] && exit
                         rm -rf "${NOTES_FOLDER:-$HOME/docs/notes}/$selected/"
@@ -61,7 +61,7 @@ if [ ! -z "$type" ]; then
                 exit;;
         esac
     else
-        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.pdf" -printf "%f\n" | sed "s/.pdf//g" | dmenu -i -p "Select a file")
+        selected=$(find ${NOTES_FOLDER:-$HOME/docs/notes} -name "*.pdf" -printf "%f\n" | sed "s/.pdf//g" | dmenu -i -c -l 3 -bw 4 -p "Select a file")
         [ -z $selected ] && exit
         if [ -d $(find ${NOTES_FOLDER:-$HOME/docs/notes}/$selected) ]; then
             ${PDF_READER:-zathura} "${NOTES_FOLDER:-$HOME/docs/notes}/$selected.pdf"
