@@ -175,5 +175,9 @@ function set_title () { print -Pn -- '\e]2;%n@%m %~\a'; }
 precmd_functions+=(set_title)
 
 # ---------- EXTRAS ---------- #
-# Get syntax highlighting while writiing.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+# Syntax highlighting.
+if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]; then
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-syntax-highlighting ]; then
+	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi

@@ -10,6 +10,7 @@ def standard():
         ["#434c5e", "#434c5e"]  # 7
     ]
 
+
 def nord():
     return [
         ["#3b4252", "#3b4252"], # 0
@@ -30,6 +31,7 @@ def nord():
         ["#eceff4", "#eceff4"]  # 15
     ]
 
+
 def gruvbox():
     return [
         ["#282828", "#282828"], # 0
@@ -49,6 +51,7 @@ def gruvbox():
         ["#689d6a", "#689d6a"], # 14
         ["#a89984", "#a89984"]  # 15
     ]
+
 
 colors_standard = standard()
 colors_custom   = nord()

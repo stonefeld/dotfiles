@@ -17,7 +17,7 @@ volume() {
 	volume=$(echo $vol | cut -d " " -f 5)
 
 	[ `echo "$volume >= 100" | bc` -eq 1 ] && icon="󰕾" || icon="󰖀"
-	[ `echo "$volume == 0" | bc` -eq 1 ] && icon=""
+	[ `echo "$volume == 0" | bc` -eq 1 ] && icon="󰖁"
 
 	mute=$(echo $vol | cut -d " " -f 6)
 	[ $mute = "off" ] && echo "󰖁 Mute" || echo "$icon $volume%"

@@ -14,7 +14,7 @@ Theo Stanfield's personal dotfiles.
   * [Suckless software](#suckless-software)
 
 # Installation
-I recommend clonning the repository as a git bare repository and locate it in `~/.local/share/dotfiles`. To do so you have to run:
+I recommend clonning the repository as a git bare repository and locate it in `~/.local/share/dotfiles/`. To do so you have to run:
 
 ```bash
 $ git clone --bare https://github.com/stonefeld/dotfiles $HOME/.local/share/dotfiles
@@ -93,6 +93,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `xkb-switch` *(\*\*)*
   * `xmenu`
   * `xss-lock`
+  * `zsh-syntax-highlighting` or clone the [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) repository into `$HOME/.config/zsh/zsh-syntax-highlighting/`
 
 * Required fonts:
   * `adobe-source-code-pro-fonts`
@@ -115,7 +116,7 @@ Most of the following packages should be in your distro's repository. In case of
 
 *(\*\*) = availabe in the AUR*
 
-*(\*\*\*) = can be manually installed from the [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts) repository and placed in* `~/.local/share/fonts` *or* `/usr/share/fonts` *and run* `fc-cache -fv`
+*(\*\*\*) = can be manually installed from the [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts) repository and placed in* `~/.local/share/fonts/` *or* `/usr/share/fonts/` *and run* `fc-cache -fv`
 
 # Essential config files
 * [Qtile](https://github.com/stonefeld/dotfiles/tree/master/.config/qtile)
@@ -163,6 +164,6 @@ Then you need to run `:PlugInstall` within neovim after sourcing the [init.vim](
 ## Suckless software
 As many of you may already know, the suckless utilities have to be compiled to run them, so I created three separated repositories for all three programs I run, which are [dwm](https://github.com/stonefeld/dwm), [st](https://github.com/stonefeld/st) and [dmenu](https://github.com/stonefeld/dmenu). I separated them from this repository since they have their own source files and licences I have to keep attention to.
 
-Now, to get my custom suckless's builds you have to pull every repository into your machine. Usually, repos are located in `~/.local/share` folder. My recommendation, use which folder location comes handy to you.
+Now, to get my custom suckless's builds you have to pull every repository into your machine. Usually, repos are located in `~/.local/share/` folder. My recommendation, use which folder location comes handy to you.
 
 Now you simply have to go into the corresponding directory and simply run `sudo make install` on each one of them to install them into your system.

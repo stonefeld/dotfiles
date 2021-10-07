@@ -6,6 +6,7 @@ from   libqtile.lazy   import lazy
 # Own
 from   variables       import *
 
+
 def my_keys():
     return [
         # Launch terminal
