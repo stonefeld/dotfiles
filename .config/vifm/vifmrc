@@ -82,8 +82,8 @@ nnoremap di :mkdir<space>
 
 nnoremap J 5j
 nnoremap K 5k
-nnoremap <M-C-h> <C-w>5<
-nnoremap <M-C-l> <C-w>5>
+nnoremap <M-C-Right> <C-w>5<
+nnoremap <M-C-Left> <C-w>5>
 
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h

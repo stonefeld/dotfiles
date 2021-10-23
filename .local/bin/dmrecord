@@ -1,82 +1,110 @@
-#!/bin/sh
+#!/bin/bash
 
 screencast_full () {
-	ffmpeg -y \
-	-f x11grab \
-	-framerate 30 \
-	-s "$(xdpyinfo | grep dimensions | sed 's/ \+/ /g' | cut -d ' ' -f 3)" \
-	-i "$DISPLAY" \
-	-f alsa -i default \
-	-r 30 \
- 	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
-	"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	if [ "$1" = "Yes" ]; then
+		ffmpeg \
+		-f x11grab \
+		-video_size "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" \
+		-framerate 25 \
+		-i "$DISPLAY" \
+		-f alsa -i hw:0,0 -c 2 \
+		-c:v libx264 -preset ultrafast -c:a aac \
+		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	else
+		ffmpeg \
+		-f x11grab \
+		-video_size "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" \
+		-framerate 25 \
+		-i "$DISPLAY" -c:v libx264 \
+		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	fi
 	echo $! > /tmp/recordingpid
-    status-init
+	status-init
 }
 
 screencast_single () {
-	ffmpeg -y \
-	-f x11grab \
-	-framerate 30 \
-	-s "1920x1080" \
-	-i "$DISPLAY" \
-	-f alsa -i default \
-	-r 30 \
- 	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
-	"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	if [ "$1" = "Yes" ]; then
+		ffmpeg \
+		-f x11grab \
+		-video_size "1920x1080" \
+		-framerate 25 \
+		-i "$DISPLAY" \
+		-f alsa -i hw:0,0 -c 2 \
+		-c:v libx264 -preset ultrafast -c:a aac \
+		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	else
+		ffmpeg \
+		-f x11grab \
+		-video_size "1920x1080" \
+		-framerate 25 \
+		-i "$DISPLAY" -c:v libx264 \
+		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	fi
 	echo $! > /tmp/recordingpid
-    status-init
+	status-init
 }
 
 webcam () {
-	ffmpeg -y \
-	-f v4l2 \
-	-framerate 25 \
-	-s "640x480" \
-	-i /dev/video0 \
-	-f alsa -i default \
- 	-c:v libx264 -preset ultrafast -c:a aac \
-	"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	if [ "$1" = "Yes" ]; then
+		ffmpeg \
+		-f v4l2 \
+		-framerate 25 \
+		-s "640x480" \
+		-i /dev/video0 \
+		-f alsa -i default \
+		-c:v libx264 -preset ultrafast -c:a aac \
+		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	else
+		ffmpeg \
+		-f v4l2 \
+		-framerate 25 \
+		-s "640x480" \
+		-i /dev/video0 \
+		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+	fi
 	echo $! > /tmp/recordingpid
-    status-init
+	status-init
 }
 
 killrecording () {
 	recpid="$(cat /tmp/recordingpid)"
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
-    status-init
+	status-init
 	sleep 3
 	kill -9 "$recpid"
 	exit
 }
 
 askrecording () {
-    if [ $(xrandr --listactivemonitors | sed '1d' | wc -l) -eq 2 ]; then
-        choice=$(printf "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 4 -bw 4)
-    else
-        choice=$(printf "Screencast\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 3 -bw 4)
-    fi
+	if [ $(xrandr --listactivemonitors | sed '1d' | wc -l) -eq 2 ]; then
+		choice=$(printf "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 4 -bw 4)
+	else
+		choice=$(printf "Screencast\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 3 -bw 4)
+	fi
+	[ ! -z "$choice" ] && [ ! "$choice" = "Launch Webcam" ] && audio=$(printf "Yes\\nNo" | dmenu -i -c -l 2 -bw 4 -p "Record Microphone?")
 
-	case "$choice" in
-		Screencast\ Full)   screencast_full;;
-		Screencast\ Single) screencast_single;;
-        Screencast)         screencast_single;;
-		Record\ Webcam)     webcam;;
-        Launch\ Webcam)     mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot;;
-	esac
+	if [ ! -z "$audio" ]; then
+		case "$choice" in
+			Screencast\ Full)   screencast_full $audio;;
+			Screencast\ Single) screencast_single $audio;;
+			Screencast)         screencast_single $audio;;
+			Record\ Webcam)     webcam;;
+			Launch\ Webcam)     mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
+		esac
+	fi
 }
 
 asktoend () {
 	choice=$(printf "Stop Recording\\nLaunch Webcam" | dmenu -i -c -l 2 -bw 4)
-    case "$choice" in
-        Stop\ Recording) response=$(printf "No\\nYes" | dmenu -i -c -l 2 -bw 4 -p "Recording still active. End recording?");;
-        Launch\ Webcam)  mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot;;
-    esac
+	case "$choice" in
+		Stop\ Recording) response=$(printf "No\\nYes" | dmenu -i -c -l 2 -bw 4 -p "Recording still active. End recording?");;
+		Launch\ Webcam)  mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
+	esac
 	[ "$response" = "Yes" ] && killrecording || exit
 }
 
 case "$1" in
-    screencast) screencast;;
-    *)          [ -f /tmp/recordingpid ] && asktoend || askrecording;;
+	screencast) screencast_full;;
+	*)          [ -f /tmp/recordingpid ] && asktoend || askrecording;;
 esac

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Use this variable to for loop.
+# Use this variable for loop.
 READY=false
 
 select_env () {

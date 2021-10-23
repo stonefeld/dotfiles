@@ -1,6 +1,9 @@
 #!/bin/sh
 
-[ -f /tmp/recordingpid ] && recording=" 󰝥󰍬 " || recording=""
+notifications=" "
+[ $(dunstctl is-paused) = "true" ] && notifications="󰂛"
+
+[ -f /tmp/recordingpid ] && recording=" 󰝥 󰍬" || recording=" "
 klayout=$(xkb-switch -p)
 unread_mails=$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/unread)
 pacupgrade=$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)
@@ -13,14 +16,13 @@ brightness() {
 }
 
 volume() {
-	vol=$(amixer sget Master | sed "6!d;s/%//;s/\[//g;s/\]//g;s/\s\+/ /g")
-	volume=$(echo $vol | cut -d " " -f 5)
+	volume=$(amixer sget Pre-Amp | grep "Front Left: [0-9]\+ \[[0-9]\+%]" | sed "s/^\s\+//g;s/\s\+/ /g;s/\[//g;s/\]//g;s/%//g" | cut -d " " -f 4)
 
-	[ `echo "$volume >= 100" | bc` -eq 1 ] && icon="󰕾" || icon="󰖀"
-	[ `echo "$volume == 0" | bc` -eq 1 ] && icon="󰖁"
+	[ $(echo "$volume >= 100" | bc) -eq 1 ] && icon="󰕾" || icon="󰖀"
+	[ $(echo "$volume == 0" | bc) -eq 1 ] && icon="󰖁"
 
-	mute=$(echo $vol | cut -d " " -f 6)
-	[ $mute = "off" ] && echo "󰖁 Mute" || echo "$icon $volume%"
+	mute=$(amixer sget Master | grep "Playback [0-9]\+ \[[0-9]\+%]" | sed "s/^\s\+//g;s/\s\+/ /g" | cut -d " " -f 6)
+	[ $mute = "[off]" ] && echo "󰖁 Mute" || echo "$icon $volume%"
 }
 
 brightness=$(brightness)
@@ -68,5 +70,5 @@ color() {
 	echo "$fg$bg"
 }
 
-statusline="$(color bg ye)$recording$(color bg bg) $(color re bg)󰌌 $klayout $(color ye bg)󰇮 $unread_mails $(color gr bg)󰬦 $pacupgrade $(color bg vi) 󰤨 $(color bg pi) $wifi $(color w1 bg) $(color re bg)󱎖 $brightness $(color ye bg)$volume $(color gr bg)$battery $(color bg vi) 󱑂 $(color bg pi) $date "
+statusline="$(color pi bg)$recording $notifications$(color bg bg)   $(color re bg)󰌌 $klayout $(color ye bg)󰇮 $unread_mails $(color gr bg)󰬦 $pacupgrade $(color bg vi) 󰤨 $(color bg pi) $wifi $(color w1 bg) $(color re bg)󱎖 $brightness $(color ye bg)$volume $(color gr bg)$battery $(color bg vi) 󱑂 $(color bg pi) $date "
 xsetroot -name "$statusline"

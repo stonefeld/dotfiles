@@ -78,6 +78,7 @@ Most of the following packages should be in your distro's repository. In case of
 * Required to get the configurations above working:
   * `brave`
   * `fd`
+  * `ffmpeg`
   * `fzf`
   * `latex suite`
   * `libxft-bgra` *(\*\*)*
@@ -111,6 +112,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `papirus-folders-git` and configured to use the `nordic` colors *(\*\*)*
   * `papirus-icon-theme`
   * `nordic-theme` *(\*\*)*
+  * `xcursor-breeze` *(\*\*)*
 
 *(\*) = has to be compiled from source*
 

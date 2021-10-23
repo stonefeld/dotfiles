@@ -26,12 +26,12 @@ XTerm*.foreground: #ffffff
 dmenu*.font: Cascadia Code:size=11
 dmenu*.background:    #2e3440
 dmenu*.foreground:    #d8dee9
-dmenu*.selbackground: #4c566a
-dmenu*.selforeground: #88c0d0
+dmenu*.selbackground: #828dd1
+dmenu*.selforeground: #2e3440
 
 /* St setup */
 st*.font: Cascadia Code:size=12:antialias=true:autohint=true
-st*.font2: Material Design Icons:size=12:antialias=true:autohint=true
+st*.font2: Joy Pixels:size=12:antialias=true:autohint=true
 st*.alpha: 1
 st*.shell: /bin/zsh
 st*.color0:     #3b4252

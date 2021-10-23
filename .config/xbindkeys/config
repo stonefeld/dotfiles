@@ -1,43 +1,52 @@
 # System variables control
-"pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
-    XF86AudioRaiseVolume
-"pactl set-sink-volume @DEFAULT_SINK@ -10% && status-init"
-    XF86AudioLowerVolume
-"pactl set-sink-mute @DEFAULT_SINK@ toggle && status-init"
-    XF86AudioMute
+# "pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
+"amixer sset Pre-Amp 1+ && status-init"
+	XF86AudioRaiseVolume
+"amixer sset Pre-Amp 1- && status-init"
+	XF86AudioLowerVolume
+"amixer sset Master toggle && status-init"
+	XF86AudioMute
 "xbacklight -inc 10 && status-init"
-    XF86MonBrightnessUp
+	XF86MonBrightnessUp
 "xbacklight -dec 10 && status-init"
-    XF86MonBrightnessDown
+	XF86MonBrightnessDown
 
 # Utilities
 "touchpad"
-    Shift + F6
+	Shift + F6
 "rfkill unblock all && [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet"
-    Shift + F7
+	Shift + F7
 "screenshot"
-    Mod4 + Print
+	Mod4 + Print
 "screenshot 5"
-    Shift+Mod4 + Print
+	Shift+Mod4 + Print
 "screenshot -s"
     Shift+Mod4 + s
+"dunstctl close"
+	Control + space
+"dunstctl close-all"
+	Control+Shift + space
+"dunstctl history-pop"
+	Control+Shift + grave
+"dunstctl context"
+	Control+Shift + period
+"dunstctl set-paused toggle && status-init"
+	Control+Shift + comma
 
 # Launch applications
 "$BROWSER"
-    Shift+Mod4 + i
+	Shift+Mod4 + i
 "passmenu -c -l 20 -bw 4 -i"
-    Shift+Mod4 + k
+	Shift+Mod4 + k
 "st -c Floating -e pulsemixer"
-    Shift+Mod4 + p
-"$FILEMANAGER"
-    Mod4 + e
+	Shift+Mod4 + p
 "st -c Floating -g 120x34 -e newsboat"
-    Shift+Mod4+ n
+	Shift+Mod4+ n
 "dmemoji"
-    Shift+Mod4 + e
+	Shift+Mod4 + e
 "dmrecord"
-    Shift+Mod4 + r
+	Shift+Mod4 + r
 "dmnotes"
-    Shift+Mod4 + o
+	Shift+Mod4 + o
 "xkb-switch -n ; status-init"
-    Mod4 + a
+	Mod4 + a

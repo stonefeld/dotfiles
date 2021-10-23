@@ -27,11 +27,7 @@ virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{yellow}($(sed 's/\-[a-zA
 gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3 }
 
 # Setting up the normal prompt.
-if [ "$COLORSCHEME" = "nord" ]; then
-    PROMPT='%B%F{blue}[%f%F{cyan}%n%f%F{blue}@%f%F{cyan}%m%f %F{yellow}%$(gitdir)~%f%F{blue}]%f%b%F{white} '
-else
-    PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white} '
-fi
+PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '
 
 # The right prompt displays the virtual environment's name.
 RPROMPT='$(virtualenv_info)'
@@ -47,15 +43,22 @@ alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1
 alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > ${XDG_DATA_HOME:-$HOME/.local/share}/updates && status-init"
 
+# AUR helper shortcuts using fzf.
+if command -v paru &>/dev/null; then
+	alias parinstall="paru -Slq | fzf --height 0% --multi --preview 'paru -Si {1}' | xargs -ro paru -S --noconfirm"
+elif command -v yay &>/dev/null; then
+	alias yayinstall="yay -Slq | fzf --height 0% --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+fi
+
 # Utilities with fzf
-alias md='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
+alias cf='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 alias sr='less "$(find ~ -maxdepth 5 -type f | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 
 # Some ls command replacements.
 if ! command -v exa &>/dev/null; then
-    alias ls="ls -h --color=always --group-directories-first"
+	alias ls="ls -h --color=always --group-directories-first"
 else
-    alias ls="exa -g --color=always --group-directories-first"
+	alias ls="exa -g --color=always --group-directories-first"
 fi
 alias lf="vifm ."
 
@@ -86,14 +89,15 @@ alias gir='git remote'
 alias e="$EDITOR"
 alias ee="$EDITOR ."
 alias ef="fzf --preview 'cat {}'| xargs -ro $EDITOR"
+alias vim="echo -ne '\e[1 q' && vim -i NONE"
 
 # Python and pip shortcuts
 alias py='python3'
 alias pe='pipenv'
 alias pyenvinit='eval "$(pyenv init -)"'
-alias pip3update="sudo pip3 list --outdated | awk '{print $1}' | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade"
-alias pepyls='pipenv install --dev python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
+alias pip3update="sudo pip3 list --outdated | sed 's/\s\+/ /g' | cut -d ' ' -f 1 | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade"
 alias pippyls='pip install python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
+alias pepyls='pipenv install --dev python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
 
 # Show all manpages on a fzf table and select the one to read.
 alias mans='man -k . | fzf | sed "s/ \+/ /g" | cut -d " " -f 1 | xargs -r man'
@@ -126,6 +130,31 @@ alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
 # Manage dotfiles.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
+# File decompresser and extracter.
+ex() {
+	if [ ! -z "$*" ]; then
+		for i in $*; do
+			if [ -f "$i" ]; then
+				case $i in
+					*.tar.bz2) tar -xjf $i;;
+					*.tar.gz)  tar -xzf $i;;
+					*.rar)     unrar -x $i;;
+					*.gz)      gunzip $i;;
+					*.tar)     tar -xf $i;;
+					*.zip)     unzip $i;;
+					*.Z)       uncompress $i;;
+					*.7z)      7z -x $i;;
+					*)         echo "ex: cannot extract '$i': Filetype not supported";;
+				esac
+			else
+				echo "ex: cannot access '$i': No such file or directory"
+			fi
+		done
+	else
+		echo "ex [FILE...]"
+	fi
+}
+
 # ---------- KEYBINDINGS ---------- #
 bindkey '^P' up-line-or-history      # Ctrl+p
 bindkey '^N' down-line-or-history    # Ctrl+n
@@ -153,10 +182,10 @@ KEYTIMEOUT=5
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select () {
-    case $KEYMAP in
-        vicmd)      echo -ne '\e[1 q';;
-        viins|main) echo -ne '\e[5 q';;
-    esac
+	case $KEYMAP in
+		vicmd)      echo -ne '\e[1 q';;
+		viins|main) echo -ne '\e[5 q';;
+	esac
 }
 zle -N zle-keymap-select
 
