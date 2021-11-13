@@ -65,14 +65,22 @@ set wildmode=full
 
 " Configure graphical settings.
 set belloff=all
-set guifont=Liberation\ Mono:h9
-" set guifont=Cascadia\ Code:h9
 set guioptions=
 set guicursor+=i-ci:block-iCursor
 set guicursor+=r-cr:block-rCursor
 set guicursor+=a:blinkon0
 
+" Set font.
+if filereadable(expand('~') . '\_vimrc')
+  " set guifont=Liberation\ Mono:h9
+  set guifont=Cascadia\ Code:h9
+elseif filereadable(expand('~') . '/.vimrc')
+  " set guifont=Liberation\ Mono\ 11
+  set guifont=Cascadia\ Code\ 11
+endif
+
 " Highlight settings.
+set background=dark
 hi! Normal guifg=#cdaa7d guibg=#161616
 hi! Statement guifg=#cd950c guibg=NONE gui=none
 hi! link Type Statement

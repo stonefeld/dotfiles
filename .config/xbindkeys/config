@@ -1,10 +1,12 @@
 # System variables control
-# "pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
-"amixer sset Pre-Amp 1+ && status-init"
+# "amixer sset Pre-Amp 1+ && status-init"
+"pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
 	XF86AudioRaiseVolume
-"amixer sset Pre-Amp 1- && status-init"
+# "amixer sset Pre-Amp 1- && status-init"
+"pactl set-sink-volume @DEFAULT_SINK@ -10% && status-init"
 	XF86AudioLowerVolume
-"amixer sset Master toggle && status-init"
+# "amixer sset Master toggle && status-init"
+"pactl set-sink-mute @DEFAULT_SINK@ toggle && status-init"
 	XF86AudioMute
 "xbacklight -inc 10 && status-init"
 	XF86MonBrightnessUp
@@ -36,17 +38,5 @@
 # Launch applications
 "$BROWSER"
 	Shift+Mod4 + i
-"passmenu -c -l 20 -bw 4 -i"
-	Shift+Mod4 + k
-"st -c Floating -e pulsemixer"
-	Shift+Mod4 + p
-"st -c Floating -g 120x34 -e newsboat"
-	Shift+Mod4+ n
-"dmemoji"
-	Shift+Mod4 + e
-"dmrecord"
-	Shift+Mod4 + r
-"dmnotes"
-	Shift+Mod4 + o
 "xkb-switch -n ; status-init"
-	Mod4 + a
+	Alt + Shift_L

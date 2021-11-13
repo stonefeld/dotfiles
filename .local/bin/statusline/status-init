@@ -16,13 +16,14 @@ brightness() {
 }
 
 volume() {
-	volume=$(amixer sget Pre-Amp | grep "Front Left: [0-9]\+ \[[0-9]\+%]" | sed "s/^\s\+//g;s/\s\+/ /g;s/\[//g;s/\]//g;s/%//g" | cut -d " " -f 4)
+	# volume=$(amixer sget Pre-Amp | grep -oP "Front Left:[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g" | cut -d " " -f 2)
+	volume=$(amixer sget Master | grep -oP "Front Left:[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g" | cut -d " " -f 2)
 
 	[ $(echo "$volume >= 100" | bc) -eq 1 ] && icon="󰕾" || icon="󰖀"
 	[ $(echo "$volume == 0" | bc) -eq 1 ] && icon="󰖁"
 
 	mute=$(amixer sget Master | grep "Playback [0-9]\+ \[[0-9]\+%]" | sed "s/^\s\+//g;s/\s\+/ /g" | cut -d " " -f 6)
-	[ $mute = "[off]" ] && echo "󰖁 Mute" || echo "$icon $volume%"
+	[ "$mute" = "[off]" ] && echo "󰖁 Mute" || echo "$icon $volume%"
 }
 
 brightness=$(brightness)

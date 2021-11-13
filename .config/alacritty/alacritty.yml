@@ -10,8 +10,8 @@ env:
 
 window:
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
 
   dynamic_padding: true
   decorations: full
@@ -30,19 +30,19 @@ scrolling:
 
 font:
   normal:
-    family: SauceCodePro Nerd Font
+    family: Cascadia Code
     style: Regular
 
   bold:
-    family: SauceCodePro Nerd Font
+    family: Cascadia Code
     style: Bold
 
   italic:
-    family: SauceCodePro Nerd Font
+    family: Cascadia Code
     style: Italic
 
   bold_italic:
-    family: SauceCodePro Nerd Font
+    family: Cascadia Code
     style: Bold Italic
 
   size: 12.0
@@ -55,8 +55,7 @@ font:
     y: 0
 
 draw_bold_text_with_bright_colors: false
-background_opacity: 0.5
-# background_opacity: 1
+background_opacity: 1
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -71,8 +70,8 @@ cursor:
   #   - | Beam
   style: Block
   unfocused_hollow: true
-  thickness: 0.15
-  blinking: Never
+  thickness: 0.2
+  blinking: off
 
 live_config_reload: true
 
@@ -136,6 +135,10 @@ debug:
   print_events: false
 
 colors:
+  cursor:
+    text:         '#2e3440'
+    cursor:       '#d8dee9'
+
   primary:
     background:   '#2e3440'
     foreground:   '#d8dee9'

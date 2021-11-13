@@ -6,24 +6,33 @@ templates_folder="${TEMPLATES_FOLDER:-$XDG_DATA_HOME/templates}"
 
 while [ "$#" -gt "0" ]; do
 	case "$1" in
-		-p) case "$2" in
+		-p|--pdf_reader)
+			case "$2" in
 				-*) echo "dmnotes: -p flag got an unexpected parameter"
 					exit;;
 			esac
+
+			[ ! $(command -v "$2") ] && echo "$SHELL: command not found: $2" && exit
 			pdf_reader="$2"
 			shift 2;;
 
-		-f) case "$2" in
+		-f|--notes_folder)
+			case "$2" in
 				-*) echo "dmnotes: -f flag got an unexpected parameter"
 					exit;;
 			esac
+
+			[ ! -d "$2" ] && echo "dmnotes: cannot access '$2': No such file or directory" && exit
 			notes_folder="$2"
 			shift 2;;
 
-		-t) case "$2" in
+		-t|--templates_folder)
+			case "$2" in
 				-*) echo "dmnotes: -t flag got an unexpected parameter"
 					exit;;
 			esac
+
+			[ ! -d "$2" ] && echo "dmnotes: cannot access '$2': No such file or directory" && exit
 			templates_folder="$2"
 			shift 2;;
 
@@ -31,7 +40,10 @@ while [ "$#" -gt "0" ]; do
 			echo "dmnotes [-p {pdf_reader}] [-f {notes_folder}] [-t {templates_folder}]"
 			exit;;
 
-		*)  shift;;
+		*)
+			echo "dmnotes: invalid option -- '$1'"
+			echo "Try 'dmnotes --help' for more information."
+			exit;;
 	esac
 done
 

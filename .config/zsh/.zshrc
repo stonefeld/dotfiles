@@ -90,6 +90,7 @@ alias e="$EDITOR"
 alias ee="$EDITOR ."
 alias ef="fzf --preview 'cat {}'| xargs -ro $EDITOR"
 alias vim="echo -ne '\e[1 q' && vim -i NONE"
+alias gvim="gvim -i NONE"
 
 # Python and pip shortcuts
 alias py='python3'
@@ -141,7 +142,7 @@ ex() {
 					*.rar)     unrar -x $i;;
 					*.gz)      gunzip $i;;
 					*.tar)     tar -xf $i;;
-					*.zip)     unzip $i;;
+					*.zip)     unzip $i -d ./${i%.*};;
 					*.Z)       uncompress $i;;
 					*.7z)      7z -x $i;;
 					*)         echo "ex: cannot extract '$i': Filetype not supported";;
@@ -168,7 +169,6 @@ bindkey '^[[H' beginning-of-line     # Home
 bindkey '^[[4~' end-of-line          # End
 bindkey '^[[4h' overwrite-mode       # Insert
 bindkey '^[[P' delete-char           # Delete
-bindkey '^H' backward-delete-word    # Ctrl+Backspace
 bindkey '^[[Z' reverse-menu-complete # Shift+Tab
 bindkey '^[[5~' beginning-of-history # PageUp
 bindkey '^[[6~' end-of-history       # PageDown
