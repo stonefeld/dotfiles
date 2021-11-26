@@ -1,16 +1,16 @@
 # System variables control
-# "amixer sset Pre-Amp 1+ && status-init"
-"pactl set-sink-volume @DEFAULT_SINK@ +10% && status-init"
+# "amixer sset Pre-Amp 1+ && statusline"
+"pactl set-sink-volume @DEFAULT_SINK@ +10% && statusline"
 	XF86AudioRaiseVolume
-# "amixer sset Pre-Amp 1- && status-init"
-"pactl set-sink-volume @DEFAULT_SINK@ -10% && status-init"
+# "amixer sset Pre-Amp 1- && statusline"
+"pactl set-sink-volume @DEFAULT_SINK@ -10% && statusline"
 	XF86AudioLowerVolume
-# "amixer sset Master toggle && status-init"
-"pactl set-sink-mute @DEFAULT_SINK@ toggle && status-init"
+# "pactl set-sink-mute @DEFAULT_SINK@ toggle && statusline"
+"amixer sset Master toggle && statusline"
 	XF86AudioMute
-"xbacklight -inc 10 && status-init"
+"xbacklight -inc 10 && statusline"
 	XF86MonBrightnessUp
-"xbacklight -dec 10 && status-init"
+"xbacklight -dec 10 && statusline"
 	XF86MonBrightnessDown
 
 # Utilities
@@ -32,11 +32,11 @@
 	Control+Shift + grave
 "dunstctl context"
 	Control+Shift + period
-"dunstctl set-paused toggle && status-init"
+"dunstctl set-paused toggle && statusline"
 	Control+Shift + comma
 
 # Launch applications
 "$BROWSER"
 	Shift+Mod4 + i
-"xkb-switch -n ; status-init"
+"xkb-switch -n ; statusline"
 	Alt + Shift_L

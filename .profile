@@ -6,7 +6,7 @@
 #   |_|
 
 # Relevant global variables.
-export PATH=$PATH:~/.local/bin/:~/.local/bin/statusline/:~/.local/share/cargo/bin/
+export PATH=$PATH:~/.local/bin/:~/.local/share/cargo/bin/
 if command -v zsh &>/dev/null; then
 	export SHELL=/bin/zsh
 else

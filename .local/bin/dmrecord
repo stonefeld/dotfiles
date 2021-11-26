@@ -20,7 +20,7 @@ screencast_full () {
 		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
 	fi
 	echo $! > /tmp/recordingpid
-	status-init
+	statusline
 }
 
 screencast_single () {
@@ -43,7 +43,7 @@ screencast_single () {
 		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
 	fi
 	echo $! > /tmp/recordingpid
-	status-init
+	statusline
 }
 
 webcam () {
@@ -65,14 +65,14 @@ webcam () {
 		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
 	fi
 	echo $! > /tmp/recordingpid
-	status-init
+	statusline
 }
 
 killrecording () {
 	recpid="$(cat /tmp/recordingpid)"
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
-	status-init
+	statusline
 	sleep 3
 	kill -9 "$recpid"
 	exit

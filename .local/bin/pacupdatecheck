@@ -43,4 +43,4 @@ else
     canberra-gtk-play -i dialog-warning
 fi
 
-status-init
+statusline

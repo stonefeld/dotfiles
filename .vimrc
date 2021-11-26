@@ -17,8 +17,8 @@ set noundofile
 set nobackup
 
 " Scroll through the buffer 8 lines before the sides of the window.
-set scrolloff=8
-set sidescrolloff=8
+set scrolloff=3
+set sidescrolloff=3
 
 " Allow opening another buffer if the current one has not been saved
 " and disable start of line when jumping to the top of the file.
@@ -34,6 +34,7 @@ set smarttab
 " Configure indentation.
 set autoindent
 set cindent
+set cinoptions=(0,l1,t0,=0
 
 " Allow backspace over end of line and start of line.
 set backspace=indent,eol,start
@@ -108,8 +109,8 @@ hi! link TabLineFill StatusLineNC
 hi! VertSplit guifg=#afafaf guibg=#afafaf
 hi! MatchParen guifg=#ff0000 guibg=NONE
 hi! ModeMsg guifg=#cd950c gui=bold
-hi! Pmenu guifg=#000000 guibg=#8b7355
-hi! PmenuSel guifg=#000000
+hi! Pmenu guifg=#ffffff guibg=#262626
+hi! PmenuSel guifg=#000000 guibg=#a6a6a6
 
 " If no character is present before the cursor act as normal tab, otherwise
 " cycle the completion tags.
@@ -128,8 +129,9 @@ endfu
 " Recursive search for keywords.
 fu! RecursiveSearch()
   let search_term=input("Enter search term: ")
-  if search_term
-    exe "vimgrep /" . search_term . "/ ./**"
+  if len(search_term) != 0
+    exe "vimgrep /" . search_term . "/ **/*.cpp"
+    exe "copen"
   endif
 endfu
 
@@ -137,8 +139,8 @@ endfu
 fu! TabSize()
   let current_tabsize=&tabstop
   let tabsize=input("Enter tab size (current: " . current_tabsize . "): ")
-  if tabsize
-    exe "set tabstop=" . tabsize " softtabstop=" . tabsize " shiftwidth=" . tabsize
+  if len(tabsize) != 0
+    exe "set tabstop=" . tabsize . " softtabstop=" . tabsize . " shiftwidth=" . tabsize
   endif
 endfu
 
@@ -158,7 +160,7 @@ nnoremap <silent> <C-h> :bp<CR>
 nnoremap <silent> <C-k> :bp<CR>:bd #<CR>
 
 " Recursive search for keywords and set change tabsize easily.
-nnoremap <silent> <leader>s :call RecursiveSearch() <bar> redraw!<CR>
+nnoremap <silent> <leader>s :call RecursiveSearch()<bar> redraw!<CR>
 nnoremap <silent> <leader>ts :call TabSize() <bar> redraw!<CR>
 
 nnoremap <silent> <leader>ta :silent exe "!ctags --recurse=yes --exclude=.git --exclude=build " . getcwd()<CR>

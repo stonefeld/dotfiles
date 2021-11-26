@@ -28,7 +28,7 @@ xset s off
 touchscreen
 
 while true; do
-	status-init
+	statusline
 	sleep 10s
 done &
 
