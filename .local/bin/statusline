@@ -23,7 +23,7 @@ wifi=$(iwgetid -r)
 vol() {
 	info=$(amixer sget Master | grep -oP "Front Left:[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g")
 	mute=$(echo $info | cut -d " " -f 3)
-	[ "$mute" = "off" ] && echo "󰖁 Mute" && exit
+	[ "$mute" = "off" ] && echo "󰖁 Mute" && return
 
 	vol=$(echo $info | cut -d " " -f 2)
 	[ "$vol" -ge 100 ] && icon="󰕾" || icon="󰖀"
@@ -38,7 +38,7 @@ br="$(( $(sed '1!d' /sys/class/backlight/*/actual_brightness) * 100 / $(sed '1!d
 bat() {
 	per=$(cat /sys/class/power_supply/BAT0/capacity)
 	char=$(cat /sys/class/power_supply/BAT0/status)
-	[ "$char" = "Full" -o "$char" = "Charging" ] && echo "󰂄 $per%" && exit
+	[ "$char" = "Full" -o "$char" = "Charging" ] && echo "󰂄 $per%" && return
 
 	bat=$(( $per / 10 ))
 	icon="󰂃"
@@ -102,5 +102,5 @@ color() {
 	echo "$fg$bg"
 }
 
-sl=" $(color pi bg)$recording $notitf$(color bg bg)   $(color re bg)󰌌 $lay $(color ye bg)󰇮 $mails $(color gr bg)󰬦 $pack $(color bg vi) 󰤨 $(color bg pi) $wifi $(color w1 bg) $(color re bg)󱎖 $br% $(color ye bg)$(vol) $(color gr bg)$(bat) $(color bg vi) 󱑂 $(color bg pi) $date "
+sl=" $(color pi bg)$rec $notitf$(color bg bg)   $(color re bg)󰌌 $lay $(color ye bg)󰇮 $mails $(color gr bg)󰬦 $pack $(color bg vi) 󰤨 $(color bg pi) $wifi $(color w1 bg) $(color re bg)󱎖 $br% $(color ye bg)$(vol) $(color gr bg)$(bat) $(color bg vi) 󱑂 $(color bg pi) $date "
 xsetroot -name "$sl"

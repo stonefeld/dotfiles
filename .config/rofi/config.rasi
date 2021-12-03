@@ -5,7 +5,6 @@ configuration {
 	m: "eDP1";
 	show-icons: true;
 	icon-theme: "Papirus";
-	theme: "applauncher";
 
 	combi-modi: "";
 	sort: false;
@@ -68,3 +67,4 @@ configuration {
 	me-select-entry: "MouseSecondary";
 	me-accept-entry: "MousePrimary";
 }
+@theme "applauncher"

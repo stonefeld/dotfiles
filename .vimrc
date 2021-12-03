@@ -1,3 +1,9 @@
+"        _
+" __   _(_)_ __ ___  _ __ ___
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__
+" (_)_/ |_|_| |_| |_|_|  \___|
+
 " Enable syntax highlighting.
 syntax on
 
@@ -151,6 +157,21 @@ elseif filereadable('build.sh')
   let &makeprg='build.sh'
 endif
 
+" Toggle quickfix window.
+fu! QFixToggle(forced)
+  if exists('g:qfix_win') && a:forced == 0
+    exe 'ccl'
+    unlet g:qfix_win
+  else
+    if exists('g:lspconfig')
+      exe 'lua vim.lsp.diagnostic.set_qflist()'
+    else
+      exe 'copen'
+    endif
+    let g:qfix_win = bufnr('$')
+  endif
+endfu
+
 " Setting the leader key.
 let mapleader=" "
 
@@ -166,8 +187,7 @@ nnoremap <silent> <leader>ts :call TabSize() <bar> redraw!<CR>
 nnoremap <silent> <leader>ta :silent exe "!ctags --recurse=yes --exclude=.git --exclude=build " . getcwd()<CR>
 
 " Quickfixlist manipulation.
-nnoremap <silent> <leader>o :copen<CR>
-nnoremap <silent> <leader>q :cclose<CR>
+nnoremap <silent> <leader>q :call QFixToggle(0)<CR>
 nnoremap <silent> <leader>n :try<bar>cnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>cfirst<bar>endtry<CR>
 nnoremap <silent> <leader>p :try<bar>cprevious<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>clast<bar>endtry<CR>
 

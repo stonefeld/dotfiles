@@ -79,22 +79,23 @@ killrecording () {
 }
 
 askrecording () {
-	if [ $(xrandr --listactivemonitors | sed '1d' | wc -l) -eq 2 ]; then
+	if [ "$(xrandr --listactivemonitors | grep -oP 'Monitors: \K.*')" -eq 2 ]; then
 		choice=$(printf "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 4 -bw 4)
 	else
 		choice=$(printf "Screencast\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 3 -bw 4)
 	fi
-	[ ! -z "$choice" ] && [ ! "$choice" = "Launch Webcam" ] && audio=$(printf "Yes\\nNo" | dmenu -i -c -l 2 -bw 4 -p "Record Microphone?")
 
-	if [ ! -z "$audio" ]; then
-		case "$choice" in
-			Screencast\ Full)   screencast_full $audio;;
-			Screencast\ Single) screencast_single $audio;;
-			Screencast)         screencast_single $audio;;
-			Record\ Webcam)     webcam;;
-			Launch\ Webcam)     mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
-		esac
-	fi
+	audio="No"
+	[ ! -z "$choice" -a ! "$choice" = "Launch Webcam" ] && audio=$(printf "Yes\\nNo" | dmenu -i -c -l 2 -bw 4 -p "Record Microphone?")
+	[ -z "$audio" ] && exit
+
+	case "$choice" in
+		Screencast\ Full)   screencast_full $audio;;
+		Screencast\ Single) screencast_single $audio;;
+		Screencast)         screencast_single $audio;;
+		Record\ Webcam)     webcam;;
+		Launch\ Webcam)     mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
+	esac
 }
 
 asktoend () {

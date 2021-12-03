@@ -1,3 +1,9 @@
+"        _  __
+" __   _(_)/ _|_ __ ___  _ __ ___
+" \ \ / / | |_| '_ ` _ \| '__/ __|
+"  \ V /| |  _| | | | | | | | (__
+"   \_/ |_|_| |_| |_| |_|_|  \___|
+
 set vicmd=nvim
 colorscheme Custom
 " fileviewer *[^/] pygmentize -O style=monokai -f console256 -g
@@ -30,7 +36,7 @@ set incsearch
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
-set scrolloff=4
+set scrolloff=3
 if !has('win')
     set slowfs=curlftpfs
 endif
@@ -74,16 +80,11 @@ nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
 nnoremap A cw
 
-nnoremap T :!st -e zsh &<CR>
-nnoremap ,w :set wrap!<CR>
-
 nnoremap % :touch<space>
-nnoremap di :mkdir<space>
+nnoremap di :mkdir<space>""<Left>
 
 nnoremap J 5j
 nnoremap K 5k
-nnoremap <M-C-Right> <C-w>5<
-nnoremap <M-C-Left> <C-w>5>
 
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
@@ -176,6 +177,7 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
     \ {View in gpicview}
     \ gpicview %c,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
+    \ identify -verbose %f,
     \ file %f
 
 " OpenRaster

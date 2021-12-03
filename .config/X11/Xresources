@@ -33,7 +33,6 @@ dmenu*.selforeground: #2e3440
 st*.font: Cascadia Code:size=12:antialias=true:autohint=true
 st*.font2: Joy Pixels:size=12:antialias=true:autohint=true
 st*.alpha: 1
-st*.shell: /bin/zsh
 st*.color0:     #3b4252
 st*.color8:     #4c566a
 st*.color1:     #bf616a
