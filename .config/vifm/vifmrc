@@ -90,6 +90,8 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <M-o> :sync %c<CR>
 
+nnoremap yi :!xclip -se c -t image/png -i %c<CR>
+
 " Interaction with system clipboard
 if has('win')
     " Yank current directory path to Windows clipboard with forward slashes
@@ -173,12 +175,15 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
     \ {View in sxiv}
-    \ sxiv %d -n $(ls | sed '/%c/q' | wc -l) &,
+    \ sxiv %d -n $(ls | sed "/%c/q" | wc -l) &,
     \ {View in gpicview}
     \ gpicview %c,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-    \ identify -verbose %f,
-    \ file %f
+    \ vifmimg draw %px %py %pw %ph %c
+    \ %pc
+    \ vifmimg clear
+    " \ identify -verbose %f,
+    " \ file %f
 
 " OpenRaster
 filextype *.ora
