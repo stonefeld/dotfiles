@@ -19,7 +19,7 @@ export BROWSER="brave"
 export NOTES_FOLDER="$HOME/docs/notes"
 export TEMPLATES_FOLDER="$XDG_DATA_HOME"/templates
 export PDF_READER="zathura"
-export LC_COLLATE="C"
+export LC_COLLATE="en_US.utf8"
 
 # XDG directories.
 export XDG_CACHE_HOME="$HOME"/.cache/
