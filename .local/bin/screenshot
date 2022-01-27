@@ -1,13 +1,22 @@
 #!/bin/sh
 
-filename=$(echo "screenshot_$(date '+%Y_%m_%d_%H_%M_%S').png")
+filename=$(echo "screenshot-$(date '+%Y_%m_%d-%H_%M_%S').png")
+destination="$HOME/imgs/screenshots/"
 
-(if [ $# -eq 1 ]; then
-    if [ "$1" = "-s" ]; then
-        scrot -s -f "$HOME/imgs/screenshots/$filename"
-    else
-        scrot -d $1 "$HOME/imgs/screenshots/$filename"
-    fi
+[ -d "$destination" ] && mkdir -p "$destination"
+
+if [ $# -eq 1 ]; then
+	if [ "$1" = "-s" ]; then
+		scrot -s -f "$destination/$filename" 2>/dev/null
+	else
+		scrot -d $1 "$destination/$filename" 2>/dev/null
+	fi
 else
-    scrot "$HOME/imgs/screenshots/$filename"
-fi) && canberra-gtk-play -i device-added && xclip -se c -t image/png -i "$HOME/imgs/screenshots/$filename" && dunstify -a scrot -I $HOME/imgs/screenshots/$filename "Copied to clipboard" "Screenshot $filename copied to clipboard"
+	scrot "$destination/$filename" 2>/dev/null
+fi
+
+[ "$?" -ne 0 ] && exit
+
+canberra-gtk-play -i device-added && \
+	xclip -se c -t image/png -i "$destination/$filename"; \
+	dunstify -a scrot -I "$destination/$filename" "Copied to clipboard" "Screenshot $filename copied to clipboard"

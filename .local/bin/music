@@ -1,0 +1,2 @@
+#!/bin/sh
+[ $(pgrep -x mpd) ] && ncmpcpp || (mpd && ncmpcpp)

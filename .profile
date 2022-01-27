@@ -5,6 +5,11 @@
 # (_) .__/|_|  \___/|_| |_|_|\___|
 #   |_|
 
+# XDG directories.
+export XDG_CACHE_HOME="$HOME"/.cache
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_DATA_HOME="$HOME"/.local/share
+
 # Relevant global variables.
 export PATH=$PATH:~/.local/bin/:~/.local/share/cargo/bin/
 if command -v zsh &>/dev/null; then
@@ -20,11 +25,6 @@ export NOTES_FOLDER="$HOME/docs/notes"
 export TEMPLATES_FOLDER="$XDG_DATA_HOME"/templates
 export PDF_READER="zathura"
 export LC_COLLATE="en_US.utf8"
-
-# XDG directories.
-export XDG_CACHE_HOME="$HOME"/.cache/
-export XDG_CONFIG_HOME="$HOME"/.config/
-export XDG_DATA_HOME="$HOME"/.local/share/
 
 # Some default options.
 export LESSHISTFILE=-

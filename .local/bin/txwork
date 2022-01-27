@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# If no argument is passed, select one from the already existing ones.
+if [ -z "$*" ]; then
+	session=$(tmux list-sessions | fzf | cut -d : -f 1)
+	tmux attach-session -t "$session" && exit
+fi
+
+# Get the session name.
+session="$1"
+shift
+
+# Check if the session already exists and attach it if true.
+tmux list-sessions | egrep "\<$session\>" &>/dev/null
+[ $? -eq 0 ] && tmux attach-session -t "$session" && exit
+
+# Move to the working directory.
+cd "$1"
+shift
+
+# Create the session and rename the first window.
+tmux new-session -d -s "$session"
+tmux rename-window -t "$session":1 "$1"
+shift
+
+# Create a counter for the widnow ids.
+counter=2
+
+# Create a window for each following argument.
+for i in $*; do
+	tmux new-window -t "$session":$counter -n "$i"
+	let counter+=1
+done
+
+# Destroy the counter.
+unset counter
+
+# Attach the created session.
+tmux attach-session -t "$session":1

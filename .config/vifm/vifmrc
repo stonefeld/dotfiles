@@ -116,6 +116,7 @@ endif
 " Pdf
 filextype {*.pdf},<application/pdf>
     \ tabbed -c zathura %c %i -e &,
+    \ zathura %c &,
     \ apvlv %c,
     \ xpdf %c
 fileviewer {*.pdf},<application/pdf>
@@ -134,13 +135,13 @@ filextype {*.djvu},<image/vnd.djvu>
     \ zathura %f,
 
 " Audio
-filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus},
-    \<audio/*>
+filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.oga},<audio/*>
     \ {Play using ffplay}
     \ ffplay -nodisp -autoexit %c,
     \ {Play using MPlayer}
     \ mplayer %f,
-fileviewer {*.mp3},<audio/mpeg> mp3info
+fileviewer {*.wav,*.mp3,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.oga},<audio/mpeg>
+    \ mp3info
 fileviewer {*.flac},<audio/flac> soxi
 
 " Video

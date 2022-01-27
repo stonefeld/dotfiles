@@ -1,12 +1,14 @@
 # System variables control
 # "amixer sset Pre-Amp 1+ && statusline"
-"pactl set-sink-volume @DEFAULT_SINK@ +10% && statusline"
+# "pactl set-sink-volume @DEFAULT_SINK@ +10% && statusline"
+"(([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed '1q') ]) && pactl set-sink-volume @DEFAULT_SINK@ +10% || amixer sset Master 10%+) && statusline"
 	XF86AudioRaiseVolume
 # "amixer sset Pre-Amp 1- && statusline"
-"pactl set-sink-volume @DEFAULT_SINK@ -10% && statusline"
+# "pactl set-sink-volume @DEFAULT_SINK@ -10% && statusline"
+"(([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed '1q') ]) && pactl set-sink-volume @DEFAULT_SINK@ -10% || amixer sset Master 10%-) && statusline"
 	XF86AudioLowerVolume
 # "pactl set-sink-mute @DEFAULT_SINK@ toggle && statusline"
-"amixer sset Master toggle && statusline"
+"(([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed '1q') ]) && amixer -D pulse sset Master toggle || amixer sset Master toggle) && statusline"
 	XF86AudioMute
 "xbacklight -inc 10 && statusline"
 	XF86MonBrightnessUp
@@ -14,10 +16,8 @@
 	XF86MonBrightnessDown
 
 # Utilities
-"touchpad"
-	Shift + F6
 "rfkill unblock all && [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet"
-	Shift + F7
+	Shift + F8
 "screenshot"
 	Mod4 + Print
 "screenshot 5"
