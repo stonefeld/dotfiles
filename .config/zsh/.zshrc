@@ -60,7 +60,7 @@ alias sr='less "$(find ~ -maxdepth 5 -type f | sed "/\.git/d;/\.venv/d;/node_mod
 
 # Some ls command replacements.
 if ! command -v exa &>/dev/null; then
-	alias ls="ls -h --color=always --group-directories-first"
+	alias ls="LC_COLLATE=C ls -h --color=always --group-directories-first"
 else
 	alias ls="exa -g --color=always --group-directories-first"
 fi

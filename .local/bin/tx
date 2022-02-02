@@ -3,7 +3,11 @@
 # If no argument is passed, select one from the already existing ones.
 if [ -z "$*" ]; then
 	session=$(tmux list-sessions | fzf | cut -d : -f 1)
-	tmux attach-session -t "$session" && exit
+	if [ -z "$TMUX" ]; then
+		tmux attach-session -t "$session" && exit
+	else
+		tmux switch-client -t "$session" && exit
+	fi
 fi
 
 # Get the session name.
@@ -12,9 +16,16 @@ shift
 
 # Check if the session already exists and attach it if true.
 tmux list-sessions | egrep "\<$session\>" &>/dev/null
-[ $? -eq 0 ] && tmux attach-session -t "$session" && exit
+if [ "$?" -eq 0 ]; then
+	if [ -z "$TMUX" ]; then
+		tmux attach-session -t "$session" && exit
+	else
+		tmux switch-client -t "$session" && exit
+	fi
+fi
 
 # Move to the working directory.
+[ ! -d "$1" ] && echo "txwork: cannot access '$1': No such file or directory" && exit
 cd "$1"
 shift
 
@@ -36,4 +47,8 @@ done
 unset counter
 
 # Attach the created session.
-tmux attach-session -t "$session":1
+if [ -z "$TMUX" ]; then
+	tmux attach-session -t "$session":1 && exit
+else
+	tmux switch-client -t "$session":1 && exit
+fi

@@ -227,7 +227,6 @@ aug CleanBuffer
   au FileType c,cpp au BufWritePre <buffer> %s/while(/while (/e
   au FileType c,cpp au BufWritePre <buffer> %s/switch(/switch (/e
   au FileType c,cpp au BufWritePre <buffer> %s/}break;/} break;/e
-  au FileType c,cpp au BufWritePre <buffer> %s/){/) {/e
 aug END
 
 " Highlight some keywords when editing C/C++ files.
