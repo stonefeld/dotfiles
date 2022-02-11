@@ -19,7 +19,7 @@ fi
 
 lxpolkit &
 nitrogen --restore &
-picom --config "${XDG_CONFIG_HOME:-$HOME/.config}"/picom/picom_dwm.conf &
+picom &
 dunst -config "${XDG_CONFIG_HOME:-$HOME/.config}"/dunst/dunstrc_dwm &
 xss-lock slock &
 xset r rate 220 30
