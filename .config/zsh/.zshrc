@@ -38,9 +38,9 @@ RPROMPT='$(virtualenv_info)'
 
 # ---------- ALIASES ---------- #
 # System power.
-alias sn="shutdown now"
-alias re="reboot"
-alias ss="systemctl suspend"
+alias psn="shutdown now"
+alias pre="reboot"
+alias pss="systemctl suspend"
 
 # Pacman shortcuts.
 alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"

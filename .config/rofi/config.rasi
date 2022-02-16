@@ -1,8 +1,6 @@
 configuration {
 	modi: "";
 	font: "Ubuntu Sans 14";
-	terminal: "alacritty";
-	m: "eDP1";
 	show-icons: true;
 	icon-theme: "Papirus";
 
@@ -12,9 +10,9 @@ configuration {
 	case-sensitive: false;
 	sidebar-mode: false;
 	matching: "normal";
-	/* hide-scrollbar: false; */
-	/* fullscreen: false; */
-	/* scrollbar-width: 8; */
+	hide-scrollbar: false;
+	fullscreen: false;
+	scrollbar-width: 8;
 	scroll-method: 0;
 
 	run-command: "{cmd}";
@@ -34,8 +32,8 @@ configuration {
 	drun-use-desktop-cache: false;
 	drun-reload-desktop-cache: false;
 
-	click-to-exit: true;
-	/* show-match: true; */
+	click-to-exit: false;
+	show-match: true;
 
 	disable-history: false;
 	max-history-size: 25;
@@ -45,21 +43,23 @@ configuration {
 	display-run: "Run";
 	display-drun: "Apps";
 
-	kb-primary-paste: "Control+V,Shift+Insert";
-	kb-clear-line: "Control+w";
+	kb-primary-paste: "Control+V";
+	kb-clear-line: "Control+u";
 	kb-move-front: "Control+a";
 	kb-move-end: "Control+e";
-	kb-move-word-back: "Alt+b";
-	kb-move-word-forward: "Alt+f";
-	kb-move-char-back: "Control+b";
-	kb-move-char-forward: "Control+f";
-	kb-remove-char-back: "BackSpace,Shift+BackSpace";
+	kb-move-word-back: "Control+Left";
+	kb-move-word-forward: "Control+Right";
+	kb-move-char-back: "Left";
+	kb-move-char-forward: "Right";
+	kb-remove-char-back: "BackSpace";
+	kb-remove-word-back: "Control+w,Control+BackSpace";
 	kb-remove-to-eol: "";
-	kb-accept-entry: "Control+m,Return,KP_Enter";
-	kb-row-left: "Left,Control+h";
-	/* kb-row-right: "Right,Control+l"; */
-	kb-row-up: "Up,Control+k";
-	kb-row-down: "Down,Control+j";
+	kb-remove-to-sol: "";
+	kb-accept-entry: "Return,KP_Enter";
+	kb-row-left: "";
+	kb-row-right: "";
+	kb-row-up: "Up,Control+p";
+	kb-row-down: "Down,Control+n";
 	ml-row-left: "ScrollLeft";
 	ml-row-right: "ScrollRight";
 	ml-row-up: "ScrollUp";
@@ -67,4 +67,3 @@ configuration {
 	me-select-entry: "MouseSecondary";
 	me-accept-entry: "MousePrimary";
 }
-@theme "applauncher"

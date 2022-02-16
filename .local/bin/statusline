@@ -1,13 +1,15 @@
 #!/bin/sh
 
+COLORED=false
+
 # Check if a screencast is running and display an icon to indicate its state.
-[ -f /tmp/recordingpid ] && rec="󰝥 󰍬"
+[ -f /tmp/recordingpid ] && rec=" 󰝥 󰍬 | "
 
 # Check if notifications are muted.
-[ "$(dunstctl is-paused)" = "true" ] && notitf="󰂛"
+[ "$(dunstctl is-paused)" = "true" ] && notitf="󰂛 | "
 
-# Dispaly current keyboard layout.
-lay=$(xkb-switch -p)
+# Display the kernel version.
+kern=$(uname -r)
 
 # Display unread emails.
 mails=$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/unread)
@@ -89,7 +91,8 @@ color() {
 		"vi") fg="^c#6c77bb^" ;;
 	esac
 	case "$2" in
-		"bg") bg="^b#2e3440^" ;;
+		"bg") bg="^b#292d3e^" ;;
+		"bl") bg="^b#2e3440^" ;;
 		"g1") bg="^b#3b4252^" ;;
 		"g2") bg="^b#4c566a^" ;;
 		"g3") bg="^b#616e88^" ;;
@@ -109,5 +112,9 @@ color() {
 	echo "$fg$bg"
 }
 
-sl=" $(color pi bg)$rec $notitf$(color bg bg)   $(color re bg)󰌌 $lay $(color ye bg)󰇮 $mails $(color gr bg)󰬦 $pack $(color bg vi) 󰤨 $(color bg pi) $wifi $(color w1 bg) $(color re bg)󱎖 $br% $(color ye bg)$(vol) $(color gr bg)$(bat) $(color bg vi) 󱑂 $(color bg pi) $date "
+if [ "$COLORED" = true ]; then
+	sl=" $(color pi bg)$rec $notitf$(color bg bg)   $(color re bg)󰻀 $kern $(color ye bg)󰇮 $mails $(color gr bg)󰬦 $pack $(color bg vi) 󰤨 $(color bg pi) $wifi $(color w1 bg) $(color re bg)󱎖 $br% $(color ye bg)$(vol) $(color gr bg)$(bat) $(color bg vi) 󱑂 $(color bg pi) $date "
+else
+	sl="$rec$notitf󰻀 $kern 󰇮 $mails 󰬦 $pack | 󰤨 $wifi | 󱎖 $br% $(vol) $(bat) | 󱑂 $date"
+fi
 xsetroot -name "$sl"

@@ -23,17 +23,16 @@ picom &
 dunst -config "${XDG_CONFIG_HOME:-$HOME/.config}"/dunst/dunstrc_dwm &
 xss-lock slock &
 xset r rate 220 30
-xset s off
-
-while true; do
-	statusline
-	sleep 10s
-done &
+# xset s off
 
 session=${1:-dwm}
 
 case $session in
-	dwm   ) exec dwm;;
+	dwm   ) while true; do
+	            statusline
+	            sleep 10s
+	        done &
+	        exec dwm;;
 	qtile ) exec qtile start;;
 	plasma) exec startplasma-x11;;
 	*     ) exec $1;;

@@ -1,13 +1,23 @@
 #!/bin/bash
 
+# If tmux is running on current terminal just switch the client.
+attach_tmux() {
+	if [ -z "$TMUX" ]; then
+		tmux attach-session -t "$1"
+	else
+		tmux switch-client -t "$1"
+	fi
+}
+
 # If no argument is passed, select one from the already existing ones.
 if [ -z "$*" ]; then
-	session=$(tmux list-sessions | fzf | cut -d : -f 1)
-	if [ -z "$TMUX" ]; then
-		tmux attach-session -t "$session" && exit
+	if pgrep tmux &>/dev/null; then
+		session=$(tmux list-sessions | fzf | cut -d : -f 1 &>/dev/null)
+		attach_tmux "$session"
 	else
-		tmux switch-client -t "$session" && exit
+		echo "tx: no tmux server running"
 	fi
+	exit
 fi
 
 # Get the session name.
@@ -15,23 +25,17 @@ session="$1"
 shift
 
 # Check if the session already exists and attach it if true.
-tmux list-sessions | egrep "\<$session\>" &>/dev/null
-if [ "$?" -eq 0 ]; then
-	if [ -z "$TMUX" ]; then
-		tmux attach-session -t "$session" && exit
-	else
-		tmux switch-client -t "$session" && exit
-	fi
-fi
+(tmux list-sessions | egrep "\<$session\>") &>/dev/null
+[ "$?" -eq 0 ] && attach_tmux "$session" && exit
 
 # Move to the working directory.
-[ ! -d "$1" ] && echo "txwork: cannot access '$1': No such file or directory" && exit
+[ ! -d "$1" ] && echo "tx: cannot access '$1': No such file or directory" && exit
 cd "$1"
 shift
 
 # Create the session and rename the first window.
 tmux new-session -d -s "$session"
-tmux rename-window -t "$session":1 "$1"
+[ ! -z "$*" ] && tmux rename-window -t "$session":1 "$1"
 shift
 
 # Create a counter for the widnow ids.
@@ -47,8 +51,4 @@ done
 unset counter
 
 # Attach the created session.
-if [ -z "$TMUX" ]; then
-	tmux attach-session -t "$session":1 && exit
-else
-	tmux switch-client -t "$session":1 && exit
-fi
+attach_tmux "$session:1"

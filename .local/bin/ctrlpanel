@@ -1,0 +1,28 @@
+#!/bin/sh
+
+PULSE=false
+([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed '1q') ]) && PULSE=true
+
+case $1 in
+	vu) # Volume up.
+		[ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ +$2% || amixer sset Master $2%+;;
+
+	vd) # Volume down.
+		[ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ -$2% || amixer sset Master $2%-;;
+
+	vm) # Volume mute.
+		[ "$PULSE" = true ] && amixer -D pulse sset Master toggle || amixer sset Master toggle;;
+
+	mm) # Microphone mute.
+		[ "$PULSE" = true ] && amixer -D pulse sset Capture toggle || amixer sset Capture toggle;;
+
+	bu) # Brightness up.
+		xbacklight -inc $2;;
+
+	bd) # Brightness down.
+		xbacklight -dec $2;;
+
+	nm) # Network manager.
+		rfkill unblock all
+		[ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet &;;
+esac

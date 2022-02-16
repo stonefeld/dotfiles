@@ -1,38 +1,45 @@
-#!/bin/sh
+#!/bin/bash
 
 # Use this variable for loop.
 READY=false
+list_envs=$(echo "dwm qtile gnome-session kde-plasma" | tr " " "\\n")
 
 select_env () {
 	# Prompt for choice.
 	printf "\\nWelcome back $USER. Select your environment:\\n"
-	printf " [1] dwm\\n [2] qtile\\n [3] gnome\\n [4] kde-plasma\\n"
+	available_envs=""
+	count=1
+	for e in $list_envs; do
+		if command -v $e &>/dev/null; then
+			available_envs=$(echo "$available_envs $e")
+			echo " [$count] $e"
+			let count+=1
+		fi
+	done
 	read -p "Enter your choice: " choice
 
 	# By default mark as ok.
 	READY=true
+	let choice+=1
+	session=$(echo "$available_envs" | cut -d " " -f $choice)
 
-	case $choice in
-		1)
-			export FILEMANAGER="st -c Floating -g 120x34 -e vifm"
-			startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc dwm;;
+	if [ -z "$session" ]; then
+		printf "\\nThis option is not available"
+		# If environment doesn't exist mark it as not ready.
+		READY=false
+		sleep 2
+	else
+		case $session in
+			gnome-session)
+				XDG_SESSION_TYPE=wayland dbus-run-session gnome-session;;
 
-		2)
-			export FILEMANAGER="pcmanfm"
-			startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc qtile;;
+			kde-plasma)
+				DESKTOP_SESSION=plasma; startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc plasma;;
 
-		3)
-			XDG_SESSION_TYPE=wayland dbus-run-session gnome-session;;
-
-		4)
-			DESKTOP_SESSION=plasma; startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc plasma;;
-
-		*)
-			printf "\\nThis option is not available"
-			# If environment doesn't exist mark it as not ready.
-			READY=false
-			sleep 2;;
-	esac
+			*)
+				startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc $session;;
+		esac
+	fi
 }
 
 # If no valid environment was selected repeat the loop.

@@ -11,6 +11,7 @@ configuration {
 	kb-row-right: "Right,l,j,Control+n";
 }
 
+
 @import "../styles/colors.rasi"
 
 * {
@@ -19,7 +20,7 @@ configuration {
 
 window {
 	transparency: "real";
-	width: 37.5%;
+	width: 16%;
 	height: 12.5%;
 	location: center;
 }

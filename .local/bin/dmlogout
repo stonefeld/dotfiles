@@ -1,14 +1,29 @@
-#!/bin/sh
+#!/bin/bash
 
-option=$(printf "Lock\\nLog out\\nSuspend\\nShutdown\\nReboot" | dmenu -c -l 5 -bw 4 -i)
-[ -z "$option" ] || confirmation=$(printf "Yes\\nNo" | dmenu -c -l 5 -bw 4 -i -p "Sure?")
+command -v rofi &>/dev/null && ROFI=true
 
-if [ "$confirmation" = "Yes" ]; then
+if [ "$ROFI" = true ]; then
+	lock="󰍁"
+	logout="󰗽"
+	suspend="󰤄"
+	shutdown="󰐥"
+	reboot="󰑓"
+	yes="󰄬"
+	no="󰅖"
+
+	option=$(printf "$lock\\n$logout\\n$suspend\\n$shutdown\\n$reboot" | rofi -theme powermenu -dmenu)
+	[ -z "$option" ] || confirmation=$(printf "$yes\\n$no" | rofi -theme confirm -dmenu)
+else
+	option=$(printf "Lock\\nLog out\\nSuspend\\nShutdown\\nReboot" | dmenu -c -l 5 -bw 4 -i)
+	[ -z "$option" ] || confirmation=$(printf "Yes\\nNo" | dmenu -c -l 5 -bw 4 -i -p "Sure?")
+fi
+
+if [ "$confirmation" = "Yes" -o "$confirmation" = "$yes" ]; then
     case $option in
-        "Lock")     slock;;
-        "Log out")  pkill -15 -t tty"$XDG_VTNR" Xorg;;
-        "Suspend")  systemctl suspend;;
-        "Shutdown") shutdown now;;
-        "Reboot")   reboot;;
+        "Lock"|"$lock")         slock;;
+        "Log out"|"$logout")    pkill -15 -t tty"$XDG_VTNR" Xorg;;
+        "Suspend"|"$suspend")   systemctl suspend;;
+        "Shutdown"|"$shutdown") shutdown now;;
+        "Reboot"|"$reboot")     reboot;;
     esac
 fi
