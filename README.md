@@ -21,3 +21,9 @@
 ![qtile option 2](screenshot5-4.png)
 
 ![qtile option 3](screenshot5-5.png)
+
+## 02/22/2022
+
+![dwm master branch](screenshot6-2.png)
+
+![dwm no-color-statusline branch](screenshot6-1.png)
