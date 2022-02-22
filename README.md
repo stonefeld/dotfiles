@@ -30,6 +30,14 @@ There are also links to other git repositories for my custom [dwm](https://githu
 
 # Example pictures
 
+### Dwm - master branch
+
+![dwm master branch](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot6-2.png)
+
+### Dwm - no-color-statusline branch
+
+![dwm no-color-statusline branch](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot6-1.png)
+
 ### Qtile - Option 1
 
 ![qtile option 1](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-3.png)
@@ -41,14 +49,6 @@ There are also links to other git repositories for my custom [dwm](https://githu
 ### Qtile - Option 3
 
 ![qtile option 3](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-5.png)
-
-### Dwm - No color emojis statusline
-
-![dwm no color statusline](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-1.png)
-
-### Dwm - Colored emojis statusline
-
-![dwm colored statusline](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-2.png)
 
 *This are the most recent pictures from my current setup. For older pictures check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch.*
 

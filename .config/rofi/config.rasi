@@ -13,7 +13,7 @@ configuration {
 	hide-scrollbar: false;
 	fullscreen: false;
 	scrollbar-width: 8;
-	scroll-method: 0;
+	// scroll-method: 0;
 
 	run-command: "{cmd}";
 	run-list-command: "";
@@ -45,8 +45,8 @@ configuration {
 
 	kb-primary-paste: "Control+V";
 	kb-clear-line: "Control+u";
-	kb-move-front: "Control+a";
-	kb-move-end: "Control+e";
+	kb-move-front: "Home,Control+a";
+	kb-move-end: "End,Control+e";
 	kb-move-word-back: "Control+Left";
 	kb-move-word-forward: "Control+Right";
 	kb-move-char-back: "Left";
@@ -56,10 +56,13 @@ configuration {
 	kb-remove-to-eol: "";
 	kb-remove-to-sol: "";
 	kb-accept-entry: "Return,KP_Enter";
+	kb-mode-complete: "";
 	kb-row-left: "";
 	kb-row-right: "";
 	kb-row-up: "Up,Control+p";
 	kb-row-down: "Down,Control+n";
+	kb-row-first: "";
+	kb-row-last: "";
 	ml-row-left: "ScrollLeft";
 	ml-row-right: "ScrollRight";
 	ml-row-up: "ScrollUp";

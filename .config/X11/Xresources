@@ -24,7 +24,7 @@ XTerm*.foreground: #ffffff
 
 /* Dmenu setup */
 dmenu*.font: Cascadia Code:size=11
-dmenu*.background:    #2e3440
+dmenu*.background:    #292d3e
 dmenu*.foreground:    #d8dee9
 dmenu*.selbackground: #828dd1
 dmenu*.selforeground: #2e3440

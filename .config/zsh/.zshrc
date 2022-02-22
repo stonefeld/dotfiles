@@ -130,7 +130,7 @@ alias sys='systemctl'
 alias jou='journalctl'
 
 # Monkiflip.
-alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4"'
+alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4" &>/dev/null'
 
 # Manage dotfiles.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'

@@ -26,10 +26,10 @@ window {
 }
 
 mainbox {
-	background-color: @white3;
+	background-color: @background;
 	border: 5px;
 	border-radius: 10px;
-	border-color: @white3;
+	border-color: @background;
 	children: [ listview ];
 }
 
@@ -44,19 +44,22 @@ listview {
 }
 
 element {
-	background-color: @white1;
+	background-color: @background-nor;
 	border-radius: 10px;
 	padding: 2%;
 }
 
 element-text {
-	text-color: @black;
+	text-color: @foreground;
 	expand: true;
 	horizontal-align: 0.5;
 	vertical-align: 0.5;
 }
 
 element selected {
-	background-color: @blue;
-	text-color: @white3;
+	background-color: @background-sel;
+}
+
+element-text selected {
+	text-color: @foreground-sel;
 }
