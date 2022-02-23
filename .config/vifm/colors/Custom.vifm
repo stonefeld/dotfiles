@@ -16,7 +16,7 @@ highlight TopLineSel cterm=bold ctermfg=white ctermbg=black
 highlight StatusLine cterm=bold ctermfg=white ctermbg=black
 highlight WildMenu cterm=reverse ctermfg=yellow ctermbg=black
 highlight CmdLine cterm=none ctermfg=white ctermbg=none
-highlight ErrorMsg cterm=none ctermfg=red ctermbg=black
+highlight ErrorMsg cterm=none ctermfg=white ctermbg=red
 highlight Border cterm=none ctermfg=white ctermbg=black
 highlight OtherLine ctermfg=default ctermbg=default
 highlight JobLine cterm=bold,reverse ctermfg=black ctermbg=white
@@ -39,7 +39,7 @@ highlight LineNr ctermfg=default ctermbg=default
 highlight OddLine ctermfg=default ctermbg=default
 
 highlight /^.*\.(mp3|ogg|oga|flac|m4a|pdf)$/ ctermfg=cyan
-highlight /^.*\.(jpg|jpeg|png|gif|tiff|webp|bmp|svg|svgz)$/ ctermfg=magenta
+highlight /^.*\.(jpg|jpeg|png|gif|tiff|webp|bmp|svg|svgz|mp4|mkv)$/ ctermfg=magenta
 highlight /^.*\.(zip|gz|bz2|xz|tar|tgz|tbz2|7z|rar|iso|rpm|deb)$/ ctermfg=red
 highlight /^.*\.(md)$/ cterm=bold,underline ctermfg=yellow
 highlight /^.*(Pipfile)$/ cterm=bold,underline ctermfg=yellow

@@ -77,12 +77,15 @@ Most of the following packages should be in your distro's repository. In case of
 
 * Required to get the configurations above working:
   * `brave`
+  * `dragon-drag-and-drop` *(\*\*)*
+  * `highlight`
   * `fd`
   * `ffmpeg`
   * `fzf`
   * `latex suite`
   * `libxft-bgra` *(\*\*)*
   * `make`
+  * `md-to-pdf` by running `npm i -g md-to-pdf`
   * `mpd`
   * `mplayer`
   * `pandoc`
@@ -98,17 +101,14 @@ Most of the following packages should be in your distro's repository. In case of
   * `zsh-syntax-highlighting` or clone the [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) repository into `$HOME/.config/zsh/zsh-syntax-highlighting/`
 
 * Required fonts:
-  * `adobe-source-code-pro-fonts`
   * `ttf-cascadia-code`
   * `ttf-fantasque-sans-mono`
-  * `ttf-fira-code`
   * `ttf-font-icons` *(\*\*)*
   * `ttf-material-design-icons-webfont` *(\*\*)*
 
 * Required nerd-fonts:
   * `nerd-fonts-cascadia-code` *(\*\*) (\*\*\*)*
   * `nerd-fonts-fantasque-sans-mono` *(\*\*) (\*\*\*)*
-  * `nerd-fonts-source-code-pro` *(\*\*) (\*\*\*)*
 
 * Themes:
   * `papirus-folders-git` and configured to use the `nordic` colors *(\*\*)*

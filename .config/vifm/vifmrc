@@ -21,8 +21,8 @@ set undolevels=100
 set vimhelp
 set norunexec
 
-set timefmt=%m/%d/%y\ %H:%M
-set statusline=" %A %10u:%-7g %= %15s %18d  "
+set timefmt="%a, %b %d (%Y) %H:%M "
+set statusline=" %A %10u:%-10g %15s%=%d"
 
 set wildmenu
 set wildstyle=popup
@@ -69,6 +69,8 @@ command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart full
+command! dragon dragon-drag-and-drop -a -x %f
+command! dragdl dlfile
 
 nnoremap e :!
 nnoremap s :shell<CR>
@@ -93,6 +95,10 @@ nnoremap <M-o> :sync %c<CR>
 
 nnoremap yi :!xclip -se c -t image/png -i %c<CR>
 
+nmap dr :dragon<CR>
+vmap dr :dragon<CR>
+nmap dl :dragdl<CR>
+
 " Interaction with system clipboard
 if has('win')
     " Yank current directory path to Windows clipboard with forward slashes
@@ -112,6 +118,13 @@ elseif executable('xsel')
     nnoremap yf :!echo -n %c:p | xsel --input --primary %i &&
         \ echo -n %c:p | xsel --clipboard --input %i<CR>
 endif
+
+" Other files
+fileviewer <text/*>
+    \ {View with syntax highlight},
+    \ highlight -O xterm256 -s base16/bright %c,
+    \ {View normal files},
+    \ cat %c,
 
 " Pdf
 filextype {*.pdf},<application/pdf>
@@ -181,15 +194,16 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
     \ {View in sxiv}
-    \ sxiv %d -n "$(LC_COLLATE=en_US.utf8 ls | sed "/%c/q" | wc -l)" &,
+    \ sxiv %d -n "$(LC_COLLATE=C ls | sed "/%c/q" | wc -l)" &,
     \ {View in gpicview}
     \ gpicview %c,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
     \ vifmimg draw %px %py %pw %ph %c
     \ %pc
-    \ vifmimg clear
-    " \ identify -verbose %f,
-    " \ file %f
+    \ vifmimg clear,
+    \ identify -verbose %f,
+    \ exiftool %c,
+    \ file %c,
 
 " OpenRaster
 filextype *.ora
@@ -298,3 +312,10 @@ filextype *.pro qtcreator %f &
 filextype */
     \ {View in thunar}
     \ Thunar %f &,
+fileviewer {*/,.*/}
+    \ tree -C %f,
+
+" Every other file
+fileviewer *[^/]
+    \ exiftool %c,
+    \ file %c,

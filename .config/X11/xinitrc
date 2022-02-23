@@ -23,7 +23,7 @@ picom &
 dunst -config "${XDG_CONFIG_HOME:-$HOME/.config}"/dunst/dunstrc_dwm &
 xss-lock slock &
 xset r rate 220 30
-# xset s off
+xset s off
 
 session=${1:-dwm}
 
