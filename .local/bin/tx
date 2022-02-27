@@ -12,8 +12,8 @@ attach_tmux() {
 # If no argument is passed, select one from the already existing ones.
 if [ -z "$*" ]; then
 	if pgrep tmux &>/dev/null; then
-		session=$(tmux list-sessions | fzf | cut -d : -f 1 &>/dev/null)
-		attach_tmux "$session"
+		session=$(tmux list-sessions | fzf | cut -d ":" -f 1)
+		[ ! -z "$session" ] && attach_tmux "$session"
 	else
 		echo "tx: no tmux server running"
 	fi

@@ -1,13 +1,32 @@
-set selection-clipboard clipboard
+# Set padding between pages
+set page-padding 1
 
+# Disable padding on the sides
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+
+# Nord-style inverted color
 set recolor-lightcolor "#3b4252"
 set recolor-darkcolor "#d8dee9"
-# set recolor-keephue
 set recolor false
+# set recolor-keephue
 
+# Set statusbar colors
 set statusbar-bg "#d8dee9"
 set statusbar-fg "#2e3440"
 
+# Set default colors and font
 set default-bg "#2e3440"
 set default-fg "#d8dee9"
 set font "monospace normal 10"
+
+# Keybindings
+map u scroll half-up
+map d scroll half-down
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map i recolor
+map p print

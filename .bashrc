@@ -34,5 +34,6 @@ alias edwm='startx $XDG_CONFIG_HOME/X11/xinitrc dwm'
 alias eqtile='startx $XDG_CONFIG_HOME/X11/xinitrc qtile'
 alias egnome='XDG_SESSION_TYPE=wayland dbus-run-session gnome-session'
 alias ekde='DESKTOP_SESSION=plasma; startx $XDG_CONFIG_HOME/X11/xinitrc plasma'
+alias eopenbox='startx $XDG_CONFIG_HOME/X11/xinitrc openbox'
 
 echo -ne '\e[1 q'

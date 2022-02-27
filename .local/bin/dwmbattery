@@ -1,0 +1,22 @@
+#!/bin/sh
+
+per=$(cat /sys/class/power_supply/BAT0/capacity)
+char=$(cat /sys/class/power_supply/BAT0/status)
+[ "$char" = "Full" -o "$char" = "Charging" ] && echo "󰂄 $per%" && return
+
+bat=$(( $per / 10 ))
+icon="󰂃"
+case $bat in
+	"0")  icon="󰂎";;
+	"1")  icon="󰁺";;
+	"2")  icon="󰁻";;
+	"3")  icon="󰁼";;
+	"4")  icon="󰁽";;
+	"5")  icon="󰁾";;
+	"6")  icon="󰁿";;
+	"7")  icon="󰂀";;
+	"8")  icon="󰂁";;
+	"9")  icon="󰂂";;
+	"10") icon="󰁹";;
+esac
+echo "$icon $per%"

@@ -1,22 +1,21 @@
 #!/bin/sh
 
-export PATH=$PATH:~/.local/bin/
+app_name="pacman"
 
-messageID="69696969"
-appName="pacman"
-
-cache_file="${XDG_DATA_HOME:-$HOME/.local/share/}updates"
+cache_file="${XDG_DATA_HOME:-$HOME/.local/share}/updates"
 
 [ ! -f "$cache_file" ] && (touch $cache_file && echo 0 > $cache_file)
 
-notify () {
+notify() {
 	if [ $# -eq 2 ]; then
-		dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "$2 new upgrades available ($1 from last time)"
-		canberra-gtk-play -i dialog-warning
+		message="$2 new upgrades available ($1 from last time)"
+	elif [ $# -eq 1 ]; then
+		message="There are $1 packages to upgrade"
 	else
-		dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "There are $1 packages to upgrade"
-		canberra-gtk-play -i dialog-warning
+		message="There are no packages to upgrade"
 	fi
+	notify-send -a $app_name -i cloud-download "Package upgrade" "$message"
+	canberra-gtk-play -i dialog-warning
 }
 
 last_count=$(cat $cache_file)
@@ -39,8 +38,5 @@ if [ "$count" -gt 0 ]; then
 	fi
 else
 	echo 0 > $cache_file
-	dunstify -a $appName -i cloud-download -r $messageID "Package upgrade" "There are no packages to upgrade"
-	canberra-gtk-play -i dialog-warning
+	notify
 fi
-
-statusline

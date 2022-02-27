@@ -1,8 +1,10 @@
 #!/bin/bash
 
-screencast_full () {
+filename="recording_$(date '+%y_%m_%d_%H_%M_%S').mp4"
+filelocation="$HOME/vids/recordings"
+
+screencast_full() {
 	if [ "$1" = "Yes" ]; then
-		# -f alsa -i hw:0,0 -c 2 \
 		ffmpeg \
 		-f x11grab \
 		-video_size "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" \
@@ -10,22 +12,21 @@ screencast_full () {
 		-i "$DISPLAY" \
 		-f alsa -i default \
 		-c:v libx264 -preset ultrafast -c:a aac \
-		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+		"$filelocation/$filename" &
 	else
 		ffmpeg \
 		-f x11grab \
 		-video_size "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" \
 		-framerate 25 \
 		-i "$DISPLAY" -c:v libx264 \
-		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+		"$filelocation/$filename" &
 	fi
 	echo $! > /tmp/recordingpid
 	statusline
 }
 
-screencast_single () {
+screencast_single() {
 	if [ "$1" = "Yes" ]; then
-		# -f alsa -i hw:0,0 -c 2 \
 		ffmpeg \
 		-f x11grab \
 		-video_size "1920x1080" \
@@ -33,20 +34,20 @@ screencast_single () {
 		-i "$DISPLAY" \
 		-f alsa -i default \
 		-c:v libx264 -preset ultrafast -c:a aac \
-		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+		"$filelocation/$filename" &
 	else
 		ffmpeg \
 		-f x11grab \
 		-video_size "1920x1080" \
 		-framerate 25 \
 		-i "$DISPLAY" -c:v libx264 \
-		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+		"$filelocation/$filename" &
 	fi
 	echo $! > /tmp/recordingpid
 	statusline
 }
 
-webcam () {
+webcam() {
 	if [ "$1" = "Yes" ]; then
 		ffmpeg \
 		-f v4l2 \
@@ -55,20 +56,20 @@ webcam () {
 		-i /dev/video0 \
 		-f alsa -i default \
 		-c:v libx264 -preset ultrafast -c:a aac \
-		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+		"$filelocation/$filename" &
 	else
 		ffmpeg \
 		-f v4l2 \
 		-framerate 25 \
 		-s "640x480" \
 		-i /dev/video0 \
-		"$HOME/vids/recordings/recording_$(date '+%y_%m_%d_%H_%M_%S').mp4" &
+		"$filelocation/$filename" &
 	fi
 	echo $! > /tmp/recordingpid
 	statusline
 }
 
-killrecording () {
+killrecording() {
 	recpid="$(cat /tmp/recordingpid)"
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
@@ -78,7 +79,7 @@ killrecording () {
 	exit
 }
 
-askrecording () {
+askrecording() {
 	if [ "$(xrandr --listactivemonitors | grep -oP 'Monitors: \K.*')" -eq 2 ]; then
 		choice=$(printf "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 4 -bw 4)
 	else
@@ -98,7 +99,7 @@ askrecording () {
 	esac
 }
 
-asktoend () {
+asktoend() {
 	choice=$(printf "Stop Recording\\nLaunch Webcam" | dmenu -i -c -l 2 -bw 4)
 	case "$choice" in
 		Stop\ Recording) response=$(printf "No\\nYes" | dmenu -i -c -l 2 -bw 4 -p "Recording still active. End recording?");;

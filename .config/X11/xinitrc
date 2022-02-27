@@ -20,7 +20,7 @@ fi
 lxpolkit &
 nitrogen --restore &
 picom &
-dunst -config "${XDG_CONFIG_HOME:-$HOME/.config}"/dunst/dunstrc_dwm &
+dunst &
 xss-lock slock &
 xset r rate 220 30
 xset s off
@@ -28,12 +28,10 @@ xset s off
 session=${1:-dwm}
 
 case $session in
-	dwm   ) while true; do
-	            statusline
-	            sleep 10s
-	        done &
-	        exec dwm;;
-	qtile ) exec qtile start;;
-	plasma) exec startplasma-x11;;
-	*     ) exec $1;;
+	dwm   )  dwmblocks &
+	         exec dwm;;
+	qtile )  exec qtile start;;
+	plasma)  exec startplasma-x11;;
+	openbox) exec openbox-session;;
+	*     )  exec $1;;
 esac
