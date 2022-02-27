@@ -1,0 +1,11 @@
+#!/bin/sh
+
+case $BUTTON in
+	1) mailcheck &;;
+	3) st -c Floating -g 120x34 -e neomutt;;
+esac
+
+unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+pgrep -x mbsync >/dev/null && icon=" 󰑓"
+
+echo "$unread$icon"

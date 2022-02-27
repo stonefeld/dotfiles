@@ -4,6 +4,10 @@ pdf_reader="xdg-open"
 notes_folder="${NOTES_FOLDER:-$HOME/docs/notes}"
 templates_folder="${TEMPLATES_FOLDER:-$XDG_DATA_HOME/templates}"
 
+run_dmenu() {
+	printf "$2" | dmenu -i -c -l 20 -bw 4 -p "$1"
+}
+
 while [ "$#" -gt "0" ]; do
 	case "$1" in
 		-p|--pdf_reader)
@@ -47,7 +51,7 @@ while [ "$#" -gt "0" ]; do
 	esac
 done
 
-type=$(printf "Markdown\\nLaTeX\\nOpen compiled note" | dmenu -i -c -l 3 -bw 4 -p "Select filetype")
+type=$(run_dmenu "Select filetype" "Markdown\\nLaTeX\\nOpen compiled note")
 [ -z "$type" ] && exit
 
 case "$type" in
@@ -56,12 +60,12 @@ case "$type" in
 esac
 
 if [ ! "$type" = "Open compiled note" ]; then
-	option=$(printf "New empty note\\nChoose existing note\\nDelete note" | dmenu -i -c -l 3 -bw 4 -p "Choose an option")
+	option=$(run_dmenu "Choose an option" "New empty note\\nChoose existing note\\nDelete note")
 	[ -z "$option" ] && exit
 
 	case "$option" in
 		"New empty note")
-			name=$(printf "" | dmenu -i -c -l 0 -bw 4 -p "Enter the name")
+			name=$(run_dmenu "Enter the name" "")
 			[ -z "$name" ] && exit
 
 			mkdir "$notes_folder/$name"
@@ -70,24 +74,24 @@ if [ ! "$type" = "Open compiled note" ]; then
 			exit;;
 
 		"Choose existing note")
-			selected=$(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix//g" | dmenu -i -c -l 20 -bw 4 -p "Select a file")
+			selected=$(run_dmenu "Select a file" $(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix//g"))
 			[ -z "$selected" ] && exit
 
 			st -e $EDITOR "$notes_folder/$selected/$selected.$prefix"
 			exit;;
 
 		"Delete note")
-			selected=$(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix//g" | dmenu -i -c -l 20 -bw 4 -p "Select a file")
+			selected=$(run_dmenu "Select a file" $(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix//g"))
 			[ -z "$selected" ] && exit
 
-			option=$(printf "No\\nYes" | dmenu -i -c -l 2 -bw 4 -p "Sure?")
+			option=$(run_dmenu "Sure?" "No\\nYes")
 			[ -z "$option" ] || [ "$option" = "No" ] && exit
 
 			rm -rf "$notes_folder/$selected"
 			exit;;
 	esac
 else
-	selected=$(find "$notes_folder" -name "*.pdf" -printf "%f\n" | sed "s/.pdf//g" | dmenu -i -c -l 20 -bw 4 -p "Select a file")
+	selected=$(run_dmenu "Select a file" $(find "$notes_folder" -name "*.pdf" -printf "%f\n" | sed "s/.pdf//g"))
 	[ -z "$selected" ] && exit
 	$pdf_reader "$notes_folder/$selected/$selected.pdf"
 fi

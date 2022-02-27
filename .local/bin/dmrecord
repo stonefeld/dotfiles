@@ -3,6 +3,14 @@
 filename="recording_$(date '+%y_%m_%d_%H_%M_%S').mp4"
 filelocation="$HOME/vids/recordings"
 
+run_dmenu() {
+	if [ "$#" -eq 1 ]; then
+		printf "$1" | dmenu -i -c -l 20 -bw 4
+	else
+		printf "$2" | dmenu -i -c -l 20 -bw 4 -p "$1"
+	fi
+}
+
 screencast_full() {
 	if [ "$1" = "Yes" ]; then
 		ffmpeg \
@@ -81,13 +89,13 @@ killrecording() {
 
 askrecording() {
 	if [ "$(xrandr --listactivemonitors | grep -oP 'Monitors: \K.*')" -eq 2 ]; then
-		choice=$(printf "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 4 -bw 4)
+		choice=$(run_dmenu "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam")
 	else
-		choice=$(printf "Screencast\\nRecord Webcam\\nLaunch Webcam" | dmenu -i -c -l 3 -bw 4)
+		choice=$(run_dmenu "Screencast\\nRecord Webcam\\nLaunch Webcam")
 	fi
 
 	audio="No"
-	[ ! -z "$choice" -a ! "$choice" = "Launch Webcam" ] && audio=$(printf "Yes\\nNo" | dmenu -i -c -l 2 -bw 4 -p "Record Microphone?")
+	[ ! -z "$choice" -a ! "$choice" = "Launch Webcam" ] && audio=$(run_dmenu "Record Microphone?" "Yes\\nNo")
 	[ -z "$audio" ] && exit
 
 	case "$choice" in
@@ -100,9 +108,9 @@ askrecording() {
 }
 
 asktoend() {
-	choice=$(printf "Stop Recording\\nLaunch Webcam" | dmenu -i -c -l 2 -bw 4)
+	choice=$(run_dmenu "Stop Recording\\nLaunch Webcam")
 	case "$choice" in
-		Stop\ Recording) response=$(printf "No\\nYes" | dmenu -i -c -l 2 -bw 4 -p "Recording still active. End recording?");;
+		Stop\ Recording) response=$(run_dmenu "Recording still active. End recording?" "No\\nYes");;
 		Launch\ Webcam)  mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
 	esac
 	[ "$response" = "Yes" ] && killrecording || exit
