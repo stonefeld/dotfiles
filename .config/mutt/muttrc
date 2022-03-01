@@ -2,72 +2,33 @@ set smtp_authenticators = "login"
 set ssl_force_tls = yes
 
 folder-hook 'gmail' 'source ~/.config/mutt/gmail'
-macro index 1 "<change-folder> ~/.local/share/mail/gmail/<enter>"
-macro index,pager <F5> "!mailcheck^M" "Update through mbsync"
-set move = no
+folder-hook 'live' 'source ~/.config/mutt/live'
+folder-hook 'uni' 'source ~/.config/mutt/uni'
 
-# Unbind some weird keys.
-bind index,pager i noop
-bind index,pager g noop
-bind index \Cf noop
-bind index,pager M noop
-bind index,pager C noop
-bind index,pager z noop
+macro index 1 "<change-folder> ~/.local/share/mail/gmail/Inbox<enter>"
+macro index 2 "<change-folder> ~/.local/share/mail/live/Inbox<enter>"
+macro index 3 "<change-folder> ~/.local/share/mail/uni/Inbox<enter>"
+macro index,pager <F5> "!mailcheck^M" "Update through mbsync"
+
+set move = no
+set edit_headers = yes
 
 # Sidebar setup.
-set sidebar_visible = yes
+set sidebar_visible = no
 set sidebar_width = 20
 set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
 set mail_check_stats
 set sidebar_format = '%D%?F? [%F]?%* %?N?%N/?%?S?%S?'
-bind index,pager \Cj sidebar-next
-bind index,pager \Ck sidebar-prev
-bind index,pager \Co sidebar-open
-bind index,pager B sidebar-toggle-visible
-
-# General keybindings.
-bind index gg first-entry
-bind index j next-entry
-bind index k previous-entry
-bind attach <return> view-mailcap
-bind attach l view-mailcap
-bind editor <space> noop
-bind index G last-entry
-bind index gg first-entry
-bind pager,attach h exit
-bind pager j next-line
-bind pager k previous-line
-bind pager l view-attachments
-bind index D delete-message
-bind index U undelete-message
-bind index L limit
-bind index h noop
-bind index l display-message
-bind index,query <space> tag-entry
-#bind browser h goto-parent
-macro browser h '<change-dir><kill-line>..<enter>' "Go to parent folder"
-bind index,pager H view-raw-message
-bind browser l select-entry
-bind pager,browser gg top-page
-bind pager,browser G bottom-page
-bind index,pager,browser d half-down
-bind index,pager,browser u half-up
-bind index,pager S sync-mailbox
-bind index,pager R group-reply
-bind index \031 previous-undeleted  # Mouse wheel
-bind index \005 next-undeleted      # Mouse wheel
-bind pager \031 previous-line       # Mouse wheel
-bind pager \005 next-line           # Mouse wheel
-bind editor <Tab> complete-query
 
 unset markers
 
-# Setup smtp program.
-set sendmail = "/usr/bin/msmtp"
-set edit_headers = yes
+set mailcap_path = "~/.config/mutt/mailcap"
+alternative_order text/html text/plain
+set implicit_autoview
 
 source ~/.config/mutt/colors
+source ~/.config/mutt/keys
 source ~/.config/mutt/gmail
 
 # Example of account config
@@ -79,3 +40,4 @@ source ~/.config/mutt/gmail
 # mailboxes +Inbox +Sent +Drafts +Spam +Trash
 # set from = "myname@mail.com"
 # set realname = "Myreal Name"
+# set sendmail = "/usr/bin/msmtp -a mymail"

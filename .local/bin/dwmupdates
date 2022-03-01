@@ -1,9 +1,11 @@
 #!/bin/sh
 
 case $BUTTON in
-	1) notify-send -i cloud-download -a "pacman" "Package upgrade" "Searching for available package updates"
-	   pacupdatecheck;;
+	1) pacupdatecheck &;;
 	3) st -c Floating -g 120x34 -e bash -c 'sudo pacman -Syy && sudo pacman -Su --noconfirm && echo "0" > ${XDG_DATA_HOME:-$HOME/.local/share}/updates && pkill -RTMIN+6 dwmblocks';;
 esac
 
-echo "$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)"
+updates="$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)"
+pgrep -x pacupdatecheck >/dev/null && icon=" 󰑓"
+
+echo "$updates$icon"

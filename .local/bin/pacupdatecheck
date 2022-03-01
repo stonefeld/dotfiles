@@ -8,11 +8,9 @@ cache_file="${XDG_DATA_HOME:-$HOME/.local/share}/updates"
 
 notify() {
 	if [ $# -eq 2 ]; then
-		message="$2 new upgrades available ($1 from last time)"
+        message="$2 new upgrade(s) available ($1 from last time)"
 	elif [ $# -eq 1 ]; then
-		message="There are $1 packages to upgrade"
-	else
-		message="There are no packages to upgrade"
+        message="There are $1 package(s) to upgrade"
 	fi
 	notify-send -a $app_name -i cloud-download "Package upgrade" "$message"
 	canberra-gtk-play -i dialog-warning
@@ -36,7 +34,6 @@ if [ "$count" -gt 0 ]; then
 		echo $count > $cache_file
 		notify $count
 	fi
-else
-	echo 0 > $cache_file
-	notify
 fi
+
+pkill -RTMIN+6 dwmblocks

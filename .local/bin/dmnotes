@@ -74,14 +74,14 @@ if [ ! "$type" = "Open compiled note" ]; then
 			exit;;
 
 		"Choose existing note")
-			selected=$(run_dmenu "Select a file" $(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix//g"))
+			selected=$(run_dmenu "Select a file" "$(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix$//")")
 			[ -z "$selected" ] && exit
 
 			st -e $EDITOR "$notes_folder/$selected/$selected.$prefix"
 			exit;;
 
 		"Delete note")
-			selected=$(run_dmenu "Select a file" $(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix//g"))
+			selected=$(run_dmenu "Select a file" "$(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix$//")")
 			[ -z "$selected" ] && exit
 
 			option=$(run_dmenu "Sure?" "No\\nYes")
@@ -91,7 +91,7 @@ if [ ! "$type" = "Open compiled note" ]; then
 			exit;;
 	esac
 else
-	selected=$(run_dmenu "Select a file" $(find "$notes_folder" -name "*.pdf" -printf "%f\n" | sed "s/.pdf//g"))
+	selected=$(run_dmenu "Select a file" "$(find "$notes_folder" -name "*.pdf" -printf "%f\n" | sed "s/.pdf$//")")
 	[ -z "$selected" ] && exit
 	$pdf_reader "$notes_folder/$selected/$selected.pdf"
 fi
