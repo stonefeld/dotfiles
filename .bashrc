@@ -12,7 +12,7 @@ alias psn='shutdown now'
 alias pre='reboot'
 alias pss='systemctl suspend'
 
-alias ls='ls --color=always --group-directories-first'
+alias ls='ls -h --color=always --group-directories-first'
 alias vim='vim -i NONE'
 
 alias cp='cp -i'

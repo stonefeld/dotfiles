@@ -1,0 +1,8 @@
+set spoolfile = "+/Inbox"
+set postponed = "+/Drafts"
+set trash = "+/Trash"
+set record = "+/Sent"
+
+set status_format="(Total: %b)----(%f %m%?n? [+%n]?%?d? [-%d]?%?t? [*%t]?%?p?----(%p draft)?)-%>-($from)----(%P)"
+
+# vim: ft=neomuttrc

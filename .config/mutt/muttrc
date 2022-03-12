@@ -5,10 +5,11 @@ folder-hook 'gmail' 'source ~/.config/mutt/gmail'
 folder-hook 'live' 'source ~/.config/mutt/live'
 folder-hook 'uni' 'source ~/.config/mutt/uni'
 
-macro index 1 "<change-folder> ~/.local/share/mail/gmail/Inbox<enter>"
-macro index 2 "<change-folder> ~/.local/share/mail/live/Inbox<enter>"
-macro index 3 "<change-folder> ~/.local/share/mail/uni/Inbox<enter>"
-macro index,pager <F5> "!mailcheck^M" "Update through mbsync"
+macro index 1 "<change-folder> ~/.local/share/mail/gmail/Inbox<enter>" "change to gmail folder"
+macro index 2 "<change-folder> ~/.local/share/mail/live/Inbox<enter>" "change to live folder"
+macro index 3 "<change-folder> ~/.local/share/mail/uni/Inbox<enter>" "change to uni folder"
+macro index,pager <F5> "!mailcheck^M" "update through mbsync"
+macro index,pager A "<pipe-message>abook --config \"$XDG_CONFIG_HOME\"/abook/abookrc --datafile \"$XDG_DATA_HOME\"/abook/addressbook --add-email<return>" "add the sender address to book"
 
 set move = no
 set edit_headers = yes
@@ -26,6 +27,7 @@ unset markers
 set mailcap_path = "~/.config/mutt/mailcap"
 alternative_order text/html text/plain
 set implicit_autoview
+set query_command='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook --mutt-query "%s"'
 
 source ~/.config/mutt/colors
 source ~/.config/mutt/keys
@@ -33,11 +35,8 @@ source ~/.config/mutt/gmail
 
 # Example of account config
 # set folder = "~/.local/share/mail/mymail"
-# set spoolfile = "+/Inbox"
-# set postponed = "+/Drafts"
-# set trash = "+/Trash"
-# set record = "+/Sent"
 # mailboxes +Inbox +Sent +Drafts +Spam +Trash
 # set from = "myname@mail.com"
 # set realname = "Myreal Name"
 # set sendmail = "/usr/bin/msmtp -a mymail"
+# source ~/.config/mutt/common

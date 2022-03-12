@@ -41,6 +41,9 @@ highlight OddLine ctermfg=default ctermbg=default
 highlight /^.*\.(mp3|ogg|oga|flac|m4a|pdf)$/ ctermfg=cyan
 highlight /^.*\.(jpg|jpeg|png|gif|tiff|webp|bmp|svg|svgz|mp4|mkv)$/ ctermfg=magenta
 highlight /^.*\.(zip|gz|bz2|xz|tar|tgz|tbz2|7z|rar|iso|rpm|deb)$/ ctermfg=red
+highlight /^.*\.(bak)$/ ctermfg=black
 highlight /^.*\.(md)$/ cterm=bold,underline ctermfg=yellow
 highlight /^.*(Pipfile)$/ cterm=bold,underline ctermfg=yellow
 highlight /^.*\.(xls)$/ ctermfg=cyan
+
+" vim: ft=vim

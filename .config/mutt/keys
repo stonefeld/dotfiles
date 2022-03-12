@@ -15,7 +15,8 @@ bind pager l view-attachments
 bind index l display-message
 bind attach l view-mailcap
 bind browser l select-entry
-bind index L limit
+
+bind index \\ limit
 
 bind index h noop
 bind pager,attach h exit
@@ -48,7 +49,6 @@ bind pager { half-up
 bind index { next-thread
 bind pager { half-down
 
-bind index,pager A create-alias
 bind index,pager a group-reply
 
 bind index,pager \Cj sidebar-next

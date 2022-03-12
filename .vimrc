@@ -1,93 +1,56 @@
-"        _
-" __   _(_)_ __ ___  _ __ ___
-" \ \ / / | '_ ` _ \| '__/ __|
-"  \ V /| | | | | | | | | (__
-" (_)_/ |_|_| |_| |_|_|  \___|
+syntax on                            " enable syntax highlight
 
-" Enable syntax highlighting.
-syntax on
+set nocompatible                     " no vi compatibility
+set nospell                          " no spell checking
+set nowrap                           " display long lines in one line
+set noswapfile                       " disable swapfile
+set noundofile                       " disable undofile
+set nobackup                         " disable backup
+set scrolloff=3                      " start scrolling 3 lines after
+set sidescrolloff=3                  " same as scrolloff but horizontally
+set hidden                           " allow opening another file with unsaved buffer
+set nostartofline                    " when on top disable jumping to the top
+set tabstop=4                        " make tabs 4 sapces long
+set softtabstop=4                    " delete 4 spaces when backspace
+set shiftwidth=4                     " use 4 spaces for shifting
+set noexpandtab                      " use tabs by default
+set smarttab                         " enable smart tabs
+set autoindent                       " use the same indent level of line before
+set cindent                          " use c-style indenting
+set cinoptions=(0,l1,t0,=0           " indentation rues
+set backspace=indent,eol,start       " enable using backspace in any case
+set splitright                       " split to the right when vertical
+set splitbelow                       " split to the bottom when horizontal
+set ruler                            " show cursor coordinates
+set mouse=a                          " enable mouse interaction
+set laststatus=2                     " show statusline in any case
+set foldcolumn=1                     " extra column for folding signs
+set updatetime=250                   " decrease updatetime delay
+set shortmess+=c                     " disable cmd-line messages when autocomplete
+set incsearch                        " search while typing
+set wildmenu                         " enable wildmenu
+set list                             " enable listchars
+set listchars=tab:\|\ ,trail:.       " set characters to display tabs and trailing space
+set belloff=all                      " disable bell
+set guioptions=                      " disable all graphical features
+set guicursor+=i-ci:block-iCursor    " set insert mode cursor
+set guicursor+=r-cr:block-rCursor    " set replace mode cursor
+set guicursor+=a:blinkon0            " disable cursor blink
 
-" Enable filetype detection.
-filetype plugin indent on
-
-" Disable vi compatibility.
-set nocompatible
-
-" Disable spell checking and word wrapping.
-set nospell
-set nowrap
-
-" Disable all type of junk files.
-set noswapfile
-set noundofile
-set nobackup
-
-" Scroll through the buffer 8 lines before the sides of the window.
-set scrolloff=3
-set sidescrolloff=3
-
-" Allow opening another buffer if the current one has not been saved
-" and disable start of line when jumping to the top of the file.
-set hidden
-set nostartofline
-
-" Configure tab settings.
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smarttab
-
-" Configure indentation.
-set autoindent
-set cindent
-set cinoptions=(0,l1,t0,=0
-
-" Allow backspace over end of line and start of line.
-set backspace=indent,eol,start
-set colorcolumn=0
-
-" Always split to the right and below
-set splitright
-set splitbelow
-
-" Enable line number, show cursor position, enable interactive mouse and
-" always show the statusline.
-set nu
-set ruler
-set mouse=a
-set laststatus=2
-
-" Set updatetime to 250ms and disable unnecessary messages.
-set updatetime=250
-set shortmess+=c
-
-" Search incrementally and don't maintain the search result highlight.
-set incsearch
-set nohlsearch
-
-" Configure wildmenu settings.
-set wildchar=<Tab>
-set wildmenu
-set wildmode=full
-
-" Configure graphical settings.
-set belloff=all
-set guioptions=
-set guicursor+=i-ci:block-iCursor
-set guicursor+=r-cr:block-rCursor
-set guicursor+=a:blinkon0
-
-" Set font.
-if filereadable(expand('~') . '\_vimrc')
-  " set guifont=Liberation\ Mono:h9
-  set guifont=Cascadia\ Code:h9
-elseif filereadable(expand('~') . '/.vimrc')
+" change default font according to os
+if has('win32')
+  set guifont=Liberation\ Mono:h9
+  " set guifont=Cascadia\ Code:h9
+  " set guifont=Courier\ New:h9
+elseif has('unix')
   " set guifont=Liberation\ Mono\ 11
   set guifont=Cascadia\ Code\ 11
 endif
 
-" Highlight settings.
-set background=dark
+set background=dark                " specify that the colorscheme is dark
+colorscheme default                " set colorscheme to deafult
+
+" highlight settings
 hi! Normal guifg=#cdaa7d guibg=#161616
 hi! Statement guifg=#cd950c guibg=NONE gui=none
 hi! link Type Statement
@@ -112,114 +75,142 @@ hi! StatusLineNC guifg=#404040 guibg=#dfdfdf
 hi! link TabLineSel StatusLine
 hi! link TabLine StatusLineNC
 hi! link TabLineFill StatusLineNC
+hi! link FoldColumn Normal
 hi! VertSplit guifg=#afafaf guibg=#afafaf
 hi! MatchParen guifg=#ff0000 guibg=NONE
 hi! ModeMsg guifg=#cd950c gui=bold
 hi! Pmenu guifg=#ffffff guibg=#262626
 hi! PmenuSel guifg=#000000 guibg=#a6a6a6
+hi! SpecialKey guifg=grey30
 
-" If no character is present before the cursor act as normal tab, otherwise
-" cycle the completion tags.
-fu! TabOrComplete(...)
-  if col('.') > 1 && strpart(getline('.'), col('.') - 2, 3) =~ '^\w'
-    if a:0 == 1
-      return "\<C-p>"
-    else
-      return "\<C-n>"
-    endif
-  else
-    return "\<Tab>"
-  endif
-endfu
-
-" Recursive search for keywords.
-fu! RecursiveSearch()
-  let search_term=input("Enter search term: ")
-  if len(search_term) != 0
-    exe "vimgrep /" . search_term . "/ **/*.cpp"
-    exe "copen"
-  endif
-endfu
-
-" Change easily tabsize.
-fu! TabSize()
-  let current_tabsize=&tabstop
-  let tabsize=input("Enter tab size (current: " . current_tabsize . "): ")
-  if len(tabsize) != 0
-    exe "set tabstop=" . tabsize . " softtabstop=" . tabsize . " shiftwidth=" . tabsize
-  endif
-endfu
-
-" If build.bat or build.sh is available in pwd set it as the make program.
-if filereadable('build.bat')
+" if build.bat or build.sh are available set them as the makeprg
+if has('win32') && filereadable('build.bat')
   let &makeprg='build.bat'
-elseif filereadable('build.sh')
+elseif has('unix') && filereadable('build.sh')
   let &makeprg='build.sh'
 endif
 
-" Toggle quickfix window.
-fu! QFixToggle(forced)
-  if exists('g:qfix_win') && a:forced == 0
-    exe 'ccl'
-    unlet g:qfix_win
-  else
-    if exists('g:lspconfig')
-      exe 'lua vim.lsp.diagnostic.set_qflist()'
-    else
-      exe 'copen'
-    endif
-    let g:qfix_win = bufnr('$')
+" ----------------------------------------
+" search recursively for search terms
+fu! RecursiveSearch()
+  let search_term=input('Enter search term: ')
+  if len(search_term) != 0
+    exe 'vimgrep /' . search_term . '/ **'
   endif
 endfu
 
-" Setting the leader key.
-let mapleader=" "
+" rename all ocurrences of a word in the current buffer
+fu! Rename()
+  let new_name=input('Enter new name (' . expand('<cword>') . '): ')
+  if len(new_name) != 0
+    exe 'mark r'
+    exe '%s/\\<' . expand('<cword>') . '\\>/' . new_name '/g'
+    exe 'normal 'r'
+  endif
+endfu
 
-" Buffer manipulation.
-nnoremap <silent> <C-l> :bn<CR>
-nnoremap <silent> <C-h> :bp<CR>
-nnoremap <silent> <C-k> :bp<CR>:bd #<CR>
+" change tab size on the fly
+fu! TabSize()
+  let current_size=&tabstop
+  let new_size=input('Enter tab size (current: ' . current_size . '): ')
+  if len(new_size) != 0
+    exe 'set tabstop=' . new_size . ' softtabstop=' . new_size . ' shiftwidth=' . tabsize
+  endif
+endfu
 
-" Recursive search for keywords and set change tabsize easily.
-nnoremap <silent> <leader>s :call RecursiveSearch()<bar> redraw!<CR>
-nnoremap <silent> <leader>ts :call TabSize() <bar> redraw!<CR>
+" toggle quickfix window
+fu! QFixToggle()
+  if exists('g:qfix_win')
+    exe 'cclose'
+    unlet g:qfix_win
+  else
+    exe 'copen'
+    let g:qfix_win=bufnr('$')
+  endif
+endfu
 
-nnoremap <silent> <leader>ta :silent exe "!ctags --recurse=yes --exclude=.git --exclude=build " . getcwd()<CR>
+" open a vertical split to compile the code
+fu! Compile()
+  let program=&makeprg
+  wincmd o
+  vertical split
+  exe 'term ' . program
+  let g:compile_buf=bufnr('$')
+  wincmd k
+  wincmd q
+  set filetype=compile
+endfu
 
-" Quickfixlist manipulation.
-nnoremap <silent> <leader>q :call QFixToggle(0)<CR>
-nnoremap <silent> <leader>n :try<bar>cnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>cfirst<bar>endtry<CR>
-nnoremap <silent> <leader>p :try<bar>cprevious<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>clast<bar>endtry<CR>
+" before compiling check if a compile window already exists
+fu! CheckCompile()
+  if exists('g:compile_buf')
+    let prev_buf=bufnr('%')
+    if bufwinnr(g:compile_buf) > 0
+      exe 'buffer ' . g:compile_buf
+      bd
+      exe 'buffer ' . prev_buf
+    else
+      unlet g:compile_buf
+    endif
+  endif
+  call Compile()
+endfu
 
-" Open netrw.
-nnoremap <silent> <leader>e :Lexplore<CR>
+" ----------------------------------------
+" setting space a leader key
+let mapleader=' '
 
-" Open shell.
-nnoremap <silent> <leader>tt :silent exe 'shell'<CR>
+" buffer manipulation
+nnoremap <silent> <c-l> <cmd>bn<cr>
+nnoremap <silent> <c-h> <cmd>bp<cr>
+nnoremap <silent> <c-k> <cmd>b #<cr>:bd #<cr>
 
-" Source vim configuration.
-if filereadable(expand('~') . '\_vimrc')
-  nnoremap <silent> <leader><CR> :so ~\_vimrc<CR>:echomsg "Sourced _vimrc"<CR>
-  nnoremap <silent> <leader><S-CR> :e ~\_vimrc<CR>
-elseif filereadable(expand('~') . '/.vimrc')
-  nnoremap <silent> <leader><CR> :so ~/.vimrc<CR>:echomsg "Sourced .vimrc"<CR>
-  nnoremap <silent> <leader><S-CR> :e ~/.vimrc<CR>
+" using the predefined functions
+nnoremap <silent> <leader>s <cmd>call RecursiveSearch()<bar>redraw!<cr>
+nnoremap <silent> <leader>ts <cmd>call TabSize()<bar>redraw!<cr>
+
+" updating the tags file
+nnoremap <silent> <leader>ta <cmd>exe '!ctags --recurse=yes --exclude=.git --exclude=build --exclude=exercises ' . getcwd()<cr>
+
+" using the quickfix window
+nnoremap <silent> <leader>q <cmd>call QFixToggle()<cr>
+nnoremap <silent> <leader>n <cmd>try<bar>cn<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>cfirst<bar>endtry<CR>
+nnoremap <silent> <leader>p <cmd>try<bar>cp<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>clast<bar>endtry<CR>
+
+" open netrw
+nnoremap <silent> <leader>e <cmd>Lexplore<cr>
+
+" rename word under cursor
+nnoremap <silent> <leader>rn <cmd>call Rename()<cr>
+
+" compile the code
+nnoremap <silent> <m-m> <cmd>call CheckCompile()<cr>
+
+" move lines up and down while selected
+vnoremap <silent> K :m '<-2<cr>gv
+vnoremap <silent> J :m '>+1<cr>gv
+
+" stay in indent mode
+vnoremap <silent> < <gv
+vnoremap <silent> > >gv
+
+" source vim configuration
+if has('win32') && filereadable(expand('~') . '\_vimrc')
+  nnoremap <silent> <leader><cr> <cmd>so ~\_vimrc<cr><cmd>echomsg 'Sourced _vimrc'<cr>
+  nnoremap <silent> <leader><s-cr> <cmd>e ~\_vimrc<cr>
+elseif has('unix') && filereadable(expand('~') . '/.vimrc')
+  nnoremap <silent> <leader><cr> <cmd>so ~/.vimrc<cr><cmd>echomsg 'Sourced .vimrc'<cr>
+  nnoremap <silent> <leader><s-cr> <cmd>e ~/.vimrc<cr>
 endif
 
-" Compile code.
-nnoremap <silent> <M-m> :silent exe 'make' <bar> redraw!<CR>
-
-" Cycle completion.
-inoremap <silent> <Tab> <C-r>=TabOrComplete()<CR>
-inoremap <silent> <S-Tab> <C-r>=TabOrComplete(1)<CR>
-
-" Netrw settings.
+" ----------------------------------------
 let g:netrw_banner=0
 let g:netrw_winsize=20
 let g:netrw_dirhistmax=0
 
-" Cleaning the current buffer.
-aug CleanBuffer
+" ----------------------------------------
+" delete trailing space or incorrect formating options
+aug clean_buffer
   au!
   au BufWritePre * %s/\s\+$//e
   au FileType c,cpp au BufWritePre <buffer> %s/if(/if (/e
@@ -227,22 +218,12 @@ aug CleanBuffer
   au FileType c,cpp au BufWritePre <buffer> %s/while(/while (/e
   au FileType c,cpp au BufWritePre <buffer> %s/switch(/switch (/e
   au FileType c,cpp au BufWritePre <buffer> %s/}break;/} break;/e
-aug END
+aug end
 
-" Highlight some keywords when editing C/C++ files.
-fu! CSyntaxHighlight()
-  syn keyword cTodo contained BUG BUGFIX
-
-  syn keyword cNote contained NOTE
-  syn cluster cCommentGroup add=cNote
-  hi def link cNote Note
-
-  syn keyword cBoolean true false TRUE FALSE
-  hi def link cBoolean Boolean
-endfu
-
-" Highlight note keyword in comments.
-aug FtSyntaxHighlight
+" set special options for the compile window
+aug compile_window
   au!
-  au FileType c,cpp call CSyntaxHighlight()
-aug END
+  au FileType compile nnoremap <buffer><silent> <m-m> <cmd>wincmd q \| call Compile()<cr>
+  au FileType compile nnoremap <buffer><silent> q <cmd>wincmd q<cr>
+  au FileType compile setl nonumber foldcolumn=0
+aug end

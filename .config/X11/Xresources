@@ -5,8 +5,8 @@
 /* /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/ */
 
 /* Cursor setup */
-Xcursor.theme: Breeze
-Xcursor.size: 16
+Xcursor.theme: Adwaita
+Xcursor.size: 32
 
 /* Display setup */
 Xft.dpi: 96
@@ -19,8 +19,8 @@ Xft.lcdfilter: lcdfilter
 
 /* XTerm setup */
 XTerm*.faceName: monospace:size=12
-XTerm*.background: #000000
-XTerm*.foreground: #ffffff
+XTerm*.background: black
+XTerm*.foreground: white
 
 /* Sxiv setup */
 Sxiv*.background: #2e3440

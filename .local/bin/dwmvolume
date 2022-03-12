@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+source config
 
 if ([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed "1q") ]); then
 	info=$(amixer -D pulse sget Master | grep -oP "(Front Left|Mono):[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g")
@@ -8,11 +10,18 @@ else
 	info=$(amixer sget Master | grep -oP "(Front Left|Mono):[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g;s/\<[0-9]\+[\.]\?[0-9]\+dB\s*//g")
 	# mute=$(echo $info | cut -d " " -f 3 | sed "s/off/yes")
 fi
-mute=$(echo $info | cut -d " " -f 3)
-[ "$mute" = "off" ] && echo "󰖁 Mute" && return
 
+mute=$(echo $info | cut -d " " -f 3)
 vol=$(echo $info | cut -d " " -f 2)
-[ "$vol" -ge 100 ] && icon="󰕾" || icon="󰖀"
-[ "$vol" -eq 0 ] && icon="󰖁"
+
+if [ "$COLORED" = true ]; then
+	[ "$mute" = "off" ] && echo "🔇 Mute" && return
+	[ "$vol" -ge 100 ] && icon="🔊" || icon="🔉"
+	[ "$vol" -eq 0 ] && icon="🔈"
+else
+	[ "$mute" = "off" ] && echo "󰖁 Mute" && return
+	[ "$vol" -ge 100 ] && icon="󰕾" || icon="󰖀"
+	[ "$vol" -eq 0 ] && icon="󰖁"
+fi
 
 echo "$icon $vol%"

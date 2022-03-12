@@ -11,6 +11,10 @@ run_dmenu() {
 	fi
 }
 
+run_ffmpeg() {
+
+}
+
 screencast_full() {
 	if [ "$1" = "Yes" ]; then
 		ffmpeg \

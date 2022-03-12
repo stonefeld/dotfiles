@@ -26,9 +26,7 @@ virtualenv_info() {
 
 # Small function to detect if the directory is a git repository and change
 # prompt's current working directory length to 1.
-gitdir() {
-	git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3
-}
+gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3; }
 
 # Setting up the normal prompt.
 PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '
@@ -72,7 +70,11 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # Pass aliases to sudo.
-alias sudo='sudo '
+if command -v doas &>/dev/null; then
+	alias doas='doas '
+else
+	alias sudo='sudo '
+fi
 
 # Git shortcuts.
 alias gis='git status'
@@ -124,6 +126,9 @@ alias dmesg='dmesg --color=always'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+
+# Change abook directories
+alias abook='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook'
 
 # System shortcuts.
 alias sys='systemctl'
