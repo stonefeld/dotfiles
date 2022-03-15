@@ -1,0 +1,12 @@
+#!/bin/sh
+
+INPUT_RES="${2:-1920x1080}"
+OUTPUT_RES="${3:-1280x720}"
+FPS="${4:-25}"
+
+ffmpeg -f x11grab -s "$INPUT_RES" -r "$FPS" -i :0.0 -f alsa -ac 2 \
+	-i default -vcodec libx264 -s "$OUTPUT_RES" \
+	-acodec libmp3lame -ab 128k -ar 44100 \
+	-threads 0 -f mp4 "$1" &
+
+echo $! > /tmp/recordingpid

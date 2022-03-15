@@ -6,10 +6,10 @@ per=$(cat /sys/class/power_supply/BAT0/capacity)
 char=$(cat /sys/class/power_supply/AC/online)
 
 if [ "$COLORED" = true ]; then
-	[ "$char" -eq 1 ] && echo "🔌 $per%" && return
+	[ "$char" -eq 1 ] && echo " 🔌 $per% |" && return
 	icon="🔋"
 else
-	[ "$char" -eq 1 ] && echo "󰂄 $per%" && return
+	[ "$char" -eq 1 ] && echo " 󰂄 $per% |" && return
 	icon="󰂃"
 	bat=$(( $per / 10 ))
 	case $bat in
@@ -26,4 +26,4 @@ else
 		"10") icon="󰁹";;
 	esac
 fi
-echo "$icon $per%"
+echo " $icon $per% |"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source config
+
+case $BUTTON in
+	1) dmrecord;;
+	3) setsid -f st -c Floating -g 120x34 -e vifm $HOME/vids/recordings;;
+esac
+
+if [ "$COLORED" = true ]; then
+	[ -f /tmp/recordingpid ] && echo " 🎤 ⏺️ |"
+fi

@@ -5,4 +5,4 @@ case $BUTTON in
 	3) setsid -f st -c Floating -g 120x34 -e htop;;
 esac
 
-free -h | awk '/^Mem:/ { print $3"/"$2 }' | sed 's/i//g'
+echo " 💻 $(free -h | awk '/^Mem:/ { print $3"/"$2 }' | sed 's/i//g') |"

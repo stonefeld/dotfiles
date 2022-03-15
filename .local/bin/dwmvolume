@@ -24,4 +24,4 @@ else
 	[ "$vol" -eq 0 ] && icon="󰖁"
 fi
 
-echo "$icon $vol%"
+echo " $icon $vol% |"

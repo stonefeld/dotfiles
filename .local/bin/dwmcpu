@@ -5,4 +5,4 @@ case $BUTTON in
 	3) setsid -f st -c Floating -g 120x34 -e htop;;
 esac
 
-sensors | awk '/^CPU/ { print $2 }' | sed 's/+//g'
+echo " 🧠 $(sensors | awk '/^CPU/ { print $2 }' | sed 's/+//g') |"

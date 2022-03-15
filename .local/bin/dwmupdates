@@ -14,4 +14,4 @@ else
 	pgrep -x pacupdatecheck >/dev/null && icon=" 󰑓"
 fi
 
-echo "$updates$icon"
+echo " 📦 $updates$icon |"

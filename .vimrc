@@ -1,3 +1,9 @@
+"        _
+" __   _(_)_ __ ___  _ __ ___
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__
+" (_)_/ |_|_| |_| |_|_|  \___|
+
 syntax on                            " enable syntax highlight
 
 set nocompatible                     " no vi compatibility
@@ -114,7 +120,7 @@ fu! TabSize()
   let current_size=&tabstop
   let new_size=input('Enter tab size (current: ' . current_size . '): ')
   if len(new_size) != 0
-    exe 'set tabstop=' . new_size . ' softtabstop=' . new_size . ' shiftwidth=' . tabsize
+    exe 'set tabstop=' . new_size . ' softtabstop=' . new_size . ' shiftwidth=' . new_size
   endif
 endfu
 

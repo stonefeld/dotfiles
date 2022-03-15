@@ -1,7 +1,9 @@
 #!/bin/bash
 
-filename="recording_$(date '+%y_%m_%d_%H_%M_%S').mp4"
+filename="recording_$(date '+%y_%m_%d_%H_%M_%S').mkv"
 filelocation="$HOME/vids/recordings"
+
+[ ! -d "$filelocation" ] && mkdir -p "$filelocation"
 
 run_dmenu() {
 	if [ "$#" -eq 1 ]; then
@@ -11,52 +13,14 @@ run_dmenu() {
 	fi
 }
 
-run_ffmpeg() {
-
-}
-
 screencast_full() {
-	if [ "$1" = "Yes" ]; then
-		ffmpeg \
-		-f x11grab \
-		-video_size "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" \
-		-framerate 25 \
-		-i "$DISPLAY" \
-		-f alsa -i default \
-		-c:v libx264 -preset ultrafast -c:a aac \
-		"$filelocation/$filename" &
-	else
-		ffmpeg \
-		-f x11grab \
-		-video_size "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" \
-		-framerate 25 \
-		-i "$DISPLAY" -c:v libx264 \
-		"$filelocation/$filename" &
-	fi
-	echo $! > /tmp/recordingpid
-	statusline
+	record "$filelocation/$filename" "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" "1280x1440"
+	pkill -RTMIN+11 dwmblocks
 }
 
 screencast_single() {
-	if [ "$1" = "Yes" ]; then
-		ffmpeg \
-		-f x11grab \
-		-video_size "1920x1080" \
-		-framerate 25 \
-		-i "$DISPLAY" \
-		-f alsa -i default \
-		-c:v libx264 -preset ultrafast -c:a aac \
-		"$filelocation/$filename" &
-	else
-		ffmpeg \
-		-f x11grab \
-		-video_size "1920x1080" \
-		-framerate 25 \
-		-i "$DISPLAY" -c:v libx264 \
-		"$filelocation/$filename" &
-	fi
-	echo $! > /tmp/recordingpid
-	statusline
+	record "$filelocation/$filename"
+	pkill -RTMIN+11 dwmblocks
 }
 
 webcam() {
@@ -78,14 +42,14 @@ webcam() {
 		"$filelocation/$filename" &
 	fi
 	echo $! > /tmp/recordingpid
-	statusline
+
 }
 
 killrecording() {
 	recpid="$(cat /tmp/recordingpid)"
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
-	statusline
+	pkill -RTMIN+11 dwmblocks
 	sleep 3
 	kill -9 "$recpid"
 	exit
@@ -98,14 +62,10 @@ askrecording() {
 		choice=$(run_dmenu "Screencast\\nRecord Webcam\\nLaunch Webcam")
 	fi
 
-	audio="No"
-	[ ! -z "$choice" -a ! "$choice" = "Launch Webcam" ] && audio=$(run_dmenu "Record Microphone?" "Yes\\nNo")
-	[ -z "$audio" ] && exit
-
 	case "$choice" in
-		Screencast\ Full)   screencast_full $audio;;
-		Screencast\ Single) screencast_single $audio;;
-		Screencast)         screencast_single $audio;;
+		Screencast\ Full)   screencast_full;;
+		Screencast\ Single) screencast_single;;
+		Screencast)         screencast_single;;
 		Record\ Webcam)     webcam;;
 		Launch\ Webcam)     mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
 	esac
