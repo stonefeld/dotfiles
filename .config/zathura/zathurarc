@@ -1,26 +1,46 @@
-# Set padding between pages
+###################
+#### GRAPHICAL ####
+###################
 set page-padding 1
-
-# Disable padding on the sides
+set pages-per-row 1
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 
-# Nord-style inverted color
-set recolor-lightcolor "#3b4252"
-set recolor-darkcolor "#d8dee9"
-set recolor false
-# set recolor-keephue
+################
+#### COLORS ####
+################
+set font "monospace 9"
+set default-bg "#000000"
+set default-fg "#f7f7f6"
+set statusbar-fg "#b0b0b0"
+set statusbar-bg "#202020"
+set inputbar-bg "#151515"
+set inputbar-fg "#ffffff"
+set notification-error-bg "#ac4142"
+set notification-error-fg "#151515"
+set notification-warning-bg "#ac4142"
+set notification-warning-fg "#151515"
+set highlight-color "#f4bf75"
+set highlight-active-color "#6a9fb5"
+set completion-highlight-bg "#90a959"
+set completion-highlight-fg "#151515"
+set completion-bg "#303030"
+set completion-fg "#e0e0e0"
+set notification-bg "#90a959"
+set notification-fg "#151515"
 
-# Set statusbar colors
-set statusbar-bg "#d8dee9"
-set statusbar-fg "#2e3440"
+#################
+#### RECOLOR ####
+#################
+set recolor "false"
+set recolor-lightcolor "#000000"
+set recolor-darkcolor "#e0e0e0"
+set recolor-reverse-video "true"
+set recolor-keephue "true"
 
-# Set default colors and font
-set default-bg "#2e3440"
-set default-fg "#d8dee9"
-set font "monospace normal 10"
-
-# Keybindings
+#####################
+#### KEYBINDINGS ####
+#####################
 map u scroll half-up
 map d scroll half-down
 map D toggle_page_mode

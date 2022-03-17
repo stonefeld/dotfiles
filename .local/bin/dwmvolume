@@ -15,11 +15,11 @@ mute=$(echo $info | cut -d " " -f 3)
 vol=$(echo $info | cut -d " " -f 2)
 
 if [ "$COLORED" = true ]; then
-	[ "$mute" = "off" ] && echo "🔇 Mute" && return
+	[ "$mute" = "off" ] && echo " 🔇 Mute |" && return
 	[ "$vol" -ge 100 ] && icon="🔊" || icon="🔉"
 	[ "$vol" -eq 0 ] && icon="🔈"
 else
-	[ "$mute" = "off" ] && echo "󰖁 Mute" && return
+	[ "$mute" = "off" ] && echo " 󰖁 Mute |" && return
 	[ "$vol" -ge 100 ] && icon="󰕾" || icon="󰖀"
 	[ "$vol" -eq 0 ] && icon="󰖁"
 fi

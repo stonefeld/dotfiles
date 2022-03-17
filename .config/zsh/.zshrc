@@ -20,16 +20,18 @@ SAVEHIST=1000
 
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
-virtualenv_info() {
-	[ -n "$VIRTUAL_ENV" ] && echo "%B%F{yellow}($(sed 's/\-[a-zA-Z0-9]*$//' <<< ${VIRTUAL_ENV##*/}))%f%b" 2>/dev/null
-}
+virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{yellow}($(sed 's/\-[a-zA-Z0-9]*$//' <<< ${VIRTUAL_ENV##*/}))%f%b" 2>/dev/null; }
 
 # Small function to detect if the directory is a git repository and change
 # prompt's current working directory length to 1.
 gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3; }
 
+# defining multiple prompts.
+default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
+minimal_prompt() { export PROMPT='%B%F{cyan}%$(gitdir)~%f %F{red}:%f%b '; }
+
 # Setting up the normal prompt.
-PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '
+default_prompt
 
 # The right prompt displays the virtual environment's name.
 RPROMPT='$(virtualenv_info)'
@@ -219,3 +221,5 @@ if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]; then
 elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-syntax-highlighting ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 fi
+
+# vim: ft=sh

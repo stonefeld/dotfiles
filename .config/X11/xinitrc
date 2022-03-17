@@ -20,7 +20,7 @@ fi
 lxpolkit &
 picom &
 dunst &
-xwallpaper --zoom "$HOME/imgs/wallpaper/minimalistic/landscape8.jpg" &
+xwallpaper --zoom "${PICS_FOLDER:-$HOME/imgs}/wallpaper/minimalistic/landscape2.jpeg" &
 xss-lock slock &
 xset r rate 220 30
 xset s off

@@ -29,14 +29,14 @@ set splitright                       " split to the right when vertical
 set splitbelow                       " split to the bottom when horizontal
 set ruler                            " show cursor coordinates
 set mouse=a                          " enable mouse interaction
-set laststatus=2                     " show statusline in any case
+set laststatus=1                     " show statusline in any case
 set foldcolumn=1                     " extra column for folding signs
 set updatetime=250                   " decrease updatetime delay
 set shortmess+=c                     " disable cmd-line messages when autocomplete
 set incsearch                        " search while typing
 set wildmenu                         " enable wildmenu
 set list                             " enable listchars
-set listchars=tab:\|\ ,trail:.       " set characters to display tabs and trailing space
+set listchars=tab:\¦\ ,trail:.       " set characters to display tabs and trailing space
 set belloff=all                      " disable bell
 set guioptions=                      " disable all graphical features
 set guicursor+=i-ci:block-iCursor    " set insert mode cursor
@@ -45,12 +45,13 @@ set guicursor+=a:blinkon0            " disable cursor blink
 
 " change default font according to os
 if has('win32')
-  set guifont=Liberation\ Mono:h9
-  " set guifont=Cascadia\ Code:h9
+  " set guifont=Liberation\ Mono:h9
+  set guifont=Cascadia\ Code:h9
   " set guifont=Courier\ New:h9
 elseif has('unix')
   " set guifont=Liberation\ Mono\ 11
   set guifont=Cascadia\ Code\ 11
+  " set guifont=Courier\ New\ 11
 endif
 
 set background=dark                " specify that the colorscheme is dark
