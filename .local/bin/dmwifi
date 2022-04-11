@@ -1,0 +1,5 @@
+#!/bin/sh
+
+wifi=$(nmcli device wifi list | sed '1d; s/\s\+/ /; /^\*/d' | dmenu -l 20 -p "Available WiFi" | sed 's/\s\+/ /g' | cut -d ' ' -f 2)
+nmcli device wifi connect "$wifi"
+pkill -RTMIN+5 dwmblocks

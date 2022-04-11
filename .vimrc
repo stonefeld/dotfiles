@@ -55,7 +55,7 @@ elseif has('unix')
 endif
 
 set background=dark                " specify that the colorscheme is dark
-colorscheme default                " set colorscheme to deafult
+colorscheme default                " set colorscheme
 
 " highlight settings
 hi! Normal guifg=#cdaa7d guibg=#161616

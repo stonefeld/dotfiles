@@ -51,12 +51,13 @@ while [ "$#" -gt "0" ]; do
 	esac
 done
 
-type=$(run_dmenu "Select filetype" "Markdown\\nLaTeX\\nOpen compiled note")
+type=$(run_dmenu "Select filetype" "Markdown\\nLaTeX\\nRMarkdown\\nOpen compiled note")
 [ -z "$type" ] && exit
 
 case "$type" in
-	"Markdown") prefix="md";;
-	"LaTeX")    prefix="tex";;
+	"Markdown")  prefix="md";;
+	"LaTeX")     prefix="tex";;
+	"RMarkdown") prefix="rmd";;
 esac
 
 if [ ! "$type" = "Open compiled note" ]; then

@@ -12,3 +12,5 @@ set classify+='  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.
 set classify+='  ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
 " office files
 set classify+='  ::*.doc,,*.docx::,  ::*.xls,,*.xls[mx]::,  ::*.pptx,,*.ppt::'
+
+" vim: ft=vim

@@ -7,36 +7,29 @@
 set vicmd=nvim
 colorscheme Custom
 " fileviewer *[^/] pygmentize -O style=monokai -f console256 -g
-
 set syscalls
 set trash
-
 set history=100
 set nofollowlinks
 set nowrap
-
 set sortnumbers
 set undolevels=100
-
 set vimhelp
 set norunexec
-
-set timefmt="%a, %b %d (%Y) %H:%M "
-set statusline=" %A %10u:%-10g %15s%=%d"
-
+set timefmt="%m/%d/%y %H:%M"
+set statusline="%=%{system('date \"+%a, %b %d (%Y) %H:%M\"')} "
 set wildmenu
-set wildstyle=popup
-
+set wildstyle=bar
+set title
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
 set ignorecase
 set smartcase
 set nohlsearch
 set incsearch
-
+set scrolloff=3
+set viewcolumns=-{name}..,6{size},{#\ \|},11{perms},{#\ \|},15{mtime}
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
-
-set scrolloff=3
 if !has('win')
     set slowfs=curlftpfs
 endif
@@ -60,10 +53,9 @@ command! df df -h %m 2> /dev/null
 command! du du -h . %m 2> /dev/null
 command! top htop 2> /dev/null
 command! zip zip -r %f.zip %f
-command! comp tar -czf %f.tar.gz %f
-command! arch tar -cf %f.tar %f
-command! decomp tar -xzf %f
-command! unarch tar -xf %f
+command! tgz tar -czf %f.tar.gz --verbose %f
+command! tar tar -cf %f.tar --verbose %f
+command! ex ex %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
@@ -71,66 +63,70 @@ command! vgrep vim "+grep %a"
 command! reload :write | restart full
 command! dragon dragon-drag-and-drop -a -x %f
 command! dragdl dlfile
-command! sw xwallpaper --zoom %c
+command! sw setbg %c
 
 nnoremap e :!
-nnoremap s :shell<CR>
-nnoremap S :sort<CR>
+nnoremap s :shell<cr>
+nnoremap S :sort<cr>
 
-nnoremap w :view<CR>
-vnoremap w :view<CR>gv
+nnoremap w :view<cr>
+vnoremap w :view<cr>gv
 
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
-nnoremap A cw
+nnoremap rn cW
+nnoremap A cw<c-e>
 
-nnoremap % :touch<space>
-nnoremap di :mkdir<space>""<Left>
+nnoremap ;f :touch<space>""<left>
+nnoremap ;d :mkdir<space>""<left>
+nnoremap ;ta :!cp<space>~/.local/share/templates/latex/basic_latex.tex<space>%d<cr>
+
+nnoremap xx :ex<cr>
+nnoremap xz :zip<cr>
+nnoremap xt :tar<cr>
+nnoremap xg :tgz<cr>
 
 nnoremap J 5j
 nnoremap K 5k
 
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <M-o> :sync %c<CR>
+nnoremap <m-o> :sync %c<cr>
 
-nnoremap yi :!xclip -se c -t image/png -i %c<CR>
-
-nmap dr :dragon<CR>
-vmap dr :dragon<CR>
-nmap dl :dragdl<CR>
+nmap dr :dragon<cr>
+vmap dr :dragon<cr>
+nmap dl :dragdl<cr>
 
 " Interaction with system clipboard
 if has('win')
     " Yank current directory path to Windows clipboard with forward slashes
-    nnoremap yp :!echo %"d:gs!\!/! %i | clip<CR>
+    nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
     " Yank path to current file to Windows clipboard with forward slashes
-    nnoremap yf :!echo %"c:gs!\!/! %i | clip<CR>
+    nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
 elseif executable('xclip')
     " Yank current directory path into the clipboard
-    nnoremap yd :!echo %d | xclip %i<CR>
+    nnoremap yd :!echo %d | xclip %i<cr>
     " Yank current file path into the clipboard
-    nnoremap yf :!echo %c:p | xclip %i<CR>
+    nnoremap yf :!echo %c:p | xclip %i<cr>
+    " Yank the current image into the clipboard
+    nnoremap yi :!xclip -se c -t image/png -i %c<cr>
 elseif executable('xsel')
     " Yank current directory path into primary and selection clipboards
     nnoremap yd :!echo -n %d | xsel --input --primary %i &&
-        \ echo -n %d | xsel --clipboard --input %i<CR>
+        \ echo -n %d | xsel --clipboard --input %i<cr>
     " Yank current file path into into primary and selection clipboards
     nnoremap yf :!echo -n %c:p | xsel --input --primary %i &&
-        \ echo -n %c:p | xsel --clipboard --input %i<CR>
+        \ echo -n %c:p | xsel --clipboard --input %i<cr>
 endif
 
 " Other files
 fileviewer <text/*>
     \ {View with syntax highlight},
-    \ highlight -O xterm256 -s base16/bright %c,
+    \ highlight -O ansi -s base16/bright %c,
     \ {View normal files},
     \ cat %c,
 
 " Pdf
 filextype {*.pdf},<application/pdf>
-    \ tabbed -c zathura %c %i -e &,
-    \ zathura %c &,
+    \ zathura %c %i &,
     \ apvlv %c,
     \ xpdf %c
 fileviewer {*.pdf},<application/pdf>
@@ -313,8 +309,8 @@ filextype *.pro qtcreator %f &
 filextype */
     \ {View in thunar}
     \ Thunar %f &,
-fileviewer {*/,.*/}
-    \ tree -a -C %f,
+" fileviewer {*/,.*/}
+"     \ tree -C %f,
 
 " Every other file
 fileviewer *[^/]

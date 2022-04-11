@@ -20,21 +20,35 @@ SAVEHIST=1000
 
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
-virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo "%B%F{yellow}($(sed 's/\-[a-zA-Z0-9]*$//' <<< ${VIRTUAL_ENV##*/}))%f%b" 2>/dev/null; }
+virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo " %B%F{red}(%F{magenta}$(sed 's/\-[a-zA-Z0-9]*$//' <<< ${VIRTUAL_ENV##*/})%f%F{red})%f%b" 2>/dev/null; }
 
 # Small function to detect if the directory is a git repository and change
 # prompt's current working directory length to 1.
 gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3; }
 
+# Get all the relevant git information.
+gitinfo() {
+	if [ $(gitdir) -eq 1 ]; then
+		git_files=$(git status --porcelain 2>/dev/null | wc -l)
+		git_branch=$(git branch --show-current 2>/dev/null)
+		git_unpushed=$([ $(git cherry -v &>/dev/null | wc -l) -gt 0 ] && echo "%F{black}-%f%F{blue}!%f")
+		echo "%F{yellow}$git_branch%f%F{black}-%f%F{green}$git_files%f$git_unpushed"
+	fi
+}
+
+# Display a '!' when the last command didn't exited succesfully.
+last_status() { [ "$?" -ne 0 ] && echo "%B%F{red}(%f%F{yellow}!%f%F{red})%f%b"; }
+
 # defining multiple prompts.
 default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
 minimal_prompt() { export PROMPT='%B%F{cyan}%$(gitdir)~%f %F{red}:%f%b '; }
-
-# Setting up the normal prompt.
-default_prompt
+god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
 
 # The right prompt displays the virtual environment's name.
-RPROMPT='$(virtualenv_info)'
+RPROMPT='$(last_status)$(virtualenv_info)'
+
+# Setting up the normal prompt.
+god_prompt
 
 # ---------- ALIASES ---------- #
 # System power.
@@ -57,6 +71,9 @@ fi
 # Utilities with fzf
 alias cf='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 alias sr='less "$(find ~ -maxdepth 5 -type f | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
+
+# Easily resource the zsh config file.
+alias reso='source ${ZDOTDIR:-}/.zshrc'
 
 # Some ls command replacements.
 if ! command -v exa &>/dev/null; then
@@ -142,31 +159,6 @@ alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4" &>/dev/null'
 # Manage dotfiles.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
-# File decompresser and extracter.
-ex() {
-	if [ ! -z "$*" ]; then
-		for i in $*; do
-			if [ -f "$i" ]; then
-				case $i in
-					*.tar.bz2) tar -xjf $i;;
-					*.tar.gz)  tar -xzf $i;;
-					*.rar)     unrar -x $i;;
-					*.gz)      gunzip $i;;
-					*.tar)     tar -xf $i;;
-					*.zip)     unzip $i -d ./${i%.*};;
-					*.Z)       uncompress $i;;
-					*.7z)      7z -x $i;;
-					*)         echo "ex: cannot extract '$i': Filetype not supported";;
-				esac
-			else
-				echo "ex: cannot access '$i': No such file or directory"
-			fi
-		done
-	else
-		echo "ex [FILE...]"
-	fi
-}
-
 # ---------- KEYBINDINGS ---------- #
 bindkey '^P' up-line-or-history      # Ctrl+p
 bindkey '^N' down-line-or-history    # Ctrl+n
@@ -216,6 +208,8 @@ precmd_functions+=(set_title)
 
 # ---------- EXTRAS ---------- #
 # Syntax highlighting.
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
+
 if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]; then
 	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-syntax-highlighting ]; then

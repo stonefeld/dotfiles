@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+source config
 
 case $BUTTON in
 	1) setsid -f st -c Floating -g 120x34 -e bmon;;
@@ -20,4 +22,8 @@ update() {
 rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
 tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
 
-printf " 🔻%4sB 🔺%4sB |\\n" $(numfmt --to=iec $rx $tx)
+if [ "$COLORED" = true ]; then
+	printf " 🔻%4sB 🔺%4sB |\\n" $(numfmt --to=iec $rx $tx)
+else
+	printf " 󰁆%4sB 󰁞%4sB |\\n" $(numfmt --to=iec $rx $tx)
+fi

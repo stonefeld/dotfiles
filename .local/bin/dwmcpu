@@ -1,8 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+
+source config
 
 case $BUTTON in
 	1) notify-send -i "null" -a ps "Most cpu consuming processes" "$(ps axch -o cmd:20,%cpu --sort=-%cpu | head | sed 's/$/%/')";;
 	3) setsid -f st -c Floating -g 120x34 -e htop;;
 esac
 
-echo " 🧠 $(sensors | awk '/^CPU/ { print $2 }' | sed 's/+//g') |"
+[ "$COLORED" = true ] && icon="🧠" || icon="󰒋"
+echo " $icon $(sensors | awk '/^CPU/ { print $2 }' | sed 's/+//g') |"

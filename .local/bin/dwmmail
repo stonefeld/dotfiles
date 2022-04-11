@@ -9,9 +9,9 @@ esac
 
 unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
 if [ "$COLORED" = true ]; then
-    pgrep -x mailcheck >/dev/null && icon=" 🔄"
+	pgrep -x mailcheck >/dev/null && sync=" 🔄"
+	echo " 📬 $unread$sync |"
 else
-    pgrep -x mailcheck >/dev/null && icon=" 󰑓"
+	pgrep -x mailcheck >/dev/null && sync=" 󰑓"
+	echo " 󰇮 $unread$sync |"
 fi
-
-echo " 📬 $unread$icon |"

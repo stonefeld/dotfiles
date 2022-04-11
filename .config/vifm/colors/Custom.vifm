@@ -13,11 +13,11 @@ highlight Selected cterm=bold ctermfg=magenta ctermbg=default
 highlight CurrLine cterm=bold,reverse
 highlight TopLine cterm=none ctermfg=white ctermbg=black
 highlight TopLineSel cterm=bold ctermfg=white ctermbg=black
-highlight StatusLine cterm=bold ctermfg=white ctermbg=black
+highlight StatusLine cterm=none ctermfg=white ctermbg=black
 highlight WildMenu cterm=reverse ctermfg=yellow ctermbg=black
 highlight CmdLine cterm=none ctermfg=white ctermbg=none
 highlight ErrorMsg cterm=none ctermfg=white ctermbg=red
-highlight Border cterm=none ctermfg=white ctermbg=black
+highlight Border cterm=none ctermfg=none ctermbg=black
 highlight OtherLine ctermfg=default ctermbg=default
 highlight JobLine cterm=bold,reverse ctermfg=black ctermbg=white
 highlight SuggestBox cterm=bold ctermfg=default ctermbg=default
@@ -44,6 +44,6 @@ highlight /^.*\.(zip|gz|bz2|xz|tar|tgz|tbz2|7z|rar|iso|rpm|deb)$/ ctermfg=red
 highlight /^.*\.(bak)$/ ctermfg=black
 highlight /^.*\.(md)$/ cterm=bold,underline ctermfg=yellow
 highlight /^.*(Pipfile)$/ cterm=bold,underline ctermfg=yellow
-highlight /^.*\.(xls)$/ ctermfg=cyan
+highlight /^.*\.(xls|xlsx)$/ ctermfg=cyan
 
 " vim: ft=vim

@@ -43,7 +43,7 @@
     ##############
     #### TEXT ####
     ##############
-    font = Monospace 11                  # font used by the notifications
+    font = Cascadia Code 11              # font used by the notifications
     line_height = 0                      # line spacing
     markup = full                        # text treatment (full|strip|no)
     # The format of the message.  Possible variables are:
@@ -86,7 +86,7 @@
     #######################
     #### MISC/ADVANCED ####
     #######################
-    dmenu = dmenu -p dunst: -l 20        # dmenu path
+    dmenu = dmenu -p Action: -l 20       # dmenu path
     browser = /usr/bin/xdg-open          # browser to open from actions menu
     always_run_script = true             # always run rule-defined scripts, even if the notification is suppressed
     title = Dunst                        # title of the windows spawned by dunst

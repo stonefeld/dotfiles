@@ -16,6 +16,12 @@ compile_tex() {
 	$command --output-directory="$dir" "$base"
 }
 
+compile_c() {
+	[ -f "getnum.c" ] && SRC="getnum.c"
+	gcc -std=c99 -pedantic -Wall -o "$base" "$file" $SRC -lm
+}
+
 case "$ext" in
 	tex) compile_tex;;
+	c)   compile_c;;
 esac

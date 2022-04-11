@@ -10,8 +10,8 @@ esac
 updates="$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)"
 if [ "$COLORED" = true ]; then
 	pgrep -x pacupdatecheck >/dev/null && icon=" 🔄"
+	echo " 📦 $updates$icon |"
 else
 	pgrep -x pacupdatecheck >/dev/null && icon=" 󰑓"
+	echo " 󰬦 $updates$icon |"
 fi
-
-echo " 📦 $updates$icon |"

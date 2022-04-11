@@ -1,9 +1,12 @@
-#!/bin/sh
+#!/bin/bash
+
+source config
 
 case $BUTTON in
-	1|3) ctrlpanel nm;;
+	1|3) setsid -f st -c Floating -e nmtui;;
 esac
 
 wifi=$(iwgetid -r)
 [ -z "$wifi" ] && wifi="Disconnected"
-echo " 📶 $wifi |"
+
+[ "$COLORED" = true ] && echo " 📶 $wifi |" || echo " 󰤨 $wifi |"

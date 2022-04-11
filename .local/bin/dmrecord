@@ -7,9 +7,9 @@ filelocation="$HOME/vids/recordings"
 
 run_dmenu() {
 	if [ "$#" -eq 1 ]; then
-		printf "$1" | dmenu -i -c -l 20 -bw 4
+		printf "$1" | dmenu -i -l 20
 	else
-		printf "$2" | dmenu -i -c -l 20 -bw 4 -p "$1"
+		printf "$2" | dmenu -i -l 20 -p "$1"
 	fi
 }
 
@@ -24,8 +24,7 @@ screencast_single() {
 }
 
 webcam() {
-	if [ "$1" = "Yes" ]; then
-		ffmpeg \
+	ffmpeg \
 		-f v4l2 \
 		-framerate 25 \
 		-s "640x480" \
@@ -33,16 +32,7 @@ webcam() {
 		-f alsa -i default \
 		-c:v libx264 -preset ultrafast -c:a aac \
 		"$filelocation/$filename" &
-	else
-		ffmpeg \
-		-f v4l2 \
-		-framerate 25 \
-		-s "640x480" \
-		-i /dev/video0 \
-		"$filelocation/$filename" &
-	fi
 	echo $! > /tmp/recordingpid
-
 }
 
 killrecording() {

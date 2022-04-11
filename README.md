@@ -30,11 +30,7 @@ There are also links to other git repositories for my custom [dwm](https://githu
 
 # Example pictures
 
-### Dwm - master branch
-
-![dwm master branch](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot6-2.png)
-
-### Dwm - no-color-statusline branch
+### Dwm
 
 ![dwm no-color-statusline branch](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot6-1.png)
 

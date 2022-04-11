@@ -1,3 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-echo " 💡 $(( $(sed '1!d' /sys/class/backlight/*/actual_brightness) * 100 / $(sed '1!d' /sys/class/backlight/*/max_brightness) ))% |"
+source config
+
+[ "$COLORED" = true ] && icon="💡" || icon="󰖨"
+echo " $icon $(( $(sed '1!d' /sys/class/backlight/*/actual_brightness) * 100 / $(sed '1!d' /sys/class/backlight/*/max_brightness) ))% |"
