@@ -4,9 +4,9 @@
 "  \ V /| |  _| | | | | | | | (__
 "   \_/ |_|_| |_| |_| |_|_|  \___|
 
-set vicmd=nvim
 colorscheme Custom
-" fileviewer *[^/] pygmentize -O style=monokai -f console256 -g
+
+set vicmd=nvim
 set syscalls
 set trash
 set history=100

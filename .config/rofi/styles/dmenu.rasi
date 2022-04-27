@@ -1,0 +1,7 @@
+* {
+	background:     #111111ff;
+	background-nor: #222222ff;
+	background-sel: #005577ff;
+	foreground:     #bbbbbbff;
+	foreground-sel: #eeeeeeff;
+}

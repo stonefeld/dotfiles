@@ -49,46 +49,46 @@
 ;; scroll on compilation pane
 (setq compilation-scroll-output t)
 
-;; ;; keybindings
-;; (defvar my-keys-minor-mode-map
-;;   (let ((map (make-sparse-keymap)))
-;; 	(define-key map (kbd "C-s") 'save-buffer)
-;; 	(define-key map (kbd "C-S-s") (lambda () (interactive) (save-some-buffers "!")))
-;; 	(define-key map (kbd "C-o") 'find-file)
-;; 	(define-key map (kbd "C-S-o") 'find-file-other-window)
-;; 	(define-key map (kbd "C-p") 'switch-to-buffer)
-;; 	(define-key map (kbd "C-S-p") 'switch-to-buffer-other-window)
-;; 	(define-key map (kbd "C-,") 'other-window)
-;; 	(define-key map (kbd "C-.") 'exchange-point-and-mark)
-;; 	(define-key map (kbd "C-k") 'kill-buffer)
-;; 	(define-key map (kbd "C-S-k") (lambda () (interactive) (kill-buffer (current-buffer))))
-;; 	(define-key map (kbd "C-f") 'isearch-forward)
-;; 	(define-key map (kbd "C-d") 'delete-region)
-;; 	(define-key map (kbd "C-S-d") 'kill-whole-line)
-;; 	(define-key map (kbd "C-<backspace>") 'my-backward-kill-word)
-;; 	(define-key map (kbd "C-z") 'undo)
-;; 	(define-key map (kbd "C-c") 'kill-ring-save)
-;; 	(define-key map (kbd "C-x") 'kill-region)
-;; 	(define-key map (kbd "C-v") 'clipboard-yank)
-;; 	(define-key map (kbd "<tab>") 'dabbrev-expand)
-;; 	(define-key map (kbd "C-<tab>") 'indent-for-tab-command)
-;; 	(define-key map (kbd "C-S-<tab>") 'indent-region)
-;; 	(define-key map (kbd "M-m") (lambda () (interactive) (if (file-exists-p "build.bat") (compile "build.bat") (if (file-exists-p "build.sh") (compile "build.sh") (call-interactively 'compile)))))
-;; 	(define-key map (kbd "<f1>") 'recompile)
-;; 	(define-key map (kbd "M-<f4>") 'kill-emacs)
-;; 	map)
-;;   "my-keys-minor-mode keymap.")
-;;
-;; ;; override any annoying mayor modes
-;; (define-minor-mode my-keys-minor-mode
-;;   "A minor mode so that my key settings override annoying mayor modes."
-;;   :init-value t)
-;; (my-keys-minor-mode 1)
-;;
-;; ;; disable the minor mode on the minibuffer
-;; (defun my-minibuffer-setup-hook ()
-;;   (my-keys-minor-mode 0))
-;; (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+;; keybindings
+(defvar my-keys-minor-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-s") 'save-buffer)
+    (define-key map (kbd "C-S-s") (lambda () (interactive) (save-some-buffers "!")))
+    (define-key map (kbd "C-o") 'find-file)
+    (define-key map (kbd "C-S-o") 'find-file-other-window)
+    (define-key map (kbd "C-p") 'switch-to-buffer)
+    (define-key map (kbd "C-S-p") 'switch-to-buffer-other-window)
+    (define-key map (kbd "C-,") 'other-window)
+    (define-key map (kbd "C-.") 'exchange-point-and-mark)
+    (define-key map (kbd "C-k") 'kill-buffer)
+    (define-key map (kbd "C-S-k") (lambda () (interactive) (kill-buffer (current-buffer))))
+    (define-key map (kbd "C-f") 'isearch-forward)
+    (define-key map (kbd "C-d") 'delete-region)
+    (define-key map (kbd "C-S-d") 'kill-whole-line)
+    (define-key map (kbd "C-<backspace>") 'my-backward-kill-word)
+    (define-key map (kbd "C-z") 'undo)
+    (define-key map (kbd "C-c") 'kill-ring-save)
+    (define-key map (kbd "C-x") 'kill-region)
+    (define-key map (kbd "C-v") 'clipboard-yank)
+    (define-key map (kbd "<tab>") 'dabbrev-expand)
+    (define-key map (kbd "C-<tab>") 'indent-for-tab-command)
+    (define-key map (kbd "C-S-<tab>") 'indent-region)
+    (define-key map (kbd "M-m") (lambda () (interactive) (if (file-exists-p "build.bat") (compile "build.bat") (if (file-exists-p "build.sh") (compile "build.sh") (call-interactively 'compile)))))
+    (define-key map (kbd "<f1>") 'recompile)
+    (define-key map (kbd "M-<f4>") 'kill-emacs)
+    map)
+  "my-keys-minor-mode keymap.")
+
+;; override any annoying mayor modes
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying mayor modes."
+  :init-value t)
+(my-keys-minor-mode 1)
+
+;; disable the minor mode on the minibuffer
+(defun my-minibuffer-setup-hook ()
+  (my-keys-minor-mode 0))
+(add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
 
 ;; add standard c and c++ styles as well as some comment keywords highlight
 (defun my-c-mode-common-hook ()
@@ -108,37 +108,6 @@
 ;; avoid changing default-directory value when using find-file command
 (setq current-working-directory default-directory)
 (add-hook 'find-file-hook #'(lambda () (setq default-directory (expand-file-name current-working-directory))))
-
-;; initialize packages
-(setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ("org" . "https://ormode.org/elpa/")
-        ("elpa" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
-
-;; ensure all required packages are installed
-(setq use-package-always-ensure t)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile (require 'use-package))
-
-;; vim like keybindings.
-(use-package undo-fu)
-(use-package evil
-      :demand t
-      :bind (("<escape>" . keyboard-escape-quit))
-      :init
-      (setq evil-search-module 'evil-search)
-      (setq evil-want-keybinding nil)
-      (setq evil-undo-system 'undo-fu)
-      :config
-      (evil-mode 1))
-(use-package evil-collection
-      :after evil
-      :config
-      (setq evil-want-integration t)
-      (evil-collection-init))
 
 ;; Init commands
 (electric-pair-mode)

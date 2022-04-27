@@ -30,17 +30,16 @@ set splitbelow                       " split to the bottom when horizontal
 set ruler                            " show cursor coordinates
 set mouse=a                          " enable mouse interaction
 set laststatus=1                     " show statusline in any case
-set foldcolumn=1                     " extra column for folding signs
+set showcmd                          " show extra information on the cmdline
+set ttimeoutlen=50                   " time waited for a key code to complete
 set updatetime=250                   " decrease updatetime delay
 set shortmess+=c                     " disable cmd-line messages when autocomplete
 set incsearch                        " search while typing
 set wildmenu                         " enable wildmenu
 set list                             " enable listchars
-set listchars=tab:\¦\ ,trail:.       " set characters to display tabs and trailing space
+set listchars=tab:\ \ ,trail:.       " set characters to display tabs and trailing space
 set belloff=all                      " disable bell
 set guioptions=                      " disable all graphical features
-set guicursor+=i-ci:block-iCursor    " set insert mode cursor
-set guicursor+=r-cr:block-rCursor    " set replace mode cursor
 set guicursor+=a:blinkon0            " disable cursor blink
 
 " change default font according to os
@@ -54,41 +53,10 @@ elseif has('unix')
   " set guifont=Courier\ New\ 11
 endif
 
-set background=dark                " specify that the colorscheme is dark
-colorscheme default                " set colorscheme
-
 " highlight settings
-hi! Normal guifg=#cdaa7d guibg=#161616
-hi! Statement guifg=#cd950c guibg=NONE gui=none
-hi! link Type Statement
-hi! link Identifier Statement
-hi! String guifg=#6b8e23 guibg=NONE
-hi! link Character String
-hi! link Special String
-hi! link Constant String
-hi! PreProc guifg=#f0e68c guibg=NONE
-hi! Comment guifg=#7d7d7d guibg=NONE
-hi! Todo guifg=#ff0000 guibg=NONE gui=bold
-hi! Note guifg=#00ff00 guibg=NONE gui=bold
-hi! LineNr guifg=#3d3d3d guibg=NONE
-hi! CursorLine guifg=NONE guibg=#000044
-hi! link QuickFixLine CursorLine
-hi! Visual guifg=NONE guibg=#0000aa
-hi! Cursor guifg=#000000 guibg=#40ff40
-hi! iCursor guifg=#000000 guibg=#ff4040
-hi! rCursor guifg=#000000 guibg=#4040ff
-hi! StatusLine guifg=#afafaf guibg=#000000
-hi! StatusLineNC guifg=#404040 guibg=#dfdfdf
-hi! link TabLineSel StatusLine
-hi! link TabLine StatusLineNC
-hi! link TabLineFill StatusLineNC
-hi! link FoldColumn Normal
-hi! VertSplit guifg=#afafaf guibg=#afafaf
-hi! MatchParen guifg=#ff0000 guibg=NONE
-hi! ModeMsg guifg=#cd950c gui=bold
-hi! Pmenu guifg=#ffffff guibg=#262626
-hi! PmenuSel guifg=#000000 guibg=#a6a6a6
-hi! SpecialKey guifg=grey30
+hi! Normal guifg=white guibg=black
+hi! Visual guibg=black gui=reverse ctermbg=256 cterm=reverse
+hi! SpecialKey guifg=grey30 ctermfg=8
 
 " if build.bat or build.sh are available set them as the makeprg
 if has('win32') && filereadable('build.bat')
@@ -111,8 +79,8 @@ fu! Rename()
   let new_name=input('Enter new name (' . expand('<cword>') . '): ')
   if len(new_name) != 0
     exe 'mark r'
-    exe '%s/\\<' . expand('<cword>') . '\\>/' . new_name '/g'
-    exe 'normal 'r'
+    exe '%s/\<' . expand('<cword>') . '\>/' . new_name . '/g'
+    exe "normal 'r"
   endif
 endfu
 
@@ -163,6 +131,22 @@ fu! CheckCompile()
   call Compile()
 endfu
 
+" quickly toggle syntax highlight
+let g:syn=1
+fu! ToggleSyntax()
+  if g:syn == 1
+    syntax off
+    let g:syn=0
+  else
+    syntax on
+    let g:syn=1
+  endif
+endfu
+
+" ----------------------------------------
+" add manpage command
+runtime ftplugin/man.vim
+
 " ----------------------------------------
 " setting space a leader key
 let mapleader=' '
@@ -170,7 +154,7 @@ let mapleader=' '
 " buffer manipulation
 nnoremap <silent> <c-l> <cmd>bn<cr>
 nnoremap <silent> <c-h> <cmd>bp<cr>
-nnoremap <silent> <c-k> <cmd>b #<cr>:bd #<cr>
+nnoremap <silent> <c-k> <cmd>bn<cr>:bd #<cr>
 
 " using the predefined functions
 nnoremap <silent> <leader>s <cmd>call RecursiveSearch()<bar>redraw!<cr>
@@ -186,6 +170,9 @@ nnoremap <silent> <leader>p <cmd>try<bar>cp<bar>catch /^Vim\%((\a\+)\)\=:E\%(553
 
 " open netrw
 nnoremap <silent> <leader>e <cmd>Lexplore<cr>
+
+" toggle syntax
+nnoremap <silent> <leader>s <cmd>call ToggleSyntax()<cr>
 
 " rename word under cursor
 nnoremap <silent> <leader>rn <cmd>call Rename()<cr>
@@ -216,15 +203,25 @@ let g:netrw_winsize=20
 let g:netrw_dirhistmax=0
 
 " ----------------------------------------
-" delete trailing space or incorrect formating options
+" delete trailing space or incorrect formating options and set the cursor in
+" the last position
 aug clean_buffer
   au!
+  au BufWritePre * let curr_pos=getpos('.')
   au BufWritePre * %s/\s\+$//e
   au FileType c,cpp au BufWritePre <buffer> %s/if(/if (/e
   au FileType c,cpp au BufWritePre <buffer> %s/for(/for (/e
   au FileType c,cpp au BufWritePre <buffer> %s/while(/while (/e
   au FileType c,cpp au BufWritePre <buffer> %s/switch(/switch (/e
   au FileType c,cpp au BufWritePre <buffer> %s/}break;/} break;/e
+  au FileType c,cpp au BufWritePre <buffer> %s/\s* ++/++/e
+  au BufWritePost * call cursor(curr_pos[1], curr_pos[2])
+aug end
+
+" use manpages to access developer manpages for c code
+aug manpages
+  au!
+  au FileType c,cpp,man nnoremap <buffer><silent> K <cmd>exe 'Man ' . expand('<cword>') . '.3'<cr>
 aug end
 
 " set special options for the compile window
@@ -234,3 +231,50 @@ aug compile_window
   au FileType compile nnoremap <buffer><silent> q <cmd>wincmd q<cr>
   au FileType compile setl nonumber foldcolumn=0
 aug end
+
+" set some special settings for writing html, css and javascript
+aug web_dev
+  au!
+  au FileType html,css,javascript setl tabstop=2 softtabstop=2 shiftwidth=2
+  au FileType html inoremap <silent> !<tab> <!DOCTYPE html><cr><html><cr><head><cr><meta charset="UTF-8"><cr><meta http-equiv="X-UA-Compatible" content="IE=edge"><cr><meta name="viewport" content="width=device-width, initial-scale=1"><cr><title></title><cr></head><cr><body><cr><++><cr></body><cr></html><esc>5kf>a
+  au FileType html inoremap <silent> ;d<tab> <div class=""<++>><++></div><esc>15hi
+  au FileType html inoremap <silent> ;h1<tab> <h1 class=""<++>><++></h1><esc>14hi
+  au FileType html inoremap <silent> ;h2<tab> <h2 class=""<++>><++></h2><esc>14hi
+  au FileType html inoremap <silent> ;h3<tab> <h3 class=""<++>><++></h3><esc>14hi
+  au FileType html inoremap <silent> ;h4<tab> <h4 class=""<++>><++></h4><esc>14hi
+  au FileType html inoremap <silent> ;bu<tab> <button class="" type="<++>"<++>><++></button><esc>30hi
+  au FileType html inoremap <silent> ;in<tab> <input class="" type="<++>" id="<++>" value="<++>" placeholder="<++>"></input><esc>63hi
+  au FileType html inoremap <silent> <c-l> <esc>:let @0=@/<cr>/<++><cr>:let @/=@0<cr>ca<
+aug end
+
+" set some special settings for writing latex
+aug latex_writing
+  au!
+  au BufNewFile,BufRead *.tex setl ft=tex
+  au FileType tex setl tabstop=2 softtabstop=2 shiftwidth=2 textwidth=80
+  au FileType tex nnoremap <silent> <m-m> <cmd>w! \| exe '!compiler ' . expand('%:p')<cr>
+  au FileType tex nnoremap <silent> <m-o> <cmd>exe '!setsid -f xdg-open ' . expand('%:r') . '.pdf' \| redraw!<cr>
+  au FileType tex inoremap <silent> !<tab> \documentclass{article}<cr><cr>\usepackage[margin=1in]{geometry}<cr><cr>\title{}<cr>\author{<++>}<cr><cr>\begin{document}<cr><cr>\maketitle<cr><++><cr><cr>\end{document}<esc>8k$i
+  au FileType tex inoremap <silent> ;be<tab> \begin{}<cr>\end{<++>}<esc>k$i
+  au FileType tex inoremap <silent> ;s<tab> \section{}<cr><cr><++><esc>2k$i
+  au FileType tex inoremap <silent> ;ss<tab> \subsection{}<cr><cr><++><esc>2k$i
+  au FileType tex inoremap <silent> ;sss<tab> \subsubsection{}<cr><cr><++><esc>2k$i
+  au FileType tex inoremap <silent> ;eq<tab> \[<cr><cr>\]<esc>ki
+  au FileType tex inoremap <silent> ;ie<tab> $$ <++><esc>5hi
+  au FileType tex inoremap <silent> ;e<tab> \textit{} <++><esc>5hi
+  au FileType tex inoremap <silent> ;b<tab> \textbf{} <++><esc>5hi
+  au FileType tex inoremap <silent> ;ce<tab> \begin{center}<cr><cr>\end{center}<esc>kA
+  au FileType tex inoremap <silent> ;en<tab> \begin{enumerate}<cr>\item <cr>\end{enumerate}<esc>kA
+  au FileType tex inoremap <silent> ;it<tab> \begin{itemize}<cr>\item <cr>\end{itemize}<esc>kA
+  au FileType tex inoremap <silent> ;i<tab> <esc>cc\item<space>
+  au FileType tex inoremap <silent> <c-l> <esc>:let @0=@/<cr>/<++><cr>:let @/=@0<cr>ca<
+aug end
+
+" ----------------------------------------
+" solve the problem where i can't bind alt+<any_key>
+let c='a'
+while c<='z'
+  exec "set <A-" . c . ">=\e" . c
+  exec "imap \e" . c . " <A-" . c . ">"
+  let c=nr2char(1 + char2nr(c))
+endwhile

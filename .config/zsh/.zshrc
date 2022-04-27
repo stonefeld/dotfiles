@@ -127,6 +127,7 @@ alias pepyls='pipenv install --dev python-language-server rope pyflakes mccabe p
 
 # Show all manpages on a fzf table and select the one to read.
 alias mans='man -k . | fzf | sed "s/ \+/ /g" | cut -d " " -f 1 | xargs -r man'
+alias mand='man -a --names-only -k . | grep -o "^.*(3)\s*-" | sed "s/-$//" | fzf | cut -d " " -f 1 | sed "s/$/\.3/" | xargs -r man'
 
 # Lazygit shortctut.
 alias lgit='lazygit'
@@ -208,7 +209,7 @@ precmd_functions+=(set_title)
 
 # ---------- EXTRAS ---------- #
 # Syntax highlighting.
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]; then
 	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh

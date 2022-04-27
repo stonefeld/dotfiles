@@ -46,7 +46,7 @@ There are also links to other git repositories for my custom [dwm](https://githu
 
 ![qtile option 3](https://raw.githubusercontent.com/stonefeld/dotfiles/stored-images/screenshot5-5.png)
 
-*This are the most recent pictures from my current setup. For older pictures check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch.*
+_This are the most recent pictures from my current setup. For older pictures check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch._
 
 # Dependencies
 Most of the following packages should be in your distro's repository. In case of arch-users there are some packages that must be installed from the AUR. I recommend install some kind of [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) and works really well.
@@ -54,9 +54,9 @@ Most of the following packages should be in your distro's repository. In case of
 * Programs with configurations:
   * `alacritty`
   * `bash`
-  * `dmenu` *(\*)*
+  * `dmenu` _(\*)_
   * `dunst`
-  * `dwm` *(\*)*
+  * `dwm` _(\*)_
   * `firefox`
   * `ncmpcpp`
   * `neovim` version 0.5 or above
@@ -64,7 +64,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `picom`
   * `qtile`
   * `rofi`
-  * `st` *(\*)*
+  * `st` _(\*)_
   * `tmux`
   * `vifm`
   * `xbindkeys`
@@ -73,13 +73,13 @@ Most of the following packages should be in your distro's repository. In case of
 
 * Required to get the configurations above working:
   * `brave`
-  * `dragon-drag-and-drop` *(\*\*)*
+  * `dragon-drag-and-drop` _(\*\*)_
   * `highlight`
   * `fd`
   * `ffmpeg`
   * `fzf`
   * `latex suite`
-  * `libxft-bgra` *(\*\*)*
+  * `libxft-bgra` _(\*\*)_
   * `make`
   * `md-to-pdf` by running `npm i -g md-to-pdf`
   * `mpd`
@@ -91,7 +91,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `scrot`
   * `slock`
   * `wireless_tools`
-  * `xkb-switch` *(\*\*)*
+  * `xkb-switch` _(\*\*)_
   * `xmenu`
   * `xss-lock`
   * `zsh-syntax-highlighting` or clone the [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) repository into `$HOME/.config/zsh/zsh-syntax-highlighting/`
@@ -99,24 +99,23 @@ Most of the following packages should be in your distro's repository. In case of
 * Required fonts:
   * `ttf-cascadia-code`
   * `ttf-fantasque-sans-mono`
-  * `ttf-font-icons` *(\*\*)*
-  * `ttf-material-design-icons-webfont` *(\*\*)*
+  * `ttf-font-icons` _(\*\*)_
+  * `ttf-material-design-icons-webfont` _(\*\*)_
 
 * Required nerd-fonts:
-  * `nerd-fonts-cascadia-code` *(\*\*) (\*\*\*)*
-  * `nerd-fonts-fantasque-sans-mono` *(\*\*) (\*\*\*)*
+  * `nerd-fonts-cascadia-code` _(\*\*) (\*\*\*)_
+  * `nerd-fonts-fantasque-sans-mono` _(\*\*) (\*\*\*)_
 
 * Themes:
-  * `papirus-folders-git` and configured to use the `nordic` colors *(\*\*)*
+  * `papirus-folders-git` and configured to use the `nordic` colors _(\*\*)_
   * `papirus-icon-theme`
-  * `nordic-theme` *(\*\*)*
-  * `xcursor-breeze` *(\*\*)*
+  * `nordic-theme` _(\*\*)_
+  * `xcursor-breeze` _(\*\*)_
+_(\*) = has to be compiled from source_
 
-*(\*) = has to be compiled from source*
+_(\*\*) = availabe in the AUR_
 
-*(\*\*) = availabe in the AUR*
-
-*(\*\*\*) = can be manually installed from the [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts) repository and placed in* `~/.local/share/fonts/` *or* `/usr/share/fonts/` *and run* `fc-cache -fv`
+_(\*\*\*) = can be manually installed from the [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts) repository and placed in_ `~/.local/share/fonts/` _or_ `/usr/share/fonts/` _and run_ `fc-cache -fv`
 
 # Essential config files
 * [Qtile](https://github.com/stonefeld/dotfiles/tree/master/.config/qtile)
@@ -130,7 +129,7 @@ Most of the following packages should be in your distro's repository. In case of
 * [Rofi](https://github.com/stonefeld/dotfiles/tree/master/.config/rofi)
 * [Dmenu](https://github.com/stonefeld/dmenu) *(\*)*
 
-*(\*) = links to another personal repository and is added as a submodule*
+_(\*) = links to another personal repository and is added as a submodule_
 
 # Personal scripts
 * [Dwm's statusline](https://github.com/stonefeld/dotfiles/tree/master/.local/bin/statusline)
@@ -157,8 +156,8 @@ Then you need to run `:PlugInstall` within neovim after sourcing the [init.vim](
 * This point is optional, but you need to install and configure [xmenu](https://github.com/phillbush/xmenu) the way you like.
 
 ## Firefox
-* First you need to locate your *Root Directory* by opening `about:profiles` in Firefox.
-* Then create a folder named *chrome* inside the *Root Directory* and place every file in the [firefox configs folder](https://github.com/stonfeld/dotfiles/tree/master/.config/firefox) inside the *chrome* folder.
+* First you need to locate your _Root Directory_ by opening `about:profiles` in Firefox.
+* Then create a folder named _chrome_ inside the _Root Directory_ and place every file in the [firefox configs folder](https://github.com/stonfeld/dotfiles/tree/master/.config/firefox) inside the _chrome_ folder.
 * Lastly you need to navigate to `about:config` in Firefox and search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set the value to `True`.
 
 ## Suckless software

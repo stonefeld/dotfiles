@@ -7,12 +7,12 @@ filelocation="$HOME/imgs/screenshots/"
 
 if [ "$#" -eq 1 ]; then
 	if [ "$1" = "-s" ]; then
-		scrot -s -f "$filelocation/$filename" &>/dev/null
+		scrot -s -f "$filelocation/$filename" 1>/dev/null
 	else
-		scrot -d $1 "$filelocation/$filename" &>/dev/null
+		scrot -d $1 "$filelocation/$filename" 1>/dev/null
 	fi
 else
-	scrot "$filelocation/$filename" &>/dev/null
+	scrot "$filelocation/$filename" 1>/dev/null
 fi
 
 [ "$?" -ne 0 ] && exit
