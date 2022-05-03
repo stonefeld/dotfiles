@@ -3,31 +3,34 @@
 ([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed '1q') ]) && PULSE=true || PULSE=false
 
 case $1 in
-	vu) # Volume up.
-	    [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ +$2% || amixer sset Master $2%+
-	    pkill -RTMIN+4 dwmblocks;;
+	vu)  # Volume up.
+	     [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ +$2% || amixer sset Master $2%+
+	     pkill -RTMIN+4 dwmblocks;;
 
-	vd) # Volume down.
-	    [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ -$2% || amixer sset Master $2%-
-	    pkill -RTMIN+4 dwmblocks;;
+	vd)  # Volume down.
+	     [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ -$2% || amixer sset Master $2%-
+	     pkill -RTMIN+4 dwmblocks;;
 
-	vm) # Volume mute.
-	    [ "$PULSE" = true ] && amixer -D pulse sset Master toggle || amixer sset Master toggle
-	    pkill -RTMIN+4 dwmblocks;;
+	vm)  # Volume mute.
+	     [ "$PULSE" = true ] && amixer -D pulse sset Master toggle || amixer sset Master toggle
+	     pkill -RTMIN+4 dwmblocks;;
 
-	mm) # Microphone mute.
-	    [ "$PULSE" = true ] && amixer -D pulse sset Capture toggle || amixer sset Capture toggle
-	    pkill -RTMIN+4 dwmblocks;;
+	mm)  # Microphone mute.
+	     [ "$PULSE" = true ] && amixer -D pulse sset Capture toggle || amixer sset Capture toggle
+	     pkill -RTMIN+4 dwmblocks;;
 
-	bu) # Brightness up.
-	    xbacklight -inc $2
-	    pkill -RTMIN+3 dwmblocks;;
+	bu)  # Brightness up.
+	     xbacklight -inc $2
+	     pkill -RTMIN+3 dwmblocks;;
 
-	bd) # Brightness down.
-	    xbacklight -dec $2
-	    pkill -RTMIN+3 dwmblocks;;
+	bd)  # Brightness down.
+	     xbacklight -dec $2
+	     pkill -RTMIN+3 dwmblocks;;
 
-	nm) # Network manager.
-	    rfkill unblock all
-	    [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet &;;
+	nm)  # Network manager.
+	     rfkill unblock all
+	     [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet &;;
+
+	run) # Run applications.
+	     dmenu_run -i -l 20 -c -bw 4;;
 esac

@@ -7,7 +7,7 @@ current_song=$(mpc status | head -n 1)
 echo "$current_song" | egrep '^volume:.*$' &>/dev/null
 [ "$?" -eq 0 ] || now_playing="Now playing: $current_song"
 
-choice=$(printf "$options" | dmenu -i -h 25 -p "$now_playing")
+choice=$(printf "$options" | dmenu -i -l 20 -p "$now_playing")
 [ -z "$choice" ] && exit
 
 case "$choice" in

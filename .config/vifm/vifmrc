@@ -86,6 +86,8 @@ nnoremap xz :zip<cr>
 nnoremap xt :tar<cr>
 nnoremap xg :tgz<cr>
 
+nnoremap qq :q<cr>
+
 nnoremap J 5j
 nnoremap K 5k
 

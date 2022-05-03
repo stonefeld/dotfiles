@@ -11,7 +11,7 @@ configuration {
 	kb-row-right: "Right,l,j,Control+n";
 }
 
-@import "../styles/dmenu.rasi"
+@import "colors.rasi"
 
 * {
 	background-color: transparent;

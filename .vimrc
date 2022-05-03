@@ -278,3 +278,15 @@ while c<='z'
   exec "imap \e" . c . " <A-" . c . ">"
   let c=nr2char(1 + char2nr(c))
 endwhile
+
+" ----------------------------------------
+" install vim-polyglot if it is not installed
+if has('win32') && ! isdirectory(expand('~') . '\vimfiles\pack\plugins\start\vim-polyglot')
+  echomsg 'Installing vim-polyglot'
+  silent exe '!md  ' . expand('~') . '\vimfiles\pack\plugins\start'
+  silent exe '!git clone https://github.com/sheerun/vim-polyglot ' . expand('~') . '/.vim/pack/plugins/start/vim-polyglot'
+elseif has('unix') && ! isdirectory(expand('~') . '/.vim/pack/plugins/start/vim-polyglot')
+  echomsg 'Installing vim-polyglot'
+  silent exe '!mkdir -p ' . expand('~') . '/.vim/pack/plugins/start'
+  silent exe '!git clone https://github.com/sheerun/vim-polyglot ' . expand('~') . '/.vim/pack/plugins/start/vim-polyglot &>/dev/null'
+endif

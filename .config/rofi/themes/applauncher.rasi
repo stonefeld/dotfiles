@@ -7,7 +7,7 @@ configuration {
 	kb-row-right: "Control+l";
 }
 
-@import "../styles/dmenu.rasi"
+@import "colors.rasi"
 
 * {
 	background-color: transparent;
