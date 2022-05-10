@@ -5,15 +5,22 @@
 #  \__,_|_|\__,_|\___|_|  |_|\__|\__|\__, (_)__, |_| |_| |_|_|
 #                                    |___/  |___/
 
+import:
+  - ~/.config/alacritty/colors.yml
+
 env:
   TERM: xterm-256color
 
 window:
   padding:
-    x: 2
-    y: 2
+    x: 5
+    y: 5
 
-  opacity: 0.95
+  dimensions:
+    columns: 120
+    lines: 34
+
+  opacity: 0.9
   dynamic_padding: true
   decorations: full
   startup_mode: Windowed
@@ -55,7 +62,10 @@ font:
     x: 0
     y: 0
 
-draw_bold_text_with_bright_colors: false
+  use_thin_strokes: true
+  builtin_box_drawing: true
+
+draw_bold_text_with_bright_colors: true
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -68,11 +78,13 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Block
+  style:
+    shape: Block
+    blinking: Never
+
+  blink_interval: 500
   unfocused_hollow: true
   thickness: 0.2
-  blinking: on
-  blink_interval: 500
 
 live_config_reload: true
 
@@ -126,279 +138,5 @@ debug:
   #   - Trace
   log_level: Warn
   print_events: false
-
-schemes:
-  ##############
-  #### NORD ####
-  ##############
-  Nord: &Nord
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:   '#2e3440'
-      foreground:   '#d8dee9'
-
-    normal:
-      black:        '#3b4252'
-      red:          '#bf616a'
-      green:        '#a3be8c'
-      yellow:       '#ebcb8b'
-      blue:         '#81a1c1'
-      magenta:      '#b48ead'
-      cyan:         '#88c0d0'
-      white:        '#e5e9f0'
-
-    bright:
-      black:        '#4c566a'
-      red:          '#bf616a'
-      green:        '#a3be8c'
-      yellow:       '#ebcb8b'
-      blue:         '#81a1c1'
-      magenta:      '#b48ead'
-      cyan:         '#8fbcbb'
-      white:        '#eceff4'
-
-  #####################
-  #### NORD CUSTOM ####
-  #####################
-  Nord-Custom: &Nord-Custom
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:   '#171421'
-      foreground:   '#d8dee9'
-
-    normal:
-      black:        '#3b4252'
-      red:          '#bf616a'
-      green:        '#a3be8c'
-      yellow:       '#ebcb8b'
-      blue:         '#81a1c1'
-      magenta:      '#b48ead'
-      cyan:         '#88c0d0'
-      white:        '#e5e9f0'
-
-    bright:
-      black:        '#4c566a'
-      red:          '#bf616a'
-      green:        '#a3be8c'
-      yellow:       '#ebcb8b'
-      blue:         '#81a1c1'
-      magenta:      '#b48ead'
-      cyan:         '#8fbcbb'
-      white:        '#eceff4'
-
-  ######################
-  #### GRUVBOX DARK ####
-  ######################
-  Gruvbox-Dark: &Gruvbox-Dark
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:   '#282828'
-      foreground:   '#ebdbb2'
-
-    normal:
-      black:        '#282828'
-      red:          '#cc241d'
-      green:        '#98971a'
-      yellow:       '#d79921'
-      blue:         '#458588'
-      magenta:      '#b16286'
-      cyan:         '#689d6a'
-      white:        '#a89984'
-
-    bright:
-      black:        '#928374'
-      red:          '#fb4934'
-      green:        '#b8bb26'
-      yellow:       '#fabd2f'
-      blue:         '#83a598'
-      magenta:      '#d3869b'
-      cyan:         '#8ec07c'
-      white:        '#ebdbb2'
-
-  ####################
-  #### AYU MIRAGE ####
-  ####################
-  Ayu-Mirage: &Ayu-Mirage
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:   '#202734'
-      foreground:   '#cbccc6'
-
-    normal:
-      black:        '#191e2a'
-      red:          '#ff3333'
-      green:        '#bae67e'
-      yellow:       '#ffa759'
-      blue:         '#73d0ff'
-      magenta:      '#ffd580'
-      cyan:         '#95e6cb'
-      white:        '#c7c7c7'
-
-    bright:
-      black:        '#686868'
-      red:          '#f27983'
-      green:        '#a6cc70'
-      yellow:       '#ffcc66'
-      blue:         '#5ccfe6'
-      magenta:      '#ffee99'
-      cyan:         '#95e6cb'
-      white:        '#ffffff'
-
-  #####################
-  #### MONOKAI PRO ####
-  #####################
-  Monokai-Pro: &Monokai-Pro
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:  '#2d2a2e'
-      foreground:  '#fcfcfa'
-
-    normal:
-      black:       '#403e41'
-      red:         '#ff6188'
-      green:       '#a9dc76'
-      yellow:      '#ffd866'
-      blue:        '#fc9867'
-      magenta:     '#ab9df2'
-      cyan:        '#78dce8'
-      white:       '#fcfcfa'
-
-    bright:
-      black:       '#727072'
-      red:         '#ff6188'
-      green:       '#a9dc76'
-      yellow:      '#ffd866'
-      blue:        '#fc9867'
-      magenta:     '#ab9df2'
-      cyan:        '#78dce8'
-      white:       '#fcfcfa'
-
-  ##################
-  #### ONE DARK ####
-  ##################
-  One-Dark: &One-Dark
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:  '#282c34'
-      foreground:  '#abb2bf'
-
-    normal:
-      black:       '#5c6370'
-      red:         '#e06c75'
-      green:       '#98c379'
-      yellow:      '#e5c07b'
-      blue:        '#61afef'
-      magenta:     '#c678dd'
-      cyan:        '#56b6c2'
-      white:       '#828997'
-
-    bright:
-      normal:
-      black:       '#696c77'
-      red:         '#e45649'
-      green:       '#50a14f'
-      yellow:      '#c18401'
-      blue:        '#4078f2'
-      magenta:     '#a626a4'
-      cyan:        '#0184bc'
-      white:       '#a0a1a7'
-
-colors: *Nord-Custom
 
 WINiT_X11_SCALE_FACTOR: 1

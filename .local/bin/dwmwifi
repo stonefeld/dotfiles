@@ -3,7 +3,8 @@
 source config
 
 case $BUTTON in
-	1|3) setsid -f st -c Floating -e nmtui;;
+	1) setsid -f st -c Floating -e nmtui;;
+    3) nm-connection-editor;;
 esac
 
 wifi=$(iwgetid -r)

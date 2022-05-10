@@ -1,0 +1,73 @@
+#           _     _       _
+#  _____  _| |__ | | ____| |
+# / __\ \/ / '_ \| |/ / _` |
+# \__ \>  <| | | |   < (_| |
+# |___/_/\_\_| |_|_|\_\__,_|
+
+# volume controls
+XF86AudioRaiseVolume
+	ctrlpanel vu 10
+XF86AudioLowerVolume
+	ctrlpanel vd 10
+XF86AudioMute
+	ctrlpanel vm
+
+# brightness controls
+XF86MonBrightnessUp
+	ctrlpanel bu 10
+XF86MonBrightnessDown
+	ctrlpanel bd 10
+
+# run prompt, file explorer and browser
+super + p
+	ctrlpanel run
+super + e
+	setsid -f st -c Floating -g 150x42 -e vifmrun
+super + shift + i
+	$BROWSER
+
+# utilities
+alt + control + a
+	st -c Floating -g 120x34 -e alsamixer
+alt + control + m
+	st -c Floating -g 120x34 -e neomutt
+alt + control + h
+	st -c Floating -g 120x34 -e htop
+alt + control + p
+	st -c Floating -g 120x34 -e music
+
+# dmenu utilities
+alt + control + n
+	dmnotes
+alt + control + r
+	dmrecord
+alt + control + e
+	dmemoji
+alt + control + k
+	passmenu -c -l 20 -bw 4 -i
+
+# rofi application search
+super + s
+	rofi -show drun -theme applauncher
+
+# screenshots
+super + Print
+	screenshot
+super + shift + Print
+	screenshot 5
+super + shift + s
+	screenshot -s
+
+# notification controls
+control + space
+	dunstctl close
+control + shift + space
+	dunstctl close-all
+control + shift + grave
+	dunstctl history-pop
+control + shift + period
+	dunstctl context
+control + shift + comma
+	dunstctl set-paused toggle
+
+# vim: ft=conf
