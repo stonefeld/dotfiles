@@ -75,14 +75,14 @@ if [ ! "$type" = "Open compiled note" ]; then
 
 			mkdir "$notes_folder/$name"
 			touch "$notes_folder/$name/$name.$prefix"
-			st -e $EDITOR "$notes_folder/$name/$name.$prefix"
+			termlaunch -e "$EDITOR "$notes_folder/$name/$name.$prefix""
 			exit;;
 
 		"Choose existing note")
 			selected=$(run_dmenu "Select a file" "$(find "$notes_folder" -name "*.$prefix" -printf "%f\n" | sed "s/.$prefix$//")")
 			[ -z "$selected" ] && exit
 
-			st -e $EDITOR "$notes_folder/$selected/$selected.$prefix"
+			termlaunch -e $EDITOR "$notes_folder/$selected/$selected.$prefix"
 			exit;;
 
 		"Delete note")

@@ -32,5 +32,6 @@ case $1 in
 	     [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet &;;
 
 	run) # Run applications.
+	     cd $HOME
 	     dmenu_run -i -l 20 -c -bw 4;;
 esac

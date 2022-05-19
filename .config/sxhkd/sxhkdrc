@@ -11,6 +11,8 @@ XF86AudioLowerVolume
 	ctrlpanel vd 10
 XF86AudioMute
 	ctrlpanel vm
+XF86AudioMicMute
+	ctrlpanel mm
 
 # brightness controls
 XF86MonBrightnessUp
@@ -22,19 +24,19 @@ XF86MonBrightnessDown
 super + p
 	ctrlpanel run
 super + e
-	setsid -f st -c Floating -g 150x42 -e vifmrun
+	termlaunch -f -g 120x34 -e vifmrun
 super + shift + i
 	$BROWSER
 
 # utilities
 alt + control + a
-	st -c Floating -g 120x34 -e alsamixer
+	termlaunch -f -g 120x34 -e alsamixer
 alt + control + m
-	st -c Floating -g 120x34 -e neomutt
+	termlaunch -f -g 120x34 -e neomutt
 alt + control + h
-	st -c Floating -g 120x34 -e htop
+	termlaunch -f -g 120x34 -e htop
 alt + control + p
-	st -c Floating -g 120x34 -e music
+	termlaunch -f -g 120x34 -e music
 
 # dmenu utilities
 alt + control + n

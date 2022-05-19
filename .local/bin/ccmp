@@ -1,0 +1,64 @@
+#!/bin/sh
+
+OUTPUT_OVERRIDE=false  # change default 'a.out' name
+COMPILE_ONLY=false     # only compile the source code, don't link
+RUN=false              # run the binary after the compilation
+
+args="-std=c99 -pedantic -Wall"       # default arguments used by gcc
+ofile=""                              # output file name, empty if default
+src=""                                # list of source files
+
+print_help() {
+	echo "Usage: [OPTIONS...] [FILES]
+OPTIONS:
+\t-h --help\tprint this help message
+\t-o --output\tset output name
+\t-c --compile\tonly compile the code, no linking
+\t-r --run\trun the binary after compilation
+
+Default args are '$args' but you can pass any other 'gcc' argument you like.
+"
+}
+
+print_error() {
+	echo "$1\n"
+	print_help
+	exit 1
+}
+
+# if no arguments passed, print help message
+[ -z "$*" ] && print_help && exit 0;
+
+# check for flags and arguments
+for i in $*; do
+	[ "$OUTPUT_OVERRIDE" = true ] && [ -z "$ofile" ] && ofile="$i" && continue
+	case $i in
+		-h|--help)    print_help && exit 0;;
+		-o|--output)  OUTPUT_OVERRIDE=true;;
+		-c|--compile) [ "$RUN" = false ] && COMPILE_ONLY=true || print_error "ccmp: Error compile only flag specified but run flag was given";;
+		-r|--run)     [ "$COMPILE_ONLY" = false ] && RUN=true || print_error "ccmp: Error run flag specified but the compile only flag was given";;
+		-*|--*)       args="$args $i";;
+		*)            [ ! -z "$i" ] && src="$src $i" || print_error "ccmp: Cannot access '$i'. No such file or directory";;
+	esac
+done
+
+# if COMPILE_ONLY requested, compile every file separately
+if [ "$COMPILE_ONLY" = true ]; then
+	for file in $src; do
+		gcc $args -c "$file"
+	done
+	exit 0
+fi
+
+# compile the selected files into on binary file
+if [ "$OUTPUT_OVERRIDE" = true ]; then
+	[ -z "$ofile" ] && print_error "ccmp: No output file given but '-o' flag has been passed"
+	gcc $args $src -o "$ofile"
+else
+	gcc $args $src
+fi
+
+# run the program if -r flag was given
+if [ "$RUN" = true ]; then
+	[ -z "$ofile" ] && ./a.out || ./"$ofile"
+fi

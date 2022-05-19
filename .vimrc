@@ -23,7 +23,7 @@ set noexpandtab                      " use tabs by default
 set smarttab                         " enable smart tabs
 set autoindent                       " use the same indent level of line before
 set cindent                          " use c-style indenting
-set cinoptions=(0,l1,t0,=0           " indentation rues
+set cinoptions=(0,W4,w1,m1,l1,t0,g0  " indentation rues
 set backspace=indent,eol,start       " enable using backspace in any case
 set splitright                       " split to the right when vertical
 set splitbelow                       " split to the bottom when horizontal
@@ -43,15 +43,8 @@ set guioptions=                      " disable all graphical features
 set guicursor+=a:blinkon0            " disable cursor blink
 
 " change default font according to os
-if has('win32')
-  " set guifont=Liberation\ Mono:h9
-  set guifont=Cascadia\ Code:h9
-  " set guifont=Courier\ New:h9
-elseif has('unix')
-  " set guifont=Liberation\ Mono\ 11
-  set guifont=Cascadia\ Code\ 11
-  " set guifont=Courier\ New\ 11
-endif
+let g:fontsize=11
+let g:fontname='Cascadia\ Code'
 
 " highlight settings
 hi! Normal guifg=white guibg=black
@@ -140,7 +133,61 @@ fu! ToggleSyntax()
   else
     syntax on
     let g:syn=1
+	call CSyntax()
   endif
+endfu
+
+" change font for guifont according to os
+fu! SetFont()
+  if has('win32')
+    exe 'set guifont=' . get(g:, 'fontname', 'Liberation\ Mono') . ':h' . get(g:, 'fontsize', 9)
+  elseif has('unix')
+    exe 'set guifont=' . get(g:, 'fontname', 'Liberation\ Mono') . '\ ' . get(g:, 'fontsize', 12)
+  endif
+endfu
+
+" change faster the font size
+fu! SetFontSize()
+  let size=input('Enter font size (current: ' . get(g:, 'fontsize') . '): ')
+  if len(size) != 0
+	let g:fontsize=size
+	call SetFont()
+	redraw!
+  endif
+endfu
+
+" add custom c/c++ syntax highlight
+fu! CSyntax()
+  syn match cType "\<[A-Z][a-zA-Z0-9]*\>"
+
+  syn match cCustomMacro "\<[A-Z_]*\>"
+  hi def link cCustomMacro Global
+
+  syn match cCustomParen "(" contains=cParen,cCppParen
+  syn match cCustomFunc "\w\+\s*(" contains=cCustomParen
+  syn match cCustomScope "::"
+  syn match cCustomClass "\w\+\s*::" contains=cCustomScope
+  hi def link cCustomFunc Function
+  hi def link cCustomClass Function
+
+  syn match cCustomBraces "[{}\[\]()]"
+  hi def link cCustomBraces Constant
+
+  syn match cCustomOperators "[\.<>=!&|;\-+\*%\^,]"
+  hi def link cCustomOperators Constant
+
+  syn match cCustomDivision "(/\|//)" contains=ALLBUT,Comment
+  hi def link cCustomDivision Braces
+
+  syn keyword cTodo contained TODO FIXME NOTE BUG BUGFIX XXX
+
+  syn match cCustomMemberAccess "\.\|->" nextgroup=cStructMember,cppTemplateKeyword
+  syn match cStructMember "\<\h\w*\>\%((\|<\)\@!" contained
+  syn cluster cParenGroup add=cStructMember
+  syn cluster cPreProcGroup add=cStructMember
+  syn cluster cMultiGroup add=cStructMember
+  hi def link cStructMember Member
+  hi def link cCustomMemberAccess Member
 endfu
 
 " ----------------------------------------
@@ -157,7 +204,7 @@ nnoremap <silent> <c-h> <cmd>bp<cr>
 nnoremap <silent> <c-k> <cmd>bn<cr>:bd #<cr>
 
 " using the predefined functions
-nnoremap <silent> <leader>s <cmd>call RecursiveSearch()<bar>redraw!<cr>
+nnoremap <silent> <leader>f <cmd>call RecursiveSearch()<bar>redraw!<cr>
 nnoremap <silent> <leader>ts <cmd>call TabSize()<bar>redraw!<cr>
 
 " updating the tags file
@@ -197,6 +244,9 @@ elseif has('unix') && filereadable(expand('~') . '/.vimrc')
   nnoremap <silent> <leader><s-cr> <cmd>e ~/.vimrc<cr>
 endif
 
+" change font size
+nnoremap <silent> <leader>cs <cmd>call SetFontSize()<cr>
+
 " ----------------------------------------
 let g:netrw_banner=0
 let g:netrw_winsize=20
@@ -230,6 +280,12 @@ aug compile_window
   au FileType compile nnoremap <buffer><silent> <m-m> <cmd>wincmd q \| call Compile()<cr>
   au FileType compile nnoremap <buffer><silent> q <cmd>wincmd q<cr>
   au FileType compile setl nonumber foldcolumn=0
+aug end
+
+" add additional syntax highlight for c/c++ files
+aug c_syntax
+  au!
+  au FileType c,cpp call CSyntax()
 aug end
 
 " set some special settings for writing html, css and javascript
@@ -280,13 +336,5 @@ while c<='z'
 endwhile
 
 " ----------------------------------------
-" install vim-polyglot if it is not installed
-if has('win32') && ! isdirectory(expand('~') . '\vimfiles\pack\plugins\start\vim-polyglot')
-  echomsg 'Installing vim-polyglot'
-  silent exe '!md  ' . expand('~') . '\vimfiles\pack\plugins\start'
-  silent exe '!git clone https://github.com/sheerun/vim-polyglot ' . expand('~') . '/.vim/pack/plugins/start/vim-polyglot'
-elseif has('unix') && ! isdirectory(expand('~') . '/.vim/pack/plugins/start/vim-polyglot')
-  echomsg 'Installing vim-polyglot'
-  silent exe '!mkdir -p ' . expand('~') . '/.vim/pack/plugins/start'
-  silent exe '!git clone https://github.com/sheerun/vim-polyglot ' . expand('~') . '/.vim/pack/plugins/start/vim-polyglot &>/dev/null'
-endif
+" execute functions at startup
+call SetFont()

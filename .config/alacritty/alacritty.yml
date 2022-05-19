@@ -9,12 +9,12 @@ import:
   - ~/.config/alacritty/colors.yml
 
 env:
-  TERM: xterm-256color
+  TERM: st-256color
 
 window:
   padding:
-    x: 5
-    y: 5
+    x: 4
+    y: 4
 
   dimensions:
     columns: 120
@@ -26,6 +26,7 @@ window:
   startup_mode: Windowed
 
   title: Alacritty
+  dynamic_title: true
   class:
     instance: Alacritty
     general: Alacritty
@@ -138,5 +139,3 @@ debug:
   #   - Trace
   log_level: Warn
   print_events: false
-
-WINiT_X11_SCALE_FACTOR: 1

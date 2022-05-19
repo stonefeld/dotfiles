@@ -3,9 +3,16 @@
 INPUT_RES="${2:-1920x1080}"
 OUTPUT_RES="${3:-1280x720}"
 FPS="${4:-25}"
+TYPE="${5:-monitor}"
 
-ffmpeg -f x11grab -s "$INPUT_RES" -r "$FPS" -i :0.0 -f alsa -ac 2 \
-	-i default -vcodec libx264 -s "$OUTPUT_RES" \
+input=$(pactl list short sources | sed 's/\s\+/ /g' | cut -d ' ' -f 2 | egrep '\.monitor$')
+if [ "$TYPE" = "mic" ]; then
+	input=$(echo "$input" | sed 's/\.monitor$//; s/_output\./_input\./')
+fi
+
+ffmpeg -f x11grab -s "$INPUT_RES" -r "$FPS" -i :0.0 \
+	-f pulse -ac 2 -i $input \
+	-vcodec libx264 -s "$OUTPUT_RES" \
 	-acodec libmp3lame -ab 128k -ar 44100 \
 	-threads 0 -f mp4 "$1" &
 

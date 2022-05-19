@@ -3,8 +3,8 @@
 source config
 
 case $BUTTON in
-	1) setsid -f st -c Floating -g 120x34 -e bmon;;
-	3) setsid -f st -c Floating -g 120x34 -e bmon;;
+	1) termlaunch -f -g 120x34 -e bmon;;
+	3) termlaunch -f -g 120x34 -e bmon;;
 esac
 
 update() {

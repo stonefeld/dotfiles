@@ -7,9 +7,9 @@ filelocation="$HOME/vids/recordings"
 
 run_dmenu() {
 	if [ "$#" -eq 1 ]; then
-		printf "$1" | dmenu -i -l 20
+		printf "$1" | dmenu -c -i -l 20 -bw 4
 	else
-		printf "$2" | dmenu -i -l 20 -p "$1"
+		printf "$2" | dmenu -c -i -l 20 -bw 4 -p "$1"
 	fi
 }
 
@@ -23,16 +23,8 @@ screencast_single() {
 	pkill -RTMIN+11 dwmblocks
 }
 
-webcam() {
-	ffmpeg \
-		-f v4l2 \
-		-framerate 25 \
-		-s "640x480" \
-		-i /dev/video0 \
-		-f alsa -i default \
-		-c:v libx264 -preset ultrafast -c:a aac \
-		"$filelocation/$filename" &
-	echo $! > /tmp/recordingpid
+launch_webcam() {
+	mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror
 }
 
 killrecording() {
@@ -47,25 +39,24 @@ killrecording() {
 
 askrecording() {
 	if [ "$(xrandr --listactivemonitors | grep -oP 'Monitors: \K.*')" -eq 2 ]; then
-		choice=$(run_dmenu "Screencast Full\\nScreencast Single\\nRecord Webcam\\nLaunch Webcam")
+		choice=$(run_dmenu "Screencast Full\\nScreencast Single\\nLaunch Webcam")
 	else
-		choice=$(run_dmenu "Screencast\\nRecord Webcam\\nLaunch Webcam")
+		choice=$(run_dmenu "Screencast\\nLaunch Webcam")
 	fi
 
 	case "$choice" in
-		Screencast\ Full)   screencast_full;;
-		Screencast\ Single) screencast_single;;
-		Screencast)         screencast_single;;
-		Record\ Webcam)     webcam;;
-		Launch\ Webcam)     mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
+		"Screencast Full")   screencast_full;;
+		"Screencast Single") screencast_single;;
+		"Screencast")        screencast_single;;
+		"Launch Webcam")     launch_webcam;;
 	esac
 }
 
 asktoend() {
 	choice=$(run_dmenu "Stop Recording\\nLaunch Webcam")
 	case "$choice" in
-		Stop\ Recording) response=$(run_dmenu "Recording still active. End recording?" "No\\nYes");;
-		Launch\ Webcam)  mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 25 -vf screenshot -vf mirror;;
+		"Stop Recording") response=$(run_dmenu "Recording still active. End recording?" "No\\nYes");;
+		"Launch Webcam")  launch_webcam;;
 	esac
 	[ "$response" = "Yes" ] && killrecording || exit
 }

@@ -3,7 +3,7 @@
 source config
 
 case $BUTTON in
-	1) setsid -f st -c Floating -g 150x42 -e calcurse;;
+	1) termlaunch -f -g 150x42 -e calcurse;;
 esac
 
 [ "$COLORED" = true ] && date "+ 📅 %a, %b %d (%Y) | 🕓 %H:%M " || date "+ 󰃮 %a, %b %d (%Y) | 󱑂 %H:%M "
