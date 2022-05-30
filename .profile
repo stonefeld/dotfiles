@@ -33,6 +33,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=16"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={.git,.venv,node_modules}"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export RANGER_DEVICONS_SEPARATOR="  "
 
 # Cleaning home directory.
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc

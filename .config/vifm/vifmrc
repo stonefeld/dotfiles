@@ -27,9 +27,9 @@ set smartcase
 set nohlsearch
 set incsearch
 set scrolloff=3
+set previewoptions+=graphicsdelay:0
 set viewcolumns=-{name}..,6{size},{#\ \|},11{perms},{#\ \|},15{mtime}
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
-    \phistory,fhistory,dirstack,registers,bookmarks,bmarks
+set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 if !has('win')
     set slowfs=curlftpfs
 endif
@@ -74,7 +74,7 @@ vnoremap w :view<cr>gv
 
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
-nnoremap rn cW
+nnoremap aa cW
 nnoremap A cw<c-e>
 
 nnoremap ;f :touch<space>""<left>

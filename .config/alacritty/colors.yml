@@ -94,8 +94,8 @@ schemes:
   ######################
   Gruvbox-Dark: &Gruvbox-Dark
     cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
+      text:         '#282828'
+      cursor:       '#ebdbb2'
 
     selection:
       text:         CellForeground

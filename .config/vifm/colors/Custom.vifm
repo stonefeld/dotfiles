@@ -42,7 +42,7 @@ hi /^.*\.(mp3|ogg|oga|flac|m4a|pdf)$/ ctermfg=cyan
 hi /^.*\.(jpg|jpeg|png|gif|tiff|webp|bmp|svg|svgz|mp4|mkv)$/ ctermfg=magenta
 hi /^.*\.(zip|gz|bz2|xz|tar|tgz|tbz2|7z|rar|iso|rpm|deb)$/ ctermfg=red
 hi /^.*\.(bak)$/ ctermfg=black
-hi /^.*\.(md)$/ cterm=bold,underline ctermfg=yellow
+hi /^.*\.(md)$/ cterm=bold ctermfg=yellow
 hi /^.*(Pipfile)$/ cterm=bold,underline ctermfg=yellow
 hi /^.*\.(xls|xlsx)$/ ctermfg=cyan
 

@@ -39,16 +39,29 @@ gitinfo() {
 # Display a '!' when the last command didn't exited succesfully.
 last_status() { [ "$?" -ne 0 ] && echo "%B%F{red}(%f%F{yellow}!%f%F{red})%f%b"; }
 
-# defining multiple prompts.
-default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
-minimal_prompt() { export PROMPT='%B%F{cyan}%$(gitdir)~%f %F{red}:%f%b '; }
-god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
+# Just change the color prompt according to the status
+last_status_color() { [ "$?" -ne 0 ] && echo "red" || echo "blue"; }
+
+# Print the current directory for the 'minimal_prompt'
+current_dir() {
+	current_color="yellow"
+	base_color="cyan"
+	[ "$PWD" = "$HOME" ] && echo "%F{$current_color}~%f" && return
+	dir_base="$(echo ${PWD%/*} | sed "s|$HOME|~|")/"
+	dir_current="${PWD##*/}"
+	echo "%F{$base_color}$dir_base%f%F{$current_color}$dir_current%f"
+}
 
 # The right prompt displays the virtual environment's name.
 RPROMPT='$(last_status)$(virtualenv_info)'
 
+# defining multiple prompts.
+default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
+minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
+god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
+
 # Setting up the normal prompt.
-god_prompt
+default_prompt
 
 # ---------- ALIASES ---------- #
 # System power.

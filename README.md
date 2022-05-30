@@ -1,7 +1,9 @@
 # Dotfiles
+
 Theo Stanfield's personal dotfiles.
 
 # Table of Contents
+
 * [Installation](#installation)
 * [Example pictures](#example-pictures)
 * [Dependencies](#dependencies)
@@ -14,6 +16,7 @@ Theo Stanfield's personal dotfiles.
   * [Suckless software](#suckless-software)
 
 # Installation
+
 I recommend clonning the repository as a git bare repository and locate it in `~/.local/share/dotfiles/`. To do so you have to run:
 
 ```bash
@@ -49,7 +52,8 @@ There are also links to other git repositories for my custom [dwm](https://githu
 _This are the most recent pictures from my current setup. For older pictures check the [stored-images](https://github.com/stonefeld/dotfiles/tree/stored-images) branch._
 
 # Dependencies
-Most of the following packages should be in your distro's repository. In case of arch-users there are some packages that must be installed from the AUR. I recommend install some kind of [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [paru](https://github.com/Morganamilo/paru) and works really well.
+
+Most of the following packages should be in your distro's repository. In case of arch-users there are some packages that must be installed from the AUR. I recommend install some kind of [AUR helper](https://wiki.archlinux.org/index.php/AUR_helpers). I've been using [yay](https://github.com/Jguer/yay) and works really well.
 
 * Programs with configurations:
   * `alacritty`
@@ -59,6 +63,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `dwm` _(\*)_
   * `firefox`
   * `ncmpcpp`
+  * `neomutt`
   * `neovim` version 0.5 or above
   * `newsboat`
   * `picom`
@@ -111,6 +116,7 @@ Most of the following packages should be in your distro's repository. In case of
   * `papirus-icon-theme`
   * `nordic-theme` _(\*\*)_
   * `xcursor-breeze` _(\*\*)_
+
 _(\*) = has to be compiled from source_
 
 _(\*\*) = availabe in the AUR_
@@ -118,6 +124,7 @@ _(\*\*) = availabe in the AUR_
 _(\*\*\*) = can be manually installed from the [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts) repository and placed in_ `~/.local/share/fonts/` _or_ `/usr/share/fonts/` _and run_ `fc-cache -fv`
 
 # Essential config files
+
 * [Qtile](https://github.com/stonefeld/dotfiles/tree/master/.config/qtile)
 * [Dwm](https://github.com/stonefeld/dwm) *(\*)*
 * [Neovim](https://github.com/stonefeld/nvim) *(\*)*
@@ -132,13 +139,16 @@ _(\*\*\*) = can be manually installed from the [nerd-fonts](https://github.com/r
 _(\*) = links to another personal repository and is added as a submodule_
 
 # Personal scripts
+
 * [Dwm's statusline](https://github.com/stonefeld/dotfiles/tree/master/.local/bin/statusline)
 * [Dmenu and rofi scripts, update checker and others](https://github.com/stonefeld/dotfiles/tree/master/.local/bin)
 
 # To get things working
+
 Here I will give you some basic steps to get things working correctly. First of all you have to make sure that every package from the [dependencies list](#dependencies) is correctly installed and running accordingly.
 
 ## Neovim
+
 First of all, as I explained before, you have to clone the [neovim setup](https://github.com/stonefeld/nvim) repo into `~/.config/nvim`.
 
 Next you need to install a Plugin Manager. My neovim config is prepared for using the [vim-plug](https://github.com/junegunn/vim-plug). To install it on your machine you need to run
@@ -151,16 +161,19 @@ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 Then you need to run `:PlugInstall` within neovim after sourcing the [init.vim](https://github.com/stonefeld/nvim/tree/master/init.vim). This will install every package needed to get my neovim configuration, including my self-made vim/neovim colorscheme [nordokai](https://github.com/stonefeld/nordokai), if you want to check it out. ;)
 
 ## Qtile
+
 * Just install the following python packages: `iwlib` and `psutil` which are necessary to get network and hardware information.
 * Check the [qtile's scripts folder](https://github.com/stonefeld/dotfiles/tree/master/.config/qtile/scripts) to make sure that they are marked as executable. If they are not you can just run `chmod +x ~/.config/qtile/scripts/*`.
 * This point is optional, but you need to install and configure [xmenu](https://github.com/phillbush/xmenu) the way you like.
 
 ## Firefox
+
 * First you need to locate your _Root Directory_ by opening `about:profiles` in Firefox.
 * Then create a folder named _chrome_ inside the _Root Directory_ and place every file in the [firefox configs folder](https://github.com/stonfeld/dotfiles/tree/master/.config/firefox) inside the _chrome_ folder.
 * Lastly you need to navigate to `about:config` in Firefox and search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set the value to `True`.
 
 ## Suckless software
+
 As many of you may already know, the suckless utilities have to be compiled to run them, so I created three separated repositories for all three programs I run, which are [dwm](https://github.com/stonefeld/dwm), [st](https://github.com/stonefeld/st) and [dmenu](https://github.com/stonefeld/dmenu). I separated them from this repository since they have their own source files and licences I have to keep attention to.
 
 Now, to get my custom suckless's builds you have to pull every repository into your machine. Usually, repos are located in `~/.local/share/` folder. My recommendation, use which folder location comes handy to you.

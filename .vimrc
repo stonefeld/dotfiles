@@ -38,6 +38,7 @@ set incsearch                        " search while typing
 set wildmenu                         " enable wildmenu
 set list                             " enable listchars
 set listchars=tab:\ \ ,trail:.       " set characters to display tabs and trailing space
+set t_Co=16                          " only set 16 available colors
 set belloff=all                      " disable bell
 set guioptions=                      " disable all graphical features
 set guicursor+=a:blinkon0            " disable cursor blink
@@ -161,7 +162,7 @@ fu! CSyntax()
   syn match cType "\<[A-Z][a-zA-Z0-9]*\>"
 
   syn match cCustomMacro "\<[A-Z_]*\>"
-  hi def link cCustomMacro Global
+  hi def link cCustomMacro PreProc
 
   syn match cCustomParen "(" contains=cParen,cCppParen
   syn match cCustomFunc "\w\+\s*(" contains=cCustomParen
@@ -186,8 +187,8 @@ fu! CSyntax()
   syn cluster cParenGroup add=cStructMember
   syn cluster cPreProcGroup add=cStructMember
   syn cluster cMultiGroup add=cStructMember
-  hi def link cStructMember Member
-  hi def link cCustomMemberAccess Member
+  hi def link cStructMember Function
+  hi def link cCustomMemberAccess Function
 endfu
 
 " ----------------------------------------
