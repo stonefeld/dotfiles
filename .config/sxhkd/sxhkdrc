@@ -48,10 +48,6 @@ alt + control + e
 alt + control + k
 	passmenu -c -l 20 -bw 4 -i
 
-# rofi application search
-super + s
-	rofi -show drun -theme applauncher
-
 # screenshots
 super + Print
 	screenshot
@@ -61,15 +57,15 @@ super + shift + s
 	screenshot -s
 
 # notification controls
-control + space
+super + space
 	dunstctl close
-control + shift + space
+super + shift + space
 	dunstctl close-all
-control + shift + grave
+super + shift + grave
 	dunstctl history-pop
-control + shift + period
+super + shift + period
 	dunstctl context
-control + shift + comma
+super + shift + comma
 	dunstctl set-paused toggle
 
 # vim: ft=conf

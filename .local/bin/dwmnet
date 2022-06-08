@@ -3,8 +3,7 @@
 source config
 
 case $BUTTON in
-	1) termlaunch -f -g 120x34 -e bmon;;
-	3) termlaunch -f -g 120x34 -e bmon;;
+	1) ctrlpanel nm;;
 esac
 
 update() {
@@ -25,5 +24,5 @@ tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
 if [ "$COLORED" = true ]; then
 	printf " 🔻%4sB 🔺%4sB |\\n" $(numfmt --to=iec $rx $tx)
 else
-	printf " 󰁆%4sB 󰁞%4sB |\\n" $(numfmt --to=iec $rx $tx)
+    printf " $(cl 'ma' '')󰁆%4sB 󰁞%4sB |\\n" $(numfmt --to=iec $rx $tx)
 fi

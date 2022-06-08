@@ -39,19 +39,19 @@ scrolling:
 
 font:
   normal:
-    family: Cascadia Code
-    style: Regular
+    family: SauceCodePro Nerd Font
+    style: Medium
 
   bold:
-    family: Cascadia Code
+    family: SauceCodePro Nerd Font
     style: Bold
 
   italic:
-    family: Cascadia Code
-    style: Italic
+    family: SauceCodePro Nerd Font
+    style: Medium Italic
 
   bold_italic:
-    family: Cascadia Code
+    family: SauceCodePro Nerd Font
     style: Bold Italic
 
   size: 12.0

@@ -3,11 +3,12 @@
 source config
 
 case $BUTTON in
-	1) setsid -f st -c Floating -e nmtui;;
+	1) ctrlpanel nm;;
     3) nm-connection-editor;;
 esac
 
 wifi=$(iwgetid -r)
 [ -z "$wifi" ] && wifi="Disconnected"
 
-[ "$COLORED" = true ] && echo " 📶 $wifi |" || echo " 󰤨 $wifi |"
+# [ "$COLORED" = true ] && echo "| 📶 $wifi |" || echo " $(cl 'cy' '')󰤨^d^ $wifi |"
+[ "$COLORED" = true ] && echo "| 📶 $wifi |" || echo " 󰤨 $wifi  "

@@ -12,6 +12,7 @@ if [ "$COLORED" = true ]; then
 	pgrep -x pacupdatecheck >/dev/null && icon=" 🔄"
 	echo " 📦 $updates$icon |"
 else
-	pgrep -x pacupdatecheck >/dev/null && icon=" 󰑓"
-	echo " 󰬦 $updates$icon |"
+    # pgrep -x pacupdatecheck >/dev/null && icon=" $(cl 'gr' '')󰑓^d^"
+    pgrep -x pacupdatecheck >/dev/null && icon=" 󰑓"
+    echo " 󰬦 $updates$icon  "
 fi

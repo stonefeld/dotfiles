@@ -12,6 +12,8 @@ if [ "$COLORED" = true ]; then
 	pgrep -x mailcheck >/dev/null && sync=" 🔄"
 	echo " 📬 $unread$sync |"
 else
-	pgrep -x mailcheck >/dev/null && sync=" 󰑓"
-	echo " 󰇮 $unread$sync |"
+    # pgrep -x mailcheck >/dev/null && sync=" $(cl 'gr' '')󰑓^d^"
+    pgrep -x mailcheck >/dev/null && sync=" 󰑓"
+    # echo " $(cl 'bl' '')󰇮^d^ $unread$sync |"
+    echo " $(cl 'cy' '')󰇮 $unread$sync |"
 fi

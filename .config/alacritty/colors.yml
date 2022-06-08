@@ -7,10 +7,6 @@ schemes:
       text:         '#2e3440'
       cursor:       '#d8dee9'
 
-    selection:
-      background:   '#4c566a'
-      text:         CellForeground
-
     search:
       matches:
         foreground: CellBackground
@@ -51,10 +47,6 @@ schemes:
     cursor:
       text:         '#2e3440'
       cursor:       '#d8dee9'
-
-    # selection:
-      # text:         CellForeground
-      # background:   '#4c566a'
 
     search:
       matches:
@@ -97,10 +89,6 @@ schemes:
       text:         '#282828'
       cursor:       '#ebdbb2'
 
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
     search:
       matches:
         foreground: CellBackground
@@ -141,10 +129,6 @@ schemes:
     cursor:
       text:         '#2e3440'
       cursor:       '#d8dee9'
-
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
 
     search:
       matches:
@@ -187,10 +171,6 @@ schemes:
       text:         '#2e3440'
       cursor:       '#d8dee9'
 
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
     search:
       matches:
         foreground: CellBackground
@@ -232,10 +212,6 @@ schemes:
       text:         '#2e3440'
       cursor:       '#d8dee9'
 
-    selection:
-      text:         CellForeground
-      background:   '#4c566a'
-
     search:
       matches:
         foreground: CellBackground
@@ -270,4 +246,172 @@ schemes:
       cyan:        '#0184bc'
       white:       '#a0a1a7'
 
-colors: *Nord-Custom
+
+  ##########################
+  #### CATPPUCCIN LATTE ####
+  ##########################
+  Catppuccin-Latte: &Catppuccin-Latte
+    cursor:
+      text:         '#eff1f5'
+      cursor:       '#dc8a78'
+
+    search:
+      matches:
+        foreground: '#eff1f5'
+        background: '#6c6f85'
+
+      bar:
+        foreground: '#eff1f5'
+        background: '#6c6f85'
+
+    primary:
+      background:   '#eff1f5'
+      foreground:   '#4c4f69'
+
+    normal:
+      black:        '#4C4F69'
+      red:          '#D20F39'
+      green:        '#40A02B'
+      yellow:       '#DF8E1D'
+      blue:         '#1E66F5'
+      magenta:      '#EA76CB'
+      cyan:         '#179299'
+      white:        '#ACB0BE'
+
+    bright:
+      black:        '#4C4F69'
+      red:          '#D20F39'
+      green:        '#40A02B'
+      yellow:       '#DF8E1D'
+      blue:         '#1E66F5'
+      magenta:      '#EA76CB'
+      cyan:         '#179299'
+      white:        '#ACB0BE'
+
+
+  ###########################
+  #### CATPPUCCIN FRAPPE ####
+  ###########################
+  Catppuccin-Frappe: &Catppuccin-Frappe
+    cursor:
+      text:         '#303446'
+      cursor:       '#f2d5cf'
+
+    search:
+      matches:
+        foreground: '#303446'
+        background: '#a5adce'
+
+      bar:
+        foreground: '#303446'
+        background: '#a5adce'
+
+    primary:
+      background:   '#303446'
+      foreground:   '#c6d0f5'
+
+    normal:
+      black:        '#51576d'
+      red:          '#e78284'
+      green:        '#a6d189'
+      yellow:       '#e5c890'
+      blue:         '#8caaee'
+      magenta:      '#f4b8e4'
+      cyan:         '#81c8be'
+      white:        '#b5bfe2'
+
+    bright:
+      black:        '#51576d'
+      red:          '#e78284'
+      green:        '#a6d189'
+      yellow:       '#e5c890'
+      blue:         '#8caaee'
+      magenta:      '#f4b8e4'
+      cyan:         '#81c8be'
+      white:        '#b5bfe2'
+
+
+  ##############################
+  #### CATPPUCCIN MACCHIATO ####
+  ##############################
+  Catppuccin-Macchiato: &Catppuccin-Macchiato
+    cursor:
+      text:         '#24273a'
+      cursor:       '#f4dbd6'
+
+    search:
+      matches:
+        foreground: '#24273a'
+        background: '#a5adcb'
+
+      bar:
+        foreground: '#24273a'
+        background: '#a5adcb'
+
+    primary:
+      background:   '#24273a'
+      foreground:   '#cad3f5'
+
+    normal:
+      black:        '#494d64'
+      red:          '#ed8796'
+      green:        '#a6da95'
+      yellow:       '#eed49f'
+      blue:         '#8aadf4'
+      magenta:      '#f5bde6'
+      cyan:         '#8bd5ca'
+      white:        '#b8c0e0'
+
+    bright:
+      black:        '#494d64'
+      red:          '#ed8796'
+      green:        '#a6da95'
+      yellow:       '#eed49f'
+      blue:         '#8aadf4'
+      magenta:      '#f5bde6'
+      cyan:         '#8bd5ca'
+      white:        '#b8c0e0'
+
+
+  ##########################
+  #### CATPPUCCIN MOCHA ####
+  ##########################
+  Catppuccin-Mocha: &Catppuccin-Mocha
+    cursor:
+      text:         '#1e1e2e'
+      cursor:       '#f5e0dc'
+
+    search:
+      matches:
+        foreground: '#1e1e2e'
+        background: '#a6adc8'
+
+      bar:
+        foreground: '#1e1e2e'
+        background: '#a6adc8'
+
+    primary:
+      background:   '#1e1e2e'
+      foreground:   '#cdd6f4'
+
+    normal:
+      black:        '#45475a'
+      red:          '#f38ba8'
+      green:        '#a6e3a1'
+      yellow:       '#f9e2af'
+      blue:         '#89b4fa'
+      magenta:      '#f5c2e7'
+      cyan:         '#94e2d5'
+      white:        '#bac2de'
+
+    bright:
+      black:        '#45475a'
+      red:          '#f38ba8'
+      green:        '#a6e3a1'
+      yellow:       '#f9e2af'
+      blue:         '#89b4fa'
+      magenta:      '#f5c2e7'
+      cyan:         '#94e2d5'
+      white:        '#bac2de'
+
+colors: *Catppuccin-Mocha

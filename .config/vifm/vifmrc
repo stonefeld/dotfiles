@@ -14,6 +14,7 @@ set nofollowlinks
 set nowrap
 set sortnumbers
 set undolevels=100
+set sort=+iname
 set vimhelp
 set norunexec
 set timefmt="%m/%d/%y %H:%M"
@@ -28,6 +29,7 @@ set nohlsearch
 set incsearch
 set scrolloff=3
 set previewoptions+=graphicsdelay:0
+set timeoutlen=250
 set viewcolumns=-{name}..,6{size},{#\ \|},11{perms},{#\ \|},15{mtime}
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 if !has('win')
@@ -81,7 +83,7 @@ nnoremap ;f :touch<space>""<left>
 nnoremap ;d :mkdir<space>""<left>
 nnoremap ;ta :!cp<space>~/.local/share/templates/latex/basic_latex.tex<space>%d<cr>
 
-nnoremap xx :ex<cr>
+nnoremap xx :ex<cr> extract
 nnoremap xz :zip<cr>
 nnoremap xt :tar<cr>
 nnoremap xg :tgz<cr>
@@ -132,6 +134,9 @@ filextype {*.pdf},<application/pdf>
     \ apvlv %c,
     \ xpdf %c
 fileviewer {*.pdf},<application/pdf>
+    \ vifmimg pdf %px %py %pw %ph %c
+    \ %pc
+    \ vifmimg clear,
     \ pdfinfo %c
 
 " PostScript
@@ -153,8 +158,17 @@ filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.og
     \ {Play using MPlayer}
     \ mplayer %f,
 fileviewer {*.wav,*.mp3,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus,*.oga},<audio/mpeg>
+    \ vifmimg audio %px %py %pw %ph %c
+    \ %pc
+    \ vifmimg clear,
     \ mp3info
 fileviewer {*.flac},<audio/flac> soxi
+
+" Font
+fileviewer <font/*>
+    \ vifmimg font %px %py %pw %ph %c
+    \ %pc
+    \ vifmimg clear
 
 " Video
 filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
@@ -173,6 +187,9 @@ fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
     \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
     \*.as[fx]},
     \<video/*>
+    \ vifmimg video %px %py %pw %ph %c
+    \ %pc
+    \ vifmimg clear,
     \ ffprobe -pretty %c 2>&1
 
 " Web

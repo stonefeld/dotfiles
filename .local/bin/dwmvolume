@@ -24,9 +24,11 @@ if [ "$COLORED" = true ]; then
 	[ "$vol" -ge 100 ] && icon="🔊" || icon="🔉"
 	[ "$vol" -eq 0 ] && icon="🔈"
 else
-	[ "$mute" = "off" ] && echo " 󰖁 Mute |" && return
+    # [ "$mute" = "off" ] && echo " $(cl 're' '')󰖁^d^ Mute |" && return
+    [ "$mute" = "off" ] && echo " $(cl 'gr' '')󰖁 Mute |" && return
 	[ "$vol" -ge 100 ] && icon="󰕾" || icon="󰖀"
-	[ "$vol" -eq 0 ] && icon="󰖁"
+    [ "$vol" -eq 0 ] && icon="󰖁"
 fi
 
-echo " $icon $vol% |"
+# echo " $(cl 're' '')$icon^d^ $vol% |"
+echo " $(cl 'gr' '')$icon $vol% |"

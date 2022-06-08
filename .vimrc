@@ -50,6 +50,7 @@ let g:fontname='Cascadia\ Code'
 " highlight settings
 hi! Normal guifg=white guibg=black
 hi! Visual guibg=black gui=reverse ctermbg=256 cterm=reverse
+hi! Function guifg=blue ctermfg=4
 hi! SpecialKey guifg=grey30 ctermfg=8
 
 " if build.bat or build.sh are available set them as the makeprg

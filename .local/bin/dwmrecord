@@ -10,5 +10,5 @@ esac
 if [ "$COLORED" = true ]; then
 	[ -f /tmp/recordingpid ] && echo " 🎤 ⏺️ |"
 else
-	[ -f /tmp/recordingpid ] && echo " 󰝥 󰍬 |"
+    [ -f /tmp/recordingpid ] && echo " $(cl 'or' '')󰝥 󰍬  "
 fi

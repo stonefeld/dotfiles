@@ -3,7 +3,7 @@ bind index <esc>v noop
 bind index \Cn noop
 bind index \Cp noop
 bind alias,index,pager,browser,query g noop
-bind pager q noop
+bind pager q exit
 
 bind index j next-entry
 bind pager j next-line

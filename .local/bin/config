@@ -1,2 +1,80 @@
 #!/bin/sh
 COLORED=false
+COLORS="mocha"
+
+nord() {
+	case "$1" in
+		"bg") fg="^c#2E3440^" ;;
+		"g1") fg="^c#3B4252^" ;;
+		"g2") fg="^c#4C566A^" ;;
+		"g3") fg="^c#616E88^" ;;
+		"wh") fg="^c#D8DEE9^" ;;
+		"cy") fg="^c#88C0D0^" ;;
+		"bl") fg="^c#81A1C1^" ;;
+		"re") fg="^c#BF616A^" ;;
+		"or") fg="^c#D08770^" ;;
+		"ye") fg="^c#EBCB8B^" ;;
+		"gr") fg="^c#A3BE8C^" ;;
+		"ma") fg="^c#B48EAD^" ;;
+		"pi") fg="^c#828DD1^" ;;
+		"vi") fg="^c#6C77BB^" ;;
+	esac
+	case "$2" in
+		"bg") bg="^b#292D3E^" ;;
+		"bl") bg="^b#2E3440^" ;;
+		"g1") bg="^b#3B4252^" ;;
+		"g2") bg="^b#4C566A^" ;;
+		"g3") bg="^b#616E88^" ;;
+		"wh") bg="^b#D8DEE9^" ;;
+		"cy") bg="^b#88C0D0^" ;;
+		"bl") bg="^b#81A1C1^" ;;
+		"re") bg="^b#BF616A^" ;;
+		"or") bg="^b#D08770^" ;;
+		"ye") bg="^b#EBCB8B^" ;;
+		"gr") bg="^b#A3BE8C^" ;;
+		"ma") bg="^b#B48EAD^" ;;
+		"pi") bg="^b#828DD1^" ;;
+		"vi") bg="^b#6C77BB^" ;;
+	esac
+	echo "$fg$bg"
+}
+
+mocha() {
+	case "$1" in
+		"bg") fg="^c#45475A^";;
+		"g1") fg="^c#585B70^";;
+        "g2") fg="^c#6C7086^";;
+		"re") fg="^c#F38BA8^";;
+		"gr") fg="^c#A6E3A1^";;
+		"ye") fg="^c#F9E2AF^";;
+		"bl") fg="^c#89B4FA^";;
+		"ma") fg="^c#F5C2E7^";;
+		"cy") fg="^c#94E2D5^";;
+		"wh") fg="^c#BAC2DE^";;
+		"or") fg="^c#FAB387^";;
+        "vi") fg="^c#CBA6F7^";;
+	esac
+	case "$2" in
+		"bg") bg="^b#45475A^";;
+		"g1") bg="^b#585B70^";;
+        "g2") bg="^b#6C7086^";;
+		"re") bg="^b#F38BA8^";;
+		"gr") bg="^b#A6E3A1^";;
+		"ye") bg="^b#F9E2AF^";;
+		"bl") bg="^b#89B4FA^";;
+		"vi") bg="^b#F5C2E7^";;
+		"cy") bg="^b#94E2D5^";;
+		"wh") bg="^b#BAC2DE^";;
+		"or") bg="^b#FAB387^";;
+        "vi") bg="^b#CBA6F7^";;
+	esac
+	echo "$fg$bg"
+}
+
+case "$COLORS" in
+	"nord")     cl() { echo "$(nord "$1" "$2")"; };;
+	"mocha")    cl() { echo "$(mocha "$1" "$2")"; };;
+	*)          cl() { echo ""; };;
+esac
+
+SEP="$(cl 'g2' '')|^d^"

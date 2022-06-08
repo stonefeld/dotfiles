@@ -32,7 +32,11 @@ gitinfo() {
 		git_files=$(git status --porcelain 2>/dev/null | wc -l)
 		git_branch=$(git branch --show-current 2>/dev/null)
 		git_unpushed=$([ $(git cherry -v &>/dev/null | wc -l) -gt 0 ] && echo "%F{black}-%f%F{blue}!%f")
-		echo "%F{yellow}$git_branch%f%F{black}-%f%F{green}$git_files%f$git_unpushed"
+		if [ "$1" = "br" ]; then
+			echo "%F{blue}(%f%F{yellow}$git_branch%f%F{black}-%f%F{green}$git_files%f$git_unpushed%F{blue})%f "
+		else
+			echo "%F{yellow}$git_branch%f%F{black}-%f%F{green}$git_files%f$git_unpushed"
+		fi
 	fi
 }
 
@@ -58,10 +62,12 @@ RPROMPT='$(last_status)$(virtualenv_info)'
 # defining multiple prompts.
 default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
 minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
+ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f $(gitinfo "br")%F{red}:%f%b '; }
 god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
+starship_prompt() { source <(/usr/bin/starship init zsh --print-full-init); }
 
 # Setting up the normal prompt.
-default_prompt
+starship_prompt
 
 # ---------- ALIASES ---------- #
 # System power.
@@ -90,9 +96,13 @@ alias reso='source ${ZDOTDIR:-}/.zshrc'
 
 # Some ls command replacements.
 if ! command -v exa &>/dev/null; then
-	alias ls="LC_COLLATE=C ls -h --color=always --group-directories-first"
+	alias ls="LC_COLLATE=C ls -hp --color=always --group-directories-first"
+    alias ll="LC_COLLATE=C ls -lahp --color=always --group-directories-first"
+    alias la="LC_COLLATE=C ls -ahp --color=always --group-directories-first"
 else
 	alias ls="exa -g --color=always --group-directories-first"
+    alias ll="exa -la -g --color=always --group-directories-first"
+    alias la="exa -a -g --color=always --group-directories-first"
 fi
 alias lf="vifm ."
 
@@ -162,6 +172,9 @@ alias fgrep='fgrep --color=auto'
 
 # Change abook directories
 alias abook='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook'
+
+# Manage bluetooth
+alias bth='bluetoothctl'
 
 # System shortcuts.
 alias sys='systemctl'

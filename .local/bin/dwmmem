@@ -7,5 +7,6 @@ case $BUTTON in
 	3) termlaunch -f -g 120x34 -e htop;;
 esac
 
+# [ "$COLORED" = true ] && icon="💻" || icon="$(cl 'ye' '')󰇄^d^"
 [ "$COLORED" = true ] && icon="💻" || icon="󰇄"
-echo " $icon $(free -h | awk '/^Mem:/ { print $3"/"$2 }' | sed 's/i//g') |"
+echo " $icon $(free -h | awk '/^Mem:/ { print $3"/"$2 }' | sed 's/i//g')  "

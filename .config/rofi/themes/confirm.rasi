@@ -20,7 +20,7 @@ configuration {
 window {
 	transparency: "real";
 	width: 16%;
-	height: 12.5%;
+	height: 12.0%;
 	location: center;
 }
 

@@ -12,7 +12,6 @@ Theo Stanfield's personal dotfiles.
 * [To get things working](#to-get-things-working)
   * [Neovim](#neovim)
   * [Qtile](#qtile)
-  * [Firefox](#firefox)
   * [Suckless software](#suckless-software)
 
 # Installation
@@ -165,12 +164,6 @@ Then you need to run `:PlugInstall` within neovim after sourcing the [init.vim](
 * Just install the following python packages: `iwlib` and `psutil` which are necessary to get network and hardware information.
 * Check the [qtile's scripts folder](https://github.com/stonefeld/dotfiles/tree/master/.config/qtile/scripts) to make sure that they are marked as executable. If they are not you can just run `chmod +x ~/.config/qtile/scripts/*`.
 * This point is optional, but you need to install and configure [xmenu](https://github.com/phillbush/xmenu) the way you like.
-
-## Firefox
-
-* First you need to locate your _Root Directory_ by opening `about:profiles` in Firefox.
-* Then create a folder named _chrome_ inside the _Root Directory_ and place every file in the [firefox configs folder](https://github.com/stonfeld/dotfiles/tree/master/.config/firefox) inside the _chrome_ folder.
-* Lastly you need to navigate to `about:config` in Firefox and search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set the value to `True`.
 
 ## Suckless software
 

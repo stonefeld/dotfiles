@@ -2,5 +2,6 @@
 
 source config
 
+# [ "$COLORED" = true ] && icon="💡" || icon="$(cl 'ye' '')󰖨^d^"
 [ "$COLORED" = true ] && icon="💡" || icon="󰖨"
 echo " $icon $(( $(sed '1!d' /sys/class/backlight/*/actual_brightness) * 100 / $(sed '1!d' /sys/class/backlight/*/max_brightness) ))% |"
