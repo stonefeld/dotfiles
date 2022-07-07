@@ -4,7 +4,6 @@ source config
 
 case $BUTTON in
 	1) ctrlpanel nm;;
-    3) nm-connection-editor;;
 esac
 
 wifi=$(iwgetid -r)

@@ -72,8 +72,6 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: false
 
-# window.dynamic_title: true
-
 cursor:
   # Values for `style`:
   #   - ▇ Block

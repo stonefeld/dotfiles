@@ -34,7 +34,7 @@
     horizontal_padding = 8               # horizontal padding
     text_icon_padding = 0                # padding between text and icon
     frame_width = 3                      # width of notifcation frame (0 to disable)
-    frame_color = "#4c566a"              # color of the notifcation frame (original #aaaaaa)
+    frame_color = "#aaaaaa"              # color of the notifcation frame (original #aaaaaa)
     separator_color = frame              # separator color (auto|foreground|frame|anything)
     sort = yes                           # sort by urgency
     idle_threshold = 0                   # don't remove notifications if idle (0 to disable)
@@ -43,7 +43,7 @@
     ##############
     #### TEXT ####
     ##############
-    font = Cascadia Code 11              # font used by the notifications
+    font = monospace 11                  # font used by the notifications
     line_height = 0                      # line spacing
     markup = full                        # text treatment (full|strip|no)
     # The format of the message.  Possible variables are:
@@ -75,8 +75,8 @@
 
     # Paths to default icons.
     # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-    icon_path = /usr/share/icons/Papirus/16x16/actions:/usr/share/icons/Papirus-Light/16x16/apps:/usr/share/icons/Papirus-Light/16x16/categories:/usr/share/icons/Papirus-Light/16x16/devices:/usr/share/icons/Papirus-Light/16x16/emblems:/usr/share/icons/Papirus-Light/16x16/emotes:/usr/share/icons/Papirus-Light/16x16/mimetypes:/usr/share/icons/Papirus-Light/16x16/panel:/usr/share/icons/Papirus-Light/16x16/places:/usr/share/icons/Papirus-Light/16x16/status
-    # icon_path = /usr/share/icons/Papirus-Dark/16x16/actions:/usr/share/icons/Papirus-Dark/16x16/apps:/usr/share/icons/Papirus-Dark/16x16/categories:/usr/share/icons/Papirus-Light-Dark/16x16/devices:/usr/share/icons/Papirus-Dark/16x16/emblems:/usr/share/icons/Papirus-Light-Dark/16x16/emotes:/usr/share/icons/Papirus-Dark/16x16/mimetypes:/usr/share/icons/Papirus-Light-Dark/16x16/panel:/usr/share/icons/Papirus-Dark/16x16/places:/usr/share/icons/Papirus-Light-Dark/16x16/status
+    # icon_path = /usr/share/icons/Papirus-Light/16x16/actions:/usr/share/icons/Papirus-Light/16x16/apps:/usr/share/icons/Papirus-Light/16x16/categories:/usr/share/icons/Papirus-Light/16x16/devices:/usr/share/icons/Papirus-Light/16x16/emblems:/usr/share/icons/Papirus-Light/16x16/emotes:/usr/share/icons/Papirus-Light/16x16/mimetypes:/usr/share/icons/Papirus-Light/16x16/panel:/usr/share/icons/Papirus-Light/16x16/places:/usr/share/icons/Papirus-Light/16x16/status
+    icon_path = /usr/share/icons/Papirus-Dark/16x16/actions:/usr/share/icons/Papirus-Dark/16x16/apps:/usr/share/icons/Papirus-Dark/16x16/categories:/usr/share/icons/Papirus-Dark/16x16/devices:/usr/share/icons/Papirus-Dark/16x16/emblems:/usr/share/icons/Papirus-Dark/16x16/emotes:/usr/share/icons/Papirus-Dark/16x16/mimetypes:/usr/share/icons/Papirus-Dark/16x16/panel:/usr/share/icons/Papirus-Dark/16x16/places:/usr/share/icons/Papirus-Dark/16x16/status
 
     #################
     #### HISTORY ####
@@ -144,10 +144,8 @@
     #default_icon = /path/to/icon
 
 [urgency_normal]
-    background = "#d8dee9"               # original #285577
-    foreground = "#4c566a"               # original #ffffff
-    # background = "#285577"               # original #285577
-    # foreground = "#ffffff"               # original #ffffff
+    background = "#285577"
+    foreground = "#ffffff"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     #default_icon = /path/to/icon

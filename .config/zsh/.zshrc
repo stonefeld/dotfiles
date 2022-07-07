@@ -18,6 +18,15 @@ zstyle ':completion:*' menu select cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zs
 # Save most recent 1000 lines on history file.
 SAVEHIST=1000
 
+# Get version control information to display on prompt.
+autoload -Uz vcs_info
+precmd_functions+=(vcs_info)
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '%F{black}-%F{blue}U'
+zstyle ':vcs_info:*' stagedstr '%F{black}-%F{green}A'
+zstyle ':vcs_info:git:*' formats '%F{yellow}%b%u%c'
+zstyle ':vcs_info:git:*' actionformats '%F{yellow}%b%F{black}-%F{magenta}%a%F{black}-%F{red}%u%F{black}-%F{green}%c'
+
 # Small function to detect an active virtual environment and return the name.
 # Avoid creating virtual environments with dashes inside the name.
 virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo " %B%F{red}(%F{magenta}$(sed 's/\-[a-zA-Z0-9]*$//' <<< ${VIRTUAL_ENV##*/})%f%F{red})%f%b" 2>/dev/null; }
@@ -56,18 +65,28 @@ current_dir() {
 	echo "%F{$base_color}$dir_base%f%F{$current_color}$dir_current%f"
 }
 
+pathshorten() {
+	if [ $(gitdir) -eq 1 ]; then
+		echo "%1~"
+	else
+		echo "$(pwd | sed -e "s|$HOME|~|" | sed -re "s|([^./])[^/]+/|\1/|g")"
+	fi
+}
+
 # The right prompt displays the virtual environment's name.
 RPROMPT='$(last_status)$(virtualenv_info)'
 
 # defining multiple prompts.
 default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
+default_prompt_short() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}$(pathshorten)%f%F{red}]%f%b%F{white}$ '; }
 minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
 ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f $(gitinfo "br")%F{red}:%f%b '; }
 god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
+god_prompt_short() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
 starship_prompt() { source <(/usr/bin/starship init zsh --print-full-init); }
 
 # Setting up the normal prompt.
-starship_prompt
+god_prompt_short
 
 # ---------- ALIASES ---------- #
 # System power.
@@ -170,9 +189,6 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-# Change abook directories
-alias abook='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook'
-
 # Manage bluetooth
 alias bth='bluetoothctl'
 
@@ -241,6 +257,15 @@ if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]; then
 	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-syntax-highlighting ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi
+
+# Autosuggestions
+if [ -d /usr/share/zsh/plugins/zsh-autosuggestions ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+    bindkey '^f' autosuggest-accept
+elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions ]; then
+	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+    bindkey '^f' autosuggest-accept
 fi
 
 # vim: ft=sh

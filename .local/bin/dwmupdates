@@ -4,7 +4,6 @@ source config
 
 case $BUTTON in
 	1) pacupdatecheck &;;
-	3) termlaunch -f -g 120x34 -e bash -c 'sudo pacman -Syy && sudo pacman -Su --noconfirm && echo "0" > ${XDG_DATA_HOME:-$HOME/.local/share}/updates && pkill -RTMIN+6 dwmblocks';;
 esac
 
 updates="$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)"

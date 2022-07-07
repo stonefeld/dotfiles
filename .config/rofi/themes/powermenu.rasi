@@ -62,3 +62,5 @@ element selected {
 element-text selected {
 	text-color: @foreground-sel;
 }
+
+// vim: ft=rasi

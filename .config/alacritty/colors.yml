@@ -58,7 +58,8 @@ schemes:
         foreground: '#d8dee9'
 
     primary:
-      background:   '#171421'
+      # background:   '#171421'
+      background:   '#292d3e'
       foreground:   '#d8dee9'
 
     normal:
@@ -81,10 +82,10 @@ schemes:
       cyan:         '#8fbcbb'
       white:        '#eceff4'
 
-  ######################
-  #### GRUVBOX DARK ####
-  ######################
-  Gruvbox-Dark: &Gruvbox-Dark
+  #############################
+  #### GRUVBOX DARK MEDIUM ####
+  #############################
+  Gruvbox-Dark: &Gruvbox-Dark-Medium
     cursor:
       text:         '#282828'
       cursor:       '#ebdbb2'
@@ -121,6 +122,47 @@ schemes:
       magenta:      '#d3869b'
       cyan:         '#8ec07c'
       white:        '#ebdbb2'
+
+  ###########################
+  #### GRUVBOX DARK HARD ####
+  ###########################
+  Gruvbox-Dark-Hard: &Gruvbox-Dark-Hard
+    cursor:
+      text:         '#1d2021'
+      cursor:       '#d5c4a1'
+
+    search:
+      matches:
+        foreground: CellBackground
+        background: '#88c0d0'
+
+      bar:
+        background: '#434c5e'
+        foreground: '#d8dee9'
+
+    primary:
+      background:   '#1d2021'
+      foreground:   '#d5c4a1'
+
+    normal:
+      black:        '#1d2021'
+      red:          '#fb4934'
+      green:        '#b8bb26'
+      yellow:       '#fabd2f'
+      blue:         '#83a598'
+      magenta:      '#d3869b'
+      cyan:         '#8ec07c'
+      white:        '#d5c4a1'
+
+    bright:
+      black:        '#665c54'
+      red:          '#fb4934'
+      green:        '#b8bb26'
+      yellow:       '#fabd2f'
+      blue:         '#83a598'
+      magenta:      '#d3869b'
+      cyan:         '#8ec07c'
+      white:        '#fbf1c7'
 
   ####################
   #### AYU MIRAGE ####
@@ -414,4 +456,4 @@ schemes:
       cyan:         '#94e2d5'
       white:        '#bac2de'
 
-colors: *Catppuccin-Mocha
+colors: *Nord-Custom

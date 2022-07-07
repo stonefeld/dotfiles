@@ -16,6 +16,25 @@ compile_tex() {
 	$command --output-directory="$dir" "$base"
 }
 
+compile_md() {
+    # pandoc \
+    #     --verbose \
+    #     --pdf-engine=xelatex \
+    #     --highlight-style=zenburn \
+    #     --variable graphics \
+    #     --variable 'geometry:margin=1in' \
+    #     "$base".md -s \
+    #     --output "$base".pdf
+    pandoc \
+        "$base".md \
+        -o "$base".pdf \
+        --from markdown \
+        --template $HOME/.local/share/templates/latex/template.tex \
+        --pdf-engine xelatex \
+        --listings \
+        --verbose
+}
+
 compile_c() {
 	[ -f "getnum.c" ] && SRC="getnum.c"
 	gcc -std=c99 -pedantic -Wall -o "$base" "$file" $SRC -lm
@@ -23,5 +42,6 @@ compile_c() {
 
 case "$ext" in
 	tex) compile_tex;;
+    md)  compile_md;;
 	c)   compile_c;;
 esac

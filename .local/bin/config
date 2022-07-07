@@ -1,6 +1,6 @@
 #!/bin/sh
 COLORED=false
-COLORS="mocha"
+COLORS="nord"
 
 nord() {
 	case "$1" in
@@ -39,6 +39,42 @@ nord() {
 	echo "$fg$bg"
 }
 
+gruvbox() {
+	case "$1" in
+		"bg") fg="^c#181818^" ;;
+		"g1") fg="^c#282828^" ;;
+		"g2") fg="^c#383838^" ;;
+		"g3") fg="^c#928374^" ;;
+		"wh") fg="^c#A89984^" ;;
+		"cy") fg="^c#689D6A^" ;;
+		"bl") fg="^c#458588^" ;;
+		"re") fg="^c#CC241D^" ;;
+		"or") fg="^c#FE8019^" ;;
+		"ye") fg="^c#D79921^" ;;
+		"gr") fg="^c#98971A^" ;;
+		"ma") fg="^c#B16286^" ;;
+		"pi") fg="^c#B16286^" ;;
+		"vi") fg="^c#B16286^" ;;
+	esac
+	case "$2" in
+		"bg") bg="^b#181818^" ;;
+		"g1") bg="^b#282828^" ;;
+		"g2") bg="^b#383838^" ;;
+		"g3") bg="^b#928374^" ;;
+		"wh") bg="^b#A89984^" ;;
+		"cy") bg="^b#689D6A^" ;;
+		"bl") bg="^b#458588^" ;;
+		"re") bg="^b#CC241D^" ;;
+		"or") bg="^b#FE8019^" ;;
+		"ye") bg="^b#D79921^" ;;
+		"gr") bg="^b#98971A^" ;;
+		"ma") bg="^b#B16286^" ;;
+		"pi") bg="^b#B16286^" ;;
+		"vi") bg="^b#B16286^" ;;
+	esac
+	echo "$fg$bg"
+}
+
 mocha() {
 	case "$1" in
 		"bg") fg="^c#45475A^";;
@@ -73,6 +109,7 @@ mocha() {
 
 case "$COLORS" in
 	"nord")     cl() { echo "$(nord "$1" "$2")"; };;
+	"gruvbox")  cl() { echo "$(gruvbox "$1" "$2")"; };;
 	"mocha")    cl() { echo "$(mocha "$1" "$2")"; };;
 	*)          cl() { echo ""; };;
 esac

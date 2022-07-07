@@ -20,7 +20,7 @@ fi
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export TERM="xterm-256color"
-export BROWSER="firefox"
+export BROWSER="brave"
 export NOTES_FOLDER="$HOME/docs/notes"
 export TEMPLATES_FOLDER="$XDG_DATA_HOME"/templates
 export PDF_READER="zathura"
