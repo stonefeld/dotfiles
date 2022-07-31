@@ -15,12 +15,12 @@ run_dmenu() {
 
 screencast_full() {
 	record "$filelocation/$filename" "$(xdpyinfo | grep dimensions | sed 's/\s\+/ /g' | cut -d ' ' -f 3)" "1280x1440"
-	pkill -RTMIN+11 dwmblocks
+	pkill -RTMIN+7 dwmblocks
 }
 
 screencast_single() {
 	record "$filelocation/$filename"
-	pkill -RTMIN+11 dwmblocks
+	pkill -RTMIN+7 dwmblocks
 }
 
 launch_webcam() {
@@ -31,7 +31,7 @@ killrecording() {
 	recpid="$(cat /tmp/recordingpid)"
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
-	pkill -RTMIN+11 dwmblocks
+	pkill -RTMIN+7 dwmblocks
 	sleep 3
 	kill -9 "$recpid"
 	exit

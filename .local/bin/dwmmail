@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source config
+source dwmconfig
 
 case $BUTTON in
 	1) mailcheck &;;

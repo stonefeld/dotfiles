@@ -1,10 +1,11 @@
 #!/bin/bash
 
-source config
+source dwmconfig
 
 case $BUTTON in
 	1) termlaunch -f -g 120x34 -e calcurse;;
 esac
 
 # [ "$COLORED" = true ] && date "+ 📅 %a, %b %d (%Y) |" || date "+ $(cl 'or' '')󰃮^d^ %a, %b %d (%Y) |"
-[ "$COLORED" = true ] && date "+ 📅 %a, %b %d (%Y) |" || date "+ $(cl 'ye' '')󰃮 %a, %b %d (%Y) |"
+# [ "$COLORED" = true ] && date "+ 📅 %a, %b %d (%Y) |" || date "+ $(cl 'ye' '')󰃮 %a, %b %d (%Y) |"
+date "+^i^ %a, %b %d (%Y) %H:%M "

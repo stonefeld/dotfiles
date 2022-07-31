@@ -107,11 +107,44 @@ mocha() {
 	echo "$fg$bg"
 }
 
+tokyonight() {
+	case "$1" in
+		"bg") fg="^c#24283B^";;
+		"g1") fg="^c#32344A^";;
+        "g2") fg="^c#444B6A^";;
+		"re") fg="^c#F7768E^";;
+		"gr") fg="^c#9ECE6A^";;
+		"ye") fg="^c#E0AF68^";;
+		"bl") fg="^c#7AA2F7^";;
+		"ma") fg="^c#AD8EE6^";;
+		"cy") fg="^c#449DAB^";;
+		"wh") fg="^c#9699A8^";;
+		"or") fg="^c#E0AF68^";;
+        "vi") fg="^c#AD8EE6^";;
+	esac
+	case "$2" in
+		"bg") bg="^b#24283B^";;
+		"g1") bg="^b#32344A^";;
+        "g2") bg="^b#444B6A^";;
+		"re") bg="^b#F7768E^";;
+		"gr") bg="^b#9ECE6A^";;
+		"ye") bg="^b#E0AF68^";;
+		"bl") bg="^b#7AA2F7^";;
+		"ma") bg="^b#AD8EE6^";;
+		"cy") bg="^b#449DAB^";;
+		"wh") bg="^b#9699A8^";;
+		"or") bg="^b#E0AF68^";;
+        "vi") bg="^b#AD8EE6^";;
+	esac
+	echo "$fg$bg"
+}
+
 case "$COLORS" in
-	"nord")     cl() { echo "$(nord "$1" "$2")"; };;
-	"gruvbox")  cl() { echo "$(gruvbox "$1" "$2")"; };;
-	"mocha")    cl() { echo "$(mocha "$1" "$2")"; };;
-	*)          cl() { echo ""; };;
+	"nord")       cl() { echo "$(nord "$1" "$2")"; };;
+	"gruvbox")    cl() { echo "$(gruvbox "$1" "$2")"; };;
+	"mocha")      cl() { echo "$(mocha "$1" "$2")"; };;
+    "tokyonight") cl() { echo "$(tokyonight "$1" "$2")"; };;
+	*)            cl() { echo ""; };;
 esac
 
 SEP="$(cl 'g2' '')|^d^"

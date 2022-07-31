@@ -16,8 +16,7 @@ case $1 in
 	     pkill -RTMIN+4 dwmblocks;;
 
 	mm)  # Microphone mute.
-	     [ "$PULSE" = true ] && amixer -D pulse sset Capture toggle || amixer sset Capture toggle
-	     pkill -RTMIN+4 dwmblocks;;
+	     [ "$PULSE" = true ] && amixer -D pulse sset Capture toggle || amixer sset Capture toggle;;
 
 	bu)  # Brightness up.
 	     xbacklight -inc $2

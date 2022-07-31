@@ -1,31 +1,6 @@
 #!/bin/bash
 
-source config
-
 per=$(cat /sys/class/power_supply/BAT0/capacity)
 char=$(cat /sys/class/power_supply/AC/online)
-
-if [ "$COLORED" = true ]; then
-	[ "$char" -eq 1 ] && echo " 🔌 $per% |" && exit
-	icon="🔋"
-else
-    # [ "$char" -eq 1 ] && echo " $(cl 'gr' '')󰂄^d^ $per% |" && exit
-    [ "$char" -eq 1 ] && echo " $(cl 'gr' '')󰂄$(cl 'gr' '') $per%  " && exit
-	icon="󰂃"
-	bat=$(( $per / 10 ))
-	case $bat in
-        "0")  icon="$(cl 're' '')󰂎";;
-		"1")  icon="$(cl 're' '')󰁺";;
-		"2")  icon="$(cl 'or' '')󰁻";;
-		"3")  icon="$(cl 'or' '')󰁼";;
-		"4")  icon="$(cl 'or' '')󰁽";;
-		"5")  icon="$(cl 'ye' '')󰁾";;
-		"6")  icon="$(cl 'ye' '')󰁿";;
-		"7")  icon="$(cl 'ye' '')󰂀";;
-		"8")  icon="$(cl 'gr' '')󰂁";;
-		"9")  icon="$(cl 'gr' '')󰂂";;
-		"10") icon="$(cl 'gr' '')󰁹";;
-	esac
-fi
-# echo " $icon^d^ $per% |"
-echo " $icon$(cl 'gr' '') $per%  "
+[ "$char" -eq 1 ] && echo " ^a^Connected: ^n^$per% " && exit
+echo " ^a^Battery: ^n^$per% "

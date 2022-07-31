@@ -2,7 +2,7 @@ schemes:
   ##############
   #### NORD ####
   ##############
-  Nord: &Nord
+  nord: &nord
     cursor:
       text:         '#2e3440'
       cursor:       '#d8dee9'
@@ -17,48 +17,6 @@ schemes:
         foreground: '#d8dee9'
 
     primary:
-      background:   '#2e3440'
-      foreground:   '#d8dee9'
-
-    normal:
-      black:        '#3b4252'
-      red:          '#bf616a'
-      green:        '#a3be8c'
-      yellow:       '#ebcb8b'
-      blue:         '#81a1c1'
-      magenta:      '#b48ead'
-      cyan:         '#88c0d0'
-      white:        '#e5e9f0'
-
-    bright:
-      black:        '#4c566a'
-      red:          '#bf616a'
-      green:        '#a3be8c'
-      yellow:       '#ebcb8b'
-      blue:         '#81a1c1'
-      magenta:      '#b48ead'
-      cyan:         '#8fbcbb'
-      white:        '#eceff4'
-
-  #####################
-  #### NORD CUSTOM ####
-  #####################
-  Nord-Custom: &Nord-Custom
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      # background:   '#171421'
       background:   '#292d3e'
       foreground:   '#d8dee9'
 
@@ -82,51 +40,10 @@ schemes:
       cyan:         '#8fbcbb'
       white:        '#eceff4'
 
-  #############################
-  #### GRUVBOX DARK MEDIUM ####
-  #############################
-  Gruvbox-Dark: &Gruvbox-Dark-Medium
-    cursor:
-      text:         '#282828'
-      cursor:       '#ebdbb2'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:   '#282828'
-      foreground:   '#ebdbb2'
-
-    normal:
-      black:        '#282828'
-      red:          '#cc241d'
-      green:        '#98971a'
-      yellow:       '#d79921'
-      blue:         '#458588'
-      magenta:      '#b16286'
-      cyan:         '#689d6a'
-      white:        '#a89984'
-
-    bright:
-      black:        '#928374'
-      red:          '#fb4934'
-      green:        '#b8bb26'
-      yellow:       '#fabd2f'
-      blue:         '#83a598'
-      magenta:      '#d3869b'
-      cyan:         '#8ec07c'
-      white:        '#ebdbb2'
-
-  ###########################
-  #### GRUVBOX DARK HARD ####
-  ###########################
-  Gruvbox-Dark-Hard: &Gruvbox-Dark-Hard
+  #################
+  #### GRUVBOX ####
+  #################
+  gruvbox: &gruvbox
     cursor:
       text:         '#1d2021'
       cursor:       '#d5c4a1'
@@ -165,260 +82,9 @@ schemes:
       white:        '#fbf1c7'
 
   ####################
-  #### AYU MIRAGE ####
+  #### CATPPUCCIN ####
   ####################
-  Ayu-Mirage: &Ayu-Mirage
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:   '#202734'
-      foreground:   '#cbccc6'
-
-    normal:
-      black:        '#191e2a'
-      red:          '#ff3333'
-      green:        '#bae67e'
-      yellow:       '#ffa759'
-      blue:         '#73d0ff'
-      magenta:      '#ffd580'
-      cyan:         '#95e6cb'
-      white:        '#c7c7c7'
-
-    bright:
-      black:        '#686868'
-      red:          '#f27983'
-      green:        '#a6cc70'
-      yellow:       '#ffcc66'
-      blue:         '#5ccfe6'
-      magenta:      '#ffee99'
-      cyan:         '#95e6cb'
-      white:        '#ffffff'
-
-  #####################
-  #### MONOKAI PRO ####
-  #####################
-  Monokai-Pro: &Monokai-Pro
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:  '#2d2a2e'
-      foreground:  '#fcfcfa'
-
-    normal:
-      black:       '#403e41'
-      red:         '#ff6188'
-      green:       '#a9dc76'
-      yellow:      '#ffd866'
-      blue:        '#fc9867'
-      magenta:     '#ab9df2'
-      cyan:        '#78dce8'
-      white:       '#fcfcfa'
-
-    bright:
-      black:       '#727072'
-      red:         '#ff6188'
-      green:       '#a9dc76'
-      yellow:      '#ffd866'
-      blue:        '#fc9867'
-      magenta:     '#ab9df2'
-      cyan:        '#78dce8'
-      white:       '#fcfcfa'
-
-  ##################
-  #### ONE DARK ####
-  ##################
-  One-Dark: &One-Dark
-    cursor:
-      text:         '#2e3440'
-      cursor:       '#d8dee9'
-
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
-    primary:
-      background:  '#282c34'
-      foreground:  '#abb2bf'
-
-    normal:
-      black:       '#5c6370'
-      red:         '#e06c75'
-      green:       '#98c379'
-      yellow:      '#e5c07b'
-      blue:        '#61afef'
-      magenta:     '#c678dd'
-      cyan:        '#56b6c2'
-      white:       '#828997'
-
-    bright:
-      normal:
-      black:       '#696c77'
-      red:         '#e45649'
-      green:       '#50a14f'
-      yellow:      '#c18401'
-      blue:        '#4078f2'
-      magenta:     '#a626a4'
-      cyan:        '#0184bc'
-      white:       '#a0a1a7'
-
-
-  ##########################
-  #### CATPPUCCIN LATTE ####
-  ##########################
-  Catppuccin-Latte: &Catppuccin-Latte
-    cursor:
-      text:         '#eff1f5'
-      cursor:       '#dc8a78'
-
-    search:
-      matches:
-        foreground: '#eff1f5'
-        background: '#6c6f85'
-
-      bar:
-        foreground: '#eff1f5'
-        background: '#6c6f85'
-
-    primary:
-      background:   '#eff1f5'
-      foreground:   '#4c4f69'
-
-    normal:
-      black:        '#4C4F69'
-      red:          '#D20F39'
-      green:        '#40A02B'
-      yellow:       '#DF8E1D'
-      blue:         '#1E66F5'
-      magenta:      '#EA76CB'
-      cyan:         '#179299'
-      white:        '#ACB0BE'
-
-    bright:
-      black:        '#4C4F69'
-      red:          '#D20F39'
-      green:        '#40A02B'
-      yellow:       '#DF8E1D'
-      blue:         '#1E66F5'
-      magenta:      '#EA76CB'
-      cyan:         '#179299'
-      white:        '#ACB0BE'
-
-
-  ###########################
-  #### CATPPUCCIN FRAPPE ####
-  ###########################
-  Catppuccin-Frappe: &Catppuccin-Frappe
-    cursor:
-      text:         '#303446'
-      cursor:       '#f2d5cf'
-
-    search:
-      matches:
-        foreground: '#303446'
-        background: '#a5adce'
-
-      bar:
-        foreground: '#303446'
-        background: '#a5adce'
-
-    primary:
-      background:   '#303446'
-      foreground:   '#c6d0f5'
-
-    normal:
-      black:        '#51576d'
-      red:          '#e78284'
-      green:        '#a6d189'
-      yellow:       '#e5c890'
-      blue:         '#8caaee'
-      magenta:      '#f4b8e4'
-      cyan:         '#81c8be'
-      white:        '#b5bfe2'
-
-    bright:
-      black:        '#51576d'
-      red:          '#e78284'
-      green:        '#a6d189'
-      yellow:       '#e5c890'
-      blue:         '#8caaee'
-      magenta:      '#f4b8e4'
-      cyan:         '#81c8be'
-      white:        '#b5bfe2'
-
-
-  ##############################
-  #### CATPPUCCIN MACCHIATO ####
-  ##############################
-  Catppuccin-Macchiato: &Catppuccin-Macchiato
-    cursor:
-      text:         '#24273a'
-      cursor:       '#f4dbd6'
-
-    search:
-      matches:
-        foreground: '#24273a'
-        background: '#a5adcb'
-
-      bar:
-        foreground: '#24273a'
-        background: '#a5adcb'
-
-    primary:
-      background:   '#24273a'
-      foreground:   '#cad3f5'
-
-    normal:
-      black:        '#494d64'
-      red:          '#ed8796'
-      green:        '#a6da95'
-      yellow:       '#eed49f'
-      blue:         '#8aadf4'
-      magenta:      '#f5bde6'
-      cyan:         '#8bd5ca'
-      white:        '#b8c0e0'
-
-    bright:
-      black:        '#494d64'
-      red:          '#ed8796'
-      green:        '#a6da95'
-      yellow:       '#eed49f'
-      blue:         '#8aadf4'
-      magenta:      '#f5bde6'
-      cyan:         '#8bd5ca'
-      white:        '#b8c0e0'
-
-
-  ##########################
-  #### CATPPUCCIN MOCHA ####
-  ##########################
-  Catppuccin-Mocha: &Catppuccin-Mocha
+  catpuccin: &catpuccin
     cursor:
       text:         '#1e1e2e'
       cursor:       '#f5e0dc'
@@ -456,4 +122,4 @@ schemes:
       cyan:         '#94e2d5'
       white:        '#bac2de'
 
-colors: *Nord-Custom
+colors: *nord

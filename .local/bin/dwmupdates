@@ -1,17 +1,9 @@
 #!/bin/bash
 
-source config
-
 case $BUTTON in
 	1) pacupdatecheck &;;
 esac
 
 updates="$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)"
-if [ "$COLORED" = true ]; then
-	pgrep -x pacupdatecheck >/dev/null && icon=" 🔄"
-	echo " 📦 $updates$icon |"
-else
-    # pgrep -x pacupdatecheck >/dev/null && icon=" $(cl 'gr' '')󰑓^d^"
-    pgrep -x pacupdatecheck >/dev/null && icon=" 󰑓"
-    echo " 󰬦 $updates$icon  "
-fi
+pgrep -x pacupdatecheck >/dev/null && icon=" (*)"
+echo " ^a^Updates$icon: ^n^$updates "

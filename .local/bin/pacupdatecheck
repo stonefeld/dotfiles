@@ -1,8 +1,9 @@
 #!/bin/sh
 
 app_name="pacman"
-
 cache_file="${XDG_DATA_HOME:-$HOME/.local/share}/updates"
+
+pkill -RTMIN+6 dwmblocks
 
 [ ! -f "$cache_file" ] && (touch $cache_file && echo 0 > $cache_file)
 

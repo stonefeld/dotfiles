@@ -20,7 +20,8 @@ fi
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export TERM="xterm-256color"
-export BROWSER="brave"
+export TERMFM="vifmrun"
+export BROWSER="firefox"
 export NOTES_FOLDER="$HOME/docs/notes"
 export TEMPLATES_FOLDER="$XDG_DATA_HOME"/templates
 export PDF_READER="zathura"
@@ -61,6 +62,7 @@ export GOPATH="$XDG_DATA_HOME"/go
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PLATFORMIO_HOME_DIR="$XDG_DATA_HOME"/platformio
 

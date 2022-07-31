@@ -13,14 +13,14 @@ env:
 
 window:
   padding:
-    x: 4
-    y: 4
+    x: 5
+    y: 5
 
   dimensions:
     columns: 120
     lines: 34
 
-  opacity: 0.9
+  opacity: 1.0
   dynamic_padding: true
   decorations: full
   startup_mode: Windowed

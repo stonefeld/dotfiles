@@ -21,8 +21,8 @@ if [ -z "$*" ]; then
 fi
 
 # Get the session name.
-session="$1"
-shift
+session="${1##*/}"
+[ "$session" = "." ] && session="${PWD##*/}"
 
 # Check if the session already exists and attach it if true.
 (tmux list-sessions | egrep "\<$session\>") &>/dev/null

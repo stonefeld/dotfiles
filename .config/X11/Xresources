@@ -18,7 +18,7 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
 /* XTerm setup */
-XTerm*.faceName: monospace:size=12
+XTerm*.faceName: monospace:size=9
 XTerm*.background: black
 XTerm*.foreground: white
 

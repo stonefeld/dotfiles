@@ -82,7 +82,7 @@ default_prompt_short() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F
 minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
 ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f $(gitinfo "br")%F{red}:%f%b '; }
 god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
-god_prompt_short() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
+god_prompt_short() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}─%f%F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
 starship_prompt() { source <(/usr/bin/starship init zsh --print-full-init); }
 
 # Setting up the normal prompt.
@@ -116,14 +116,20 @@ alias reso='source ${ZDOTDIR:-}/.zshrc'
 # Some ls command replacements.
 if ! command -v exa &>/dev/null; then
 	alias ls="LC_COLLATE=C ls -hp --color=always --group-directories-first"
-    alias ll="LC_COLLATE=C ls -lahp --color=always --group-directories-first"
-    alias la="LC_COLLATE=C ls -ahp --color=always --group-directories-first"
+	alias ll="LC_COLLATE=C ls -lahp --color=always --group-directories-first"
+	alias la="LC_COLLATE=C ls -ahp --color=always --group-directories-first"
 else
 	alias ls="exa -g --color=always --group-directories-first"
-    alias ll="exa -la -g --color=always --group-directories-first"
-    alias la="exa -a -g --color=always --group-directories-first"
+	alias ll="exa -la -g --color=always --group-directories-first"
+	alias la="exa -a -g --color=always --group-directories-first"
 fi
-alias lf="vifm ."
+alias lf="$TERMFM ."
+
+# Create a directory and cd into it
+mkcd() {
+	[ -z "$*" -o "$#" -gt 1 ] && echo "mkcd [DIR]" && return
+	mkdir "$1"; cd "$1";
+}
 
 # Avoid overriding.
 alias cp='cp -i'
@@ -261,11 +267,11 @@ fi
 
 # Autosuggestions
 if [ -d /usr/share/zsh/plugins/zsh-autosuggestions ]; then
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-    bindkey '^f' autosuggest-accept
+	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+	bindkey '^f' autosuggest-accept
 elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-    bindkey '^f' autosuggest-accept
+	bindkey '^f' autosuggest-accept
 fi
 
 # vim: ft=sh

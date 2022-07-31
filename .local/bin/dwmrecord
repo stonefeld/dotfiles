@@ -1,14 +1,8 @@
 #!/bin/bash
 
-source config
-
 case $BUTTON in
 	1) dmrecord;;
 	3) termlaunch -f -g 120x34 -e vifm $HOME/vids/recordings;;
 esac
 
-if [ "$COLORED" = true ]; then
-	[ -f /tmp/recordingpid ] && echo " 🎤 ⏺️ |"
-else
-    [ -f /tmp/recordingpid ] && echo " $(cl 'or' '')󰝥 󰍬  "
-fi
+[ -f /tmp/recordingpid ] && echo "^u^ Rec ^n^"

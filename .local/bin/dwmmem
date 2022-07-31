@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source config
+source dwmconfig
 
 case $BUTTON in
 	1) notify-send -i "null" -a ps "Most memory consuming processes" "$(ps axch -o cmd:20,%mem --sort=-%mem | head | sed 's/$/%/')";;

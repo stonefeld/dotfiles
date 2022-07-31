@@ -8,7 +8,8 @@ syntax on                            " enable syntax highlight
 
 set nocompatible                     " no vi compatibility
 set nospell                          " no spell checking
-set nowrap                           " display long lines in one line
+set wrap                             " cut lines
+set linebreak                        " wrap by word and not by character
 set noswapfile                       " disable swapfile
 set noundofile                       " disable undofile
 set nobackup                         " disable backup
@@ -19,7 +20,7 @@ set nostartofline                    " when on top disable jumping to the top
 set tabstop=4                        " make tabs 4 sapces long
 set softtabstop=4                    " delete 4 spaces when backspace
 set shiftwidth=4                     " use 4 spaces for shifting
-set noexpandtab                      " use tabs by default
+set expandtab                        " use spaces as tabs
 set smarttab                         " enable smart tabs
 set autoindent                       " use the same indent level of line before
 set cindent                          " use c-style indenting
@@ -28,8 +29,10 @@ set backspace=indent,eol,start       " enable using backspace in any case
 set splitright                       " split to the right when vertical
 set splitbelow                       " split to the bottom when horizontal
 set ruler                            " show cursor coordinates
+set number                           " show line numbers
+set numberwidth=5                    " set width of line number space
 set mouse=a                          " enable mouse interaction
-set laststatus=1                     " show statusline in any case
+set laststatus=2                     " show statusline in any case
 set showcmd                          " show extra information on the cmdline
 set ttimeoutlen=50                   " time waited for a key code to complete
 set updatetime=250                   " decrease updatetime delay
@@ -38,20 +41,17 @@ set incsearch                        " search while typing
 set wildmenu                         " enable wildmenu
 set list                             " enable listchars
 set listchars=tab:\ \ ,trail:.       " set characters to display tabs and trailing space
-set t_Co=16                          " only set 16 available colors
 set belloff=all                      " disable bell
 set guioptions=                      " disable all graphical features
 set guicursor+=a:blinkon0            " disable cursor blink
+set t_Co=256
 
 " change default font according to os
-let g:fontsize=11
-let g:fontname='Cascadia\ Code'
+let g:fontsize=10
+let g:fontname='Consolas'
 
-" highlight settings
-hi! Normal guifg=white guibg=black
-hi! Visual guibg=black gui=reverse ctermbg=256 cterm=reverse
-hi! Function guifg=blue ctermfg=4
-hi! SpecialKey guifg=grey30 ctermfg=8
+" set prefered color
+let g:colorscheme='zenburn'
 
 " if build.bat or build.sh are available set them as the makeprg
 if has('win32') && filereadable('build.bat')
@@ -135,6 +135,7 @@ fu! ToggleSyntax()
   else
     syntax on
     let g:syn=1
+    call SetColors()
 	call CSyntax()
   endif
 endfu
@@ -158,38 +159,99 @@ fu! SetFontSize()
   endif
 endfu
 
+" highlight settings
+fu! SetColors()
+  hi clear
+  if exists('syntax_on')
+    syntax reset
+  endif
+
+  if g:colorscheme == 'devcpp'
+    set background=light
+
+    hi Comment guifg=blue
+    hi Identifier guifg=black gui=bold
+    hi Statement guifg=black gui=bold
+    hi Type guifg=black gui=bold
+    hi PreProc guifg=green3
+    hi Constant guifg=magenta3
+    hi String gui=NONE guifg=red3 guibg=NONE
+    hi! link Character String
+    hi Visual guifg=white guibg=darkblue
+  elseif g:colorscheme == 'handmadehero'
+    set background=dark
+
+    hi Normal guifg=burlywood3 guibg=gray3
+    hi Statement guifg=DarkGoldenrod3 gui=NONE
+    hi! link Identifier Statement
+    hi! link Type Statement
+    hi Visual guibg=darkblue
+    hi Constant guifg=OliveDrab
+    hi! link Special Constant
+    hi PreProc guifg=DarkKhaki
+    hi Comment guifg=gray40
+    hi MatchParen guifg=red guibg=NONE
+    hi Cursor guifg=black guibg=green3
+  elseif g:colorscheme == 'zenburn'
+    set background=dark
+
+    hi Normal guifg=#dcdccc guibg=#3f3f3f
+    hi NonText guifg=#7f7f7f
+    hi LineNr guifg=#7f7f7f guibg=#0f0f0f
+    hi CursorLineNr guifg=#7f7f7f guibg=#0f0f0f gui=NONE
+    hi CursorLine guibg=#0f0f0f
+    hi Statement guifg=#e3ceab gui=bold
+    hi! link Identifier Statement
+    hi Type guifg=#cedf99 gui=bold
+    hi Visual guibg=#5f5f5f
+    hi Constant guifg=#8cd0d3
+    hi String guifg=#cc9898
+    hi! link Special String
+    hi PreProc guifg=#ffcfaf
+    hi Comment guifg=#7f9f7f gui=bold,italic
+    hi Operator guifg=#9f9d6d gui=bold
+    hi! link MatchParen Statement
+    hi VertSplit guibg=#dcdccc
+  endif
+
+  hi SpecialKey guifg=gray30 ctermfg=8
+  hi Folded guifg=gray40 guibg=gray10
+  hi Pmenu guifg=white guibg=gray10
+  hi PmenuSel guifg=black guibg=gray80
+endfu
+
 " add custom c/c++ syntax highlight
 fu! CSyntax()
-  syn match cType "\<[A-Z][a-zA-Z0-9]*\>"
+  " syn match cType "\<[A-Z][a-zA-Z0-9]*\>"
 
-  syn match cCustomMacro "\<[A-Z_]*\>"
-  hi def link cCustomMacro PreProc
+  " syn match cCustomMacro "\<[A-Z_]*\>"
+  " hi def link cCustomMacro PreProc
 
-  syn match cCustomParen "(" contains=cParen,cCppParen
-  syn match cCustomFunc "\w\+\s*(" contains=cCustomParen
-  syn match cCustomScope "::"
-  syn match cCustomClass "\w\+\s*::" contains=cCustomScope
-  hi def link cCustomFunc Function
-  hi def link cCustomClass Function
+  " syn match cCustomParen "(" contains=cParen,cCppParen
+  " syn match cCustomFunc "\w\+\s*(" contains=cCustomParen
+  " syn match cCustomScope "::"
+  " syn match cCustomClass "\w\+\s*::" contains=cCustomScope
+  " hi def link cCustomFunc Function
+  " hi def link cCustomClass Function
 
   syn match cCustomBraces "[{}\[\]()]"
-  hi def link cCustomBraces Constant
+  hi def link cCustomBraces Operator
 
   syn match cCustomOperators "[\.<>=!&|;\-+\*%\^,]"
-  hi def link cCustomOperators Constant
+  hi def link cCustomOperators Operator
 
   syn match cCustomDivision "(/\|//)" contains=ALLBUT,Comment
-  hi def link cCustomDivision Braces
+  hi def link cCustomDivision Operator
 
   syn keyword cTodo contained TODO FIXME NOTE BUG BUGFIX XXX
 
-  syn match cCustomMemberAccess "\.\|->" nextgroup=cStructMember,cppTemplateKeyword
-  syn match cStructMember "\<\h\w*\>\%((\|<\)\@!" contained
-  syn cluster cParenGroup add=cStructMember
-  syn cluster cPreProcGroup add=cStructMember
-  syn cluster cMultiGroup add=cStructMember
-  hi def link cStructMember Function
-  hi def link cCustomMemberAccess Function
+  " syn match cCustomMemberAccess "\.\|->" nextgroup=cStructMember,cppTemplateKeyword
+  " syn match cStructMember "\<\h\w*\>\%((\|<\)\@!" contained
+  " syn cluster cParenGroup add=cStructMember
+  " syn cluster cPreProcGroup add=cStructMember
+  " syn cluster cMultiGroup add=cStructMember
+  " hi def link cStructMember Function
+  " hi def link cCustomMemberAccess Function
 endfu
 
 " ----------------------------------------
@@ -218,7 +280,7 @@ nnoremap <silent> <leader>n <cmd>try<bar>cn<bar>catch /^Vim\%((\a\+)\)\=:E\%(553
 nnoremap <silent> <leader>p <cmd>try<bar>cp<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>clast<bar>endtry<CR>
 
 " open netrw
-nnoremap <silent> <leader>e <cmd>Lexplore<cr>
+nnoremap <silent> <leader>e <cmd>Explore<cr>
 
 " toggle syntax
 nnoremap <silent> <leader>s <cmd>call ToggleSyntax()<cr>
@@ -287,6 +349,7 @@ aug end
 " add additional syntax highlight for c/c++ files
 aug c_syntax
   au!
+  au BufNewFile,BufRead *.ino set ft=cpp
   au FileType c,cpp call CSyntax()
 aug end
 
@@ -329,14 +392,6 @@ aug latex_writing
 aug end
 
 " ----------------------------------------
-" solve the problem where i can't bind alt+<any_key>
-let c='a'
-while c<='z'
-  exec "set <A-" . c . ">=\e" . c
-  exec "imap \e" . c . " <A-" . c . ">"
-  let c=nr2char(1 + char2nr(c))
-endwhile
-
-" ----------------------------------------
 " execute functions at startup
 call SetFont()
+call SetColors()

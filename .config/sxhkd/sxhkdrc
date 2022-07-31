@@ -24,7 +24,7 @@ XF86MonBrightnessDown
 super + p
 	ctrlpanel run
 super + e
-	termlaunch -f -g 120x34 -e vifmrun
+	cd $HOME && termlaunch -f -g 120x34 -e $TERMFM
 super + shift + i
 	$BROWSER
 

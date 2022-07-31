@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source config
-
 case $BUTTON in
 	1) pavucontrol;;
 	3) ctrlpanel vm;;
@@ -9,26 +7,11 @@ esac
 
 if ([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed "1q") ]); then
 	info=$(amixer -D pulse sget Master | grep -oP "(Front Left|Mono):[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g")
-	# info=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP "Volume:\s*front-left:\s*[0-9]*\s*\K.*" | sed "s/\%//g")
-	# mute=$(pactl get-sink-mute @DEFAULT_SINK@ | grep -oP "Mute:\s*\K.*")
 else
 	info=$(amixer sget Master | grep -oP "(Front Left|Mono):[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g;s/\<[0-9]\+[\.]\?[0-9]\+dB\s*//g")
-	# mute=$(echo $info | cut -d " " -f 3 | sed "s/off/yes")
 fi
 
 mute=$(echo $info | cut -d " " -f 3)
-vol=$(echo $info | cut -d " " -f 2)
-
-if [ "$COLORED" = true ]; then
-	[ "$mute" = "off" ] && echo " 🔇 Mute |" && return
-	[ "$vol" -ge 100 ] && icon="🔊" || icon="🔉"
-	[ "$vol" -eq 0 ] && icon="🔈"
-else
-    # [ "$mute" = "off" ] && echo " $(cl 're' '')󰖁^d^ Mute |" && return
-    [ "$mute" = "off" ] && echo " $(cl 'gr' '')󰖁 Mute |" && return
-	[ "$vol" -ge 100 ] && icon="󰕾" || icon="󰖀"
-    [ "$vol" -eq 0 ] && icon="󰖁"
-fi
-
-# echo " $(cl 're' '')$icon^d^ $vol% |"
-echo " $(cl 'gr' '')$icon $vol% |"
+vol="$(echo $info | cut -d " " -f 2)%"
+[ "$mute" = "off" ] && vol="Mute"
+echo " ^a^Volume: ^n^$vol "

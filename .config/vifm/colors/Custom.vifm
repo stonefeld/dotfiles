@@ -17,15 +17,16 @@ hi StatusLine cterm=none ctermfg=white ctermbg=black
 hi WildMenu cterm=reverse ctermfg=yellow ctermbg=black
 hi CmdLine cterm=none ctermfg=white ctermbg=none
 hi ErrorMsg cterm=none ctermfg=white ctermbg=red
-hi Border cterm=none ctermfg=none ctermbg=black
+" hi Border cterm=none ctermfg=none ctermbg=black
+hi Border cterm=none ctermfg=none ctermbg=none
 hi OtherLine ctermfg=default ctermbg=default
 hi JobLine cterm=bold,reverse ctermfg=black ctermbg=white
-hi SuggestBox cterm=bold ctermfg=default ctermbg=default
+hi SuggestBox cterm=none ctermfg=default ctermbg=black
 hi CmpMismatch cterm=bold ctermfg=white ctermbg=red
 hi AuxWin ctermfg=default ctermbg=default
 hi TabLine cterm=none ctermfg=white ctermbg=black
 hi TabLineSel cterm=bold,reverse ctermfg=default ctermbg=default
-hi User1 ctermfg=default ctermbg=default
+hi User1 ctermfg=cyan ctermbg=default
 hi User2 ctermfg=default ctermbg=default
 hi User3 ctermfg=default ctermbg=default
 hi User4 ctermfg=default ctermbg=default
