@@ -17,8 +17,7 @@ hi StatusLine cterm=none ctermfg=white ctermbg=black
 hi WildMenu cterm=reverse ctermfg=yellow ctermbg=black
 hi CmdLine cterm=none ctermfg=white ctermbg=none
 hi ErrorMsg cterm=none ctermfg=white ctermbg=red
-" hi Border cterm=none ctermfg=none ctermbg=black
-hi Border cterm=none ctermfg=none ctermbg=none
+hi Border cterm=none ctermfg=none ctermbg=black
 hi OtherLine ctermfg=default ctermbg=default
 hi JobLine cterm=bold,reverse ctermfg=black ctermbg=white
 hi SuggestBox cterm=none ctermfg=default ctermbg=black

@@ -13,14 +13,14 @@ env:
 
 window:
   padding:
-    x: 5
-    y: 5
+    x: 2
+    y: 2
 
   dimensions:
     columns: 120
     lines: 34
 
-  opacity: 1.0
+  opacity: 0.9
   dynamic_padding: true
   decorations: full
   startup_mode: Windowed
@@ -39,19 +39,19 @@ scrolling:
 
 font:
   normal:
-    family: SauceCodePro Nerd Font
-    style: Medium
+    family: JetbrainsMonoNL Nerd Font
+    style: Regular
 
   bold:
-    family: SauceCodePro Nerd Font
+    family: JetbrainsMonoNL Nerd Font
     style: Bold
 
   italic:
-    family: SauceCodePro Nerd Font
-    style: Medium Italic
+    family: JetbrainsMonoNL Nerd Font
+    style: Italic
 
   bold_italic:
-    family: SauceCodePro Nerd Font
+    family: JetbrainsMonoNL Nerd Font
     style: Bold Italic
 
   size: 12.0

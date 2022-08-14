@@ -34,8 +34,9 @@ set milleroptions=lsize:1,csize:2,rsize:3,rpreview:all
 set millerview
 set quickview
 set previewoptions+=graphicsdelay:0
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
+" set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 set dotdirs=
+set dotfiles
 if !has('win')
   set slowfs=curlftpfs
 endif
@@ -94,10 +95,15 @@ nnoremap aa cW
 nnoremap <wait> ;f :touch<space>""<left>
 nnoremap <wait> ;d :mkdir<space>""<left>
 
-nnoremap <wait> xx :ex<cr> extract
+nnoremap <wait> xx :ex<cr>
 nnoremap <wait> xz :zip<cr>
 nnoremap <wait> xt :tar<cr>
 nnoremap <wait> xg :tgz<cr>
+
+nnoremap <silent> <c-t> :tabnew<cr>
+nnoremap <silent> <c-k> :tabc<cr>
+nnoremap <silent> <c-l> :tabn<cr>
+nnoremap <silent> <c-h> :tabp<cr>
 
 nnoremap <wait> ,w :set wrap!<cr>
 
@@ -133,12 +139,17 @@ endif
 " ========== FILETYPES ========== "
 " Open files with the program specified on each system
 filetype *
-      \ xdg-open %c
+      \ xdg-open %c 2>/dev/null &
 
 " Try to highlight known text files, otherwise just print them
 fileviewer <text/*>
       \ highlight -O ansi -s base16/bright %c,
       \ cat %c,
+
+" Try to format a json file
+fileviewer *.json
+      \ python -m json.tool %c,
+      \ file %c,
 
 " Try to preview the pdf
 fileviewer *.pdf

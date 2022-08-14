@@ -29,23 +29,23 @@ super + shift + i
 	$BROWSER
 
 # utilities
-alt + control + a
+super + a; a
 	termlaunch -f -g 120x34 -e alsamixer
-alt + control + m
+super + a; m
 	termlaunch -f -g 120x34 -e neomutt
-alt + control + h
+super + a; h
 	termlaunch -f -g 120x34 -e htop
-alt + control + p
+super + a; p
 	termlaunch -f -g 120x34 -e music
 
 # dmenu utilities
-alt + control + n
+super + a; n
 	dmnotes
-alt + control + r
+super + a; r
 	dmrecord
-alt + control + e
+super + a; e
 	dmemoji
-alt + control + k
+super + a; k
 	passmenu -c -l 20 -bw 4 -i
 
 # screenshots

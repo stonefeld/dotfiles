@@ -250,7 +250,7 @@ precmd_functions+=(fix_cursor)
 
 # ---------- TITLE ---------- #
 # Print the username, the hostname and the path.
-function set_title () { print -Pn -- '\e]2;%n@%m %~\a'; }
+function set_title () { print -Pn -- '\e]2;%n@%m:%~\a'; }
 
 # Rewrite the title for each new prompt.
 precmd_functions+=(set_title)

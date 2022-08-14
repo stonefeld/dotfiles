@@ -6,38 +6,16 @@ set pages-per-row 1
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set sandbox none
+set guioptions 'svh'
+set window-title-home-tilde 1
+set statusbar-home-tilde 1
+set statusbar-page-percent 1
 
 ################
 #### COLORS ####
 ################
 set font "monospace 9"
-set default-bg "#000000"
-set default-fg "#f7f7f6"
-set statusbar-fg "#b0b0b0"
-set statusbar-bg "#202020"
-set inputbar-bg "#151515"
-set inputbar-fg "#ffffff"
-set notification-error-bg "#ac4142"
-set notification-error-fg "#151515"
-set notification-warning-bg "#ac4142"
-set notification-warning-fg "#151515"
-set highlight-color "#f4bf75"
-set highlight-active-color "#6a9fb5"
-set completion-highlight-bg "#90a959"
-set completion-highlight-fg "#151515"
-set completion-bg "#303030"
-set completion-fg "#e0e0e0"
-set notification-bg "#90a959"
-set notification-fg "#151515"
-
-#################
-#### RECOLOR ####
-#################
-set recolor "false"
-set recolor-lightcolor "#000000"
-set recolor-darkcolor "#e0e0e0"
-set recolor-reverse-video "true"
-set recolor-keephue "true"
+include catppuccin
 
 #####################
 #### KEYBINDINGS ####
