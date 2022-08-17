@@ -122,4 +122,4 @@ schemes:
       cyan:         '#94e2d5'
       white:        '#bac2de'
 
-colors: *catppuccin
+colors: *gruvbox

@@ -20,7 +20,7 @@ fi
 
 if [ "$confirmation" = "Yes" -o "$confirmation" = "$yes" ]; then
     case $option in
-        "Lock"|"$lock")         slock;;
+        "Lock"|"$lock")         xset dpms force standby;;
         "Log out"|"$logout")    pkill -15 -t tty"$XDG_VTNR" Xorg;;
         "Suspend"|"$suspend")   systemctl suspend;;
         "Shutdown"|"$shutdown") shutdown now;;

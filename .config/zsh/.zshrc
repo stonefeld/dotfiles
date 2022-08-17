@@ -82,7 +82,7 @@ default_prompt_short() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F
 minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
 ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f $(gitinfo "br")%F{red}:%f%b '; }
 god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
-god_prompt_short() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}─%f%F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
+god_prompt_short() { export PROMPT=' %B%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red}) %F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n'' %F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
 starship_prompt() { source <(/usr/bin/starship init zsh --print-full-init); }
 
 # Setting up the normal prompt.
@@ -217,6 +217,7 @@ bindkey '^[[D' backward-char         # Left arrow
 bindkey '^[[C' forward-char          # Right arrow
 bindkey '^[[1;5D' backward-word      # Ctrl+Left arrow
 bindkey '^[[1;5C' forward-word       # Ctrl+Right arrow
+bindkey '^?' backward-delete-char    # Backspace
 bindkey '^[[H' beginning-of-line     # Home
 bindkey '^[[4~' end-of-line          # End
 bindkey '^[[4h' overwrite-mode       # Insert
