@@ -80,13 +80,13 @@ RPROMPT='$(last_status)$(virtualenv_info)'
 default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
 default_prompt_short() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}$(pathshorten)%f%F{red}]%f%b%F{white}$ '; }
 minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
-ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f $(gitinfo "br")%F{red}:%f%b '; }
+ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f ${vcs_info_msg_0_}%F{red}:%f%b '; }
 god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
 god_prompt_short() { export PROMPT=' %B%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red}) %F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n'' %F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
 starship_prompt() { source <(/usr/bin/starship init zsh --print-full-init); }
 
 # Setting up the normal prompt.
-god_prompt_short
+default_prompt_short
 
 # ---------- ALIASES ---------- #
 # System power.
@@ -128,7 +128,7 @@ alias lf="$TERMFM ."
 # Create a directory and cd into it
 mkcd() {
 	[ -z "$*" -o "$#" -gt 1 ] && echo "mkcd [DIR]" && return
-	mkdir "$1"; cd "$1";
+	mkdir -p "$1"; cd "$1";
 }
 
 # Avoid overriding.

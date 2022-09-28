@@ -1,2 +1,1 @@
-@import "../styles/gruvbox.rasi"
-// vim: ft=rasi
+@import "../styles/catppuccin.rasi"

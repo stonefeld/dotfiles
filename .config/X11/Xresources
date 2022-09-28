@@ -5,7 +5,7 @@
 /* /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/ */
 
 /* Cursor setup */
-Xcursor.theme: Breeze_Snow
+Xcursor.theme: Adwaita
 Xcursor.size: 32
 
 /* Display setup */
@@ -23,6 +23,6 @@ XTerm*.background: black
 XTerm*.foreground: white
 
 /* Sxiv setup */
-Sxiv*.background: #2e3440
-Sxiv*.foreground: #d8dee9
-Sxiv*.font: monospace:size=8
+Sxiv*.background: black
+Sxiv*.foreground: white
+Sxiv*.font: monospace:size=9

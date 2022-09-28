@@ -20,7 +20,7 @@ window:
     columns: 120
     lines: 34
 
-  opacity: 0.9
+  opacity: 0.8
   dynamic_padding: true
   decorations: full
   startup_mode: Windowed
@@ -39,19 +39,19 @@ scrolling:
 
 font:
   normal:
-    family: JetbrainsMonoNL Nerd Font
+    family: JetbrainsMono Nerd Font Mono
     style: Regular
 
   bold:
-    family: JetbrainsMonoNL Nerd Font
+    family: JetbrainsMono Nerd Font Mono
     style: Bold
 
   italic:
-    family: JetbrainsMonoNL Nerd Font
+    family: JetbrainsMono Nerd Font Mono
     style: Italic
 
   bold_italic:
-    family: JetbrainsMonoNL Nerd Font
+    family: JetbrainsMono Nerd Font Mono
     style: Bold Italic
 
   size: 12.0

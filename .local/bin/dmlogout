@@ -1,5 +1,9 @@
 #!/bin/bash
 
+kill_x11() {
+	pkill -15 -t tty"$XDG_VTNR" Xorg
+}
+
 command -v rofi &>/dev/null && ROFI=true
 
 if [ "$ROFI" = true ]; then
@@ -21,9 +25,9 @@ fi
 if [ "$confirmation" = "Yes" -o "$confirmation" = "$yes" ]; then
     case $option in
         "Lock"|"$lock")         xset dpms force standby;;
-        "Log out"|"$logout")    pkill -15 -t tty"$XDG_VTNR" Xorg;;
+        "Log out"|"$logout")    kill_x11;;
         "Suspend"|"$suspend")   systemctl suspend;;
-        "Shutdown"|"$shutdown") shutdown now;;
+        "Shutdown"|"$shutdown") kill_x11; shutdown now;;
         "Reboot"|"$reboot")     reboot;;
     esac
 fi

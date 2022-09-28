@@ -74,7 +74,7 @@ command! tgz tar -czf %f.tar.gz --verbose %f
 command! tar tar -cf %f.tar --verbose %f
 command! ex ex %f
 command! run !! ./%f
-command! dragon dragon-drag-and-drop -a -x %f
+command! dragon dragon-drop -a -x %f
 command! dragdl dlfile
 command! sw setbg %c
 

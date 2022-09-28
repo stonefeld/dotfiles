@@ -1,5 +1,4 @@
 configuration {
-	icon-theme: "Papirus-Dark";
 	disable-history: true;
 	kb-row-up: "Up,Control+p,Control+k";
 	kb-row-down: "Down,Control+n,Control+j";

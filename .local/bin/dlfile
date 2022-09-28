@@ -1,6 +1,6 @@
 #!/bin/sh
 
-url=$(dragon-drag-and-drop -t -x)
+url=$(dragon-drop -t -x)
 
 if [ ! -z "$url" ]; then
 	ans=""
