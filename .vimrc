@@ -19,12 +19,13 @@ set splitright splitbelow                                    " make splits below
 set ruler number numberwidth=5                               " show cursor coords and line numbers
 set laststatus=2                                             " always show the statusline
 set updatetime=250                                           " increase updatetime
-set formatoptions-=ro                                        " disable autommatic comment insertion
 set shortmess+=c                                             " disable cmd messages when autocomplete
+set colorcolumn=80 textwidth=79                              " set a limit for the comments in code
 set nohlsearch incsearch                                     " search while typing
 set completeopt=longest,menuone                              " don't select first item
 set wildmenu wildoptions=pum                                 " enable wildmenu
 set list listchars=tab:\ \ ,trail:.                          " show not printable characters
+set viminfo=""
 
 " gui only options
 set belloff=all                                              " disable bell
@@ -80,7 +81,7 @@ endif
 if has('win32') || has('win64')
   let $VIMHOME=$HOME . '\vimfiles'
 else
-  let $VIMHOME=$HOME . '/.vim'
+  let $VIMHOME=$HOME . '/.config/vim'
 endif
 
 " netrw variables

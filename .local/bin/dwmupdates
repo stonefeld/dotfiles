@@ -5,5 +5,5 @@ case $BUTTON in
 esac
 
 updates="$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)"
-pgrep -x pacupdatecheck >/dev/null && icon=" (*)"
-echo " ^a^Updates$icon: ^n^$updates "
+pgrep -x pacupdatecheck >/dev/null && sync="  " || sync=""
+echo " ^a^[  ^n^$updates^a^$sync ]"

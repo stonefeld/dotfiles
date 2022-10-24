@@ -7,18 +7,9 @@ schemes:
       text:         '#2e3440'
       cursor:       '#d8dee9'
 
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
     primary:
-      background:   '#292d3e'
       foreground:   '#d8dee9'
+      background:   '#292d3e'
 
     normal:
       black:        '#3b4252'
@@ -48,18 +39,9 @@ schemes:
       text:         '#1d2021'
       cursor:       '#d5c4a1'
 
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-
-      bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
-
     primary:
-      background:   '#1d2021'
       foreground:   '#d5c4a1'
+      background:   '#1d2021'
 
     normal:
       black:        '#1d2021'
@@ -89,18 +71,9 @@ schemes:
       text:         '#1e1e2e'
       cursor:       '#f5e0dc'
 
-    search:
-      matches:
-        foreground: '#1e1e2e'
-        background: '#a6adc8'
-
-      bar:
-        foreground: '#1e1e2e'
-        background: '#a6adc8'
-
     primary:
-      background:   '#1e1e2e'
       foreground:   '#cdd6f4'
+      background:   '#1e1e2e'
 
     normal:
       black:        '#45475a'
@@ -122,4 +95,36 @@ schemes:
       cyan:         '#94e2d5'
       white:        '#a6adc8'
 
-colors: *catppuccin
+  ####################
+  #### EVERFOREST ####
+  ####################
+  everforest: &everforest
+    cursor:
+      text:         '#2b3339'
+      cursor:       '#d3c6aa'
+
+    primary:
+      foreground:   '#d3c6aa'
+      background:   '#2b3339'
+
+    normal:
+      black:        '#4b565c'
+      red:          '#e67e80'
+      green:        '#a7c080'
+      yellow:       '#dbbc7f'
+      blue:         '#7fbbb3'
+      magenta:      '#d699b6'
+      cyan:         '#83c092'
+      white:        '#d3c6aa'
+
+    bright:
+      black:        '#4b565c'
+      red:          '#e67e80'
+      green:        '#a7c080'
+      yellow:       '#dbbc7f'
+      blue:         '#7fbbb3'
+      magenta:      '#d699b6'
+      cyan:         '#83c092'
+      white:        '#d3c6aa'
+
+colors: *everforest

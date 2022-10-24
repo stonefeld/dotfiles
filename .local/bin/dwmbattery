@@ -1,6 +1,19 @@
 #!/bin/bash
 
 per=$(cat /sys/class/power_supply/BAT0/capacity)
+case ${per::-1} in
+	10) icon=" ";;
+	9)  icon=" ";;
+	8)  icon=" ";;
+	7)  icon=" ";;
+	6)  icon=" ";;
+	5)  icon=" ";;
+	4)  icon=" ";;
+	3)  icon=" ";;
+	2)  icon=" ";;
+	1)  icon=" ";;
+	0)  icon=" ";;
+esac
 char=$(cat /sys/class/power_supply/AC/online)
-[ "$char" -eq 1 ] && echo " ^a^Connected: ^n^$per% " && exit
-echo " ^a^Battery: ^n^$per% "
+[ "$char" -eq 1 ] && char=" " || char=""
+echo " ^a^[ $icon $char ^n^$per% ^a^] "

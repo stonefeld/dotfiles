@@ -2,7 +2,6 @@
 
 case $BUTTON in
 	1) dmrecord;;
-	3) termlaunch -f -g 120x34 -e vifm $HOME/vids/recordings;;
 esac
 
-[ -f /tmp/recordingpid ] && echo "^u^ Rec ^n^"
+[ -f /tmp/recordingpid ] && echo "^u^   Rec ^n^"

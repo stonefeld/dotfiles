@@ -59,6 +59,7 @@
 ;; unbind some default bindings
 (global-unset-key "\C-x")
 (global-unset-key "\C-c")
+(global-unset-key "\C-d")
 (global-unset-key "\C-z")
 (global-unset-key "\C-y")
 (global-unset-key "\C-w")
@@ -135,7 +136,7 @@
   (c-set-offset 'access-label '-)
   (c-toggle-hungry-state 1)
   (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|NOTE\\|BUG\\|BUGFIX\\)[(:]" 1 font-lock-warning-face t)))
-  (font-lock-add-keywords nil '(("\\<\\(true\\|false\\|\\(0[xb]\\)?[0-9]+\\.?[0-9]+[fFlL]?\\)" 1 font-lock-string-face t))))
+  (font-lock-add-keywords nil '(("\\<\\(true\\|false\\|NULL\\|\\(0[xb]\\)?[0-9]+\\(\\.?[0-9]+\\)?[fFlL]?\\)" 1 font-lock-string-face t))))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;; startup hook

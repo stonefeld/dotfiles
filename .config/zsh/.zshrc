@@ -90,20 +90,20 @@ default_prompt_short
 
 # ---------- ALIASES ---------- #
 # System power.
-alias psn="shutdown now"
-alias pre="reboot"
-alias pss="systemctl suspend"
+alias psn='shutdown now'
+alias pre='reboot'
+alias pss='systemctl suspend'
 
 # Pacman shortcuts.
-alias pacinstall="pacman -Slq | fzf --height 0% --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias pacremove="pacman -Qq | fzf --height 0% --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+alias pacinstall='pacman -Slq | fzf --height 0% --multi --preview "pacman -Si {1}" | xargs -ro sudo pacman -S'
+alias pacremove='pacman -Qq | fzf --height 0% --multi --preview "pacman -Qi {1}" | xargs -ro sudo pacman -Rns'
 alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > ${XDG_DATA_HOME:-$HOME/.local/share}/updates && pkill -RTMIN+6 dwmblocks"
 
 # AUR helper shortcuts using fzf.
 if command -v paru &>/dev/null; then
-	alias parinstall="paru -Slq | fzf --height 0% --multi --preview 'paru -Si {1}' | xargs -ro paru -S --noconfirm"
+	alias parinstall='paru -Slq | fzf --height 0% --multi --preview "paru -Si {1}" | xargs -ro paru -S --noconfirm'
 elif command -v yay &>/dev/null; then
-	alias yayinstall="yay -Slq | fzf --height 0% --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+	alias yayinstall='yay -Slq | fzf --height 0% --multi --preview "yay -Si {1}" | xargs -ro yay -S'
 fi
 
 # Utilities with fzf
@@ -115,13 +115,13 @@ alias reso='source ${ZDOTDIR:-}/.zshrc'
 
 # Some ls command replacements.
 if ! command -v exa &>/dev/null; then
-	alias ls="LC_COLLATE=C ls -hp --color=always --group-directories-first"
-	alias ll="LC_COLLATE=C ls -lahp --color=always --group-directories-first"
-	alias la="LC_COLLATE=C ls -ahp --color=always --group-directories-first"
+	alias ls='LC_COLLATE=C ls -hp --color=always --group-directories-first'
+	alias ll='LC_COLLATE=C ls -lahp --color=always --group-directories-first'
+	alias la='LC_COLLATE=C ls -ahp --color=always --group-directories-first'
 else
-	alias ls="exa -g --color=always --group-directories-first"
-	alias ll="exa -la -g --color=always --group-directories-first"
-	alias la="exa -a -g --color=always --group-directories-first"
+	alias ls='exa -g --color=always --group-directories-first'
+	alias ll='exa -la -g --color=always --group-directories-first'
+	alias la='exa -a -g --color=always --group-directories-first'
 fi
 alias lf="$TERMFM ."
 
@@ -162,14 +162,14 @@ alias gir='git remote'
 alias e="$EDITOR"
 alias ee="$EDITOR ."
 alias ef="fzf --preview 'cat {}'| xargs -ro $EDITOR"
-alias vim="echo -ne '\e[1 q' && vim -i NONE"
-alias gvim="gvim -i NONE"
+alias vim="echo -ne '\e[1 q' && vim"
 
 # Python and pip shortcuts
 alias py='python3'
 alias pe='pipenv'
 alias pyenvinit='eval "$(pyenv init -)"'
-alias pip3update="sudo pip3 list --outdated | sed 's/\s\+/ /g' | cut -d ' ' -f 1 | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade"
+alias rbenvinit='eval "$(rbenv init - zsh)"'
+alias pip3update='sudo pip3 list --outdated | sed 's/\s\+/ /g' | cut -d ' ' -f 1 | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade'
 alias pippyls='pip install python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
 alias pepyls='pipenv install --dev python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
 
@@ -274,5 +274,3 @@ elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 	bindkey '^f' autosuggest-accept
 fi
-
-# vim: ft=sh

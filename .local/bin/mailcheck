@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pkill -RTMIN+7 dwmblocks
+
 notify() {
 	notify-send -i email -a "mailcheck" "New mail!" "$2 new mail(s) in \`$1\` account."
 	canberra-gtk-play -i dialog-warning

@@ -49,4 +49,4 @@ while ! $READY; do
 done
 
 # When done exit the session.
-exit
+# exit

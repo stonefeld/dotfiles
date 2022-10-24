@@ -6,4 +6,4 @@ esac
 
 wifi=$(iwgetid -r)
 [ -z "$wifi" ] && wifi="Disconnected"
-echo " ^a^Wifi: ^n^$wifi "
+echo " [ ^a^ ^n^$wifi^a^ ]"

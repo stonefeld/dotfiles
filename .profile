@@ -52,6 +52,7 @@ export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
+export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
@@ -64,6 +65,8 @@ export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PLATFORMIO_HOME_DIR="$XDG_DATA_HOME"/platformio
+export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
+export BUNDLE_APP_CONFIG="$XDG_DATA_HOME"/bundle
 
 # Setting less colors.
 export LESS=-R

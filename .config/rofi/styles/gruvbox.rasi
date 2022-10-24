@@ -6,7 +6,7 @@
 	foreground-sel: @stdblack1;
 
 	stdblack1: #181818ff;
-    stdblack2: #282828ff;
+	stdblack2: #282828ff;
 	black:     #282828ff;
 	red:       #cc241dff;
 	green:     #98971aff;

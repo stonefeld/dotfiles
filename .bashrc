@@ -6,15 +6,14 @@
 
 [[ $- != *i* ]] && return
 
-export PROMPT_DIRTRIM=3
-PS1='\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\w\[\e[1;31m\]]\[\e[0;37m\]$ '
+PS1='\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\W\[\e[1;31m\]]\[\e[0;37m\]\$ '
 
 alias psn='shutdown now'
 alias pre='reboot'
 alias pss='systemctl suspend'
 
 alias ls='ls -h --color=always --group-directories-first'
-alias vim='vim -i NONE'
+alias ll='ls -lah --color=always --group-directories-first'
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -27,6 +26,9 @@ alias less='less -r'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+
+alias sudo='sudo '
+alias doas='doas '
 
 alias sys='systemctl'
 alias jou='journalctl'
