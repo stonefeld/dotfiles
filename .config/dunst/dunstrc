@@ -11,7 +11,7 @@
     width = (0, 500)                     # dynamic width from a to b (a, b)
     height = 300                         # maximum height excluding frame
     origin = top-right                   # notifcation position
-    offset = 0x0                         # offset from the origin
+    offset = 10x10                       # offset from the origin
     scale = 0                            # scale factor (auto-detected if 0)
     notification_limit = 0               # no limit if 0
     indicate_hidden = yes                # show hidden notifcation number
@@ -38,7 +38,7 @@
     separator_color = frame              # separator color (auto|foreground|frame|anything)
     sort = yes                           # sort by urgency
     idle_threshold = 0                   # don't remove notifications if idle (0 to disable)
-    corner_radius = 0                    # radius of the notification corners (0 to disable)
+    corner_radius = 10                   # radius of the notification corners (0 to disable)
 
     ##############
     #### TEXT ####

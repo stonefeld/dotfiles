@@ -27,7 +27,7 @@ xset r rate 220 30
 xset s 540 60
 
 lxpolkit &>/dev/null &
-picom --experimental-backends &>/dev/null &
+picom &>/dev/null &
 dunst &>/dev/null &
 setbg &>/dev/null &
 sxhkd &>/dev/null &

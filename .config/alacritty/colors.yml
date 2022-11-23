@@ -127,4 +127,4 @@ schemes:
       cyan:         '#83c092'
       white:        '#d3c6aa'
 
-colors: *everforest
+colors: *catppuccin

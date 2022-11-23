@@ -8,7 +8,8 @@
 syntax on                                                    " enable syntax highlighting
 filetype indent plugin on                                    " enable specific functionality for certain filetypes
 set nocompatible hidden                                      " disable vi compatibility
-set linebreak breakindent                                    " break long lines by words but keep indentation
+set colorcolumn=80 textwidth=79                              " set a line width limit
+set nowrap linebreak breakindent                             " break long lines by words but keep indentation
 set noswapfile noundofile nobackup                           " disable all kind of unnecesary files
 set scrolloff=3 nostartofline                                " scroll offset and keep column position
 set tabstop=4 softtabstop=4 shiftwidth=4                     " indentation size
@@ -16,6 +17,7 @@ set expandtab smarttab                                       " replace tabs with
 set autoindent smartindent                                   " define indentation rules
 set backspace=indent,eol,start                               " use backspace in any case
 set splitright splitbelow                                    " make splits below and to the right side
+set cursorline                                               " highlight current cursor's line
 set ruler number numberwidth=5                               " show cursor coords and line numbers
 set laststatus=2                                             " always show the statusline
 set updatetime=250                                           " increase updatetime
@@ -25,7 +27,8 @@ set nohlsearch incsearch                                     " search while typi
 set completeopt=longest,menuone                              " don't select first item
 set wildmenu wildoptions=pum                                 " enable wildmenu
 set list listchars=tab:\ \ ,trail:.                          " show not printable characters
-set viminfo=""
+set fillchars=stl:-,stlnc:-                                  " display a '-' to fill empty spaces in statusline
+set viminfo=                                                 " disable .viminfo file
 
 " gui only options
 set belloff=all                                              " disable bell
@@ -47,12 +50,14 @@ if has('gui_running')
   hi! LineNr       guifg=#7f7f7f guibg=#0f0f0f gui=NONE
   hi! CursorLineNr guifg=#7f7f7f guibg=#0f0f0f gui=NONE
   hi! CursorLine   guifg=NONE    guibg=#0f0f0f gui=NONE
+  hi! ColorColumn  guifg=NONE    guibg=#4a4a4a gui=NONE
   hi! StatusLineNC guifg=#808080 guibg=#303030 gui=NONE
   hi! Statement    guifg=#e3ceab guibg=NONE    gui=bold
   hi! Type         guifg=#cedf99 guibg=NONE    gui=bold
   hi! Visual       guifg=NONE    guibg=#5f5f5f gui=NONE
   hi! Constant     guifg=#8cd0d3 guibg=NONE    gui=NONE
   hi! String       guifg=#cc9898 guibg=NONE    gui=NONE
+  hi! SpecialChar  guifg=#e3ceab guibg=NONE    gui=NONE
   hi! PreProc      guifg=#ffcfaf guibg=NONE    gui=NONE
   hi! Comment      guifg=#7f9f7f guibg=NONE    gui=bold,italic
   hi! Operator     guifg=#9f9d6d guibg=NONE    gui=bold
@@ -72,8 +77,9 @@ if has('gui_running')
   hi! link         Special       String
   hi! link         MatchParen    Statement
   hi! link         Question      MoreMsg
-  hi! link         TabLine       StatusLineNC
   hi! link         TabLineFill   StatusLineNC
+  hi! link         TabLine       StatusLineNC
+  hi! link         TabLineSel    StatusLine
 endif
 
 " ========== VARIABLES ========== "
@@ -82,6 +88,13 @@ if has('win32') || has('win64')
   let $VIMHOME=$HOME . '\vimfiles'
 else
   let $VIMHOME=$HOME . '/.config/vim'
+endif
+
+" change makeprg if build.bat or build.sh are available
+if (has('win32') || has('win64')) && filereadable('build.bat')
+  set makeprg=build.bat
+elseif has('unix') && filereadable('build.sh')
+  set makeprg=build.sh
 endif
 
 " netrw variables
@@ -99,6 +112,8 @@ nnoremap <silent> <c-h>     <cmd>bp<cr>
 nnoremap <silent> <c-k>     <cmd>bn<cr><cmd>bd #<cr>
 nnoremap <silent> <leader>e <cmd>Ex<cr>
 nnoremap <silent> <leader>w <cmd>set wrap!<cr>
+nnoremap <silent> <leader>q <cmd>copen<cr>
+nnoremap <silent> <m-m>     <cmd>make<cr>
 
 " insert
 inoremap <silent> <c-space> <c-x><c-o>
@@ -113,7 +128,7 @@ vnoremap <silent> >         >gv
 fu! SyntaxRules()
   " syntax rules
   syn match    cCustomBraces    '[{}\[\]()]'
-  syn match    cCustomOperators '[\.<>=!&|;\-+\*%\^,:]'
+  syn match    cCustomOperators '[\.<>=!?&|;\-+\*%\^,:]'
   syn match    cCustomDivision  '(/\|//)' contains=ALLBUT,Comment
   syn keyword  cTodo            contained TODO FIXME NOTE BUG BUGFIX XXX
   hi  def link cCustomBraces    Operator
@@ -138,9 +153,20 @@ aug clean_buffer
   au BufWritePost * call cursor(curr_pos[1], curr_pos[2]) | unlet curr_pos
 aug end
 
+aug qflist
+  au!
+  au FileType qf nnoremap <silent><buffer> q <cmd>q<cr>
+aug end
+
 aug c_filetype
   au!
   au FileType c,cpp call CFileType()
+aug end
+
+aug arduino_filetype
+  au!
+  au FileType arduino setl tabstop=2 softtabstop=2 shiftwidth=2
+  au FileType arduino call CFileType()
 aug end
 
 aug java_filetype

@@ -14,6 +14,6 @@ fi
 mute="$(echo $info | cut -d " " -f 3)"
 vol="$(echo $info | cut -d " " -f 2)"
 [ "$vol" -ge 100 ] && icon=" " || { [ "$vol" -gt 0 ] && icon="" || icon=""; }
-vol="$vol%"
-[ "$mute" = "off" ] && icon="" && vol="Mute"
-echo " [ ^a^$icon ^n^$vol ^a^]"
+vol="$vol^a^%"
+[ "$mute" = "off" ] && icon="" && vol="Mute^a^"
+echo " [ ^a^$icon ^n^$vol ]"

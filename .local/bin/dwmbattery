@@ -16,4 +16,4 @@ case ${per::-1} in
 esac
 char=$(cat /sys/class/power_supply/AC/online)
 [ "$char" -eq 1 ] && char=" " || char=""
-echo " ^a^[ $icon $char ^n^$per% ^a^] "
+echo " ^a^[ $icon $char ^n^$per^a^% ] "

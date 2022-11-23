@@ -27,19 +27,17 @@ window {
 mainbox {
 	background-color: @background;
 	border: 5px;
-	border-radius: 10px;
+	border-radius: 5px;
 	border-color: @background;
 	children: [ listview ];
 }
 
 listview {
-	margin: 1%;
-	spacing: 1%;
 	cycle: false;
 	dynamic: true;
+	margin: 1%;
+	spacing: 1%;
 	layout: horizontal;
-	horizontal-align: 0.5;
-	vertical-align: 0.5;
 }
 
 element {
@@ -49,8 +47,8 @@ element {
 }
 
 element-text {
-	text-color: @foreground;
 	expand: true;
+	text-color: @foreground;
 	horizontal-align: 0.5;
 	vertical-align: 0.5;
 }

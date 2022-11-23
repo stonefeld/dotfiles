@@ -15,7 +15,7 @@ set statusbar-page-percent 1
 #### COLORS ####
 ################
 set font "monospace 9"
-include everforest
+include catppuccin
 
 #####################
 #### KEYBINDINGS ####
