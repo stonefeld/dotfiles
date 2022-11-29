@@ -1,64 +1,68 @@
 configuration {
-	font: "feather 32";
-	show-icons: false;
-	sidebar-mode: false;
-	click-to-exit: true;
-	kb-row-down: "";
-	kb-row-up: "";
-	kb-move-char-back: "";
-	kb-move-char-forward: "";
-	kb-row-left: "Left,h,k,Control+p";
-	kb-row-right: "Right,l,j,Control+n";
+    font: "feather 32";
+    show-icons: false;
+    sidebar-mode: false;
+    click-to-exit: true;
+    hover-select: true;
+    kb-row-down: "";
+    kb-row-up: "";
+    kb-move-char-back: "";
+    kb-move-char-forward: "";
+    kb-row-left: "Left,h,k,Control+p";
+    kb-row-right: "Right,l,j,Control+n";
 }
 
 @import "colors.rasi"
 
 * {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 window {
-	transparency: "real";
-	width: 16%;
-	height: 12.0%;
-	location: center;
+    transparency: "real";
+    width: 16%;
+    height: 12.0%;
+    location: center;
+    cursor: default;
 }
 
 mainbox {
-	background-color: @background;
-	border: 5px;
-	border-radius: 5px;
-	border-color: @background;
-	children: [ listview ];
+    background-color: @background;
+    border: 5px;
+    border-radius: 5px;
+    border-color: @background;
+    children: [ listview ];
 }
 
 listview {
-	cycle: false;
-	dynamic: true;
-	margin: 1%;
-	spacing: 1%;
-	layout: horizontal;
+    cycle: false;
+    dynamic: true;
+    margin: 1%;
+    spacing: 1%;
+    layout: horizontal;
 }
 
 element {
-	background-color: @background-nor;
-	border-radius: 10px;
-	padding: 2%;
+    background-color: @background-nor;
+    border-radius: 10px;
+    padding: 2%;
+    cursor: pointer;
 }
 
 element-text {
-	text-color: @foreground;
-	expand: true;
-	horizontal-align: 0.5;
-	vertical-align: 0.5;
+    text-color: @foreground;
+    expand: true;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    cursor: inherit;
 }
 
 element selected {
-	background-color: @background-sel;
+    background-color: @background-sel;
 }
 
 element-text selected {
-	text-color: @foreground-sel;
+    text-color: @foreground-sel;
 }
 
 // vim: ft=rasi

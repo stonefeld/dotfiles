@@ -13,7 +13,7 @@ configuration {
 	hide-scrollbar: false;
 	fullscreen: false;
 	scrollbar-width: 8;
-	// scroll-method: 0;
+	scroll-method: 0;
 
 	run-command: "{cmd}";
 	run-list-command: "";
@@ -49,16 +49,16 @@ configuration {
 	kb-move-end: "End,Control+e";
 	kb-move-word-back: "Control+Left";
 	kb-move-word-forward: "Control+Right";
-	kb-move-char-back: "Left";
-	kb-move-char-forward: "Right";
+	kb-move-char-back: "Control+b";
+	kb-move-char-forward: "Control+f";
 	kb-remove-char-back: "BackSpace";
 	kb-remove-word-back: "Control+w,Control+BackSpace";
 	kb-remove-to-eol: "";
 	kb-remove-to-sol: "";
 	kb-accept-entry: "Return,KP_Enter";
 	kb-mode-complete: "";
-	kb-row-left: "";
-	kb-row-right: "";
+	kb-row-left: "Left";
+	kb-row-right: "Right";
 	kb-row-up: "Up,Control+p";
 	kb-row-down: "Down,Control+n";
 	kb-row-first: "";
@@ -70,3 +70,6 @@ configuration {
 	me-select-entry: "MouseSecondary";
 	me-accept-entry: "MousePrimary";
 }
+
+// vim: ft=rasi
+@theme "gnome-apps"

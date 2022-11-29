@@ -22,7 +22,9 @@ XF86MonBrightnessDown
 
 # run prompt, file explorer and browser
 super + p
-	ctrlpanel run
+	cd $HOME && ctrlpanel run
+super + s
+    cd $HOME && rofi -show drun
 super + e
 	cd $HOME && termlaunch -f -g 120x34 -e $TERMFM
 super + shift + i
