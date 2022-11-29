@@ -1,0 +1,80 @@
+configuration {
+    show-icons: false;
+    sidebar-mode: false;
+    click-to-exit: true;
+    font: "JetBrains Mono Nerd Font Mono 11";
+    hover-select: true;
+    kb-move-char-back: "";
+    kb-move-char-forward: "";
+    kb-row-down: "Down,j";
+    kb-row-up: "Up,k";
+    kb-row-left: "Left,h,Control+p";
+    kb-row-right: "Right,l,Control+n";
+}
+
+@import "colors.rasi"
+
+* {
+    background-color: transparent;
+}
+
+window {
+    transparency: "real";
+    width: 20em;
+    height: 16.75em;
+    location: north east;
+    x-offset: -10px;
+    y-offset: 45px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    background-color: @background-app;
+    border-radius: 5px;
+    padding: 1% 0.25%;
+}
+
+inputbar {
+    children: [ prompt ];
+    background-color: @background-app-nor;
+    border-radius: 10px;
+    margin: 1% 1% 0% 1%;
+    padding: 1%;
+}
+
+prompt {
+    expand: true;
+    text-color: @foreground;
+}
+
+listview {
+    cycle: false;
+    dynamic: true;
+    columns: 1;
+    margin: 1%;
+    spacing: 1%;
+    layout: vertical;
+}
+
+element {
+    border-radius: 10px;
+    padding: 1%;
+    cursor: pointer;
+}
+
+element-text {
+    expand: true;
+    text-color: @foreground;
+    vertical-align: 0.5;
+    cursor: inherit;
+}
+
+element selected {
+    background-color: @background-sel;
+}
+
+element-text selected {
+    text-color: @foreground-sel;
+}
+
+// vim: ft=rasi

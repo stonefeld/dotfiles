@@ -24,7 +24,7 @@ XF86MonBrightnessDown
 super + p
 	cd $HOME && ctrlpanel run
 super + s
-    cd $HOME && rofi -show drun
+	cd $HOME && rofi -show drun
 super + e
 	cd $HOME && termlaunch -f -g 120x34 -e $TERMFM
 super + shift + i
