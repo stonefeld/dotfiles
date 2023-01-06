@@ -1,16 +1,16 @@
 #!/bin/sh
 
 if [ ! -z "$*" ]; then
-	for i in $*; do
+	for i in "$@"; do
 		if [ -f "$i" ]; then
-			case $i in
-				*.tar.bz2)  tar -xjf $i --verbose;;
-				*.tar.gz)   tar -xzf $i --verbose;;
-				*.rar)      unrar x $i;;
-				*.gz)       gunzip $i;;
-				*.tar)      tar -xf $i;;
-				*.zip|*.7z) 7z x $i -o./${i%.*};;
-				*.Z)        uncompress $i;;
+			case "$i" in
+				*.tar.bz2)  tar -xjf "$i" --verbose;;
+				*.tar.gz)   tar -xzf "$i" --verbose;;
+				*.rar)      unrar x "$i";;
+				*.gz)       gunzip "$i";;
+				*.tar)      tar -xf "$i";;
+				*.zip|*.7z) 7z x "$i" -o./"${i%.*}";;
+				*.Z)        uncompress "$i";;
 				*)          echo "ex: cannot extract '$i': Filetype not supported";;
 			esac
 		else
@@ -18,5 +18,6 @@ if [ ! -z "$*" ]; then
 		fi
 	done
 else
-	echo "ex [FILE...]"
+	echo "Quick file extractor
+Usage: ex [FILE...]"
 fi

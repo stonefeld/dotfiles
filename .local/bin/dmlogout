@@ -36,7 +36,7 @@ if [ "$ROFI" = true ]; then
 
 	if [ "$APPLET" = true ]; then
 		option=$(printf "$lock\\n$logout\\n$suspend\\n$shutdown\\n$reboot" | rofi -theme powermenu-applet -dmenu -p "Uptime: $(uptime -p | sed 's/^up\s//')")
-		sleep 0.1
+		sleep 0.2
 		[ -z "$option" ] || confirmation=$(printf "$yes\\n$no" | rofi -theme confirm-applet -dmenu -p "Sure?")
 	else
 		option=$(printf "$lock\\n$logout\\n$suspend\\n$shutdown\\n$reboot" | rofi -theme powermenu -dmenu)

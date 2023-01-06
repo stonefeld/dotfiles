@@ -83,10 +83,10 @@ minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
 ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f ${vcs_info_msg_0_}%F{red}:%f%b '; }
 god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
 god_prompt_short() { export PROMPT=' %B%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red}) %F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n'' %F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
-starship_prompt() { source <(/usr/bin/starship init zsh --print-full-init); }
+starship_prompt() { command -v starship &>/dev/null && source <(starship init zsh --print-full-init); }
 
 # Setting up the normal prompt.
-default_prompt_short
+starship_prompt
 
 # ---------- ALIASES ---------- #
 # System power.
@@ -107,7 +107,6 @@ elif command -v yay &>/dev/null; then
 fi
 
 # Utilities with fzf
-alias cf='cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 alias sr='less "$(find ~ -maxdepth 5 -type f | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
 
 # Easily resource the zsh config file.
@@ -135,6 +134,9 @@ mkcd() {
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+
+# Clear the screen for real
+alias cls='printf "\033c"'
 
 # Pass aliases to sudo.
 if command -v doas &>/dev/null; then
@@ -195,6 +197,9 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+# Activate ssh-agent and add github's ssh-key
+alias ghssh='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_github'
+
 # Manage bluetooth
 alias bth='bluetoothctl'
 
@@ -208,9 +213,17 @@ alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4" &>/dev/null'
 # Manage dotfiles.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
+# Move quicker between folders with fzf.
+move-cd() {
+	cd "$(find ~ -maxdepth 5 -type d | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"
+	zle reset-prompt &>/dev/null
+}
+zle -N move-cd
+
 # ---------- KEYBINDINGS ---------- #
 bindkey '^P' up-line-or-history      # Ctrl+p
 bindkey '^N' down-line-or-history    # Ctrl+n
+bindkey '^F' move-cd                 # Ctrl+f
 bindkey '^[[A' up-line-or-history    # Up arrow
 bindkey '^[[B' down-line-or-history  # Down arrow
 bindkey '^[[D' backward-char         # Left arrow
@@ -234,20 +247,20 @@ bindkey -v
 KEYTIMEOUT=5
 
 # Change cursor shape for different vi modes.
-function zle-keymap-select () {
-	case $KEYMAP in
-		vicmd)      echo -ne '\e[1 q';;
-		viins|main) echo -ne '\e[5 q';;
-	esac
-}
-zle -N zle-keymap-select
-
-# Use beam shape cursor on startup.
-echo -ne '\e[5 q'
-
-# Use beam shape for each new prompt.
-fix_cursor() { echo -ne '\e[5 q'; }
-precmd_functions+=(fix_cursor)
+# function zle-keymap-select () {
+# 	case $KEYMAP in
+# 		vicmd)      echo -ne '\e[1 q';;
+# 		viins|main) echo -ne '\e[5 q';;
+# 	esac
+# }
+# zle -N zle-keymap-select
+#
+# # Use beam shape cursor on startup.
+# echo -ne '\e[5 q'
+#
+# # Use beam shape for each new prompt.
+# fix_cursor() { echo -ne '\e[5 q'; }
+# precmd_functions+=(fix_cursor)
 
 # ---------- TITLE ---------- #
 # Print the username, the hostname and the path.
@@ -269,8 +282,8 @@ fi
 # Autosuggestions
 if [ -d /usr/share/zsh/plugins/zsh-autosuggestions ]; then
 	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-	bindkey '^f' autosuggest-accept
+	bindkey '^K' autosuggest-accept
 elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-	bindkey '^f' autosuggest-accept
+	bindkey '^K' autosuggest-accept
 fi
