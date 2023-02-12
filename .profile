@@ -19,7 +19,6 @@ else
 fi
 export EDITOR="nvim"
 export TERMINAL="st"
-export TERM="xterm-256color"
 export TERMFM="vifmrun"
 export BROWSER="brave"
 export NOTES_FOLDER="$HOME/docs/notes"

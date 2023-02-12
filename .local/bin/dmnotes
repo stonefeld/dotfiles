@@ -5,7 +5,7 @@ notes_folder="${NOTES_FOLDER:-$HOME/Documents/notes}"
 templates_folder="${TEMPLATES_FOLDER:-$XDG_DATA_HOME/templates}"
 
 run_dmenu() {
-	printf "$2" | dmenu -i -l 20 -p "$1" -c -bw 4
+	printf "$2" | dmenu -p "$1"
 }
 
 while [ "$#" -gt "0" ]; do

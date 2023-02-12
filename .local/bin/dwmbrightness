@@ -3,4 +3,4 @@
 actual=$(sed '1!d' /sys/class/backlight/*/actual_brightness)
 max=$(sed '1!d' /sys/class/backlight/*/max_brightness)
 let per=actual*100/max
-echo " ^a^[  ^n^$per^a^% ]"
+echo " 󰖨 $per% |"

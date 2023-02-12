@@ -21,8 +21,6 @@ XF86MonBrightnessDown
 	ctrlpanel bd 10
 
 # run prompt, file explorer and browser
-super + p
-	cd $HOME && ctrlpanel run
 super + s
 	cd $HOME && rofi -show drun
 super + e

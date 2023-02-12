@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# A simple script to show the calendar on a floating terminal and exit on 'q' key pressed.
-cal -y
-while true; do
-	read -n 1 -s i
-	[ "$i" = "q" ] && exit
-done

@@ -32,5 +32,5 @@ case $1 in
 
 	run) # Run applications.
 	     cd $HOME
-	     dmenu_run -i -l 20 -c -bw 4;;
+	     dmenu_run;;
 esac

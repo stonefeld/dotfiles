@@ -7,9 +7,9 @@ filelocation="$HOME/vids/recordings"
 
 run_dmenu() {
 	if [ "$#" -eq 1 ]; then
-		printf "$1" | dmenu -c -i -l 20 -bw 4
+		printf "$1" | dmenu
 	else
-		printf "$2" | dmenu -c -i -l 20 -bw 4 -p "$1"
+		printf "$2" | dmenu -p "$1"
 	fi
 }
 

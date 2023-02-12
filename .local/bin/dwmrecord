@@ -4,4 +4,4 @@ case $BUTTON in
 	1) dmrecord;;
 esac
 
-[ -f /tmp/recordingpid ] && echo "^u^   Rec ^n^"
+[ -f /tmp/recordingpid ] && echo "   Rec "

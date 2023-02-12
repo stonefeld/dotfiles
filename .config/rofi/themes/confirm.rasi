@@ -1,5 +1,5 @@
 configuration {
-    font: "feather 32";
+    font: "Material Design Icons 32";
     show-icons: false;
     sidebar-mode: false;
     click-to-exit: true;
