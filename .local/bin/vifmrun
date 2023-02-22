@@ -8,7 +8,7 @@ elif [ -z "$(command -v ueberzug)" ]; then
 else
 	cleanup() {
 		exec 3>&-
-	    rm "$FIFO_UEBERZUG"
+		rm "$FIFO_UEBERZUG"
 	}
 	[ ! -d "$HOME/.cache/vifm" ] && mkdir -p "$HOME/.cache/vifm"
 	export FIFO_UEBERZUG="$HOME/.cache/vifm/ueberzug-${$}"

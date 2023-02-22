@@ -1,9 +1,9 @@
 * {
-	background:         #0f0f0fff;
-	background-nor:     #1e1e1eff;
-	background-sel:     #85c1dcff;
-    background-app:     #181825dd;
-    background-app-nor: #cdd6f422;
+	background:         #181828ff;
+	background-nor:     #1e1e2eff;
+	background-sel:     #89b4faff;
+	background-app:     #181825dd;
+	background-app-nor: #cdd6f422;
 	foreground:         #cdd6f4ff;
 	foreground-sel:     #1e1e1eff;
 }

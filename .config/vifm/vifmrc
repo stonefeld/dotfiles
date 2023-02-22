@@ -69,10 +69,10 @@ source ~/.config/vifm/icons.vifm
 command! df df -h %m 2> /dev/null
 command! du du -h . %m 2> /dev/null
 command! reload :write | restart full
-command! zip zip -r %f.zip %f
-command! tgz tar -czf %f.tar.gz --verbose %f
-command! tar tar -cf %f.tar --verbose %f
-command! ex ex %f
+command! zip apack %f.zip %f
+command! tgz apack %f.tar.gz %f
+command! tar apack %f.tar %f
+command! ex aunpack %f
 command! run !! ./%f
 command! dragon dragon-drop -a -x %f
 command! dragdl dlfile

@@ -185,6 +185,7 @@ alias lgit='lazygit'
 # NetworkManager commands shortcuts.
 alias wcon='nmcli device wifi connect'
 alias wls='nmcli device wifi list'
+alias wlsr='nmcli device wifi list --rescan yes'
 
 # Open irssi and specify the config and data folder.
 alias irssi='irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi'
@@ -286,4 +287,9 @@ if [ -d /usr/share/zsh/plugins/zsh-autosuggestions ]; then
 elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 	bindkey '^K' autosuggest-accept
+fi
+
+# Gitflow completion
+if [ -d ${ZDOTDIR:-$HOME/.config/zsh}/git-flow-completion ]; then
+	source ${ZDOTDIR:-$HOME/.config/zsh}/git-flow-completion/git-flow-completion.zsh
 fi

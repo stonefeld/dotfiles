@@ -46,7 +46,7 @@ super + a; r
 super + a; e
 	dmemoji
 super + a; k
-	passmenu -c -l 20 -bw 4 -i
+	passmenu -l 20
 
 # screenshots
 super + Print

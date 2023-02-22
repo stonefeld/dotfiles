@@ -24,7 +24,7 @@ window {
     height: 16.75em;
     location: north east;
     x-offset: -10px;
-    y-offset: 45px;
+    y-offset: 40px;
 }
 
 mainbox {
