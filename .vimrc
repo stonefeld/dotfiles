@@ -10,14 +10,12 @@ filetype indent plugin on                                    " enable specific f
 set nocompatible hidden                                      " disable vi compatibility
 set colorcolumn=80 textwidth=79                              " set a line width limit
 set nowrap linebreak breakindent                             " break long lines by words but keep indentation
-set noswapfile noundofile nobackup                           " disable all kind of unnecesary files
 set scrolloff=3 nostartofline                                " scroll offset and keep column position
 set tabstop=4 softtabstop=4 shiftwidth=4                     " indentation size
 set expandtab smarttab                                       " replace tabs with spaces and use smart tabs
 set autoindent smartindent                                   " define indentation rules
 set backspace=indent,eol,start                               " use backspace in any case
 set splitright splitbelow                                    " make splits below and to the right side
-set cursorline                                               " highlight current cursor's line
 set ruler number numberwidth=5                               " show cursor coords and line numbers
 set laststatus=2                                             " always show the statusline
 set updatetime=250                                           " increase updatetime
@@ -29,21 +27,22 @@ set wildmenu wildoptions=pum                                 " enable wildmenu
 set list listchars=tab:\ \ ,trail:.                          " show not printable characters
 set fillchars=stl:-,stlnc:-                                  " display a '-' to fill empty spaces in statusline
 set viminfo=                                                 " disable .viminfo file
-
-" gui only options
-set belloff=all                                              " disable bell
-set guioptions=                                              " disable all gui items
-set guicursor+=a:blinkon0                                    " disable cursor blinking
-if has('win32') || has('win64')                              " set the font according to os
-  set guifont=Consolas:h10
-elseif has('unix')
-  set guifont=Liberation\ Mono\ 12
-endif
+set noswapfile noundofile nobackup                           " disable all kind of unnecesary files
 
 " ========== HIGHLIGHT ========== "
-" zenburn scheme
 set background=dark
 if has('gui_running')
+  set cursorline                                               " highlight current cursor's line
+  set belloff=all                                              " disable bell
+  set guioptions=                                              " disable all gui items
+  set guicursor+=a:blinkon0                                    " disable cursor blinking
+  if has('win32') || has('win64')                              " set the font according to os
+    set guifont=Consolas:h10
+  elseif has('unix')
+    set guifont=Liberation\ Mono\ 12
+  endif
+
+  " zenburn scheme
   hi  clear
   hi! Normal       guifg=#dcdccc guibg=#3f3f3f gui=NONE
   hi! NonText      guifg=#7f7f7f guibg=NONE    gui=NONE

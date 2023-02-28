@@ -1,19 +1,18 @@
 #!/bin/sh
 
-app_name="pacman"
 cache_file="${XDG_DATA_HOME:-$HOME/.local/share}/updates"
 
 pkill -RTMIN+6 dwmblocks
 
-[ ! -f "$cache_file" ] && (touch $cache_file && echo 0 > $cache_file)
+[ -f "$cache_file" ] || (touch $cache_file && echo 0 > $cache_file)
 
 notify() {
 	if [ $# -eq 2 ]; then
-        message="$2 new upgrade(s) available ($1 from last time)"
+		message="$2 new upgrade(s) available ($1 from last time)"
 	elif [ $# -eq 1 ]; then
-        message="There are $1 package(s) to upgrade"
+		message="There are $1 package(s) to upgrade"
 	fi
-	notify-send -a $app_name -i cloud-download "Package upgrade" "$message"
+	notify-send -i cloud-download "Package upgrade" "$message"
 	canberra-gtk-play -i dialog-warning
 }
 

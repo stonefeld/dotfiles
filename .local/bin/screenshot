@@ -1,7 +1,7 @@
 #!/bin/sh
 
 filename="screenshot-$(date '+%Y_%m_%d-%H_%M_%S').png"
-filelocation="$HOME/pics/screenshots/"
+filelocation="$HOME/Pictures/screenshots/"
 
 [ -d "$filelocation" ] && mkdir -p "$destination"
 
@@ -17,6 +17,7 @@ fi
 
 [ "$?" -ne 0 ] && exit
 
-canberra-gtk-play -i device-added; \
-	xclip -se c -t image/png -i "$filelocation/$filename"; \
-	notify-send -i "$filelocation/$filename" "Copied to clipboard" "Screenshot $filename copied to clipboard"
+xclip -se c -t image/png -i "$filelocation/$filename"
+
+notify-send -i "$filelocation/$filename" "Copied to clipboard" "Screenshot $filename copied to clipboard"
+canberra-gtk-play -i device-added

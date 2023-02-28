@@ -74,9 +74,8 @@ command! tgz apack %f.tar.gz %f
 command! tar apack %f.tar %f
 command! ex aunpack %f
 command! run !! ./%f
-command! dragon dragon-drop -a -x %f
-command! dragdl dlfile
-command! sw setbg %c
+command! drag dragon-drop -a -x %f
+command! sw swall %c
 
 " ========== MAPPINGS ========== "
 nnoremap e :edit<cr>
@@ -112,9 +111,7 @@ nnoremap qq :q<cr>
 nnoremap J 5j
 nnoremap K 5k
 
-nmap dr :dragon<cr>
-vmap dr :dragon<cr>
-nmap dl :dragdl<cr>
+nmap dr :drag<cr>
 
 " Interaction with system clipboard
 if has('win')

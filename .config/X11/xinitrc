@@ -48,7 +48,7 @@ keys=/usr/bin/sxhkd
 check $keys && $keys &>/dev/null &
 
 # wallpaper setter
-wallp="$HOME"/.local/bin/setbg
+wallp="$HOME"/.local/bin/swall
 check $wallp && $wallp &>/dev/null &
 
 session=${1:-dwm}

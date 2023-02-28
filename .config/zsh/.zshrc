@@ -106,9 +106,6 @@ elif command -v yay &>/dev/null; then
 	alias yayinstall='yay -Slq | fzf --height 0% --multi --preview "yay -Si {1}" | xargs -ro yay -S'
 fi
 
-# Utilities with fzf
-alias sr='less "$(find ~ -maxdepth 5 -type f | sed "/\.git/d;/\.venv/d;/node_modules/d;/virtualenv*/d" | fzf)"'
-
 # Easily resource the zsh config file.
 alias reso='source ${ZDOTDIR:-}/.zshrc'
 
@@ -135,7 +132,10 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-# Clear the screen for real
+# Open any applications quicker
+alias open='xdg-open'
+
+# Clear the screen fr
 alias cls='printf "\033c"'
 
 # Pass aliases to sudo.
@@ -144,21 +144,6 @@ if command -v doas &>/dev/null; then
 else
 	alias sudo='sudo '
 fi
-
-# Git shortcuts.
-alias gis='git status'
-alias gid='git diff'
-alias gio='git show'
-alias gia='git add'
-alias gic='git commit'
-alias gil='git log --graph'
-alias gib='git branch'
-alias gih='git checkout'
-alias gip='git push'
-alias giu='git pull'
-alias gif='git fetch'
-alias gim='git merge'
-alias gir='git remote'
 
 # Neovim shortcuts.
 alias e="$EDITOR"
@@ -170,10 +155,6 @@ alias vim="echo -ne '\e[1 q' && vim"
 alias py='python3'
 alias pe='pipenv'
 alias pyenvinit='eval "$(pyenv init -)"'
-alias rbenvinit='eval "$(rbenv init - zsh)"'
-alias pip3update='sudo pip3 list --outdated | sed 's/\s\+/ /g' | cut -d ' ' -f 1 | tail -n+3 | xargs -r -n1 sudo pip3 install --upgrade'
-alias pippyls='pip install python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
-alias pepyls='pipenv install --dev python-language-server rope pyflakes mccabe pycodestyle pydocstyle autopep8 yapf'
 
 # Show all manpages on a fzf table and select the one to read.
 alias mans='man -k . | fzf | sed "s/ \+/ /g" | cut -d " " -f 1 | xargs -r man'
@@ -186,9 +167,6 @@ alias lgit='lazygit'
 alias wcon='nmcli device wifi connect'
 alias wls='nmcli device wifi list'
 alias wlsr='nmcli device wifi list --rescan yes'
-
-# Open irssi and specify the config and data folder.
-alias irssi='irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi'
 
 # Getting colored outputs.
 alias ip='ip -color=auto'
@@ -207,9 +185,6 @@ alias bth='bluetoothctl'
 # System shortcuts.
 alias sys='systemctl'
 alias jou='journalctl'
-
-# Monkiflip.
-alias monkiflip='mpv "https://www.youtube.com/watch?v=XZ5Uv4JKTU4" &>/dev/null'
 
 # Manage dotfiles.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
@@ -247,30 +222,35 @@ bindkey -v
 # Remove mode switching delay.
 KEYTIMEOUT=5
 
-# Change cursor shape for different vi modes.
-# function zle-keymap-select () {
-# 	case $KEYMAP in
-# 		vicmd)      echo -ne '\e[1 q';;
-# 		viins|main) echo -ne '\e[5 q';;
-# 	esac
-# }
-# zle -N zle-keymap-select
-#
-# # Use beam shape cursor on startup.
-# echo -ne '\e[5 q'
-#
-# # Use beam shape for each new prompt.
-# fix_cursor() { echo -ne '\e[5 q'; }
-# precmd_functions+=(fix_cursor)
+# Call this function after it's declaration to enable this utility
+vim_mode_cursor_indicator() {
+	# Change cursor shape for different vi modes.
+	function zle-keymap-select () {
+		case $KEYMAP in
+			vicmd)      echo -ne '\e[1 q';;
+			viins|main) echo -ne '\e[5 q';;
+		esac
+	}
+	zle -N zle-keymap-select
+
+	# Use beam shape cursor on startup.
+	echo -ne '\e[5 q'
+
+	# Use beam shape for each new prompt.
+	fix_cursor() { echo -ne '\e[5 q'; }
+	precmd_functions+=(fix_cursor)
+}
 
 # ---------- TITLE ---------- #
 # Print the username, the hostname and the path.
-function set_title () { print -Pn -- '\e]2;%n@%m:%~\a'; }
+function set_title() {
+	print -Pn -- '\e]2;%n@%m:%~\a';
+}
 
 # Rewrite the title for each new prompt.
 precmd_functions+=(set_title)
 
-# ---------- EXTRAS ---------- #
+# ---------- PLUGINS ---------- #
 # Syntax highlighting.
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 

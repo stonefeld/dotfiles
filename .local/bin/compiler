@@ -7,15 +7,6 @@ ext="${file##*.}"
 
 cd "$dir" || exit
 
-compile_tex() {
-	command='pdflatex'
-	$command --output-directory="$dir" "$base" && \
-		grep -qi 'addbibresource' "$file" && \
-		biber --input-directory "$dir" "$base" && \
-		$command --output-directory="$dir" "$base"
-	$command --output-directory="$dir" "$base"
-}
-
 compile_md() {
 	pandoc \
 		"$base".md \
@@ -27,6 +18,5 @@ compile_md() {
 }
 
 case "$ext" in
-	tex) compile_tex;;
 	md)  compile_md;;
 esac
