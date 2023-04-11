@@ -12,7 +12,6 @@ compile_md() {
 		"$base".md \
 		-s -o "$base".pdf \
 		-V 'geometry:margin=1in' \
-		--highlight-style=zenburn \
 		--pdf-engine=xelatex \
 		--verbose
 }

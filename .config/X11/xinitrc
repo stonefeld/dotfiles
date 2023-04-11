@@ -28,33 +28,37 @@ xset r rate 220 30
 
 # check if an application exists
 check() {
-	commanv -v "$1" &>/dev/null
+	command -v "$1" >/dev/null 2>&1
 }
 
 # polkit agent
 polkit=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-check $polkit && $polkit &>/dev/null &
+check $polkit && $polkit >/dev/null 2>&1 &
 
 # compositor
 comp=/usr/bin/picom
-check $comp && $comp &>/dev/null &
+check $comp && $comp >/dev/null 2>&1 &
 
 # notification manager
 notif=/usr/bin/dunst
-check $notif && $notif &>/dev/null &
+check $notif && $notif >/dev/null 2>&1 &
 
 # key remapper
 keys=/usr/bin/sxhkd
-check $keys && $keys &>/dev/null &
+check $keys && $keys >/dev/null 2>&1 &
 
 # wallpaper setter
 wallp="$HOME"/.local/bin/swall
-check $wallp && $wallp &>/dev/null &
+check $wallp && $wallp >/dev/null 2>&1 &
+
+# wifi manager
+wfm=/usr/bin/nm-applet
+check $wfm && $wfm >/dev/null 2>&1 &
 
 session=${1:-dwm}
 
 case $session in
-	dwm)      dwmblocks &>/dev/null &
+	dwm)      dwmblocks >/dev/null 2>&1 &
 	          while type dwm >/dev/null; do dwm && continue || break; done
 	          exec dwm;;
 	qtile)    exec qtile start;;

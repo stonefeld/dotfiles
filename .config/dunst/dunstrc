@@ -11,7 +11,7 @@
     width = (0, 500)                     # dynamic width from a to b (a, b)
     height = 300                         # maximum height excluding frame
     origin = top-right                   # notifcation position
-    offset = 0x0                         # offset from the origin
+    offset = 0x19                        # offset from the origin
     scale = 0                            # scale factor (auto-detected if 0)
     notification_limit = 0               # no limit if 0
     indicate_hidden = yes                # show hidden notifcation number
@@ -28,13 +28,13 @@
     ####################
     #### APPEREANCE ####
     ####################
-    transparency = 10                    # transparency from 0 to 100 (only with compositor)
+    transparency = 0                     # transparency from 0 to 100 (only with compositor)
     separator_height = 2                 # height of the separator between two notifications (0 to disable)
     padding = 8                          # padding between text and separator
     horizontal_padding = 8               # horizontal padding
     text_icon_padding = 0                # padding between text and icon
-    frame_width = 3                      # width of notifcation frame (0 to disable)
-    frame_color = "#9399b2"              # color of the notifcation frame (original #aaaaaa)
+    frame_width = 1                      # width of notifcation frame (0 to disable)
+    frame_color = "#aaaaaa"              # color of the notifcation frame (original #aaaaaa)
     separator_color = frame              # separator color (auto|foreground|frame|anything)
     sort = yes                           # sort by urgency
     idle_threshold = 0                   # don't remove notifications if idle (0 to disable)
@@ -43,7 +43,7 @@
     ##############
     #### TEXT ####
     ##############
-    font = CaskaydiaCove Nerd Font 12    # font used by the notifications
+    font = monospace 10                  # font used by the notifications
     line_height = 0                      # line spacing
     markup = strip                       # text treatment (full|strip|no)
     # The format of the message. Possible variables are:
@@ -72,11 +72,6 @@
     icon_position = left                 # icon position (left|right|top|off)
     min_icon_size = 0                    # minimum size for icons (0 to disable)
     max_icon_size = 32                   # scale icons to this size (0 to disable)
-
-    # Paths to default icons.
-    # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-    # icon_path = /usr/share/icons/Papirus-Light/16x16/actions:/usr/share/icons/Papirus-Light/16x16/apps:/usr/share/icons/Papirus-Light/16x16/categories:/usr/share/icons/Papirus-Light/16x16/devices:/usr/share/icons/Papirus-Light/16x16/emblems:/usr/share/icons/Papirus-Light/16x16/emotes:/usr/share/icons/Papirus-Light/16x16/mimetypes:/usr/share/icons/Papirus-Light/16x16/panel:/usr/share/icons/Papirus-Light/16x16/places:/usr/share/icons/Papirus-Light/16x16/status
-    icon_path = /usr/share/icons/Papirus-Dark/16x16/actions:/usr/share/icons/Papirus-Dark/16x16/apps:/usr/share/icons/Papirus-Dark/16x16/categories:/usr/share/icons/Papirus-Dark/16x16/devices:/usr/share/icons/Papirus-Dark/16x16/emblems:/usr/share/icons/Papirus-Dark/16x16/emotes:/usr/share/icons/Papirus-Dark/16x16/mimetypes:/usr/share/icons/Papirus-Dark/16x16/panel:/usr/share/icons/Papirus-Dark/16x16/places:/usr/share/icons/Papirus-Dark/16x16/status
 
     #################
     #### HISTORY ####
@@ -144,8 +139,8 @@
     #default_icon = /path/to/icon
 
 [urgency_normal]
-    background = "#313244"         # (original #285577)
-    foreground = "#cdd6f4"         # (original #ffffff)
+    background = "#285577"         # (original #285577)
+    foreground = "#ffffff"         # (original #ffffff)
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     #default_icon = /path/to/icon

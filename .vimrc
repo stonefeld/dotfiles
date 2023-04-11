@@ -19,7 +19,7 @@ set splitright splitbelow                                    " make splits below
 set ruler number numberwidth=5                               " show cursor coords and line numbers
 set laststatus=2                                             " always show the statusline
 set updatetime=250                                           " increase updatetime
-set shortmess+=c                                             " disable cmd messages when autocomplete
+set shortmess+=c showcmd                                     " disable cmd messages when autocomplete
 set colorcolumn=80 textwidth=79                              " set a limit for the comments in code
 set nohlsearch incsearch                                     " search while typing
 set completeopt=longest,menuone                              " don't select first item

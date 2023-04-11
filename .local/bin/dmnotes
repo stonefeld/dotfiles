@@ -51,13 +51,12 @@ while [ "$#" -gt "0" ]; do
 	esac
 done
 
-type=$(run_dmenu "Select filetype" "Markdown\\nLaTeX\\nRMarkdown\\nOpen compiled note")
+type=$(run_dmenu "Select filetype" "Markdown\\nLaTeX\\nOpen compiled note")
 [ -z "$type" ] && exit
 
 case "$type" in
 	"Markdown")  extension="md";;
 	"LaTeX")     extension="tex";;
-	"RMarkdown") extension="rmd";;
 esac
 
 if [ ! "$type" = "Open compiled note" ]; then
@@ -71,7 +70,7 @@ if [ ! "$type" = "Open compiled note" ]; then
 
 			mkdir -p "$notes_folder/$name"
 			touch "$notes_folder/$name/$name.$extension"
-			termlaunch -e "$EDITOR "$notes_folder/$name/$name.$extension""
+			termlaunch -e $EDITOR "$notes_folder/$name/$name.$extension"
 			exit;;
 
 		"Choose existing note")

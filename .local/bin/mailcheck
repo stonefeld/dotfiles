@@ -2,6 +2,10 @@
 
 pkill -RTMIN+7 dwmblocks
 
+lastrun="${XDG_CACHE_HOME:-$HOME/.cache}/mailchecklastrun"
+mbsyncconf="${XDG_CONFIG_HOME:-$HOME/.config}/isync/mbsyncrc"
+count=0
+
 notify() {
 	notify-send -i email "New mail!" "$2 new mail(s) in \`$1\` account."
 	canberra-gtk-play -i dialog-warning
@@ -9,7 +13,7 @@ notify() {
 
 syncandnotify() {
 	acc="$(echo "$account" | sed "s/.*\///")"
-	mbsync -c ${XDG_CONFIG_HOME:-$HOME/.config}/isync/mbsyncrc -a
+	mbsync -c "$mbsyncconf" "$acc"
 	new=$(find \
 		"$HOME/.local/share/mail/$acc/INBOX/new/"\
 		"$HOME/.local/share/mail/$acc/Inbox/new/"\
@@ -17,19 +21,19 @@ syncandnotify() {
 		"$HOME/.local/share/mail/$acc/INBOX/cur/"\
 		"$HOME/.local/share/mail/$acc/Inbox/cur/"\
 		"$HOME/.local/share/mail/$acc/inbox/cur/"\
-		-type f -newer "${XDG_DATA_HOME:-$HOME/.local/share}/mailchecklastrun" 2>/dev/null)
+		-type f -newer "$lastrun" 2>/dev/null)
 	newcount=$(echo "$new" | sed '/^\s*$/d' | wc -l)
 	[ $newcount -gt 0 ] && notify "$acc" "$newcount"
-	echo "$newcount" > "${XDG_DATA_HOME:-$HOME/.local/share}/unread"
+    let count+=$newcount
 }
 
-accounts="$(awk '/^Account/ { print $2 }' "${XDG_CONFIG_HOME:-$HOME/.config}/isync/mbsyncrc")"
-
+accounts="$(awk '/^Account/ { print $2 }' "$mbsyncconf")"
 for account in $accounts; do
 	syncandnotify &
 done
+echo "$count" > "${XDG_DATA_HOME:-$HOME/.local/share}/unread"
 
 wait
 
-touch "${XDG_CONFIG_HOME:-$HOME/.config}/mutt/.mailchecklastrun"
+touch "$lastrun"
 pkill -RTMIN+7 dwmblocks

@@ -9,6 +9,7 @@ Xcursor.theme: Adwaita
 Xcursor.size: 32
 
 /* Display setup */
+/* 96: 100% | 120: 125% | 144: 150% */
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true

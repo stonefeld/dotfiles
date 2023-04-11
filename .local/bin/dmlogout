@@ -44,10 +44,10 @@ if [ "$ROFI" = true ]; then
 	fi
 else
 	option=$(printf "$lock_text\\n$logout_text\\n$suspend_text\\n$shutdown_text\\n$reboot_text" | dmenu)
-	[ -z "$option" ] || confirmation=$(printf "$yes_text\\n$no_text" | dmenu "Sure?")
+	[ -z "$option" ] || confirmation=$(printf "$yes_text\\n$no_text" | dmenu -p "Sure?")
 fi
 
-if [ "$confirmation" = "$yes_text" -o "$confirmation" = "$yes" ]; then
+if [ "$confirmation" = "$yes_text" ] || [ "$ROFI" = true -a "$confirmation" = "$yes" ]; then
 	case $option in
 		"$lock_text"|"$lock")         xset dpms force standby;;
 		"$logout_text"|"$logout")     kill_x11;;

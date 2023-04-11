@@ -20,18 +20,16 @@ last_count=$(cat $cache_file)
 [ "$last_count" -eq 0 ] && last_available=false || last_available=true
 
 count=$(checkupdates 2>/dev/null | wc -l)
+echo $count > $cache_file
 
 if [ "$count" -gt 0 ]; then
 	if [ "$last_available" = true ]; then
 		if [ $last_count -lt $count ]; then
-			echo $count > $cache_file
 			notify $last_count $(( $count - $last_count ))
 		else
-			echo $count > $cache_file
 			notify $count
 		fi
 	else
-		echo $count > $cache_file
 		notify $count
 	fi
 fi

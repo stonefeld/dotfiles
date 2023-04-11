@@ -11,9 +11,13 @@ else
 	info=$(amixer sget Master | grep -oP "(Front Left|Mono):[\s]?\S*\s\K.*" | sed "s/\[//g;s/\]//g;s/%//g;s/\<[0-9]\+[\.]\?[0-9]\+dB\s*//g")
 fi
 
+if command -v dunstctl &>/dev/null; then
+	[ $(dunstctl is-paused) = "true" ] && notif="  󰂛"
+fi
+
 mute="$(echo $info | cut -d " " -f 3)"
 vol="$(echo $info | cut -d " " -f 2)"
 [ "$vol" -ge 100 ] && icon="󰕾" || { [ "$vol" -gt 0 ] && icon="󰖀" || icon="󰕿"; }
 vol="$vol%"
 [ "$mute" = "off" ] && icon="󰖁" && vol="Mute"
-echo " ^fg^[ $icon $vol |"
+echo " ^fg^[ $icon $vol$notif |"

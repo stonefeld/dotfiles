@@ -1,0 +1,19 @@
+#!/bin/sh
+
+note_folder="$HOME/Documents/notes/quicknotes"
+note_file="$note_folder/quicknote-$(date '+%Y-%m-%d')"
+note_md="$note_file.md"
+note_pdf="$note_file.pdf"
+
+[ -d "$note_folder" ] || mkdir -p "$note_folder"
+if [ "$1" = '-o' ]; then
+    [ -f "$note_pdf" ] && xdg-open "$note_pdf"
+else
+    [ -f "$note_md" ] || echo "# Notes for $(date '+%Y-%m-%d')" > "$note_md"
+    nvim -c "norm Go" \
+        -c "norm Go## $(date '+%H:%M')" \
+        -c "norm G2o" \
+        -c "norm zz" \
+        -c "startinsert" "$note_md"
+    setsid -f pandoc "$note_md" -V geometry:margin=1in -o "$note_pdf"
+fi

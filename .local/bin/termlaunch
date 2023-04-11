@@ -5,38 +5,43 @@ DIMENSION=false
 DIM_READY=false
 EXECUTE=false
 
+# get the program name
+prgname="$(basename "$0")"
+
 print_error() {
-	echo "$1"
-	exit 1
+    echo "$1"
+    exit 1
 }
 
 for i in $*; do
-	if [ "$DIMENSION" = true ] && [ "$DIM_READY" = false ]; then
-		echo "$i" | egrep '^[0-9]+x[0-9]+$' 1>/dev/null
-		[ "$?" -ne 0 ] && print_error "termlaunch: bad dimension format"
+    if [ "$DIMENSION" = true ] && [ "$DIM_READY" = false ]; then
+        echo "$i" | egrep '^[0-9]+x[0-9]+$' 1>/dev/null
+        [ "$?" -ne 0 ] && print_error "$prgname: bad dimension format"
 
-		COLS=$(echo "$i" | cut -d 'x' -f 1)
-		ROWS=$(echo "$i" | cut -d 'x' -f 2)
-		DIM_READY=true
-	fi
+        COLS=$(echo "$i" | cut -d 'x' -f 1)
+        ROWS=$(echo "$i" | cut -d 'x' -f 2)
+        DIM_READY=true
+    fi
 
-	if [ "$EXECUTE" = true ]; then
-		program="$program $i"
-	fi
+    if [ "$EXECUTE" = true ]; then
+        program="$program $i"
+    fi
 
-	case $i in
-		-g|--geometry) [ "$DIMENSION" = false ] && DIMENSION=true || print_error "termlaunch: dimension already specified";;
-		-f|--floating) FLOATING=true;;
-		-e|--execute)  [ "$EXECUTE" = false ] && EXECUTE=true || print_error "termlaunch: program to exectue already specified";;
-	esac
+    case $i in
+        -g|--geometry) [ "$DIMENSION" = false ] && DIMENSION=true || print_error "$prgname: dimension already specified";;
+        -f|--floating) FLOATING=true;;
+        -e|--execute)  [ "$EXECUTE" = false ] && EXECUTE=true || print_error "$prgname: program to exectue already specified";;
+    esac
 done
 
 case $TERMINAL in
-	st)         [ "$EXECUTE" = true ] && exe="-e $program"
-	            [ "$FLOATING" = true ] && float=$(echo "-c Floating -g $COLS x $ROWS" | sed 's/ x /x/');;
+    st)
+        [ "$EXECUTE" = true ] && exe="-e $program"
+        [ "$FLOATING" = true ] && float=$(echo "-c Floating -g $COLS x $ROWS" | sed 's/ x /x/');;
 
-	alacritty)  [ "$EXECUTE" = true ] && exe="-e $program"
-	            [ "$FLOATING" = true ] && float=$(echo "-o window.class.general=Floating -o window.dimensions.columns=$COLS -o window.dimensions.lines=$ROWS");;
+    alacritty)
+        [ "$EXECUTE" = true ] && exe="-e $program"
+        [ "$FLOATING" = true ] && float=$(echo "-o window.class.general=Floating -o window.dimensions.columns=$COLS -o window.dimensions.lines=$ROWS");;
 esac
 
 setsid -f $TERMINAL $float $exe

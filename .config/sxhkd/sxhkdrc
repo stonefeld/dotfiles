@@ -21,8 +21,6 @@ XF86MonBrightnessDown
 	ctrlpanel bd 10
 
 # run prompt, file explorer and browser
-super + s
-	cd $HOME && rofi -show drun
 super + e
 	cd $HOME && termlaunch -f -g 120x34 -e $TERMFM
 super + shift + i
@@ -39,8 +37,14 @@ super + a; p
 	termlaunch -f -g 120x34 -e music
 
 # dmenu utilities
+super + shift + l
+	dmlogout
 super + a; n
 	dmnotes
+super + a; q
+	termlaunch -f -g 80x30 -e quicknote
+super + a; shift + q
+	quicknote -o
 super + a; r
 	dmrecord
 super + a; e
@@ -66,6 +70,6 @@ super + shift + grave
 super + shift + period
 	dunstctl context
 super + shift + comma
-	dunstctl set-paused toggle
+	dunstctl set-paused toggle && pkill -RTMIN+4 dwmblocks
 
-# vim: ft=conf
+# vim: ft=conf noet

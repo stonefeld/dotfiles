@@ -16,7 +16,7 @@ compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
 zstyle ':completion:*' menu select cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache-$ZSH_VERSION
 
 # Save most recent 1000 lines on history file.
-SAVEHIST=1000
+SAVEHIST=5000
 
 # Get version control information to display on prompt.
 autoload -Uz vcs_info
@@ -52,21 +52,8 @@ gitinfo() {
 # Display a '!' when the last command didn't exited succesfully.
 last_status() { [ "$?" -ne 0 ] && echo "%B%F{red}(%f%F{yellow}!%f%F{red})%f%b"; }
 
-# Just change the color prompt according to the status
-last_status_color() { [ "$?" -ne 0 ] && echo "red" || echo "blue"; }
-
-# Print the current directory for the 'minimal_prompt'
-current_dir() {
-	current_color="yellow"
-	base_color="cyan"
-	[ "$PWD" = "$HOME" ] && echo "%F{$current_color}~%f" && return
-	dir_base="$(echo ${PWD%/*} | sed "s|$HOME|~|")/"
-	dir_current="${PWD##*/}"
-	echo "%F{$base_color}$dir_base%f%F{$current_color}$dir_current%f"
-}
-
 pathshorten() {
-	if [ $(gitdir) -eq 1 ]; then
+	if [ "$(git check-ignore -q . 2>/dev/null)" -eq '1' ]; then
 		echo "%1~"
 	else
 		echo "$(pwd | sed -e "s|$HOME|~|" | sed -re "s|([^./])[^/]+/|\1/|g")"
@@ -79,7 +66,6 @@ RPROMPT='$(last_status)$(virtualenv_info)'
 # defining multiple prompts.
 default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
 default_prompt_short() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}$(pathshorten)%f%F{red}]%f%b%F{white}$ '; }
-minimal_prompt() { export PROMPT='%B$(current_dir) %F{red}:%f%b '; }
 ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f ${vcs_info_msg_0_}%F{red}:%f%b '; }
 god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
 god_prompt_short() { export PROMPT=' %B%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red}) %F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n'' %F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
@@ -89,11 +75,6 @@ starship_prompt() { command -v starship &>/dev/null && source <(starship init zs
 starship_prompt
 
 # ---------- ALIASES ---------- #
-# System power.
-alias psn='shutdown now'
-alias pre='reboot'
-alias pss='systemctl suspend'
-
 # Pacman shortcuts.
 alias pacinstall='pacman -Slq | fzf --height 0% --multi --preview "pacman -Si {1}" | xargs -ro sudo pacman -S'
 alias pacremove='pacman -Qq | fzf --height 0% --multi --preview "pacman -Qi {1}" | xargs -ro sudo pacman -Rns'
@@ -110,16 +91,16 @@ fi
 alias reso='source ${ZDOTDIR:-}/.zshrc'
 
 # Some ls command replacements.
-if ! command -v exa &>/dev/null; then
-	alias ls='LC_COLLATE=C ls -hp --color=always --group-directories-first'
-	alias ll='LC_COLLATE=C ls -lahp --color=always --group-directories-first'
-	alias la='LC_COLLATE=C ls -ahp --color=always --group-directories-first'
-else
+if command -v exa &>/dev/null; then
 	alias ls='exa -g --color=always --group-directories-first'
 	alias ll='exa -la -g --color=always --group-directories-first'
 	alias la='exa -a -g --color=always --group-directories-first'
+else
+	alias ls='LC_COLLATE=C ls -hp --color=always --group-directories-first'
+	alias ll='LC_COLLATE=C ls -lahp --color=always --group-directories-first'
+	alias la='LC_COLLATE=C ls -ahp --color=always --group-directories-first'
 fi
-alias lf="$TERMFM ."
+alias lf="vifm ."
 
 # Create a directory and cd into it
 mkcd() {
@@ -127,13 +108,16 @@ mkcd() {
 	mkdir -p "$1"; cd "$1";
 }
 
-# Avoid overriding.
+# Avoid overriding
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
 # Open any applications quicker
 alias open='xdg-open'
+if command -v neomutt &>/dev/null; then
+	alias mutt='neomutt'
+fi
 
 # Clear the screen fr
 alias cls='printf "\033c"'
@@ -141,15 +125,9 @@ alias cls='printf "\033c"'
 # Pass aliases to sudo.
 if command -v doas &>/dev/null; then
 	alias doas='doas '
-else
+elif command -v sudo &>/dev/null; then
 	alias sudo='sudo '
 fi
-
-# Neovim shortcuts.
-alias e="$EDITOR"
-alias ee="$EDITOR ."
-alias ef="fzf --preview 'cat {}'| xargs -ro $EDITOR"
-alias vim="echo -ne '\e[1 q' && vim"
 
 # Python and pip shortcuts
 alias py='python3'
@@ -158,7 +136,6 @@ alias pyenvinit='eval "$(pyenv init -)"'
 
 # Show all manpages on a fzf table and select the one to read.
 alias mans='man -k . | fzf | sed "s/ \+/ /g" | cut -d " " -f 1 | xargs -r man'
-alias mand='man -a --names-only -k . | grep -o "^.*(3)\s*-" | sed "s/-$//" | fzf | cut -d " " -f 1 | sed "s/$/\.3/" | xargs -r man'
 
 # Lazygit shortctut.
 alias lgit='lazygit'
@@ -175,6 +152,10 @@ alias dmesg='dmesg --color=always'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+
+# Faster mixer commands
+alias pm='pulsemixer'
+alias am='alsamixer'
 
 # Activate ssh-agent and add github's ssh-key
 alias ghssh='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_github'
@@ -200,17 +181,15 @@ zle -N move-cd
 bindkey '^P' up-line-or-history      # Ctrl+p
 bindkey '^N' down-line-or-history    # Ctrl+n
 bindkey '^F' move-cd                 # Ctrl+f
-bindkey '^[[A' up-line-or-history    # Up arrow
-bindkey '^[[B' down-line-or-history  # Down arrow
-bindkey '^[[D' backward-char         # Left arrow
-bindkey '^[[C' forward-char          # Right arrow
 bindkey '^[[1;5D' backward-word      # Ctrl+Left arrow
 bindkey '^[[1;5C' forward-word       # Ctrl+Right arrow
 bindkey '^?' backward-delete-char    # Backspace
+bindkey '^H' backward-delete-word    # Ctrl+Backspace
 bindkey '^[[H' beginning-of-line     # Home
 bindkey '^[[4~' end-of-line          # End
 bindkey '^[[4h' overwrite-mode       # Insert
 bindkey '^[[P' delete-char           # Delete
+bindkey '^[[M' delete-word           # Ctrl+Delete
 bindkey '^[[Z' reverse-menu-complete # Shift+Tab
 bindkey '^[[5~' beginning-of-history # PageUp
 bindkey '^[[6~' end-of-history       # PageDown
@@ -221,25 +200,6 @@ bindkey -v
 
 # Remove mode switching delay.
 KEYTIMEOUT=5
-
-# Call this function after it's declaration to enable this utility
-vim_mode_cursor_indicator() {
-	# Change cursor shape for different vi modes.
-	function zle-keymap-select () {
-		case $KEYMAP in
-			vicmd)      echo -ne '\e[1 q';;
-			viins|main) echo -ne '\e[5 q';;
-		esac
-	}
-	zle -N zle-keymap-select
-
-	# Use beam shape cursor on startup.
-	echo -ne '\e[5 q'
-
-	# Use beam shape for each new prompt.
-	fix_cursor() { echo -ne '\e[5 q'; }
-	precmd_functions+=(fix_cursor)
-}
 
 # ---------- TITLE ---------- #
 # Print the username, the hostname and the path.
@@ -263,10 +223,10 @@ fi
 # Autosuggestions
 if [ -d /usr/share/zsh/plugins/zsh-autosuggestions ]; then
 	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-	bindkey '^K' autosuggest-accept
+	bindkey '^Y' autosuggest-accept
 elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-	bindkey '^K' autosuggest-accept
+	bindkey '^Y' autosuggest-accept
 fi
 
 # Gitflow completion

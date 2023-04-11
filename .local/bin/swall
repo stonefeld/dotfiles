@@ -2,14 +2,21 @@
 
 RANDOM=false  # true if random picture will be selected
 PYWAL=false   # true if pywal will be used
+PYWAL_USED=false
+
+# Get the program name
+prgname="$(basename "$0")"
 
 # Print the help message
 print_help() {
-	echo "Usage: setbg [OPTIONS...] [FILE]
+	echo "Usage: $prgname [OPTIONS...] [FILE]
 OPTIONS:
 \t-h --help\tprint this help message
 \t-r --random\tpick a random image from the pictures folder
 \t-p --pywal\tcreate a colorscheme based on the selected picture using pywal
+
+If it's the first time using '$prgname', it's mandatory to set a wallpaper by specifying the wallpaper image.
+Once it's set, by just running the command without arguments it will restore the last picture
 "
 }
 
@@ -22,8 +29,8 @@ print_error() {
 
 # Check if a given file exists or not
 check_file() {
-	[ -z "$1" ] && print_error "setbg: No file specified"
-	[ -f "$1" ] || print_error "setbg: '$1': No such file or directory"
+	[ -z "$1" ] && print_error "$prgname: No file specified"
+	[ -f "$1" ] || print_error "$prgname: '$1': No such file or directory"
 }
 
 # Set the wallpaper and copy it to the default location
@@ -32,7 +39,7 @@ set_wallpaper() {
 	dest="${XDG_CACHE_HOME:-$HOME/.cache}/wal.$ext"
 	[ "$1" = "$dest" ] || cp "$1" "$dest"
 
-	echo "Setting wallpaper '$(basename $1)'..."
+	echo "Setting wallpaper '$(basename "$1")'..."
 	xwallpaper --zoom "$1"
 }
 
@@ -46,15 +53,16 @@ default_file="$(find ${XDG_CACHE_HOME:-$HOME/.cache} -maxdepth 1 -type f -name "
 for i in $*; do
 	case $i in
 		-r|--random) RANDOM=true;;
-		-p|--pywal)  PYWAL=true; command -v wal 2>/dev/null || print_error "setbg: pywal not installed";;
+		-p|--pywal)  PYWAL=true; command -v wal 2>/dev/null || print_error "$prgname: 'pywal' not installed"
+		             print_error "$prgname: 'pywal' does not have any utility right now. This flag is unused";;
 		-h|--help)   print_help && exit;;
-		-*|--*)      print_error "setbg: Unknown argument $i";;
-		*)           [ -z "$file" ] && { check_file "$i" && file="$i"; } || print_error "setbg: File already specified";;
+		-*|--*)      print_error "$prgname: Unknown argument $i";;
+		*)           [ -z "$file" ] && { check_file "$i" && file="$i"; } || print_error "$prgname: File already specified";;
 	esac
 done
 
 # If random flag was used, search for a random wallpaper
-[ "$RANDOM" = true ] && file=$(find $HOME/imgs/wallpaper -type f | shuf | head -n 1)
+[ "$RANDOM" = true ] && file=$(find "$HOME"/Pictures/wallpaper -type f | shuf | head -n 1)
 
 # If no file was specified, use the default one
 [ -z "$file" ] && { check_file "$default_file" && file="$default_file"; } || rm -f "$default_file"
@@ -66,16 +74,17 @@ set_wallpaper "$file"
 if [ "$PYWAL" = true ]; then
 	echo "Creating colorscheme..."
 	wal -i "$file" -n -q
+	[ "$?" -ne 0 ] && print_error "$prgname: 'pywal' had an error creating the colorcheme"
 
 	echo "Cleaning up generated colorscheme..."
 	sed '/\[SchemeUrg\]/d' -i "$HOME/.cache/wal/colors-wal-dwm.h"
 
 	echo "Recompiling st terminal..."
-	cd "$HOME/.local/src/st/" && sudo make clean install >/dev/null
+	cd "$HOME/.local/src/suckenv/st/" && sudo make clean install >/dev/null
 
 	echo "Recompiling dmenu..."
-	cd "$HOME/.local/src/dmenu" && sudo make clean install >/dev/null
+	cd "$HOME/.local/src/suckenv/dmenu" && sudo make clean install >/dev/null
 
 	echo "Recompiling dwm..."
-	cd "$HOME/.local/src/dwm-original/" && sudo make clean install >/dev/null
+	cd "$HOME/.local/src/suckenv/dwm/" && sudo make clean install >/dev/null
 fi
