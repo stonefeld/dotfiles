@@ -7,6 +7,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 [[ -f ~/.profile ]] && . ~/.profile
+[[ -f ~/.config/priv_profile ]] && . ~/.config/priv_profile
 
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
     xlogin

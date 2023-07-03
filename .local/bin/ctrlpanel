@@ -3,34 +3,40 @@
 ([ $(pgrep -x pulseaudio) ] || [ $(pgrep -x pipewire | sed '1q') ]) && PULSE=true || PULSE=false
 
 case $1 in
-	vu)  # Volume up.
-	     [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ +$2% || amixer sset Master $2%+
-	     pkill -RTMIN+4 dwmblocks;;
-
-	vd)  # Volume down.
-	     [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ -$2% || amixer sset Master $2%-
-	     pkill -RTMIN+4 dwmblocks;;
-
-	vm)  # Volume mute.
-	     [ "$PULSE" = true ] && amixer -D pulse sset Master toggle || amixer sset Master toggle
-	     pkill -RTMIN+4 dwmblocks;;
-
-	mm)  # Microphone mute.
-	     [ "$PULSE" = true ] && amixer -D pulse sset Capture toggle || amixer sset Capture toggle;;
-
-	bu)  # Brightness up.
-	     xbacklight -inc $2
-	     pkill -RTMIN+3 dwmblocks;;
-
-	bd)  # Brightness down.
-	     xbacklight -dec $2
-	     pkill -RTMIN+3 dwmblocks;;
-
-	nm)  # Network manager.
-	     rfkill unblock all
-	     [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet &;;
-
-	run) # Run applications.
-	     cd $HOME
-	     dmenu_run;;
+    # Volume up.
+    vu)
+        [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ +$2% || amixer sset Master $2%+
+        pkill -RTMIN+4 dwmblocks;;
+    # Volume down.
+    vd)
+        [ "$PULSE" = true ] && pactl set-sink-volume @DEFAULT_SINK@ -$2% || amixer sset Master $2%-
+        pkill -RTMIN+4 dwmblocks;;
+    # Volume mute.
+    vm)
+        [ "$PULSE" = true ] && amixer -D pulse sset Master toggle || amixer sset Master toggle
+        pkill -RTMIN+4 dwmblocks;;
+    # Microphone mute.
+    mm)
+        [ "$PULSE" = true ] && amixer -D pulse sset Capture toggle || amixer sset Capture toggle;;
+    # Brightness up.
+    bu)
+        xbacklight -inc $2
+        pkill -RTMIN+3 dwmblocks;;
+    # Brightness down.
+    bd)
+        xbacklight -dec $2
+        pkill -RTMIN+3 dwmblocks;;
+    # Network manager.
+    nm)
+        rfkill unblock all
+        [ $(pgrep -x nm-applet) ] && killall nm-applet || nm-applet &;;
+    mi)
+        if command -v pavucontrol; then
+            pavucontrol
+        elif command -v pulsemixer; then
+            termlaunch -f -e pulsemixer
+        elif command -v alsamixer; then
+            termlaunch -f -e alsamixer
+        fi
+        pkill -RTMIN+4 dwmblocks;;
 esac

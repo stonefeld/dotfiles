@@ -12,6 +12,7 @@ compile_md() {
 		"$base".md \
 		-s -o "$base".pdf \
 		-V 'geometry:margin=1in' \
+		--highlight-style=tango \
 		--pdf-engine=xelatex \
 		--verbose
 }

@@ -28,23 +28,19 @@ super + shift + i
 
 # utilities
 super + a; a
-	termlaunch -f -g 120x34 -e alsamixer
-super + a; m
-	termlaunch -f -g 120x34 -e neomutt
+	ctrlpanel mi
 super + a; h
 	termlaunch -f -g 120x34 -e htop
 super + a; p
 	termlaunch -f -g 120x34 -e music
 
 # dmenu utilities
-super + shift + l
+super + a; l
 	dmlogout
 super + a; n
 	dmnotes
 super + a; q
 	termlaunch -f -g 80x30 -e quicknote
-super + a; shift + q
-	quicknote -o
 super + a; r
 	dmrecord
 super + a; e

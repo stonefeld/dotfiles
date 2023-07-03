@@ -9,7 +9,7 @@ prgname="$(basename "$0")"
 
 # Print the help message
 print_help() {
-	echo "Usage: $prgname [OPTIONS...] [FILE]
+	printf "Usage: $prgname [OPTIONS...] [FILE]
 OPTIONS:
 \t-h --help\tprint this help message
 \t-r --random\tpick a random image from the pictures folder

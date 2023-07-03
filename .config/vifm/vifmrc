@@ -15,6 +15,7 @@ set sortnumbers
 set sort=+iname
 set vimhelp
 set norunexec
+set mouse=a
 set wildmenu
 set wildstyle=popup
 set tuioptions=p
@@ -175,7 +176,7 @@ fileviewer <video/*>
       \ vifmimg video %px %py %pw %ph %c
       \ %pc
       \ vifmimg clear,
-      \ ffprobe -pretty %c 2>&1
+      \ ffprobe -pretty %c 2>&1,
       \ file %c,
 
 " Try to preview the picture

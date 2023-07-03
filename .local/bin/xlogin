@@ -2,7 +2,7 @@
 
 # Use this variable for loop.
 READY=false
-list_envs=$(echo "dwm qtile openbox awesome gnome-session kde-plasma" | tr " " "\\n")
+list_envs=$(echo "dwm i3 qtile gnome-session kde-plasma" | tr " " "\\n")
 
 select_env () {
 	# Prompt for choice.

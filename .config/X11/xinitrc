@@ -17,52 +17,61 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 [ -f "$usermodmap" ]    && xmodmap "$usermodmap"
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-	for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-		[ -x "$f" ] && . "$f"
-	done
-	unset f
+    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
 fi
+
+# screen saver at 15 minutes and monitor off at 20
+xset s 900
+xset dpms 0 0 1200
 
 # set the key repetion rate
 xset r rate 220 30
 
 # check if an application exists
 check() {
-	command -v "$1" >/dev/null 2>&1
+    command -v "$1" >/dev/null 2>&1
+}
+
+# run without output
+run() {
+    $1 >/dev/null 2>&1 &
 }
 
 # polkit agent
 polkit=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-check $polkit && $polkit >/dev/null 2>&1 &
+check $polkit && run $polkit
 
 # compositor
 comp=/usr/bin/picom
-check $comp && $comp >/dev/null 2>&1 &
+check $comp && run $comp
 
 # notification manager
 notif=/usr/bin/dunst
-check $notif && $notif >/dev/null 2>&1 &
+check $notif && run $notif
 
 # key remapper
 keys=/usr/bin/sxhkd
-check $keys && $keys >/dev/null 2>&1 &
+check $keys && run $keys
 
 # wallpaper setter
 wallp="$HOME"/.local/bin/swall
-check $wallp && $wallp >/dev/null 2>&1 &
+check $wallp && run $wallp
 
 # wifi manager
 wfm=/usr/bin/nm-applet
-check $wfm && $wfm >/dev/null 2>&1 &
+check $wfm && run $wfm
 
 session=${1:-dwm}
 
 case $session in
-	dwm)      dwmblocks >/dev/null 2>&1 &
-	          while type dwm >/dev/null; do dwm && continue || break; done
-	          exec dwm;;
-	qtile)    exec qtile start;;
-	plasma)   exec startplasma-x11;;
-	openbox)  exec openbox-session;;
-	*)        exec $1;;
+    dwm)      status=/usr/local/bin/dwmblocks
+              check $status && run $status
+              while type dwm; do dwm && continue || break; done;
+              exec dwm;;
+    qtile)    exec qtile start;;
+    plasma)   exec startplasma-x11;;
+    *)        exec $1;;
 esac

@@ -33,42 +33,27 @@ virtualenv_info() { [ -n "$VIRTUAL_ENV" ] && echo " %B%F{red}(%F{magenta}$(sed '
 
 # Small function to detect if the directory is a git repository and change
 # prompt's current working directory length to 1.
-gitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq "1" ] && echo 1 || echo 3; }
+checkgitdir() { git check-ignore -q . 2>/dev/null; [ "$?" -eq '1' ] && return 0 || return 1 }
+gitdir() { checkgitdir && echo "%1~" || echo "%3~"; }
 
-# Get all the relevant git information.
-gitinfo() {
-	if [ $(gitdir) -eq 1 ]; then
-		git_files=$(git status --porcelain 2>/dev/null | wc -l)
-		git_branch=$(git branch --show-current 2>/dev/null)
-		git_unpushed=$([ $(git cherry -v &>/dev/null | wc -l) -gt 0 ] && echo "%F{black}-%f%F{blue}!%f")
-		if [ "$1" = "br" ]; then
-			echo "%F{blue}(%f%F{yellow}$git_branch%f%F{black}-%f%F{green}$git_files%f$git_unpushed%F{blue})%f "
-		else
-			echo "%F{yellow}$git_branch%f%F{black}-%f%F{green}$git_files%f$git_unpushed"
-		fi
-	fi
-}
+# Display a smaller version of the pwd with only one letter for each parent dir.
+pathshorten() { echo "$(pwd | sed -e "s|$HOME|~|" | sed -re "s|([^./])[^/]+/|\1/|g")"; }
+gitpathshorten() { checkgitdir && echo "%1~" || pathshorten; }
 
 # Display a '!' when the last command didn't exited succesfully.
 last_status() { [ "$?" -ne 0 ] && echo "%B%F{red}(%f%F{yellow}!%f%F{red})%f%b"; }
-
-pathshorten() {
-	if [ "$(git check-ignore -q . 2>/dev/null)" -eq '1' ]; then
-		echo "%1~"
-	else
-		echo "$(pwd | sed -e "s|$HOME|~|" | sed -re "s|([^./])[^/]+/|\1/|g")"
-	fi
-}
 
 # The right prompt displays the virtual environment's name.
 RPROMPT='$(last_status)$(virtualenv_info)'
 
 # defining multiple prompts.
-default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%$(gitdir)~%f%F{red}]%f%b%F{white}$ '; }
-default_prompt_short() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}$(pathshorten)%f%F{red}]%f%b%F{white}$ '; }
+default_prompt() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}$(gitdir)%f%F{red}]%f%b%F{white}$ '; }
+default_prompt_short() { export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}$(gitpathshorten)%f%F{red}]%f%b%F{white}$ '; }
 ultra_minimal_prompt() { export PROMPT='%B%F{cyan}%1~%f ${vcs_info_msg_0_}%F{red}:%f%b '; }
-god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}%$(gitdir)~%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f$(gitinfo)%F{red})%f$%b '; }
-god_prompt_short() { export PROMPT=' %B%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red}) %F{red}(%f%F{magenta}$(pathshorten)%f%F{red})%f'$'\n'' %F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
+god_prompt() { export PROMPT='%B%F{black}╭─%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red})%F{black}-%f%F{red}(%f%F{magenta}$(gitdir)%f%F{red})%f'$'\n''%F{black}╰─%f%F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
+god_prompt_short() { export PROMPT=' %B%F{red}(%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f%F{red}) %F{red}(%f%F{magenta}$(gitpathshorten)%f%F{red})%f'$'\n'' %F{red}(%f${vcs_info_msg_0_}%F{red})%f$%b '; }
+debian_prompt() { export PROMPT='%B%F{green}%n@%m%f%F{white}:%f%F{blue}%~%f%b%F{white}$ '; }
+debian_prompt_short() { export PROMPT='%B%F{green}%n@%m%f%F{white}:%f%F{blue}$(pathshorten)%f%b%F{white}$ '; }
 starship_prompt() { command -v starship &>/dev/null && source <(starship init zsh --print-full-init); }
 
 # Setting up the normal prompt.
@@ -78,13 +63,15 @@ starship_prompt
 # Pacman shortcuts.
 alias pacinstall='pacman -Slq | fzf --height 0% --multi --preview "pacman -Si {1}" | xargs -ro sudo pacman -S'
 alias pacremove='pacman -Qq | fzf --height 0% --multi --preview "pacman -Qi {1}" | xargs -ro sudo pacman -Rns'
-alias pacupdate="sudo pacman -Syy && sudo pacman -Su --noconfirm && echo 0 > ${XDG_DATA_HOME:-$HOME/.local/share}/updates && pkill -RTMIN+6 dwmblocks"
+alias pacupdate="sudo pacman -Syu --noconfirm && setsid -f pacupdatecheck"
 
 # AUR helper shortcuts using fzf.
 if command -v paru &>/dev/null; then
 	alias parinstall='paru -Slq | fzf --height 0% --multi --preview "paru -Si {1}" | xargs -ro paru -S --noconfirm'
+	alias parupdate="paru -Sua --noconfirm && setsid -f pacupdatecheck"
 elif command -v yay &>/dev/null; then
 	alias yayinstall='yay -Slq | fzf --height 0% --multi --preview "yay -Si {1}" | xargs -ro yay -S'
+	alias yayupdate="yay -Sua --noconfirm && setsid -f pacupdatecheck"
 fi
 
 # Easily resource the zsh config file.
@@ -100,7 +87,7 @@ else
 	alias ll='LC_COLLATE=C ls -lahp --color=always --group-directories-first'
 	alias la='LC_COLLATE=C ls -ahp --color=always --group-directories-first'
 fi
-alias lf="vifm ."
+alias lf='$TERMFM .'
 
 # Create a directory and cd into it
 mkcd() {
@@ -157,9 +144,6 @@ alias fgrep='fgrep --color=auto'
 alias pm='pulsemixer'
 alias am='alsamixer'
 
-# Activate ssh-agent and add github's ssh-key
-alias ghssh='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_github'
-
 # Manage bluetooth
 alias bth='bluetoothctl'
 
@@ -184,7 +168,7 @@ bindkey '^F' move-cd                 # Ctrl+f
 bindkey '^[[1;5D' backward-word      # Ctrl+Left arrow
 bindkey '^[[1;5C' forward-word       # Ctrl+Right arrow
 bindkey '^?' backward-delete-char    # Backspace
-bindkey '^H' backward-delete-word    # Ctrl+Backspace
+bindkey '^H' backward-delete-char    # Ctrl+Backspace
 bindkey '^[[H' beginning-of-line     # Home
 bindkey '^[[4~' end-of-line          # End
 bindkey '^[[4h' overwrite-mode       # Insert
@@ -232,4 +216,11 @@ fi
 # Gitflow completion
 if [ -d ${ZDOTDIR:-$HOME/.config/zsh}/git-flow-completion ]; then
 	source ${ZDOTDIR:-$HOME/.config/zsh}/git-flow-completion/git-flow-completion.zsh
+fi
+
+# FZF history search
+if [ -d /usr/share/zsh/plugins/zsh-fzf-history-search ]; then
+	source /usr/share/fzf/plugins/zsh-fzf-history-search/zsh-syntax-highlighting.plugin.zsh
+elif [ -d ${ZDOTDIR:-$HOME/.config/zsh}/zsh-fzf-history-search ]; then
+	source ${ZDOTDIR:-$HOME/.config/zsh}/zsh-fzf-history-search/zsh-fzf-history-search.plugin.zsh
 fi

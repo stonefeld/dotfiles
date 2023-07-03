@@ -11,7 +11,7 @@
     width = (0, 500)                     # dynamic width from a to b (a, b)
     height = 300                         # maximum height excluding frame
     origin = top-right                   # notifcation position
-    offset = 0x19                        # offset from the origin
+    offset = 0x0                         # offset from the origin
     scale = 0                            # scale factor (auto-detected if 0)
     notification_limit = 0               # no limit if 0
     indicate_hidden = yes                # show hidden notifcation number
@@ -33,7 +33,7 @@
     padding = 8                          # padding between text and separator
     horizontal_padding = 8               # horizontal padding
     text_icon_padding = 0                # padding between text and icon
-    frame_width = 1                      # width of notifcation frame (0 to disable)
+    frame_width = 2                      # width of notifcation frame (0 to disable)
     frame_color = "#aaaaaa"              # color of the notifcation frame (original #aaaaaa)
     separator_color = frame              # separator color (auto|foreground|frame|anything)
     sort = yes                           # sort by urgency
@@ -43,7 +43,7 @@
     ##############
     #### TEXT ####
     ##############
-    font = monospace 10                  # font used by the notifications
+    font = CaskaydiaCove Nerd Font 10    # font used by the notifications
     line_height = 0                      # line spacing
     markup = strip                       # text treatment (full|strip|no)
     # The format of the message. Possible variables are:

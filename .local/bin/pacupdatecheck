@@ -1,37 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 
-cache_file="${XDG_DATA_HOME:-$HOME/.local/share}/updates"
+cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/pkg_updates"
 
 pkill -RTMIN+6 dwmblocks
 
-[ -f "$cache_file" ] || (touch $cache_file && echo 0 > $cache_file)
-
 notify() {
-	if [ $# -eq 2 ]; then
-		message="$2 new upgrade(s) available ($1 from last time)"
-	elif [ $# -eq 1 ]; then
-		message="There are $1 package(s) to upgrade"
-	fi
-	notify-send -i cloud-download "Package upgrade" "$message"
+	message="$1 package(s) to update\n- Pacman: $2\n- AUR: $3"
+	notify-send -i cloud-download "Package upgrades" "$message"
 	canberra-gtk-play -i dialog-warning
 }
 
-last_count=$(cat $cache_file)
-[ "$last_count" -eq 0 ] && last_available=false || last_available=true
-
-count=$(checkupdates 2>/dev/null | wc -l)
+pacman_count="$(checkupdates 2>/dev/null | wc -l)"
+aur_count="$(yay -Quaq 2>/dev/null | wc -l)"
+let count=pacman_count+aur_count
 echo $count > $cache_file
 
-if [ "$count" -gt 0 ]; then
-	if [ "$last_available" = true ]; then
-		if [ $last_count -lt $count ]; then
-			notify $last_count $(( $count - $last_count ))
-		else
-			notify $count
-		fi
-	else
-		notify $count
-	fi
-fi
+[ "$count" -gt 0 ] && notify $count $pacman_count $aur_count
 
 pkill -RTMIN+6 dwmblocks

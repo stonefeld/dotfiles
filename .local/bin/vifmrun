@@ -1,21 +1,26 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ -z "$(command -v vifm)" ]; then
-	printf "vifm isn't installed on your system!\n"
-	exit 1
-elif [ -z "$(command -v ueberzug)" ]; then
-	exec vifm "$@"
+print_error() {
+    echo "$1"
+    exit 1
+}
+
+command -v vifm &>/dev/null || print_error "vifm isn't installed on your system!"
+
+if command -v ueberzug &>/dev/null; then
+    cleanup() {
+        exec 3>&-
+        rm "$FIFO_UEBERZUG"
+    }
+
+    [ -d "$HOME/.cache/vifm" ] || mkdir -p "$HOME/.cache/vifm"
+    export FIFO_UEBERZUG="$HOME/.cache/vifm/ueberzug-${$}"
+    mkfifo "$FIFO_UEBERZUG"
+    ueberzug layer -s <"$FIFO_UEBERZUG" -p json &
+    exec 3>"$FIFO_UEBERZUG"
+    trap cleanup EXIT
+    vifm "$@" 3>&-
+    vifmimg clear
 else
-	cleanup() {
-		exec 3>&-
-		rm "$FIFO_UEBERZUG"
-	}
-	[ ! -d "$HOME/.cache/vifm" ] && mkdir -p "$HOME/.cache/vifm"
-	export FIFO_UEBERZUG="$HOME/.cache/vifm/ueberzug-${$}"
-	mkfifo "$FIFO_UEBERZUG"
-	ueberzug layer -s <"$FIFO_UEBERZUG" -p json &
-	exec 3>"$FIFO_UEBERZUG"
-	trap cleanup EXIT
-	vifm "$@" 3>&-
-	vifmimg clear
+    exec vifm "$@"
 fi

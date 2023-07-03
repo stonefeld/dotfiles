@@ -6,7 +6,7 @@
 
 [[ $- != *i* ]] && return
 
-PS1='\[\e[1;31m\][\[\e[1;33m\]\u\[\e[1;32m\]@\[\e[1;34m\]\h \[\e[1;35m\]\W\[\e[1;31m\]]\[\e[0;37m\]\$ '
+PS1='\[\e[1;32m\]\u@\h\[\e[1;37m\]:\[\e[1;34m\]\w\[\e[0;37m\]\$ '
 
 alias psn='shutdown now'
 alias pre='reboot'
@@ -34,6 +34,7 @@ alias sys='systemctl'
 alias jou='journalctl'
 
 alias edwm='startx $XDG_CONFIG_HOME/X11/xinitrc dwm'
+alias ei3='startx $XDG_CONFIG_HOME/X11/xinitrc i3'
 alias eqtile='startx $XDG_CONFIG_HOME/X11/xinitrc qtile'
 alias egnome='XDG_SESSION_TYPE=wayland dbus-run-session gnome-session'
 alias ekde='DESKTOP_SESSION=plasma; startx $XDG_CONFIG_HOME/X11/xinitrc plasma'

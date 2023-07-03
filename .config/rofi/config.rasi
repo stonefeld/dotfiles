@@ -71,4 +71,3 @@ configuration {
 }
 
 // vim: ft=rasi
-@theme "gnome-apps"
