@@ -40,7 +40,7 @@ super + a; l
 super + a; n
 	dmnotes
 super + a; q
-	termlaunch -f -g 80x30 -e quicknote
+	powerprofile
 super + a; r
 	dmrecord
 super + a; e

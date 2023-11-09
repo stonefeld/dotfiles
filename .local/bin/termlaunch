@@ -15,7 +15,7 @@ print_error() {
 
 for i in $*; do
     if [ "$DIMENSION" = true ] && [ "$DIM_READY" = false ]; then
-        echo "$i" | egrep '^[0-9]+x[0-9]+$' 1>/dev/null
+        echo "$i" | grep -E '^[0-9]+x[0-9]+$' 1>/dev/null
         [ "$?" -ne 0 ] && print_error "$prgname: bad dimension format"
 
         COLS=$(echo "$i" | cut -d 'x' -f 1)
@@ -37,11 +37,17 @@ done
 case $TERMINAL in
     st)
         [ "$EXECUTE" = true ] && exe="-e $program"
-        [ "$FLOATING" = true ] && float=$(echo "-c Floating -g $COLS x $ROWS" | sed 's/ x /x/');;
+        [ "$FLOATING" = true ] && float="-c Floating -g ${COLS}x${ROWS}";;
 
     alacritty)
         [ "$EXECUTE" = true ] && exe="-e $program"
-        [ "$FLOATING" = true ] && float=$(echo "-o window.class.general=Floating -o window.dimensions.columns=$COLS -o window.dimensions.lines=$ROWS");;
+        [ "$FLOATING" = true ] && float="-o window.class.general=Floating -o window.dimensions.columns=$COLS -o window.dimensions.lines=$ROWS";;
+
+    kitty)
+        [ "$EXECUTE" = true ] && exe="$program"
+        [ "$FLOATING" = true ] && float="--class Floating -o initial_window_width=${COLS}c -o initial_window_height=${ROWS}c -o remember_window_size=no"
 esac
 
+echo $exe
+echo $float
 setsid -f $TERMINAL $float $exe

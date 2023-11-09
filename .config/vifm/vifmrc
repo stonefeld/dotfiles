@@ -4,59 +4,28 @@
 "  \ V /| |  _| | | | | | | | (__
 "   \_/ |_|_| |_| |_| |_|_|  \___|
 
-" ========== OPTIONS ========== "
-set vicmd=$EDITOR
-set syscalls
-set trash
-set history=100
-set undolevels=100
-set nofollowlinks
-set sortnumbers
-set sort=+iname
-set vimhelp
-set norunexec
-set mouse=a
-set wildmenu
-set wildstyle=popup
-set tuioptions=p
-set nowrap
-set suggestoptions=normal,visual,view,delay:0,keys,marks,registers
-set ignorecase
-set smartcase
-set nohlsearch
-set incsearch
+set nowrap mouse=a
+set history=100 undolevels=100
+set ignorecase smartcase
+set nohlsearch incsearch
+set wildmenu wildstyle=popup
 set scrolloff=3
-set viewcolumns=-{name}..,6{}
-set timefmt=%Y-%m-%d\ %H:%M
-set statusline=" %1*%A%* %u %g %s %d%=%{system('cat ~/.config/vifm/dirsum')} sum, %a free  %l/%S  %P "
-set rulerformat=
+
 set dirsize=nitems
-set milleroptions=lsize:1,csize:2,rsize:3,rpreview:all
-set millerview
-set quickview
+set tuioptions=ps
+set vicmd=$EDITOR vimhelp
+set syscalls trash nofollowlinks
+set timefmt=%Y-%m-%d\ %H:%M
+set statusline="  %t%= %A %10u:%-7g %15s %20d  "
+
+set vifminfo=dhistory,savedirs,chistory,state,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
+set suggestoptions=delay:0,normal,visual,view,keys,marks,registers
 set previewoptions+=graphicsdelay:0
-" set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
-set dotdirs=
-set dotfiles
-if !has('win')
-  set slowfs=curlftpfs
-endif
 
-" ========== COLORS ========== "
 colorscheme Custom
-
-" ========== AUTOCOMMANDS ========== "
-" Re-exectue dirsum command on every directory changed
-au DirEnter '*' !dirsum &
-au DirEnter '.*' !dirsum &
-only
-
-" ========== CONFIGURATIONS ========== "
-" Get bookmarks and icons
 source ~/.config/vifm/bookmarks.vifm
 source ~/.config/vifm/icons.vifm
 
-" ========== COMMANDS ========== "
 " The following macros can be used in a command
 " %a is replaced with the user arguments.
 " %c the current file under the cursor.
@@ -77,6 +46,7 @@ command! ex aunpack %f
 command! run !! ./%f
 command! drag dragon-drop -a -x %f
 command! sw swall %c
+command! fw ffwpp %c
 
 " ========== MAPPINGS ========== "
 nnoremap e :edit<cr>
@@ -100,10 +70,14 @@ nnoremap <wait> xz :zip<cr>
 nnoremap <wait> xt :tar<cr>
 nnoremap <wait> xg :tgz<cr>
 
+nnoremap <wait> xw :fw<cr>
+
 nnoremap <silent> <c-t> :tabnew<cr>
 nnoremap <silent> <c-k> :tabc<cr>
 nnoremap <silent> <c-l> :tabn<cr>
 nnoremap <silent> <c-h> :tabp<cr>
+
+noremap <silent> ao :sync %c<cr>
 
 nnoremap <wait> ,w :set wrap!<cr>
 
@@ -114,27 +88,6 @@ nnoremap K 5k
 
 nmap dr :drag<cr>
 
-" Interaction with system clipboard
-if has('win')
-    " Yank current directory path to Windows clipboard with forward slashes
-    nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
-    " Yank path to current file to Windows clipboard with forward slashes
-    nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
-elseif executable('xclip')
-    " Yank current directory path into the clipboard
-    nnoremap yd :!echo %d | xclip %i<cr>
-    " Yank current file path into the clipboard
-    nnoremap yf :!echo %c:p | xclip %i<cr>
-elseif executable('xsel')
-    " Yank current directory path into primary and selection clipboards
-    nnoremap yd :!echo -n %d | xsel --input --primary %i &&
-                \ echo -n %d | xsel --clipboard --input %i<cr>
-    " Yank current file path into into primary and selection clipboards
-    nnoremap yf :!echo -n %c:p | xsel --input --primary %i &&
-                \ echo -n %c:p | xsel --clipboard --input %i<cr>
-endif
-
-" ========== FILETYPES ========== "
 " Open files with the program specified on each system
 filetype *
       \ xdg-open %c 2>/dev/null &
@@ -177,6 +130,11 @@ fileviewer <video/*>
       \ %pc
       \ vifmimg clear,
       \ ffprobe -pretty %c 2>&1,
+      \ file %c,
+
+" Avif file not supported by vifmimg
+fileviewer {*.avif},<image/avif>
+      \ exiftool %c,
       \ file %c,
 
 " Try to preview the picture
@@ -249,7 +207,7 @@ fileviewer {*.7z},<application/x-7z-compressed>
       \ file %c,
 
 " Show verbose information from every other file
-fileviewer *
+fileviewer *[^/]
       \ exiftool %c,
       \ file %c,
 

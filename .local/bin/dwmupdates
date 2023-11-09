@@ -4,6 +4,6 @@ case $BUTTON in
 	1) pacupdatecheck &;;
 esac
 
-updates="$(cat ${XDG_DATA_HOME:-$HOME/.local/share}/updates)"
+updates="$(cat ${XDG_CACHE_HOME:-$HOME/.cache}/pkg_updates)"
 pgrep -x pacupdatecheck >/dev/null && sync=" 󰑐" || sync=""
 echo " 󰆦 $updates$sync ]"

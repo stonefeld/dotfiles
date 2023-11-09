@@ -6,6 +6,7 @@ set pages-per-row 1
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 set sandbox none
+set selection-clipboard clipboard
 set guioptions 'svh'
 set window-title-home-tilde 1
 set statusbar-home-tilde 1

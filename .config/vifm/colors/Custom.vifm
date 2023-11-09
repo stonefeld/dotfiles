@@ -11,13 +11,13 @@ hi Fifo cterm=bold ctermfg=cyan ctermbg=default
 hi Executable cterm=bold ctermfg=green ctermbg=default
 hi Selected cterm=bold ctermfg=magenta ctermbg=default
 hi CurrLine cterm=bold,reverse
-hi TopLine cterm=none ctermfg=white ctermbg=black
-hi TopLineSel cterm=bold ctermfg=white ctermbg=black
-hi StatusLine cterm=none ctermfg=white ctermbg=black
+hi TopLine cterm=none ctermfg=black ctermbg=white
+hi TopLineSel cterm=none ctermfg=black ctermbg=white
+hi StatusLine cterm=none ctermfg=black ctermbg=white
 hi WildMenu cterm=reverse ctermfg=yellow ctermbg=black
 hi CmdLine cterm=none ctermfg=white ctermbg=none
 hi ErrorMsg cterm=none ctermfg=white ctermbg=red
-hi Border cterm=none ctermfg=none ctermbg=black
+hi Border cterm=none ctermfg=none ctermbg=white
 hi OtherLine ctermfg=default ctermbg=default
 hi JobLine cterm=bold,reverse ctermfg=black ctermbg=white
 hi SuggestBox cterm=none ctermfg=default ctermbg=black
@@ -41,7 +41,7 @@ hi OddLine ctermfg=default ctermbg=default
 hi /^.*\.(mp3|ogg|oga|flac|m4a|mp4|mkv|pdf)$/ ctermfg=magenta
 hi /^.*\.(jpg|jpeg|png|gif|tiff|webp|bmp|svg|svgz|ico)$/ ctermfg=yellow
 hi /^.*\.(zip|gz|bz2|xz|tar|tgz|tbz2|7z|rar|iso|rpm|deb)$/ ctermfg=red
-hi /^.*\.(bak)$/ ctermfg=black
+hi /^.*\.(bak)$/ cterm=bold ctermfg=black
 hi /^.*\.(md)$/ cterm=bold ctermfg=yellow
 hi /^.*(Pipfile|package.json)$/ cterm=bold,underline ctermfg=yellow
 hi /^.*\.(xls|xlsx)$/ ctermfg=cyan

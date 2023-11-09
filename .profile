@@ -24,10 +24,14 @@ if command -v vifm &>/dev/null; then
 elif command -v ranger &>/dev/null; then
 	export TERMFM="ranger"
 fi
-if command -v brave &>/dev/null; then
-	export BROWSER="brave"
-elif command -v firefox &>/dev/null; then
-	export BROWSER="firefox"
+if [ -z "$BROWSER" ]; then
+    if command -v brave &>/dev/null; then
+        export BROWSER="brave"
+    elif command -v firefox &>/dev/null; then
+        export BROWSER="firefox"
+    elif command -v google-chrome-stable &>/dev/null; then
+        export BROWSER="google-chrome-stable"
+    fi
 fi
 
 # Some default options.
@@ -45,6 +49,7 @@ export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export HISTFILE="$XDG_CACHE_HOME"/history
+export HISTSIZE=10000
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
@@ -64,18 +69,30 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PLATFORMIO_HOME_DIR="$XDG_DATA_HOME"/platformio
 export SOLARGRAPH_CACHE="$XDG_CACHE_HOME"/solargraph
 export BUNDLE_APP_CONFIG="$XDG_DATA_HOME"/bundle
+export PSQLRC="$XDG_CONFIG_HOME"/pg/psqlrc
+export PSQL_HISTORY="$XDG_CACHE_HOME"/psql_history
+export PGPASSFILE="$XDG_CONFIG_HOME"/pg/pgpass
+export PGSERVICEFILE="$XDG_CONFIG_HOME"/pg/pg_service.conf
 
 # Setting less colors.
 export LESS=-R
-export LESS_TERMCAP_mb=$'\E[1;31m'
-export LESS_TERMCAP_md=$'\E[1;36m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[1;32m'
-export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+export LESS_TERMCAP_ZN=$(tput ssubm)
+export LESS_TERMCAP_ZV=$(tput rsubm)
+export LESS_TERMCAP_ZO=$(tput ssupm)
+export LESS_TERMCAP_ZW=$(tput rsupm)
+export GROFF_NO_SGR=1

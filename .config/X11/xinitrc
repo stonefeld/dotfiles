@@ -28,7 +28,7 @@ xset s 900
 xset dpms 0 0 1200
 
 # set the key repetion rate
-xset r rate 220 30
+# xset r rate 220 30
 
 # check if an application exists
 check() {
@@ -73,5 +73,6 @@ case $session in
               exec dwm;;
     qtile)    exec qtile start;;
     plasma)   exec startplasma-x11;;
+    cinnamon) exec cinnamon-session;;
     *)        exec $1;;
 esac
