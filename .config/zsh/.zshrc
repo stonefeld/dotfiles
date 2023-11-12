@@ -31,6 +31,9 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
 
+# Disable pipenv auto shell activation
+zstyle ':omz:plugins:pipenv' auto-shell no
+
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
 
@@ -123,6 +126,10 @@ export MODE_INDICATOR="%F{red}<<%f"
 alias ls='exa --group-directories-first -g'
 alias la='ls -a'
 alias ll='la -l'
+
+alias v='nvim'
+alias vv="[ -f 'Session.vim' ] && nvim -S Session.vim || nvim -c 'Obsession'"
+alias v.="nvim ."
 
 alias lg='lazygit'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'

@@ -2,22 +2,22 @@
 
 # If tmux is running on current terminal just switch the client.
 attach_tmux() {
-	if [ -z "$TMUX" ]; then
-		tmux attach-session -t "$1"
-	else
-		tmux switch-client -t "$1"
-	fi
+    if [ -z "$TMUX" ]; then
+        tmux attach-session -t "$1"
+    else
+        tmux switch-client -t "$1"
+    fi
 }
 
 # If no argument is passed, select one from the already existing ones.
 if [ -z "$*" ]; then
-	if pgrep tmux &>/dev/null; then
-		session=$(tmux list-sessions | fzf | cut -d ":" -f 1)
-		[ ! -z "$session" ] && attach_tmux "$session"
-	else
-		echo "tx: no tmux server running"
-	fi
-	exit
+    if pgrep tmux &>/dev/null; then
+        session=$(tmux list-sessions | fzf | cut -d ":" -f 1)
+        [ ! -z "$session" ] && attach_tmux "$session"
+    else
+        echo "tx: no tmux server running"
+    fi
+    exit
 fi
 
 # Get the session name.
@@ -35,10 +35,10 @@ shift
 
 # Create the session and rename the first window.
 tmux new-session -d -s "$session"
-if [ ! -z "$VIRTUAL_ENV" ]; then
-	tmux send-keys -t "$session" "export VIRTUAL_ENV=$VIRTUAL_ENV && clear" C-m
-	tmux setenv -t "$session" VIRTUAL_ENV $VIRTUAL_ENV
-fi
+# if [ ! -z "$VIRTUAL_ENV" ]; then
+# 	tmux send-keys -t "$session" "export VIRTUAL_ENV=$VIRTUAL_ENV && clear" C-m
+# 	tmux setenv -t "$session" VIRTUAL_ENV $VIRTUAL_ENV
+# fi
 [ ! -z "$*" ] && tmux rename-window -t "$session":1 "$1"
 shift
 
@@ -47,8 +47,8 @@ counter=2
 
 # Create a window for each following argument.
 for i in $*; do
-	tmux new-window -t "$session":$counter -n "$i"
-	let counter+=1
+    tmux new-window -t "$session":$counter -n "$i"
+    let counter+=1
 done
 
 # Destroy the counter.

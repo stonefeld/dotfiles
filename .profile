@@ -18,7 +18,7 @@ export LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 # Setting some default programs
 command -v zsh &>/dev/null && export SHELL=/bin/zsh || export SHELL=/bin/bash
 command -v nvim &>/dev/null && export EDITOR="nvim"
-command -v st &>/dev/null && export TERMINAL="st"
+command -v st &>/dev/null && export TERMINAL="kitty"
 if command -v vifm &>/dev/null; then
 	command -v vifmrun &>/dev/null && export TERMFM="vifmrun" || export TERMFM="vifm"
 elif command -v ranger &>/dev/null; then

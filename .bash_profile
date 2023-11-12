@@ -11,4 +11,5 @@
 
 if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
     xlogin
+    [ "$?" -ne 0 ] && exit
 fi

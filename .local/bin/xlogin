@@ -1,52 +1,48 @@
 #!/bin/bash
 
 # Use this variable for loop.
-READY=false
-list_envs=$(echo "dwm i3 qtile gnome-session kde-plasma cinnamon" | tr " " "\\n")
+list_envs='dwm i3 qtile gnome-session kde-plasma cinnamon'
 
 select_env () {
-	# Prompt for choice.
-	printf "\\nWelcome back $USER. Select your environment:\\n"
-	available_envs=""
-	count=1
-	for e in $list_envs; do
-		if command -v $e &>/dev/null; then
-			available_envs=$(echo "$available_envs $e")
-			echo " [$count] $e"
-			let count+=1
-		fi
-	done
-	read -p "Enter your choice: " choice
+    # Prompt for choice.
+    printf "\\nWelcome back $USER! Select your environment:\\n"
+    available_envs=""
+    count=1
+    for e in $list_envs; do
+        if command -v $e 1>/dev/null 2>&1; then
+            available_envs=$(echo "$available_envs $e")
+            echo "  [$count] $e"
+            let count+=1
+        fi
+    done
+    printf "  [t] tty\n  [q] quit\n"
+    read -p "Enter your choice: " choice
 
-	# By default mark as ok.
-	READY=true
-	let choice+=1
-	session=$(echo "$available_envs" | cut -d " " -f $choice)
+    [ "$choice" = 't' ] && exit 0
+    [ "$choice" = 'q' ] && exit 1
 
-	if [ -z "$session" ]; then
-		printf "\\nThis option is not available"
-		# If environment doesn't exist mark it as not ready.
-		READY=false
-		sleep 2
-	else
-		case $session in
-			gnome-session)
-				XDG_SESSION_TYPE=wayland dbus-run-session gnome-session;;
+    let choice+=1
+    session=$(echo "$available_envs" | cut -d " " -f $choice)
 
-			kde-plasma)
-				DESKTOP_SESSION=plasma; startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc plasma;;
+    if [ -z "$session" ]; then
+        printf '\\nThis option is not available'
+        sleep 2
+    else
+        case $session in
+            gnome-session)
+                XDG_SESSION_TYPE=wayland dbus-run-session gnome-session;;
 
-			*)
-				startx ${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc $session;;
-		esac
-	fi
+            kde-plasma)
+                DESKTOP_SESSION=plasma; startx ${XINITRC:-$HOME/.xinitrc} plasma;;
+
+            *)
+                startx ${XINITRC:-$HOME/.xinitrc} $session;;
+        esac
+    fi
 }
 
 # If no valid environment was selected repeat the loop.
-while ! $READY; do
-	clear
-	select_env
+while true; do
+    clear
+    select_env
 done
-
-# When done exit the session.
-# exit
