@@ -78,6 +78,7 @@ plugins=(
     archlinux
     colored-man-pages
     docker
+    flutter
     fzf
     git
     gitignore
