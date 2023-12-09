@@ -35,10 +35,10 @@ shift
 
 # Create the session and rename the first window.
 tmux new-session -d -s "$session"
-# if [ ! -z "$VIRTUAL_ENV" ]; then
-# 	tmux send-keys -t "$session" "export VIRTUAL_ENV=$VIRTUAL_ENV && clear" C-m
-# 	tmux setenv -t "$session" VIRTUAL_ENV $VIRTUAL_ENV
-# fi
+if [ ! -z "$VIRTUAL_ENV" ]; then
+	tmux send-keys -t "$session" "export VIRTUAL_ENV=$VIRTUAL_ENV && clear" C-m
+	tmux setenv -t "$session" VIRTUAL_ENV $VIRTUAL_ENV
+fi
 [ ! -z "$*" ] && tmux rename-window -t "$session":1 "$1"
 shift
 

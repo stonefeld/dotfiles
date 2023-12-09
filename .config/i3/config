@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:CaskaydiaCove Nerd Font 10
+font pango:CaskaydiaCove NF 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -34,6 +34,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr -c
+
+# Set trackpoint configurations
+exec --no-startup-id xinput set-prop "ETPS/2 Elantech TrackPoint" "libinput Accel Speed" 0.40
+exec --no-startup-id xinput set-prop "ETPS/2 Elantech TrackPoint" "libinput Accel Profile Enabled" 0 1
+exec --no-startup-id xinput set-prop "ETPS/2 Elantech TrackPoint" "libinput Scrolling Pixel Distance" 50
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -161,7 +166,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # always floating windows
-for_window [class="Pcmanfm"] floating enable
+for_window [class="Nemo"] floating enable
 for_window [class="Floating"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable

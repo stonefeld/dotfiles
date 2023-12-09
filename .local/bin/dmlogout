@@ -5,6 +5,7 @@ kill_x11() {
 }
 
 command -v rofi &>/dev/null && ROFI=true
+[ "$1" = '-d' ] && ROFI=false
 
 lock_text='Lock'
 logout_text='Log out'
