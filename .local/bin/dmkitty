@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sessions=$(find $HOME/.config/kitty/sessions -type f | sed "s|$HOME|~|")
+selected=$(dmenu -l 20 -p 'Select the session' <<< "$sessions")
+[ -z "$selected" ] || kitty --session "$selected"

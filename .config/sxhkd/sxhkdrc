@@ -20,11 +20,17 @@ XF86MonBrightnessUp
 XF86MonBrightnessDown
 	ctrlpanel bd 10
 
+# monitor setup
+XF86Display
+	dmdisplay
+
 # run prompt, file explorer and browser
 super + e
 	cd $HOME && termlaunch -f -g 120x34 -e $TERMFM
 super + shift + i
 	$BROWSER
+super + shift + Return
+	dmkitty
 
 # utilities
 super + a; a
@@ -32,21 +38,21 @@ super + a; a
 super + a; h
 	termlaunch -f -g 120x34 -e htop
 super + a; p
-	termlaunch -f -g 120x34 -e music
+	dmmusic
 
 # dmenu utilities
 super + a; l
-	dmlogout
+	dmlogout -d
 super + a; n
 	dmnotes
 super + a; q
-	powerprofile
+	dmpower
 super + a; r
 	dmrecord
 super + a; e
 	dmemoji
 super + a; k
-	passmenu -l 20
+	passmenu -l 20 -p 'Select the password'
 
 # screenshots
 super + Print

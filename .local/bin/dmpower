@@ -1,0 +1,9 @@
+#!/bin/sh
+
+profiles="$(powerprofilesctl list | grep ':$' | sed 's/:$//;s/\s*//g')"
+[ -z "$profiles" ] && exit
+
+selected="$(echo "$profiles" | dmenu -p 'Select your power profile')"
+[ -z "$selected" ] && exit
+
+powerprofilesctl set "$(sed 's/\*//' <<< $selected)"

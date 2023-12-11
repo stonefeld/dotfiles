@@ -40,7 +40,7 @@ inputbar {
     background-color: #cdd6f422;
     text-color: #cdd6f4ff;
     border-radius: 25%;
-    margin: 15% 30% 0% 30%;
+    margin: 7% 30% 0% 30%;
     padding: 1.5%;
 }
 
@@ -63,9 +63,9 @@ listview {
     dynamic: false;
     reverse: false;
     columns: 7;
-    lines: 3;
+    lines: 4;
     spacing: 2%;
-    margin: 5% 10% 10% 10%;
+    margin: 5% 5% 7% 5%;
     layout: vertical;
     fixed-columns: true;
 }

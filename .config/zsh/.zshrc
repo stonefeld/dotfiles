@@ -34,6 +34,10 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Disable pipenv auto shell activation
 zstyle ':omz:plugins:pipenv' auto-shell no
 
+# Enable ssh-agent identities
+zstyle ':omz:plugins:ssh-agent' quiet yes
+zstyle ':omz:plugins:ssh-agent' identities id_github
+
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
 
@@ -86,6 +90,7 @@ plugins=(
     history
     pipenv
     python
+    ssh-agent
     starship
     sudo
     systemd
@@ -101,7 +106,6 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export KEYTIMEOUT=5
-export MODE_INDICATOR="%F{red}<<%f"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8

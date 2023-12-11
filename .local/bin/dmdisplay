@@ -1,0 +1,4 @@
+#!/bin/bash
+
+selected="$(autorandr | dmenu)"
+[ -z "$selected" ] || autorandr -l "$(cut -d ' ' -f 1 <<< "$selected")"

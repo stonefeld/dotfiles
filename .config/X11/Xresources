@@ -19,11 +19,11 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
 /* XTerm setup */
-XTerm*.faceName: monospace:size=9
+XTerm*.faceName: monospace:size=10
 XTerm*.background: black
 XTerm*.foreground: white
 
 /* Sxiv setup */
 Sxiv*.background: black
 Sxiv*.foreground: white
-Sxiv*.font: monospace:size=9
+Sxiv*.font: monospace:size=10
