@@ -30,7 +30,7 @@ super + e
 super + shift + i
 	$BROWSER
 super + shift + Return
-	dmkitty
+	$SHELL $(which dmkitty)
 
 # utilities
 super + a; a

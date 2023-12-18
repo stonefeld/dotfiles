@@ -64,6 +64,10 @@ check $wallp && run $wallp
 wfm=/usr/bin/nm-applet
 check $wfm && run $wfm
 
+# numlock
+nlock=/usr/bin/numlockx
+check $nlock && run $nlock
+
 session=${1:-dwm}
 
 case $session in
