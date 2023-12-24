@@ -1,7 +1,0 @@
-#!/bin/bash
-
-case $BUTTON in
-	1) dmrecord;;
-esac
-
-[ -f /tmp/recordingpid ] && echo "^fw^[^fr^  ^fw^ Rec ]"

@@ -16,12 +16,13 @@ OPTIONS:
 \t-p --pywal\tcreate a colorscheme based on the selected picture using pywal
 
 If it's the first time using '$prgname', it's mandatory to set a wallpaper by specifying the wallpaper image.
-Once it's set, by just running the command without arguments it will restore the last picture"
+Once it's set, by just running the command without arguments it will restore the last picture
+"
 }
 
 # Print an error message, then the help message and quit
 print_error() {
-    echo "$1\n"
+    echo "$1"
     print_help
     exit
 }

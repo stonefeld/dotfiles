@@ -4,26 +4,6 @@
 # \__ \>  <| | | |   < (_| |
 # |___/_/\_\_| |_|_|\_\__,_|
 
-# volume controls
-XF86AudioRaiseVolume
-	ctrlpanel vu 10
-XF86AudioLowerVolume
-	ctrlpanel vd 10
-XF86AudioMute
-	ctrlpanel vm
-XF86AudioMicMute
-	ctrlpanel mm
-
-# brightness controls
-XF86MonBrightnessUp
-	ctrlpanel bu 10
-XF86MonBrightnessDown
-	ctrlpanel bd 10
-
-# monitor setup
-XF86Display
-	dmdisplay
-
 # run prompt, file explorer and browser
 super + e
 	cd $HOME && termlaunch -f -g 120x34 -e $TERMFM
@@ -34,7 +14,7 @@ super + shift + Return
 
 # utilities
 super + a; a
-	ctrlpanel mi
+	pavucontrol
 super + a; h
 	termlaunch -f -g 120x34 -e htop
 super + a; p
@@ -50,7 +30,7 @@ super + a; q
 super + a; r
 	dmrecord
 super + a; e
-	dmemoji
+	rofimoji --selector-args '-theme pipboy'
 super + a; k
 	passmenu -l 20 -p 'Select the password'
 

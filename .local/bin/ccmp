@@ -9,7 +9,7 @@ ofile=""                              # output file name, empty if default
 src=""                                # list of source files
 
 print_help() {
-	echo "Usage: [OPTIONS...] [FILES]
+	printf "Usage: [OPTIONS...] [FILES]
 OPTIONS:
 \t-h --help\tprint this help message
 \t-o --output\tset output name
@@ -21,7 +21,7 @@ Default args are '$args' but you can pass any other 'gcc' argument you like.
 }
 
 print_error() {
-	echo "$1\n"
+	echo "$1"
 	print_help
 	exit 1
 }

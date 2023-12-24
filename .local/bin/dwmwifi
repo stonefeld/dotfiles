@@ -1,9 +1,0 @@
-#!/bin/bash
-
-case $BUTTON in
-	1) ctrlpanel nm;;
-esac
-
-wifi=$(iwgetid -r)
-[ -z "$wifi" ] && wifi="Disconnected"
-echo " ^fc^[ 󰑫$wifi ]"

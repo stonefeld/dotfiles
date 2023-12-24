@@ -1,3 +1,0 @@
-#!/bin/sh
-[ $(pgrep -x mpd | wc -l) -gt 1 ] && killall mpd
-[ $(pgrep -x mpd) ] && ncmpcpp || (mpd && ncmpcpp)

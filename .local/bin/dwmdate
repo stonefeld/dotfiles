@@ -1,8 +1,0 @@
-#!/bin/sh
-
-case $BUTTON in
-	1) termlaunch -f -g 120x34 -e calcurse;;
-    3) dmlogout -applet;;
-esac
-
-date "+ ^fy^[ 󰃮 %a, %b %d (%Y) | 󰅐 %H:%M ] "
