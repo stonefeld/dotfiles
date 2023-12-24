@@ -1,11 +1,13 @@
 #!/bin/sh
 
 RANDOM=false  # true if random picture will be selected
-PYWAL=false   # true if pywal will be used
-PYWAL_USED=false
 
 # Get the program name
 prgname="$(basename "$0")"
+
+# pictures location
+swall_location="$HOME"/Pictures/wallpaper
+[ -z "$SWALL_LOCATION" ] || swall_location="$SWALL_LOCATION"
 
 # Print the help message
 print_help() {
@@ -13,7 +15,6 @@ print_help() {
 OPTIONS:
 \t-h --help\tprint this help message
 \t-r --random\tpick a random image from the pictures folder
-\t-p --pywal\tcreate a colorscheme based on the selected picture using pywal
 
 If it's the first time using '$prgname', it's mandatory to set a wallpaper by specifying the wallpaper image.
 Once it's set, by just running the command without arguments it will restore the last picture
@@ -53,8 +54,6 @@ default_file="$(find ${XDG_CACHE_HOME:-$HOME/.cache} -maxdepth 1 -type f -name "
 for i in $*; do
     case $i in
         -r|--random) RANDOM=true;;
-        -p|--pywal)  PYWAL=true; command -v wal 1>/dev/null 2>&1 || print_error "$prgname: 'pywal' not installed"
-                     print_error "$prgname: 'pywal' does not have any utility right now. This flag is unused";;
         -h|--help)   print_help && exit;;
         -*|--*)      print_error "$prgname: Unknown argument $i";;
         *)           [ -z "$file" ] && { check_file "$i" && file="$i"; } || print_error "$prgname: File already specified";;
@@ -62,29 +61,10 @@ for i in $*; do
 done
 
 # If random flag was used, search for a random wallpaper
-[ "$RANDOM" = true ] && file=$(find "$HOME"/Pictures/wallpaper -type f | shuf | head -n 1)
+[ "$RANDOM" = true ] && file=$(find "$swall_location" -type f | shuf | head -n 1)
 
 # If no file was specified, use the default one
 [ -z "$file" ] && { check_file "$default_file" && file="$default_file"; } || rm -f "$default_file"
 
 # Set the wallpaper
 set_wallpaper "$file"
-
-# If pywal flag was used create the colorscheme based on the wallpaper
-if [ "$PYWAL" = true ]; then
-    echo "Creating colorscheme..."
-    wal -i "$file" -n -q
-    [ "$?" -ne 0 ] && print_error "$prgname: 'pywal' had an error creating the colorcheme"
-
-    echo "Cleaning up generated colorscheme..."
-    sed '/\[SchemeUrg\]/d' -i "$HOME/.cache/wal/colors-wal-dwm.h"
-
-    echo "Recompiling st terminal..."
-    cd "$HOME/.local/src/suckenv/st/" && sudo make clean install >/dev/null
-
-    echo "Recompiling dmenu..."
-    cd "$HOME/.local/src/suckenv/dmenu" && sudo make clean install >/dev/null
-
-    echo "Recompiling dwm..."
-    cd "$HOME/.local/src/suckenv/dwm/" && sudo make clean install >/dev/null
-fi
