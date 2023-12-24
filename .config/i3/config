@@ -62,7 +62,7 @@ bindsym $mod+Shift+w kill
 
 # start dmenu (a program launcher)
 bindsym $mod+Shift+p exec --no-startup-id "dmenu_run -l 20"
-bindsym $mod+p exec --no-startup-id "rofi -modi drun -show drun -theme gnome-apps"
+bindsym $mod+p exec --no-startup-id "rofi -show drun -theme pipboy"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -172,6 +172,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
 for_window [instance="Msgcompose"] floating enable
 for_window [class="Brave-browser" window_role="pop-up"] floating enable
+for_window [class="steam"] border pixel 2
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
