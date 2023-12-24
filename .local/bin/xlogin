@@ -33,10 +33,10 @@ select_env () {
                 XDG_SESSION_TYPE=wayland dbus-run-session gnome-session;;
 
             kde-plasma)
-                DESKTOP_SESSION=plasma; startx ${XINITRC:-$HOME/.xinitrc} plasma;;
+                DESKTOP_SESSION=plasma; startx plasma;;
 
             *)
-                startx ${XINITRC:-$HOME/.xinitrc} $session;;
+                startx $session;;
         esac
     fi
 }
