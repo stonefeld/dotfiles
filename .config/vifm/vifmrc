@@ -5,7 +5,7 @@
 "   \_/ |_|_| |_| |_| |_|_|  \___|
 
 set nowrap mouse=a
-set history=100 undolevels=100
+set history=1000 undolevels=1000
 set ignorecase smartcase
 set nohlsearch incsearch
 set wildmenu wildstyle=popup
@@ -21,6 +21,7 @@ set statusline="  %t%= %A %10u:%-7g %15s %20d  "
 set vifminfo=dhistory,savedirs,chistory,state,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 set suggestoptions=delay:0,normal,visual,view,keys,marks,registers
 set previewoptions+=graphicsdelay:0
+set milleroptions=lsize:1,csize:3,rsize:4,rpreview:all
 
 colorscheme Custom
 source ~/.config/vifm/bookmarks.vifm
@@ -49,44 +50,46 @@ command! sw swall %c
 command! fw ffwpp %c
 
 " ========== MAPPINGS ========== "
-nnoremap e :edit<cr>
+nnoremap e :edit<CR>
 nnoremap E :!
-nnoremap s :shell<cr>
-nnoremap S :sort<cr>
+nnoremap s :shell<CR>
+nnoremap S :sort<CR>
 
-nnoremap w :view<cr>
-vnoremap w :view<cr>gv
+nnoremap ;m :if &millerview==1 | set nomillerview dotdirs+=nonrootparent | vsplit | else | set millerview dotdirs-=nonrootparent | only | endif<CR>
 
-nnoremap I cw<c-a>
-nnoremap cc cw<c-u>
-nnoremap A cw<c-e>
+nnoremap w :view<CR>
+vnoremap w :view<CR>gv
+
+nnoremap I cw<C-a>
+nnoremap cc cw<C-u>
+nnoremap A cw<C-e>
 nnoremap aa cW
 
-nnoremap <wait> ;f :touch<space>""<left>
-nnoremap <wait> ;d :mkdir<space>""<left>
+nnoremap <wait> ;f :touch<space>""<Left>
+nnoremap <wait> ;d :mkdir<space>""<Left>
 
-nnoremap <wait> xx :ex<cr>
-nnoremap <wait> xz :zip<cr>
-nnoremap <wait> xt :tar<cr>
-nnoremap <wait> xg :tgz<cr>
+nnoremap <wait> xx :ex<CR>
+nnoremap <wait> xz :zip<CR>
+nnoremap <wait> xt :tar<CR>
+nnoremap <wait> xg :tgz<CR>
 
-nnoremap <wait> xw :fw<cr>
+nnoremap <wait> xw :fw<CR>
 
-nnoremap <silent> <c-t> :tabnew<cr>
-nnoremap <silent> <c-k> :tabc<cr>
-nnoremap <silent> <c-l> :tabn<cr>
-nnoremap <silent> <c-h> :tabp<cr>
+nnoremap <silent> <C-t> :tabnew<CR>
+nnoremap <silent> <C-k> :tabc<CR>
+nnoremap <silent> <C-l> :tabn<CR>
+nnoremap <silent> <C-h> :tabp<CR>
 
-noremap <silent> ao :sync %c<cr>
+noremap <silent> ao :sync %c<CR>
 
-nnoremap <wait> ,w :set wrap!<cr>
+nnoremap <wait> ,w :set wrap!<CR>
 
-nnoremap qq :q<cr>
+nnoremap qq :q<CR>
 
 nnoremap J 5j
 nnoremap K 5k
 
-nmap dr :drag<cr>
+nmap dr :drag<CR>
 
 " Open files with the program specified on each system
 filetype *

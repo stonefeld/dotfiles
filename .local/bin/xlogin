@@ -15,8 +15,8 @@ select_env () {
             let count+=1
         fi
     done
-    printf "  [t] tty\n  [q] quit\n"
-    read -p "Enter your choice: " choice
+    printf '  [t] tty\n  [q] quit\n'
+    read -p 'Enter your choice: ' choice
 
     [ "$choice" = 't' ] && exit 0
     [ "$choice" = 'q' ] && exit 1
@@ -25,7 +25,7 @@ select_env () {
     session=$(echo "$available_envs" | cut -d " " -f $choice)
 
     if [ -z "$session" ]; then
-        printf '\\nThis option is not available'
+        printf '\nThis option is not available'
         sleep 2
     else
         case $session in

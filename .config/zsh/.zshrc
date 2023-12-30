@@ -54,7 +54,7 @@ zstyle ':omz:plugins:ssh-agent' identities id_github
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -81,23 +81,18 @@ plugins=(
     aliases
     archlinux
     colored-man-pages
-    docker
-    flutter
     fzf
     git
     gitignore
     git-flow
-    history
     pipenv
     python
     ssh-agent
-    starship
-    sudo
     systemd
-    tmux
-    vi-mode
     zsh-autosuggestions
     zsh-syntax-highlighting
+    vi-mode
+    starship
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -140,3 +135,5 @@ alias lg='lazygit'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
 bindkey '^y' autosuggest-accept
+bindkey '^k' up-line-or-beginning-search
+bindkey '^j' down-line-or-beginning-search
