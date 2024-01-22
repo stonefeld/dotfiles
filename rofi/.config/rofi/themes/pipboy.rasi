@@ -1,0 +1,87 @@
+configuration {
+    show-icons: false;
+    font: "Cascadia Code 14";
+    display-drun: ">";
+    display-run: "(R) >";
+    modes: [drun, run];
+    scroll-method: 1;
+    kb-row-up: "Up,Control+p,Control+k";
+    kb-row-down: "Down,Control+n,Control+j";
+    ml-row-left: "";
+    ml-row-right: "";
+    ml-row-up: "";
+    ml-row-down: "";
+    me-select-entry: "";
+    me-accept-entry: "";
+}
+
+* {
+    foreground: #babbf1ff;
+    background: #11111bbb;
+
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+window {
+    transparency: "real";
+    width: 100%;
+    height: 100%;
+    location: center;
+}
+
+mainbox {
+    background-color: @background;
+    padding: 37% 30%;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+listview {
+    border: 2px solid 0 0;
+    padding: 4px 0 0;
+    border-color: @foreground;
+    spacing: 4px;
+    scrollbar: true;
+    cycle: false;
+}
+
+element {
+    border: 0;
+    padding: 2px;
+}
+
+element selected {
+    background-color: @foreground;
+}
+
+element-text selected {
+    text-color: #000000ff;
+}
+
+scrollbar {
+    width: 4px;
+    border: 0;
+    handle-color: @foreground;
+    handle-width: 8px;
+    padding: 0;
+}
+
+inputbar {
+    spacing: 0;
+    padding: 2px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    padding: 0 10px 0 0;
+}
+
+entry {
+    expand: true;
+    blink: true;
+    cursor: text;
+    cursor-width: 8px;
+}
+
+// vim: ft=rasi

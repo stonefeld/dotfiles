@@ -1,7 +1,0 @@
-#!/bin/bash
-
-size=0
-for i in $(find "$PWD" -maxdepth 1 -type f); do
-    [ -f "$i" ] && let size+=$(stat -c "%s" "$i")
-done
-printf "%s" $(numfmt --to=iec --format="%.1f" --round=nearest $size) > "${XDG_CONFIG_HOME:-$HOME/.config}"/vifm/dirsum

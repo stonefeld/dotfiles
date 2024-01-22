@@ -1,0 +1,7 @@
+[pycodestyle]
+count = False
+statistics = False
+max-line-length = 120
+# ignore = E501,W503,W504,W291,W293
+
+# vim: ft=cfg

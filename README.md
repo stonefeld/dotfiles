@@ -2,27 +2,27 @@
 
 ## Installation
 
-```
-$ git clone --bare https://github.com/stonefeld/dotfiles $HOME/.local/share/dotfiles
-$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
-$ dotfiles checkout
+> You need `stow` installed for this to work
+
+Simply run the following command for each component you want to have
+
+```bash
+stow -t $HOME <component>
+
+# For example, to copy the zsh configs
+stow -t $HOME zsh
+
+# To get all configs run
+find . -maxdepth 1 -type d ! -path '*/.*' ! -path '.' | xargs -n1 stow -t $HOME
 ```
 
-> **Warning:** This snippet may conflict if any file from the repo already exists.
+To understand more about `stow` read the [official page documentation](https://www.gnu.org/software/stow/manual/stow.html)
 
 ## Modifying `startx`
 
 When installing `xorg-xinit` in **Arch Linux**, the following command needs to
-be executed for `$XINITRC` and `$XSERVERRC` to take effect.
+be executed for `$XINITRC` and `$XSERVERRC` to take effect (**as superuser**).
 
-```
-# sed -i 's/userclientrc="${XSERVERRC}"/userserverrc="${XSERVERRC}"/' /usr/bin/startx
-```
-
-## Getting `zsh` config to work
-
-```
-$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-$ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```bash
+sed -i 's/userclientrc="${XSERVERRC}"/userserverrc="${XSERVERRC}"/' /usr/bin/startx
 ```

@@ -1,0 +1,61 @@
+#  _ _____     _        _
+# (_)___ / ___| |_ __ _| |_ _   _ ___
+# | | |_ \/ __| __/ _` | __| | | / __|
+# | |___) \__ \ || (_| | |_| |_| \__ \
+# |_|____/|___/\__\__,_|\__|\__,_|___/
+
+general {
+    colors = true
+    interval = 5
+}
+
+order += "ipv6"
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "disk /"
+order += "load"
+order += "memory"
+order += "battery all"
+order += "volume master"
+order += "tztime local"
+
+wireless _first_ {
+    format_up = "W: (%quality at %essid) %ip"
+    format_down = "W: down"
+}
+
+ethernet _first_ {
+    format_up = "E: %ip (%speed)"
+    format_down = "E: down"
+}
+
+disk "/" {
+    format = "%avail"
+}
+
+load {
+    format = "%1min"
+}
+
+memory {
+    format = "%used | %available"
+    threshold_degraded = "1G"
+    format_degraded = "MEMORY < %available"
+}
+
+battery all {
+    last_full_capacity = true
+    format = "%status %percentage %remaining"
+}
+
+volume master {
+    format = "VOL %volume"
+    format_muted = "MUT %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+tztime local {
+    format = "%Y-%m-%d %H:%M"
+}
