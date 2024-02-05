@@ -41,7 +41,7 @@ run() {
 }
 
 # polkit agent
-polkit=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+polkit=/usr/bin/lxpolkit
 check $polkit && run $polkit
 
 # compositor

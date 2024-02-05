@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rnnoise status | egrep '^The plugin is not loaded.$' &>/dev/null
+if [ "$?" -eq 0 ]; then
+    rnnoise activate -d $(rnnoise list | sed '/Monitor/d; 1q; s/^\[//; s/\].*//')
+    notify-send -i 'audio-input-microphone' 'Noise cancelling activated' "To disable run 'noise_toggle'"
+else
+    rnnoise deactivate --force
+    notify-send -i 'audio-input-microphone' 'Noise cancelling deactivated' "To enable run 'noise_toggle'"
+fi

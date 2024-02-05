@@ -2,8 +2,6 @@
 
 cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/pkg_updates"
 
-pkill -RTMIN+6 dwmblocks
-
 notify() {
 	message="$1 package(s) to update\n- Pacman: $2\n- AUR: $3"
 	notify-send -i cloud-download "Package upgrades" "$message"
@@ -16,5 +14,3 @@ aur_count="$(yay -Quaq 2>/dev/null | wc -l)"
 echo $count > "$cache_file"
 
 [ "$count" -gt 0 ] && notify $count "$pacman_count" "$aur_count"
-
-pkill -RTMIN+6 dwmblocks

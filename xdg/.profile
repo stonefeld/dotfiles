@@ -5,40 +5,33 @@
 # (_) .__/|_|  \___/|_| |_|_|\___|
 #   |_|
 
-# XDG directories.
+# check if exists and export it
+check() {
+    if command -v "$1" &>/dev/null; then
+        export "$2"="$1"
+    fi
+}
+
+# xdg directories
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 
-# Relevant global variables.
+# set additional paths and locale
 export PATH=~/.local/bin/:~/.local/share/cargo/bin/:$PATH
 export LC_COLLATE="C"
 
-# Setting some default programs
-command -v zsh &>/dev/null && export SHELL=/bin/zsh || export SHELL=/bin/bash
+# set default applications
 command -v nvim &>/dev/null && { export EDITOR="nvim"; export MANPAGER='nvim +Man!'; }
-if command -v kitty &>/dev/null; then
-    export TERMINAL="kitty"
-elif command -v st &>/dev/null; then
-    export TERMINAL="st"
-fi
-if command -v vifm &>/dev/null; then
-    command -v vifmrun &>/dev/null && export TERMFM="vifmrun" || export TERMFM="vifm"
-elif command -v ranger &>/dev/null; then
-    export TERMFM="ranger"
-fi
-if [ -z "$BROWSER" ]; then
-    if command -v brave &>/dev/null; then
-        export BROWSER="brave"
-    elif command -v firefox &>/dev/null; then
-        export BROWSER="firefox"
-    fi
-fi
+check /bin/zsh SHELL
+check alacritty TERMINAL
+check vifmrun TERMFM
+check brave BROWSER
 
 # override those defaults
-# export TERMINAL="alacritty"
+export BROWSER="firefox"
 
-# Some default options.
+# configuring the system
 export LESSHISTFILE=-
 export QT_QPA_PLATFORMTHEME=qt5ct
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=16"
@@ -46,15 +39,15 @@ export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={.git,.venv,
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export RANGER_DEVICONS_SEPARATOR="  "
 export NEXT_TELEMETRY_DISABLED=1
+export HISTSIZE=10000
 
-# Cleaning home directory.
+# cleaning home directory
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export HISTFILE="$XDG_CACHE_HOME"/history
-export HISTSIZE=10000
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
@@ -84,20 +77,3 @@ export PSQLRC="$XDG_CONFIG_HOME"/pg/psqlrc
 export PSQL_HISTORY="$XDG_CACHE_HOME"/psql_history
 export PGPASSFILE="$XDG_CONFIG_HOME"/pg/pgpass
 export PGSERVICEFILE="$XDG_CONFIG_HOME"/pg/pg_service.conf
-
-# # Setting less colors.
-# export LESS=-R
-# export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
-# export LESS_TERMCAP_md=$(tput bold; tput setaf 6)
-# export LESS_TERMCAP_me=$(tput sgr0)
-# export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
-# export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-# export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7)
-# export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
-# export LESS_TERMCAP_mr=$(tput rev)
-# export LESS_TERMCAP_mh=$(tput dim)
-# export LESS_TERMCAP_ZN=$(tput ssubm)
-# export LESS_TERMCAP_ZV=$(tput rsubm)
-# export LESS_TERMCAP_ZO=$(tput ssupm)
-# export LESS_TERMCAP_ZW=$(tput rsupm)
-# export GROFF_NO_SGR=1

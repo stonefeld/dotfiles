@@ -12,7 +12,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # set the font for statusbar and window title
-font pango:Cascadia Code Bold 11
+font pango:Cascadia Code Bold 12
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
@@ -34,7 +34,7 @@ set $ws10 "10"
 #### STARTUP CONFIG ####
 ########################
 # startup programs
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -f -e -c '#000000' -o '#a6d189' -w '#e78284' -l '#ffffff'
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -f -e -c '#1e1e2e'
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr -c
 

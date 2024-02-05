@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# select a session based from path
+if [ "$#" -eq '1' ]; then
+    selected="$1"
+elif [ "$#" -eq '0' ]; then
+    selected=$(find ~/Documents/projects ~/Documents/uni/projects -mindepth 1 -maxdepth 1 -type d | fzf)
+else
+    echo "Usage: $(basename "$0") [path]"
+    exit 1
+fi
+
+# if none was selected, exit
+[ -z "$selected" ] && exit 1
+[ -d "$selected" ] || exit 1
+
+# get the session name and check if tmux is running
+session=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# create the new session if it doesn't exist otherwise attach to it
+if [ -z "$tmux_running" ] || ! tmux has-session -t "$session" 2>/dev/null; then
+    tmux new-session -ds "$session" -c "$selected"
+fi
+
+# then, if tmux is running in the current terminal, switch to the session
+# otherwise attach to it
+if [ -z "$TMUX" ]; then
+    tmux attach-session -t "$session"
+else
+    tmux switch-client -t "$session"
+fi
