@@ -21,7 +21,6 @@ set statusline="  %t%= %A %10u:%-7g %15s %20d  "
 set vifminfo=dhistory,savedirs,chistory,state,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 set suggestoptions=delay:0,normal,visual,view,keys,marks,registers
 set previewoptions+=graphicsdelay:0
-set milleroptions=lsize:1,csize:3,rsize:4,rpreview:all
 
 colorscheme Custom
 source ~/.config/vifm/bookmarks.vifm
@@ -54,8 +53,6 @@ nnoremap e :edit<CR>
 nnoremap E :!
 nnoremap s :shell<CR>
 nnoremap S :sort<CR>
-
-nnoremap ;m :if &millerview==1 | set nomillerview dotdirs+=nonrootparent | vsplit | else | set millerview dotdirs-=nonrootparent | only | endif<CR>
 
 nnoremap w :view<CR>
 vnoremap w :view<CR>gv

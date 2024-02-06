@@ -1,6 +1,6 @@
 configuration {
     show-icons: false;
-    font: "Cascadia Code 14";
+    font: "monospace 14";
     display-drun: ">";
     display-run: "(R) >";
     modes: [drun, run];

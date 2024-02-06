@@ -43,7 +43,7 @@
     ##############
     #### TEXT ####
     ##############
-    font = CaskaydiaCove Nerd Font 10    # font used by the notifications
+    font = monospace 10                  # font used by the notifications
     line_height = 0                      # line spacing
     markup = strip                       # text treatment (full|strip|no)
     # The format of the message. Possible variables are:

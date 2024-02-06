@@ -2,13 +2,16 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$ZDOTDIR/.oh-my-zsh"
+export ZSH="$HOME/.config/zsh/oh-my-zsh"
 
 [ -d "$ZSH" ] || {
-    source $ZDOTDIR/.zshrc.no_omz
+    source $HOME/.config/zsh/zshrc.no_omz
     unset ZSH
     return
 }
+
+# change zcompdump location
+ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-${(%):-%m}-${ZSH_VERSION}"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -98,8 +101,8 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     vi-mode
-    starship
 )
+command -v starship &>/dev/null && plugins+=(starship)
 
 source $ZSH/oh-my-zsh.sh
 

@@ -4,13 +4,14 @@ export PROMPT='%B%F{red}[%f%F{yellow}%n%f%F{green}@%f%F{blue}%m%f %F{magenta}%3~
 # Install oh-my-zsh
 install-omz() {
     command -v curl &>/dev/null || { echo "curl not found"; return 1; }
-    ZSH="$ZDOTDIR/.oh-my-zsh" KEEP_ZSHRC=yes RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ZSH="$HOME/.config/zsh/oh-my-zsh" KEEP_ZSHRC=yes RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     command -v git &>/dev/null || { echo "git not found"; return 1; }
-    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$ZDOTDIR/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$ZDOTDIR/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.config/zsh/oh-my-zsh/custom/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/zsh/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-    source "$ZDOTDIR/.zshrc"
+    echo 'Oh-my-zsh installed'
+    echo 'Please restart your terminal'
 }
 
 # Basic keybindings
@@ -34,11 +35,14 @@ bindkey -v
 KEYTIMEOUT=5
 
 # Notify that oh-my-zsh is not installed
-if [ ! -d "$ZDOTDIR/.oh-my-zsh" ] && [ ! -f "${XDG_CACHE_HOME:-$HOME/.cache}/no_omz" ]; then
+if [ ! -d "$HOME/.config/zsh/oh-my-zsh" ] && [ ! -f "${XDG_CACHE_HOME:-$HOME/.cache}/no_omz" ]; then
     echo 'Oh-my-zsh is not installed'
     echo -n 'Do you want to install it? (y/n) '
     read -k 1 answer
     echo
-    [ "$answer" = 'y' ] && install-omz || touch "${XDG_CACHE_HOME:-$HOME/.cache}/no_omz"
+    [ "$answer" = 'y' ] && install-omz || {
+        touch "${XDG_CACHE_HOME:-$HOME/.cache}/no_omz"
+        echo 'Run `install-omz` to install oh-my-zsh'
+    }
 fi
 
