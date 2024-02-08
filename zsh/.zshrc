@@ -148,3 +148,5 @@ alias pys='source .venv/bin/activate'
 
 bindkey '^y' autosuggest-accept
 bindkey -s '^f' "tmux-sessionizer\n"
+
+[ -d "$PWD/.venv" ] && pys
