@@ -96,6 +96,7 @@ plugins=(
     git-flow
     pipenv
     python
+    rust
     ssh-agent
     systemd
     zsh-autosuggestions
@@ -132,10 +133,12 @@ export KEYTIMEOUT=5
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ls='exa --group-directories-first -g'
-alias la='ls -a'
-alias ll='la -l'
-unalias l
+if command -v eza &>/dev/null; then
+    alias ls='eza --group-directories-first -g'
+    alias la='ls -a'
+    alias ll='la -l'
+    unalias l
+fi
 
 alias v='nvim'
 alias vv="[ -f 'Session.vim' ] && nvim -S Session.vim || nvim -c 'Obsession'"

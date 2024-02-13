@@ -41,13 +41,11 @@ case $TERMINAL in
 
     alacritty)
         [ "$EXECUTE" = true ] && exe="-e $program"
-        [ "$FLOATING" = true ] && float="-o window.class.general=Floating -o window.dimensions.columns=$COLS -o window.dimensions.lines=$ROWS";;
+        [ "$FLOATING" = true ] && float="-o window.class.instance='Floating' -o window.dimensions.columns=$COLS -o window.dimensions.lines=$ROWS";;
 
     kitty)
         [ "$EXECUTE" = true ] && exe="$program"
         [ "$FLOATING" = true ] && float="--class Floating -o initial_window_width=${COLS}c -o initial_window_height=${ROWS}c -o remember_window_size=no"
 esac
 
-echo $exe
-echo $float
 setsid -f $TERMINAL $float $exe
