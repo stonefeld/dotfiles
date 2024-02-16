@@ -99,10 +99,12 @@ plugins=(
     rust
     ssh-agent
     systemd
+    zoxide
     zsh-autosuggestions
     zsh-syntax-highlighting
     vi-mode
 )
+
 command -v starship &>/dev/null && plugins+=(starship)
 
 source $ZSH/oh-my-zsh.sh
@@ -145,9 +147,9 @@ alias vv="[ -f 'Session.vim' ] && nvim -S Session.vim || nvim -c 'Obsession'"
 alias v.="nvim ."
 
 alias lg='lazygit'
-# alias dotfiles='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
 
 alias pys='source .venv/bin/activate'
+alias pyd='deactivate'
 
 bindkey '^y' autosuggest-accept
 bindkey -s '^f' "tmux-sessionizer\n"
