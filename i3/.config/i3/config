@@ -30,6 +30,9 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# the amount of pixels to snap window edges to when moving or resizing
+set $move_step 20
+
 ########################
 #### STARTUP CONFIG ####
 ########################
@@ -37,15 +40,6 @@ set $ws10 "10"
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -f -e -c '#1e1e2e'
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr -c
-
-# touchpad configurations
-exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
-exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
-
-# trackpoint configurations
-exec --no-startup-id xinput set-prop "ETPS/2 Elantech TrackPoint" "libinput Accel Speed" 0.40
-exec --no-startup-id xinput set-prop "ETPS/2 Elantech TrackPoint" "libinput Accel Profile Enabled" 0 1
-exec --no-startup-id xinput set-prop "ETPS/2 Elantech TrackPoint" "libinput Scrolling Pixel Distance" 50
 
 #####################
 #### KEYBINDINGS ####
@@ -78,10 +72,10 @@ bindsym $mod+j focus down
 bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left $move_step
+bindsym $mod+Shift+k move up $move_step
+bindsym $mod+Shift+j move down $move_step
+bindsym $mod+Shift+l move right $move_step
 
 # change focus tiling / floating
 bindsym $mod+m focus mode_toggle
@@ -149,10 +143,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # these bindings trigger as soon as you enter the resize mode
-    bindsym h resize shrink width 5 px or 5 ppt
-    bindsym k resize grow height 5 px or 5 ppt
-    bindsym j resize shrink height 5 px or 5 ppt
-    bindsym l resize grow width 5 px or 5 ppt
+    bindsym h resize shrink width 20 px or 5 ppt
+    bindsym k resize grow height 20 px or 5 ppt
+    bindsym j resize shrink height 20 px or 5 ppt
+    bindsym l resize grow width 20 px or 5 ppt
 
     # back to normal: Enter or Escape or $mod+r
     bindsym Return mode "default"
@@ -167,7 +161,7 @@ bindsym $mod+r mode "resize"
 #### WINDOW RULES ####
 ######################
 # always floating windows
-for_window [class="Nemo"] floating enable
+for_window [class="Pcmanfm"] floating enable
 for_window [class="Floating"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable

@@ -1,51 +1,52 @@
 #!/bin/sh
 
-FLOATING=false
-DIMENSION=false
-DIM_READY=false
-EXECUTE=false
-
-# get the program name
 prgname="$(basename "$0")"
 
 print_error() {
-    echo "$1"
+    echo "$prgname: $1"
     exit 1
 }
 
-for i in $*; do
-    if [ "$DIMENSION" = true ] && [ "$DIM_READY" = false ]; then
-        echo "$i" | grep -E '^[0-9]+x[0-9]+$' 1>/dev/null
-        [ "$?" -ne 0 ] && print_error "$prgname: bad dimension format"
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -f) [ "$float" = "true" ] && print_error "Float flag already set"
+            float="true" ;;
 
-        COLS=$(echo "$i" | cut -d 'x' -f 1)
-        ROWS=$(echo "$i" | cut -d 'x' -f 2)
-        DIM_READY=true
-    fi
+        -g) [ "$geometry" = "true" ] && print_error "Geometry flag already set"
+            [ -z "$2" ] && print_error "Missing geometry"
+            echo "$2" | grep -E '^[0-9]+x[0-9]+$' &>/dev/null || print_error "Invalid geometry: $2"
+            geometry="true"
+            rows="$(echo "$2" | cut -d'x' -f2)"
+            cols="$(echo "$2" | cut -d'x' -f1)"
+            shift ;;
 
-    if [ "$EXECUTE" = true ]; then
-        program="$program $i"
-    fi
+        -e) [ -n "$cmd" ] && print_error "Command already set"
+            [ -z "$2" ] && print_error "Missing command"
+            cmd="$2" ; shift ;;
 
-    case $i in
-        -g|--geometry) [ "$DIMENSION" = false ] && DIMENSION=true || print_error "$prgname: dimension already specified";;
-        -f|--floating) FLOATING=true;;
-        -e|--execute)  [ "$EXECUTE" = false ] && EXECUTE=true || print_error "$prgname: program to exectue already specified";;
+        *) print_error "Unknown argument: $1" ;;
     esac
+    shift
 done
 
-case $TERMINAL in
+terminal="${TERMINAL:-alacritty}"
+
+case "$terminal" in
     st)
-        [ "$EXECUTE" = true ] && exe="-e $program"
-        [ "$FLOATING" = true ] && float="-c Floating -g ${COLS}x${ROWS}";;
+        [ "$float" = "true" ] && float='-c Floating'
+        [ "$geometry" = "true" ] && geometry="-g ${cols}x${rows}"
+        [ -n "$cmd" ] && cmd="-e $cmd" ;;
 
     alacritty)
-        [ "$EXECUTE" = true ] && exe="-e $program"
-        [ "$FLOATING" = true ] && float="-o window.class.instance='Floating' -o window.dimensions.columns=$COLS -o window.dimensions.lines=$ROWS";;
+        [ "$float" = "true" ] && float='--class Floating'
+        [ "$geometry" = "true" ] && geometry="-o window.dimensions.columns=$cols -o window.dimensions.lines=$rows"
+        [ -n "$cmd" ] && cmd="-e $cmd" ;;
 
     kitty)
-        [ "$EXECUTE" = true ] && exe="$program"
-        [ "$FLOATING" = true ] && float="--class Floating -o initial_window_width=${COLS}c -o initial_window_height=${ROWS}c -o remember_window_size=no"
+        [ "$float" = "true" ] && float='--class Floating'
+        [ "$geometry" = "true" ] && geometry="-o initial_window_width=${cols}c -o initial_window_height=${rows}c -o remember_window_size=no" ;;
+
+    *) print_error "Unknown terminal: $terminal" ;;
 esac
 
-setsid -f $TERMINAL $float $exe
+setsid -f $terminal $float $geometry $cmd

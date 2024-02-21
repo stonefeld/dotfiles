@@ -5,7 +5,7 @@
 /* /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/ */
 
 /* Cursor setup */
-Xcursor.theme: Bibata-Modern-Classic
+Xcursor.theme: Breeze_Default
 Xcursor.size: 32
 
 /* Display setup */

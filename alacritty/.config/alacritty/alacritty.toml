@@ -1,9 +1,13 @@
 # set the colorscheme
-import = ["~/.config/alacritty/catppuccin-macchiato.toml"]
+import = ["~/.config/alacritty/catppuccin-mocha.toml"]
 
 # have the same padding all around the window
 [window]
 dynamic_padding = true
+
+[window.dimensions]
+columns = 120
+lines = 30
 
 # set the terminal name for tmux compatibility
 [env]
@@ -15,6 +19,7 @@ size = 12.0
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
+# family = "CaskaydiaCove Nerd Font"
 
 # no need for the cursor
 [mouse]

@@ -6,7 +6,7 @@
 
 # run prompt, file explorer and browser
 super + e
-	cd $HOME && termlaunch -f -g 120x34 -e $TERMFM
+	pcmanfm $HOME
 super + shift + i
 	$BROWSER
 
@@ -14,7 +14,7 @@ super + shift + i
 super + a; a
 	pavucontrol
 super + a; h
-	termlaunch -f -g 120x34 -e htop
+	termlaunch -f -e htop
 super + a; p
 	dmmusic
 super + a; m; n
