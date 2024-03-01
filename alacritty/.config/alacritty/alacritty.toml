@@ -1,5 +1,5 @@
 # set the colorscheme
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/catppuccin-mocha.toml", "~/AppData/Roaming/alacritty/catppuccin-mocha.toml"]
 
 # have the same padding all around the window
 [window]
@@ -18,8 +18,10 @@ TERM = "xterm-256color"
 size = 12.0
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
-# family = "CaskaydiaCove Nerd Font"
+# family = "Hack Nerd Font"
+# family = "JetBrainsMono Nerd Font"
+# family = "FiraCode Nerd Font"
+family = "CaskaydiaCove Nerd Font"
 
 # no need for the cursor
 [mouse]
@@ -45,3 +47,8 @@ mods = "Alt"
 action = "ScrollPageDown"
 key = "D"
 mods = "Alt"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Enter"
+mods = "Control|Shift"

@@ -32,7 +32,7 @@
   <property name="layoutBottomToTop" value="false"/>
   <property name="numPairsOffset" value="1"/>
   <!--The icon theme, allowed values are "disabled", "onDrawOfLastPage", and "onScrollOfLastPage"-->
-  <property name="emptyLastPageAppend" value="onDrawOfLastPage"/>
+  <property name="emptyLastPageAppend" value="disabled"/>
   <property name="presentationMode" value="false"/>
   <!--Which GUI elements are shown in default view mode, separated by a colon (,)-->
   <property name="defaultViewModeAttributes" value="showMenubar,showToolbar,showSidebar"/>
@@ -47,10 +47,10 @@
   <!--The icon theme, allowed values are "iconsColor", "iconsLucide"-->
   <property name="iconTheme" value="iconsLucide"/>
   <property name="highlightPosition" value="true"/>
-  <property name="cursorHighlightColor" value="2164260608"/>
-  <property name="cursorHighlightBorderColor" value="2147483903"/>
+  <property name="cursorHighlightColor" value="2147483648"/>
+  <property name="cursorHighlightBorderColor" value="2885615616"/>
   <property name="cursorHighlightRadius" value="30"/>
-  <property name="cursorHighlightBorderWidth" value="0"/>
+  <property name="cursorHighlightBorderWidth" value="2"/>
   <property name="darkTheme" value="true"/>
   <property name="useStockIcons" value="false"/>
   <property name="disableScrollbarFadeout" value="false"/>
@@ -71,7 +71,7 @@
   <property name="drawDirModsRadius" value="50"/>
   <property name="snapRotation" value="true"/>
   <property name="snapRotationTolerance" value="0.3"/>
-  <property name="snapGrid" value="true"/>
+  <property name="snapGrid" value="false"/>
   <property name="snapGridTolerance" value="0.5"/>
   <property name="snapGridSize" value="14.17"/>
   <property name="strokeRecognizerMinSize" value="40"/>
@@ -215,7 +215,7 @@
     <data name="eraser">
       <attribute name="drawingType" type="string" value="default"/>
       <attribute name="size" type="string" value="MEDIUM"/>
-      <attribute name="type" type="string" value="deleteStroke"/>
+      <attribute name="type" type="string" value="default"/>
     </data>
     <data name="hand">
       <attribute name="drawingType" type="string" value="default"/>
@@ -251,7 +251,7 @@
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="selectPdfTextLinear">
-      <attribute name="color" type="hex" value="ff000000"/>
+      <attribute name="color" type="hex" value="ffff00"/>
       <attribute name="drawingType" type="string" value="default"/>
     </data>
     <data name="selectPdfTextRect">

@@ -60,10 +60,6 @@ check $keys && run $keys
 wallp="$HOME"/.local/bin/swall
 check $wallp && run $wallp
 
-# wifi manager
-wfm=/usr/bin/nm-applet
-check $wfm && run $wfm
-
 # numlock
 nlock=/usr/bin/numlockx
 check $nlock && run $nlock
