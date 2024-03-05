@@ -1,5 +1,5 @@
 # set the colorscheme
-import = ["~/.config/alacritty/catppuccin-mocha.toml", "~/AppData/Roaming/alacritty/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/tokyonight-night.toml", "~/AppData/Roaming/alacritty/tokyonight-night.toml"]
 
 # have the same padding all around the window
 [window]
