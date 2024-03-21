@@ -171,7 +171,7 @@ for_window [class="Brave-browser" window_role="pop-up"] floating enable
 for_window [class="firefox" instance="Places"] floating enable
 
 # add border and titlebar to windows that don't have one
-for_window [class=".*"] border normal
+# for_window [class=".*"] border normal
 
 ###################
 #### STATUSBAR ####

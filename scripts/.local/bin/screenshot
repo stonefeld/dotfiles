@@ -1,23 +1,41 @@
 #!/bin/sh
 
-filename="screenshot-$(date '+%Y_%m_%d-%H_%M_%S').png"
-filelocation="$HOME/Pictures/screenshots/"
+DUNST=$(command -v dunst)
+FILENAME="screenshot-$(date '+%Y_%m_%d-%H_%M_%S').png"
+LOCATION_TMP="/tmp/screenshots"
+LOCATION="$HOME/Pictures/screenshots"
 
-[ -d "$filelocation" ] && mkdir -p "$destination"
+[ -d "$LOCATION" ] || mkdir -p "$LOCATION"
+[ -d "$LOCATION_TMP" ] || mkdir -p "$LOCATION_TMP"
+
+location="$LOCATION"
+filename="$FILENAME"
 
 if [ "$#" -eq 1 ]; then
-	if [ "$1" = "-s" ]; then
-		scrot -i -s -f "$filelocation/$filename" 1>/dev/null
-	else
-		scrot -i -d $1 "$filelocation/$filename" 1>/dev/null
-	fi
+    if [ "$1" = "-s" ]; then
+        [ -z "$DUNST" ] || { location="$LOCATION_TMP"; filename="screenshot"; }
+        [ -f "$location/$filename" ] && rm "$location/$filename" 2>/dev/null
+        scrot -i -s -f "$location/$filename" 1>/dev/null
+    else
+        scrot -i -d $1 "$location/$filename" 1>/dev/null
+    fi
 else
-	scrot -i "$filelocation/$filename" 1>/dev/null
+    scrot -i "$location/$filename" 1>/dev/null
 fi
 
 [ "$?" -ne 0 ] && exit
 
-xclip -se c -t image/png -i "$filelocation/$filename"
-
-notify-send -i "$filelocation/$filename" "Copied to clipboard" "Screenshot $filename copied to clipboard"
 canberra-gtk-play -i device-added
+xclip -se c -t image/png -i "$location/$filename"
+
+if [ "$1" = "-s" ] && [ ! -z "$DUNST" ]; then
+    action=$(dunstify --action="default,Save screenshot" -i "$location/$filename" "Screenshot copied" "Screenshot copied to clipboard")
+    case "$action" in
+        "default")
+            mv "$location/$filename" "$LOCATION/$FILENAME"
+            notify-send -i "$LOCATION/$FILENAME" "Screenshot saved to files" "Now it's located at $LOCATION"
+            ;;
+    esac
+else
+    notify-send -i "$location/$filename" "Saved and copied" "Screenshot $filename copied to clipboard"
+fi

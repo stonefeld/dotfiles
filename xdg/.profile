@@ -18,7 +18,7 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 
 # set additional paths and locale
-export PATH=~/.local/bin/:~/.local/share/cargo/bin/:$PATH
+export PATH=~/.local/bin/:~/.local/share/cargo/bin/:~/.local/share/go/bin/:$PATH
 export LC_COLLATE="C"
 
 # set default applications
@@ -66,7 +66,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export GOPATH="$XDG_DATA_HOME"/go
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PLATFORMIO_HOME_DIR="$XDG_DATA_HOME"/platformio

@@ -34,7 +34,7 @@ super + a; q
 super + a; r
 	dmrecord
 super + a; e
-	rofimoji --selector-args '-theme pipboy'
+	rofimoji --action clipboard --selector-args '-theme pipboy'
 super + a; k
 	passmenu -l 20 -p 'Select the password'
 
