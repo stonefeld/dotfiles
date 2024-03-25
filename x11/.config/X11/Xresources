@@ -6,11 +6,11 @@
 
 /* Cursor setup */
 Xcursor.theme: Breeze_Default
-Xcursor.size: 32
+Xcursor.size: 48
 
 /* Display setup */
 /* 96: 100% | 120: 125% | 144: 150% */
-Xft.dpi: 120
+Xft.dpi: 144
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb

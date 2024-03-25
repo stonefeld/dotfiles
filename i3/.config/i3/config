@@ -12,7 +12,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # set the font for statusbar and window title
-font pango:monospace bold 12
+font pango:monospace bold 10
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
