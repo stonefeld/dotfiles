@@ -1,5 +1,5 @@
 # set the colorscheme
-import = ["~/.config/alacritty/tokyonight-night.toml", "~/AppData/Roaming/alacritty/tokyonight-night.toml"]
+import = ["~/.config/alacritty/catppuccin-macchiato.toml", "~/AppData/Roaming/alacritty/catppuccin-macchiato.toml"]
 
 # have the same padding all around the window
 [window]
@@ -15,13 +15,11 @@ TERM = "xterm-256color"
 
 # configuring the font
 [font]
-size = 11.0
+size = 11.25
 
 [font.normal]
-# family = "Hack Nerd Font"
-# family = "JetBrainsMono Nerd Font"
-# family = "FiraCode Nerd Font"
-family = "CaskaydiaCove Nerd Font"
+family = "JetBrainsMono NF"
+#family = "Cascadia Code NF"
 
 # no need for the cursor
 [mouse]

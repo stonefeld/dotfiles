@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Use this variable for loop.
-list_envs='dwm i3 qtile gnome-session kde-plasma cinnamon'
+list_envs='dwm i3 qtile gnome-session cinnamon'
 
 select_env () {
     # Prompt for choice.
@@ -31,9 +31,6 @@ select_env () {
         case $session in
             gnome-session)
                 XDG_SESSION_TYPE=wayland dbus-run-session gnome-session;;
-
-            kde-plasma)
-                DESKTOP_SESSION=plasma; startx $XINITRC plasma;;
 
             *)
                 startx $XINITRC $session;;

@@ -58,4 +58,8 @@ super + shift + period
 super + shift + comma
 	dunstctl set-paused toggle
 
+# disable middle click paste
+~button2
+	;echo -n | xclip -in
+
 # vim: ft=conf noet

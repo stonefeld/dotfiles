@@ -12,7 +12,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # set the font for statusbar and window title
-font pango:monospace bold 10
+font pango:monospace bold 11
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
@@ -37,9 +37,15 @@ set $move_step 20
 #### STARTUP CONFIG ####
 ########################
 # startup programs
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -f -e -c '#1e1e2e'
+# exec --no-startup-id xss-lock -ln $HOME/.config/i3/screensavernotify -- i3lock -nfe -c '#1e1e2e'
+exec --no-startup-id light-locker --late-locking --lock-after-screensaver=30 --lock-on-lid --lock-on-suspend
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr -c
+exec --no-startup-id picom
+exec --no-startup-id dunst
+exec --no-startup-id sxhkd
+exec --no-startup-id swall
+exec --no-startup-id CM_SELECTIONS=clipboard clipmenud
 
 #####################
 #### KEYBINDINGS ####
@@ -64,6 +70,9 @@ bindsym $mod+Shift+w kill
 # start a program launcher
 bindsym $mod+Shift+p exec --no-startup-id "dmenu_run -l 20"
 bindsym $mod+p exec --no-startup-id "rofi -show drun -theme pipboy"
+
+# show clipboard history menu
+bindsym $mod+v exec --no-startup-id "clipmenu"
 
 # change focus
 bindsym $mod+h focus left
@@ -164,7 +173,7 @@ bindsym $mod+r mode "resize"
 for_window [class="Floating"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Engrampa"] floating enable
-for_window [class="Pavucontrol"] floating enable
+for_window [class="pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
 for_window [instance="Msgcompose"] floating enable
 for_window [class="Brave-browser" window_role="pop-up"] floating enable

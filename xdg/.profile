@@ -34,6 +34,8 @@ export BROWSER="firefox"
 # configuring the system
 export LESSHISTFILE=-
 export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_ENABLE_HIGHDPI_SCALING=0
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=16"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude={.git,.venv,node_modules}"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -45,7 +47,7 @@ export HISTSIZE=10000
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
-export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc":"$XDG_CONFIG_HOME/gtk-2.0/gtkrc.mine"
 export HISTFILE="$XDG_CACHE_HOME"/history
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg

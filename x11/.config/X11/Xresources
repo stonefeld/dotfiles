@@ -5,23 +5,12 @@
 /* /_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/ */
 
 /* Cursor setup */
-Xcursor.theme: Breeze_Default
-Xcursor.size: 48
+Xcursor.theme: Adwaita
+Xcursor.size: 32
 
 /* Display setup */
 /* 96: 100% | 120: 125% | 144: 150% */
-Xft.dpi: 144
-Xft.antialias: true
-Xft.hinting: true
-Xft.rgba: rgb
-Xft.autohint: true
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcdfilter
-
-/* XTerm setup */
-XTerm*.faceName: monospace:size=10
-XTerm*.background: black
-XTerm*.foreground: white
+Xft.dpi: 120
 
 /* Sxiv setup */
 Sxiv*.background: black

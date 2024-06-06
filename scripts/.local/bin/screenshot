@@ -10,17 +10,18 @@ LOCATION="$HOME/Pictures/screenshots"
 
 location="$LOCATION"
 filename="$FILENAME"
+color='0.4,0.4,0.4,0.5'
 
 if [ "$#" -eq 1 ]; then
     if [ "$1" = "-s" ]; then
         [ -z "$DUNST" ] || { location="$LOCATION_TMP"; filename="screenshot"; }
         [ -f "$location/$filename" ] && rm "$location/$filename" 2>/dev/null
-        scrot -i -s -f "$location/$filename" 1>/dev/null
+        maim -l -c "$color" -s "$location/$filename" 1>/dev/null
     else
-        scrot -i -d $1 "$location/$filename" 1>/dev/null
+        maim -d $1 "$location/$filename" 1>/dev/null
     fi
 else
-    scrot -i "$location/$filename" 1>/dev/null
+    maim "$location/$filename" 1>/dev/null
 fi
 
 [ "$?" -ne 0 ] && exit

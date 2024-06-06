@@ -1,0 +1,4 @@
+#!/bin/bash
+
+notify-send -u critical 'Screen locker' 'The screen will be locked in 2 minutes'
+canberra-gtk-play -i service-login

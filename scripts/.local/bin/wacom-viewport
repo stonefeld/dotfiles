@@ -1,0 +1,10 @@
+#!/bin/bash
+
+connected_info="$(xrandr | grep -E '\<connected\>')"
+[ -z "$connected_info" ] && exit 1
+
+selected="$(echo "$connected_info" | awk '{print $1}' | dmenu -p "Select monitor")"
+[ -z "$selected" ] && exit 1
+
+wacom="$(xsetwacom list devices | grep 'stylus' | grep -oE '[0-9]+')"
+xsetwacom set "$wacom" MapToOutput "$(echo "$connected_info" | awk "/$selected/ {if (\$3 == \"primary\") print \$4; else print \$3}")"
