@@ -6,7 +6,7 @@
 
 # run prompt, file explorer and browser
 super + e
-	pcmanfm $HOME
+	pcmanfm -n $HOME
 super + shift + i
 	$BROWSER
 

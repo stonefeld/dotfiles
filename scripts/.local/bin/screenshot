@@ -16,12 +16,12 @@ if [ "$#" -eq 1 ]; then
     if [ "$1" = "-s" ]; then
         [ -z "$DUNST" ] || { location="$LOCATION_TMP"; filename="screenshot"; }
         [ -f "$location/$filename" ] && rm "$location/$filename" 2>/dev/null
-        maim -l -c "$color" -s "$location/$filename" 1>/dev/null
+        maim -l -c "$color" -s -u "$location/$filename" 1>/dev/null
     else
-        maim -d $1 "$location/$filename" 1>/dev/null
+        maim -d -u $1 "$location/$filename" 1>/dev/null
     fi
 else
-    maim "$location/$filename" 1>/dev/null
+    maim -u "$location/$filename" 1>/dev/null
 fi
 
 [ "$?" -ne 0 ] && exit
