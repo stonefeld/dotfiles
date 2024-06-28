@@ -1,5 +1,5 @@
 # set the colorscheme
-import = ["~/.config/alacritty/tokyonight-night.toml", "~/AppData/Roaming/alacritty/tokyonight-night.toml"]
+import = ["~/.config/alacritty/gruvbox-dark-hard.toml", "~/AppData/Roaming/alacritty/gruvbox-dark-hard.toml"]
 
 # have the same padding all around the window
 [window]
@@ -26,6 +26,14 @@ family = "Hack Nerd Font"
 
 # [font.bold]
 # family = "FiraCode Nerd Font SemBd"
+
+# configure cursor blinking
+[cursor]
+blink_interval = 500
+blink_timeout = 0
+
+[cursor.style]
+blinking = "Always"
 
 # no need for the cursor
 [mouse]
