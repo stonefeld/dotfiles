@@ -6,26 +6,18 @@ import = ["~/.config/alacritty/gruvbox-dark-hard.toml", "~/AppData/Roaming/alacr
 dynamic_padding = true
 
 [window.dimensions]
-columns = 120
-lines = 30
-
-# set the terminal name for tmux compatibility
-[env]
-TERM = "xterm-256color"
+columns = 100
+lines = 28
 
 # configuring the font
 [font]
-size = 12.0
+size = 12
+
+[font.offset]
+y = 2
 
 [font.normal]
-# family = "JetBrainsMono NF"
-# family = "Cascadia Code NF"
-# family = "CaskaydiaCove Nerd Font"
-# family = "FiraCode Nerd Font Ret"
 family = "Hack Nerd Font"
-
-# [font.bold]
-# family = "FiraCode Nerd Font SemBd"
 
 # configure cursor blinking
 [cursor]

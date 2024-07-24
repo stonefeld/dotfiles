@@ -17,9 +17,6 @@ fi
 # Source the zinit script
 source "$ZINIT_HOME/zinit.zsh"
 
-# Change zcompdump location
-ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${(%):-%m}-${ZSH_VERSION}"
-
 # Add powerlevel10k prompt
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -31,20 +28,16 @@ zinit light zsh-users/zsh-autosuggestions
 # FZF integration
 zinit light Aloxaf/fzf-tab
 
-# ssh-agent configuration
-# zstyle ':omz:plugins:ssh-agent' quiet yes
-# zstyle ':omz:plugins:ssh-agent' identities id_github id_bitbucket
-
 # Add snippets
-zinit snippet OMZP::archlinux
 zinit snippet OMZP::git
-# zinit snippet OMZP::git-flow
 zinit snippet OMZP::python
-# zinit snippet OMZP::ssh-agent
 zinit snippet OMZP::systemd
 
+# Change zcompdump location
+ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-${(%):-%m}-${ZSH_VERSION}"
+
 # Load completions
-autoload -U compinit && compinit
+autoload -U compinit && compinit -d $ZSH_COMPDUMP
 
 zinit cdreplay -q
 
@@ -58,7 +51,7 @@ bindkey '^n' history-search-forward
 
 # History configuration
 HISTSIZE=5000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=~/.cache/zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt appendhistory
@@ -75,6 +68,11 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
+# Shell integrations
+eval "$(zoxide init zsh)"
+eval "$(pyenv init -)"
+[ -f "$HOME"/.local/share/fzf/fzf.zsh ] && source "$HOME"/.local/share/fzf/fzf.zsh
+
 # Aliases
 if command -v eza &>/dev/null; then
     alias ls='eza --group-directories-first -g'
@@ -90,11 +88,14 @@ alias v='nvim'
 alias vv="[ -f 'Session.vim' ] && nvim -S Session.vim || nvim -c 'Obsession'"
 alias v.="nvim ."
 
+alias tmuxd='tmux new -s "${${PWD##*/}:-/}"'
+
 alias pys='source .venv/bin/activate'
 alias pyd='deactivate'
 
-[ -d "$PWD/.venv" ] && pys
+# Post init
+[ -d "$PWD/.venv" ] && pys || :
 
-# Shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init zsh)"
+# Set title
+set_title() { print -Pn -- '\e]2;%n@%m:%~\a' }
+precmd_functions+=(set_title)
