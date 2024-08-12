@@ -1,9 +1,0 @@
-* {
-	background:     #1b2329ff;
-	background-nor: #2b3339ff;
-	background-sel: #7fbbb3ff;
-	foreground:     #d3c6aaff;
-	foreground-sel: #1b2329ff;
-}
-
-// vim: ft=rasi

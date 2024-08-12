@@ -4,17 +4,19 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 
 # set additional paths and locale
-export PATH=~/.local/bin/:~/.local/share/pyenv/bin/:~/.local/share/cargo/bin/:~/.local/share/go/bin/:$PATH
+export PATH=~/.local/bin/:~/.local/share/pyenv/bin/:~/.local/share/npm/bin/:~/.local/share/cargo/bin/:~/.local/share/go/bin/:$PATH
 
 # override these defaults
 export BROWSER="firefox"
 export EDITOR="nvim"
+export TERMINAL="kitty"
 
 # configuring the system
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=16"
 export LESSHISTFILE=-
 export LESS='-R --use-color -Dd+r$Du+b$'
 export NEXT_TELEMETRY_DISABLED=1
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 # cleaning home directory
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc":"$XDG_CONFIG_HOME/gtk-2.0/gtkrc.mine"

@@ -15,8 +15,6 @@ super + a; a
 	pavucontrol
 super + a; h
 	termlaunch -f -e htop
-super + a; p
-	dmmusic
 super + a; m; n
 	playerctl next
 super + a; m; p

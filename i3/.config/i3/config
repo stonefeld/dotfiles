@@ -37,15 +37,14 @@ set $move_step 20
 #### STARTUP CONFIG ####
 ########################
 # startup programs
-# exec --no-startup-id xss-lock -ln $HOME/.config/i3/screensavernotify -- i3lock -nfe -c '#1e1e2e'
-exec --no-startup-id light-locker --late-locking --lock-after-screensaver=30 --lock-on-lid --lock-on-suspend
+exec --no-startup-id xss-lock -ln $HOME/.config/i3/screensavernotify -- i3lock -nfe -c '#1e1e2e'
 exec --no-startup-id nm-applet
 exec --no-startup-id autorandr -c
 exec --no-startup-id picom
 exec --no-startup-id dunst
 exec --no-startup-id sxhkd
 exec --no-startup-id swall
-exec --no-startup-id CM_SELECTIONS=clipboard clipmenud
+# exec --no-startup-id CM_SELECTIONS=clipboard clipmenud
 
 #####################
 #### KEYBINDINGS ####

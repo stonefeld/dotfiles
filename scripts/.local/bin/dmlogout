@@ -4,9 +4,6 @@ kill_x11() {
 	pkill -15 -t tty"$XDG_VTNR" Xorg
 }
 
-command -v rofi &>/dev/null && ROFI=true
-[ "$1" = '-d' ] && ROFI=false
-
 lock_text='Lock'
 logout_text='Log out'
 suspend_text='Suspend'
@@ -15,40 +12,10 @@ reboot_text='Reboot'
 yes_text='Yes'
 no_text='No'
 
-if [ "$ROFI" = true ]; then
-	lock='󰍁'
-	logout='󰗽'
-	suspend='󰤄'
-	shutdown='󰐥'
-	reboot='󰑓'
-	yes='󰄬'
-	no='󰅖'
+option=$(printf "$lock_text\\n$logout_text\\n$suspend_text\\n$shutdown_text\\n$reboot_text" | dmenu)
+[ -z "$option" ] || confirmation=$(printf "$yes_text\\n$no_text" | dmenu -p "Sure?")
 
-	if [ "$1" = '-applet' ]; then
-		APPLET=true
-		lock="$lock $lock_text"
-		logout="$logout $logout_text"
-		suspend="$suspend $suspend_text"
-		shutdown="$shutdown $shutdown_text"
-		reboot="$reboot $reboot_text"
-		yes="$yes $yes_text"
-		no="$no $no_text"
-	fi
-
-	if [ "$APPLET" = true ]; then
-		option=$(printf "$lock\\n$logout\\n$suspend\\n$shutdown\\n$reboot" | rofi -theme powermenu-applet -dmenu -p "Uptime: $(uptime -p | sed 's/^up\s//')")
-		sleep 0.2
-		[ -z "$option" ] || confirmation=$(printf "$yes\\n$no" | rofi -theme confirm-applet -dmenu -p "Sure?")
-	else
-		option=$(printf "$lock\\n$logout\\n$suspend\\n$shutdown\\n$reboot" | rofi -theme powermenu -dmenu)
-		[ -z "$option" ] || confirmation=$(printf "$yes\\n$no" | rofi -theme confirm -dmenu)
-	fi
-else
-	option=$(printf "$lock_text\\n$logout_text\\n$suspend_text\\n$shutdown_text\\n$reboot_text" | dmenu)
-	[ -z "$option" ] || confirmation=$(printf "$yes_text\\n$no_text" | dmenu -p "Sure?")
-fi
-
-if [ "$confirmation" = "$yes_text" ] || [ "$ROFI" = true -a "$confirmation" = "$yes" ]; then
+if [ "$confirmation" = "$yes_text" ]; then
 	case $option in
 		"$lock_text"|"$lock")         xset dpms force standby;;
 		"$logout_text"|"$logout")     kill_x11;;

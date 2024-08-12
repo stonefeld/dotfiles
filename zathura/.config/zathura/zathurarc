@@ -13,10 +13,9 @@ set statusbar-home-tilde 1
 set statusbar-page-percent 1
 
 ################
-#### COLORS ####
+#### STYLES ####
 ################
 set font "monospace 9"
-# include catppuccin
 
 #####################
 #### KEYBINDINGS ####

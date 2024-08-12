@@ -17,7 +17,13 @@ fi
 # Source the zinit script
 source "$ZINIT_HOME/zinit.zsh"
 
+# Add omz libraries
+zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::functions.zsh
+zinit snippet OMZL::termsupport.zsh
+
 # Add powerlevel10k prompt
+POWERLEVEL9K_CONFIG_FILE=${XDG_CONFIG_HOME:-$HOME/.config}/p10k.zsh
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Add big 3 zsh plugins
@@ -28,7 +34,7 @@ zinit light zsh-users/zsh-autosuggestions
 # FZF integration
 zinit light Aloxaf/fzf-tab
 
-# Add snippets
+# Add omz plugins
 zinit snippet OMZP::git
 zinit snippet OMZP::python
 zinit snippet OMZP::systemd
@@ -38,11 +44,7 @@ ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-${(%):-%m}-${ZSH_VERSION
 
 # Load completions
 autoload -U compinit && compinit -d $ZSH_COMPDUMP
-
 zinit cdreplay -q
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 
 # Keybindings
 bindkey -e
@@ -69,9 +71,10 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Shell integrations
-eval "$(zoxide init zsh)"
-eval "$(pyenv init -)"
-[ -f "$HOME"/.local/share/fzf/fzf.zsh ] && source "$HOME"/.local/share/fzf/fzf.zsh
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+command -v pyenv &>/dev/null && eval "$(pyenv init -)"
+## As soon as fzf gets updated on almost every major distribution, the second check can go away
+(command -v fzf &>/dev/null && fzf --version | grep -Eq '^0.5') && eval "$(fzf --zsh)" || :
 
 # Aliases
 if command -v eza &>/dev/null; then
@@ -96,6 +99,5 @@ alias pyd='deactivate'
 # Post init
 [ -d "$PWD/.venv" ] && pys || :
 
-# Set title
-set_title() { print -Pn -- '\e]2;%n@%m:%~\a' }
-precmd_functions+=(set_title)
+# To customize prompt, run `p10k configure`.
+[[ ! -f "$POWERLEVEL9K_CONFIG_FILE" ]] || source "$POWERLEVEL9K_CONFIG_FILE"
