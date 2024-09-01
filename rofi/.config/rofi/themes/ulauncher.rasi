@@ -1,0 +1,79 @@
+configuration {
+    font: "Sans 14";
+    show-icons: true;
+    modi: [drun];
+    drun { fallback-icon: "application-x-addon"; }
+    click-to-exit: true;
+    matching: "fuzzy";
+}
+
+* {
+    foreground: #d9d9d6ff;
+    foreground-alt: #b0b5b4ff;
+    background: #373b3dff;
+    background-alt: #313537ff;
+    background-selected: #4a5051ff;
+
+    background-color: transparent;
+    text-color: @foreground;
+
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    background-color: @background;
+    location: north;
+    border-radius: 8px;
+    width: 750px;
+    y-offset: 20%;
+}
+
+inputbar {
+    font: "Sans 20";
+    padding: 20px 30px;
+    children: [entry];
+}
+
+entry {
+    font: inherit;
+    blink: false;
+}
+
+listview {
+    lines: 10;
+    require-input: true;
+    fixed-height: false;
+    padding: 0 0 10px 0;
+}
+
+element {
+    padding: 10px 30px;
+    spacing: 16px;
+}
+
+element-icon {
+    size: 1.5em;
+}
+
+element-text {
+    text-color: @foreground-alt;
+    highlight: @foreground;
+}
+
+element selected {
+    background-color: @background-selected;
+}
+
+entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+message {
+    background-color: @background-alt;
+    padding: 10px 30px;
+    margin: 0 0 10px 0;
+}
+
+// vim:ft=rasi

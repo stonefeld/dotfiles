@@ -15,11 +15,11 @@ super + a; a
 	pavucontrol
 super + a; h
 	termlaunch -f -e htop
-super + a; m; n
+super + F12
 	playerctl next
-super + a; m; p
+super + F10
 	playerctl previous
-super + a; m; m
+super + F11
 	playerctl play-pause
 
 # dmenu utilities
@@ -31,8 +31,10 @@ super + a; q
 	dmpower
 super + a; r
 	dmrecord
+super + a; c
+	xcolor -s
 super + a; e
-	rofimoji --action clipboard --selector-args '-theme pipboy'
+	rofimoji --action clipboard --use-icons --selector-args '-theme ulauncher'
 super + a; k
 	passmenu -l 20 -p 'Select the password'
 
@@ -42,7 +44,7 @@ super + Print
 super + shift + Print
 	screenshot 5
 super + shift + s
-	screenshot -s
+	flameshot gui
 
 # notification controls
 super + space

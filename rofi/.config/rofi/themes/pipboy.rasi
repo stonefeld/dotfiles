@@ -1,6 +1,6 @@
 configuration {
     show-icons: false;
-    font: "monospace 14";
+    font: "JetBrainsMono Nerd Font 15";
     display-drun: ">";
     display-run: "(R) >";
     modes: [drun, run];
@@ -16,8 +16,9 @@ configuration {
 }
 
 * {
-    foreground: #babbf1ff;
-    background: #11111bbb;
+    foreground: #ffb642ff;
+    foreground-alt: #ffb64233;
+    background: #101010ee;
 
     background-color: transparent;
     text-color: @foreground;
@@ -25,21 +26,24 @@ configuration {
 
 window {
     transparency: "real";
-    width: 100%;
+    border: 0 0 0 2px solid;
+    border-color: @foreground;
+    width: 600px;
     height: 100%;
-    location: center;
+    location: east;
 }
 
 mainbox {
     background-color: @background;
-    padding: 37% 30%;
-    horizontal-align: 0.5;
-    vertical-align: 0.5;
+    padding: 5px 10px;
+    // padding: 27% 30%;
+    // horizontal-align: 0.5;
+    // vertical-align: 0.5;
 }
 
 listview {
     border: 2px solid 0 0;
-    padding: 4px 0 0;
+    padding: 6px 0 0;
     border-color: @foreground;
     spacing: 4px;
     scrollbar: true;
@@ -47,28 +51,22 @@ listview {
 }
 
 element {
-    border: 0;
-    padding: 2px;
+    padding: 5px 10px;
 }
 
 element selected {
-    background-color: @foreground;
-}
-
-element-text selected {
-    text-color: #000000ff;
+    border: 2px solid;
+    border-color: @foreground;
+    background-color: @foreground-alt;
 }
 
 scrollbar {
     width: 4px;
-    border: 0;
-    handle-color: @foreground;
+    handle-color: @foreground-alt;
     handle-width: 8px;
-    padding: 0;
 }
 
 inputbar {
-    spacing: 0;
     padding: 2px;
     children: [ prompt, entry ];
 }
@@ -79,9 +77,9 @@ prompt {
 
 entry {
     expand: true;
-    blink: true;
+    blink: false;
     cursor: text;
-    cursor-width: 8px;
 }
+
 
 // vim: ft=rasi

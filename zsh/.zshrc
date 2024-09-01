@@ -38,6 +38,7 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::python
 zinit snippet OMZP::systemd
+zinit snippet OMZP::archlinux
 
 # Change zcompdump location
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-${(%):-%m}-${ZSH_VERSION}"
@@ -73,14 +74,17 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # Shell integrations
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 command -v pyenv &>/dev/null && eval "$(pyenv init -)"
-## As soon as fzf gets updated on almost every major distribution, the second check can go away
-(command -v fzf &>/dev/null && fzf --version | grep -Eq '^0.5') && eval "$(fzf --zsh)" || :
+command -v fzf &>/dev/null && eval "$(fzf --zsh)"
 
 # Aliases
 if command -v eza &>/dev/null; then
     alias ls='eza --group-directories-first -g'
     alias la='ls -a'
-    alias ll='la -l'
+    alias ll='la -la'
+else
+    alias ls='LC_COLLATE=C ls --group-directories-first'
+    alias la='ls -a'
+    alias ll='la -lh'
 fi
 
 alias ip='ip -c'

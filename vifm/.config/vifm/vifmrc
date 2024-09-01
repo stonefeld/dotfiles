@@ -16,7 +16,7 @@ set tuioptions=ps
 set vicmd=$EDITOR vimhelp
 set syscalls trash nofollowlinks
 set timefmt=%Y-%m-%d\ %H:%M
-set statusline="  %t%= %A %10u:%-7g %15s %20d  "
+set statusline=" %t%= %A %10u:%-7g %15s %20d "
 
 set vifminfo=dhistory,savedirs,chistory,state,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 set suggestoptions=delay:0,normal,visual,view,keys,marks,registers

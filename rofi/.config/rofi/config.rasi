@@ -1,47 +1,4 @@
 configuration {
-    modi: "";
-    font: "Ubuntu Sans 14";
-    show-icons: true;
-
-    combi-modi: "";
-    sort: false;
-    sorting-method: "normal";
-    case-sensitive: false;
-    sidebar-mode: false;
-    matching: "normal";
-    hide-scrollbar: false;
-    fullscreen: false;
-    scrollbar-width: 8;
-    scroll-method: 0;
-
-    run-command: "{cmd}";
-    run-list-command: "";
-    run-shell-command: "{terminal} -e {cmd}";
-
-    window-command: "wmctrl -i -R {window}";
-    window-match-fields: "all";
-    window-thumbnail: true;
-    window-format: "{c}    {t}";
-
-    drun-match-fields: "name,generic,exec,categories,keywords";
-    drun-categories: "";
-    drun-show-actions: false;
-    drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
-    drun-url-launcher: "xdg-open";
-    drun-use-desktop-cache: false;
-    drun-reload-desktop-cache: false;
-
-    click-to-exit: false;
-    show-match: true;
-
-    disable-history: false;
-    max-history-size: 25;
-
-    display-window: "Windows";
-    display-windowcd: "Windows";
-    display-run: "Run";
-    display-drun: "Apps";
-
     kb-primary-paste: "Control+V";
     kb-clear-line: "Control+u";
     kb-move-front: "Home,Control+a";
@@ -55,11 +12,11 @@ configuration {
     kb-remove-to-eol: "";
     kb-remove-to-sol: "";
     kb-accept-entry: "Return,KP_Enter";
-    kb-mode-complete: "";
+    kb-mode-complete: "KP_Tab";
     kb-row-left: "Left";
     kb-row-right: "Right";
-    kb-row-up: "Up,Control+p";
-    kb-row-down: "Down,Control+n";
+    kb-row-up: "Up,Control+p,Control+k";
+    kb-row-down: "Down,Control+n,Control+j";
     kb-row-first: "";
     kb-row-last: "";
     kb-row-select: "Tab";

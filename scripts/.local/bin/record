@@ -5,7 +5,7 @@ OUTPUT_RES="${3:-1280x720}"
 FPS="${4:-25}"
 TYPE="${5:-monitor}"
 
-input=$(pactl list short sources | sed 's/\s\+/ /g' | cut -d ' ' -f 2 | egrep '\.monitor$')
+input=$(pactl list short sources | sed 's/\s\+/ /g' | cut -d ' ' -f 2 | grep -E '\.monitor$')
 if [ "$TYPE" = "mic" ]; then
 	input=$(echo "$input" | sed 's/\.monitor$//; s/_output\./_input\./')
 fi

@@ -36,6 +36,10 @@ set $move_step 20
 ########################
 #### STARTUP CONFIG ####
 ########################
+# system setup
+exec --no-startup-id xset s 780 120
+exec --no-startup-id xset dpms 1200 1500 0
+
 # startup programs
 exec --no-startup-id xss-lock -ln $HOME/.config/i3/screensavernotify -- i3lock -nfe -c '#1e1e2e'
 exec --no-startup-id nm-applet
@@ -44,7 +48,6 @@ exec --no-startup-id picom
 exec --no-startup-id dunst
 exec --no-startup-id sxhkd
 exec --no-startup-id swall
-# exec --no-startup-id CM_SELECTIONS=clipboard clipmenud
 
 #####################
 #### KEYBINDINGS ####
@@ -68,10 +71,7 @@ bindsym $mod+Shift+w kill
 
 # start a program launcher
 bindsym $mod+Shift+p exec --no-startup-id "dmenu_run -l 20"
-bindsym $mod+p exec --no-startup-id "rofi -show drun -theme pipboy"
-
-# show clipboard history menu
-bindsym $mod+v exec --no-startup-id "clipmenu"
+bindsym $mod+p exec --no-startup-id "rofi -show drun -theme ulauncher"
 
 # change focus
 bindsym $mod+h focus left
@@ -187,4 +187,5 @@ for_window [class="firefox" instance="Places"] floating enable
 # start i3status bar
 bar {
     status_command i3status
+    tray_output primary
 }

@@ -1,7 +1,7 @@
 hi clear
 
 hi Win cterm=none ctermfg=white ctermbg=none
-hi Directory cterm=bold ctermfg=blue ctermbg=default
+hi Directory cterm=bold ctermfg=cyan ctermbg=default
 hi Link cterm=bold ctermfg=yellow ctermbg=default
 hi BrokenLink cterm=bold ctermfg=red ctermbg=default
 hi HardLink cterm=none ctermfg=yellow ctermbg=default
