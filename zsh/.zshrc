@@ -35,10 +35,10 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Add omz plugins
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::systemd
 zinit snippet OMZP::git
 zinit snippet OMZP::python
-zinit snippet OMZP::systemd
-zinit snippet OMZP::archlinux
 
 # Change zcompdump location
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-${(%):-%m}-${ZSH_VERSION}"
@@ -56,14 +56,13 @@ bindkey '^n' history-search-forward
 HISTSIZE=5000
 HISTFILE=~/.cache/zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+setopt hist_expire_dups_first       # expire duplicate event first when trimming history
+setopt hist_find_no_dups            # do not display a duplicate event if it is already in the history
+setopt hist_ignore_all_dups         # delete old recorded event if new event is a duplicate
+setopt hist_ignore_dups             # do not save events that are duplicates of previous events
+setopt hist_ignore_space            # ignore lines which begin with a space
+setopt hist_save_no_dups            # do not write a duplicate event to history
+setopt share_history                # share history between all sessions
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -99,6 +98,12 @@ alias tmuxd='tmux new -s "${${PWD##*/}:-/}"'
 
 alias pys='source .venv/bin/activate'
 alias pyd='deactivate'
+
+if command -v vifmrun &>/dev/null; then
+    alias lf='vifmrun'
+else
+    alias lf='vifm'
+fi
 
 # Post init
 [ -d "$PWD/.venv" ] && pys || :

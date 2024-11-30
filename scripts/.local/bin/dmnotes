@@ -1,97 +1,113 @@
 #!/bin/bash
 
-pdf_reader="xdg-open"
+pdf_reader='xdg-open'
 notes_folder="$HOME"/Documents/notes
-templates_folder="${XDG_DATA_HOME:-$HOME/.local/share}"/templates
+templates_folder="$HOME"/Templates
 
 run_dmenu() {
-	printf "$2" | dmenu -p "$1"
+    if [ "$1" = '-l' ]; then
+        printf "$3" | dmenu -l 20 -p "$2"
+    else
+        printf "$2" | dmenu -p "$1"
+    fi
+}
+
+print_error() {
+    echo "$(basename "$0"): $1"
+    echo "Try '$(basename "$0") --help' for more information."
+    exit 1
+}
+
+print_help() {
+    printf "Usage: $(basename "$0") [-p | -f | -t]
+\t-p\tPDF reader command (default: xdg-open)
+\t-f\tNotes folder (default: ~/Documents/notes)
+\t-t\tTemplates folder (default: ~/Templates)
+"
+    exit
 }
 
 while [ "$#" -gt "0" ]; do
-	case "$1" in
-		-p|--pdf_reader)
-			case "$2" in
-				-*) echo "dmnotes: -p flag got an unexpected parameter"
-					exit;;
-			esac
+    case "$1" in
+        -p|--pdf_reader)
+            command -v "$2" &>/dev/null || print_error "command not found: $2"
+            pdf_reader="$2"
+            shift 2;;
 
-			[ ! $(command -v "$2") ] && echo "$SHELL: command not found: $2" && exit
-			pdf_reader="$2"
-			shift 2;;
+        -f|--notes_folder)
+            [ -d "$2" ] || print_error "cannot access '$2': No such file or directory"
+            notes_folder="$2"
+            shift 2;;
 
-		-f|--notes_folder)
-			case "$2" in
-				-*) echo "dmnotes: -f flag got an unexpected parameter"
-					exit;;
-			esac
+        -t|--templates_folder)
+            [ -d "$2" ] || print_error "cannot access '$2': No such file or directory"
+            templates_folder="$2"
+            shift 2;;
 
-			[ ! -d "$2" ] && echo "dmnotes: cannot access '$2': No such file or directory" && exit
-			notes_folder="$2"
-			shift 2;;
-
-		-t|--templates_folder)
-			case "$2" in
-				-*) echo "dmnotes: -t flag got an unexpected parameter"
-					exit;;
-			esac
-
-			[ ! -d "$2" ] && echo "dmnotes: cannot access '$2': No such file or directory" && exit
-			templates_folder="$2"
-			shift 2;;
-
-		-h|--help)
-			echo "dmnotes [-p {pdf_reader}] [-f {notes_folder}] [-t {templates_folder}]"
-			exit;;
-
-		*)
-			echo "dmnotes: invalid option -- '$1'"
-			echo "Try 'dmnotes --help' for more information."
-			exit;;
-	esac
+        -h|--help) print_help;;
+        *) print_error "invalid option -- '$1'";;
+    esac
 done
 
-type=$(run_dmenu "Select filetype" "Markdown\\nLaTeX\\nOpen compiled note")
-[ -z "$type" ] && exit
+notes="$(find "$notes_folder" -mindepth 2 -maxdepth 2 -type f -regex '.*\.\(md\|tex\)' -printf '%f\n' | sort | sed 's/\.md$/ (Markdown)/;s/\.tex$/ (LaTeX)/')"
+new_note_text='Create new note'
+selection="$(run_dmenu -l 'Select or create a note' "$new_note_text\\n$notes")"
+[ -z "$selection" ] && exit
 
-case "$type" in
-	"Markdown")  extension="md";;
-	"LaTeX")     extension="tex";;
-esac
+if [ "$selection" = "$new_note_text" ]; then
+    markdown_text='Empty Markdown note (.md)'
+    latex_text='Empty LaTeX note (.tex)'
 
-if [ ! "$type" = "Open compiled note" ]; then
-	option=$(run_dmenu "Choose an option" "New empty note\\nChoose existing note\\nDelete note")
-	[ -z "$option" ] && exit
+    name="$(run_dmenu 'Name the new note' '')"
+    [ -z "$name" ] && exit
 
-	case "$option" in
-		"New empty note")
-			name=$(run_dmenu "Enter the name" "")
-			[ -z "$name" ] && exit
+    while [ -d "$notes_folder/$name" ]; do
+        name="$(run_dmenu "A note with the name '$name' already exists" '')"
+        [ -z "$name" ] && exit
+    done
 
-			mkdir -p "$notes_folder/$name"
-			touch "$notes_folder/$name/$name.$extension"
-			termlaunch -e $EDITOR "$notes_folder/$name/$name.$extension"
-			exit;;
+    templates="$(find "$templates_folder" -type f -regex '.*\.\(md\|tex\)' -printf '%P\n' | sort | sed 's/\.md$/ (Markdown)/;s/\.tex$/ (LaTeX)/')"
+    template="$(run_dmenu -l "Select a template for '$name'" "$markdown_text\\n$latex_text\\n$templates")"
+    [ -z "$template" ] && exit
+    echo $template
 
-		"Choose existing note")
-			selected=$(run_dmenu "Select a file" "$(find "$notes_folder" -name "*.$extension" -printf "%f\n" | sed "s/.$extension$//")")
-			[ -z "$selected" ] && exit
+    mkdir -p "$notes_folder/$name"
 
-			termlaunch -e $EDITOR "$notes_folder/$selected/$selected.$extension"
-			exit;;
+    case "$template" in
+        'Empty '*)
+            extension="$(echo "$template" | sed 's/^Empty .* note (\(\..*\))/\1/')"
+            touch "$notes_folder/$name/$name$extension";;
+        *)
+            template="$(echo "$template" | sed 's/ (Markdown)$/.md/;s/ (LaTeX)$/.tex/')"
+            extension="$(echo "$template" | sed 's/^.*\(\..*\)/\1/')"
+            cp "$templates_folder/$template" "$notes_folder/$name/$name$extension";;
+    esac
 
-		"Delete note")
-			selected=$(run_dmenu "Select a file" "$(find "$notes_folder" -name "*.$extension" -printf "%f\n" | sed "s/.$extension$//")")
-			[ -z "$selected" ] && exit
-
-			option=$(run_dmenu "Sure?" "No\\nYes")
-			[ -z "$option" ] || [ "$option" = "No" ] && exit
-
-			rm -rf "$notes_folder/$selected"
-			exit;;
-	esac
-else
-	selected=$(run_dmenu "Select a file" "$(find "$notes_folder" -name "*.pdf" -printf "%f\n" | sed "s/.pdf$//")")
-	[ -z "$selected" ] && exit
-	$pdf_reader "$notes_folder/$selected/$selected.pdf"
+    termlaunch -e "$EDITOR $notes_folder/$name/$name$extension"
+    exit
 fi
+
+edit_text="Edit note"
+open_text="Open generated PDF"
+folder_text="Open containing folder"
+archive_text="Archive, compress and remove note"
+
+extension="$(echo "$selection" | sed 's/^.*(Markdown)$/.md/;s/^.*(LaTeX)$/.tex/')"
+name="$(echo "$selection" | sed 's/ (Markdown)$//;s/ (LaTeX)$//')"
+
+options="$edit_text\\n$folder_text\\n$archive_text"
+[ -f "$notes_folder/$name/$name.pdf" ] && options="$open_text\\n$options"
+
+selection="$(run_dmenu -l "Select an action for '$name'" "$options")"
+[ -z "$selection" ] && exit
+
+case "$selection" in
+    "$edit_text") termlaunch -e "$EDITOR $notes_folder/$name/$name$extension";;
+    "$open_text") $pdf_reader "$notes_folder/$name/$name.pdf";;
+    "$folder_text") xdg-open "$notes_folder/$name";;
+    "$archive_text")
+        cd "$notes_folder/$name" && rm *.aux *.fls *.log *.out *.synctex.gz *.toc
+        tar czf "$notes_folder/$name.tar.gz" -C "$notes_folder" "$name"
+        [ -f "$notes_folder/$name.tar.gz" ] && rm -rf "$notes_folder/$name"
+        xdg-open "$notes_folder";;
+esac

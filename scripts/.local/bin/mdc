@@ -16,17 +16,19 @@ print_error() {
 
 [ "$#" -eq 0 ] && print_help && exit
 
-for i in $*; do
+for i in "$@"; do
     case "$i" in
         -h|--help) print_help;;
         *.md)
-            [ -f "$i" ] || {
-                print_error "'$i:' No such file or directory" 0
-                continue
-            }
+            [ -f "$i" ] || { print_error "'$i:' No such file or directory" 0; continue; }
+
+            filepath="$(dirname "$i")"
+            filename="$(basename "$i")"
+
+            cd "$filepath"
             pandoc \
-                "$i" \
-                -s -o "${i%.*}".pdf \
+                "$filename" \
+                -s -o "${filename%.*}".pdf \
                 -V 'geometry:margin=1in' \
                 --highlight-style=tango \
                 --pdf-engine=xelatex \

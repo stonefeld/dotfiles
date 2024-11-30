@@ -38,7 +38,7 @@ load {
 }
 
 memory {
-    format = "%used | %available"
+    format = "%used / %available"
     threshold_degraded = "1G"
     format_degraded = "MEMORY < %available"
 }
@@ -58,4 +58,5 @@ volume master {
 
 tztime local {
     format = "%Y-%m-%d %H:%M"
+    # format = "%a, %b %d (%Y) %H:%M"
 }

@@ -4,7 +4,6 @@ configuration {
     modi: [drun];
     drun { fallback-icon: "application-x-addon"; }
     click-to-exit: true;
-    matching: "fuzzy";
 }
 
 * {

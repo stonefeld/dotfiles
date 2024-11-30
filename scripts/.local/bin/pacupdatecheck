@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/pkg_updates"
 
 notify() {
 	message="$1 package(s) to update\n- Pacman: $2\n- AUR: $3"
@@ -11,6 +10,5 @@ notify() {
 pacman_count="$(checkupdates 2>/dev/null | wc -l)"
 aur_count="$(yay -Quaq 2>/dev/null | wc -l)"
 (( count=pacman_count+aur_count ))
-echo $count > "$cache_file"
 
 [ "$count" -gt 0 ] && notify $count "$pacman_count" "$aur_count"

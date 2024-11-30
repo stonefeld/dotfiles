@@ -6,7 +6,7 @@
 
 # run prompt, file explorer and browser
 super + e
-	pcmanfm -n $HOME
+	thunar
 super + shift + i
 	$BROWSER
 
@@ -23,12 +23,14 @@ super + F11
 	playerctl play-pause
 
 # dmenu utilities
-super + a; l
-	dmlogout -d
-super + a; n
-	dmnotes
 super + a; q
 	dmpower
+super + a; l
+	dmlogout
+super + a; n
+	dmnotes
+super + a; d
+	dmdisplay
 super + a; r
 	dmrecord
 super + a; c

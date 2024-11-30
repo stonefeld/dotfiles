@@ -11,13 +11,13 @@ lines = 28
 
 # configuring the font
 [font]
-size = 12
+size = 10
 
 [font.offset]
-y = 2
+y = 4
 
 [font.normal]
-family = "Hack Nerd Font"
+family = "CaskaydiaCove Nerd Font"
 
 # configure cursor blinking
 [cursor]

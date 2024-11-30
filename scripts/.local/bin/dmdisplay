@@ -1,4 +1,11 @@
 #!/bin/bash
 
-selected="$(autorandr | dmenu)"
-[ -z "$selected" ] || autorandr -l "$(cut -d ' ' -f 1 <<< "$selected")"
+profiles="$(autorandr)"
+auto_select="Auto detect profile"
+selected="$(printf "$auto_select\\n$profiles" | dmenu -p 'Select a profile' -l 20)"
+[ -z "$selected" ] && exit
+
+case "$selected" in
+    "$auto_select") autorandr --change;;
+    *) autorandr --load "$(cut -d ' ' -f 1 <<< "$selected")";;
+esac

@@ -13,9 +13,9 @@ export TERMINAL='kitty'
 export MANPAGER='nvim +Man!'
 
 # dark theme everywhere
-export GTK_THEME=Adwaita:dark
-export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
-export QT_QPA_PLATFORMTHEME=qt5ct
+# export GTK_THEME=Adwaita:dark
+# export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc:"$XDG_CONFIG_HOME"/gtk-2.0/gtkrc.mine
+# export QT_QPA_PLATFORMTHEME=qt5ct
 
 # configuring the system
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --color=16'

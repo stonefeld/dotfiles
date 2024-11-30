@@ -7,7 +7,7 @@ set statusbar-h-padding 0
 set statusbar-v-padding 0
 set sandbox none
 set selection-clipboard clipboard
-set guioptions 'svh'
+set guioptions "svh"
 set window-title-home-tilde 1
 set statusbar-home-tilde 1
 set statusbar-page-percent 1
@@ -16,6 +16,8 @@ set statusbar-page-percent 1
 #### STYLES ####
 ################
 set font "monospace 9"
+set recolor-lightcolor "#262626"
+set recolor-darkcolor "#c6c3c6"
 
 #####################
 #### KEYBINDINGS ####

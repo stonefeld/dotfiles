@@ -18,6 +18,12 @@ font pango:monospace bold 11
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
+# avoid focus warpping
+focus_wrapping no
+
+# center titles
+title_align center
+
 # workspaces names
 set $ws1 "1"
 set $ws2 "2"
@@ -48,6 +54,7 @@ exec --no-startup-id picom
 exec --no-startup-id dunst
 exec --no-startup-id sxhkd
 exec --no-startup-id swall
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 #####################
 #### KEYBINDINGS ####
@@ -170,7 +177,7 @@ bindsym $mod+r mode "resize"
 ######################
 # always floating windows
 for_window [class="Floating"] floating enable
-for_window [class="Pcmanfm"] floating enable
+for_window [class="Thunar"] floating enable
 for_window [class="Engrampa"] floating enable
 for_window [class="pavucontrol"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
