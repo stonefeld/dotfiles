@@ -1,9 +1,14 @@
 # set the colorscheme
-import = ["~/.config/alacritty/gruvbox-dark-hard.toml", "~/AppData/Roaming/alacritty/gruvbox-dark-hard.toml"]
+[general]
+import = ["~/.config/alacritty/tokyonight-moon.toml", "~/AppData/Roaming/alacritty/tokyonight-moon.toml"]
 
 # have the same padding all around the window
 [window]
 dynamic_padding = true
+
+[window.padding]
+x = 5
+y = 5
 
 [window.dimensions]
 columns = 100
@@ -11,13 +16,13 @@ lines = 28
 
 # configuring the font
 [font]
-size = 10
+size = 11
 
 [font.offset]
-y = 4
+y = 1
 
 [font.normal]
-family = "CaskaydiaCove Nerd Font"
+family = "RecMonoLinear Nerd Font"
 
 # configure cursor blinking
 [cursor]

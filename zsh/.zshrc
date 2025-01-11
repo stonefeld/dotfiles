@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Set the zinit directory
 ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
 
@@ -14,17 +7,29 @@ if [ ! -d "$ZINIT_HOME" ]; then
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+# Change zcompdump location
+ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-${(%):-%m}-${ZSH_VERSION}"
+
 # Source the zinit script
 source "$ZINIT_HOME/zinit.zsh"
 
 # Add omz libraries
-zinit snippet OMZL::key-bindings.zsh
 zinit snippet OMZL::functions.zsh
+zinit snippet OMZL::async_prompt.zsh
+zinit snippet OMZL::key-bindings.zsh
 zinit snippet OMZL::termsupport.zsh
+zinit snippet OMZL::git.zsh
 
-# Add powerlevel10k prompt
-POWERLEVEL9K_CONFIG_FILE=${XDG_CONFIG_HOME:-$HOME/.config}/p10k.zsh
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# Add omz plugins
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::systemd
+zinit snippet OMZP::git
+zinit snippet OMZP::gitignore
+zinit snippet OMZP::python
+
+# Setting the prompt
+setopt prompt_subst
+zinit snippet OMZT::robbyrussell
 
 # Add big 3 zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -33,15 +38,6 @@ zinit light zsh-users/zsh-autosuggestions
 
 # FZF integration
 zinit light Aloxaf/fzf-tab
-
-# Add omz plugins
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::systemd
-zinit snippet OMZP::git
-zinit snippet OMZP::python
-
-# Change zcompdump location
-ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-${(%):-%m}-${ZSH_VERSION}"
 
 # Load completions
 autoload -U compinit && compinit -d $ZSH_COMPDUMP
@@ -107,6 +103,3 @@ fi
 
 # Post init
 [ -d "$PWD/.venv" ] && pys || :
-
-# To customize prompt, run `p10k configure`.
-[[ ! -f "$POWERLEVEL9K_CONFIG_FILE" ]] || source "$POWERLEVEL9K_CONFIG_FILE"

@@ -9,13 +9,13 @@ export PATH=~/.local/bin/:~/.local/share/pyenv/bin/:~/.local/share/npm/bin/:~/.l
 # override these defaults
 export BROWSER='firefox'
 export EDITOR='nvim'
-export TERMINAL='kitty'
+export TERMINAL='alacritty'
 export MANPAGER='nvim +Man!'
 
 # dark theme everywhere
 # export GTK_THEME=Adwaita:dark
-# export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc:"$XDG_CONFIG_HOME"/gtk-2.0/gtkrc.mine
-# export QT_QPA_PLATFORMTHEME=qt5ct
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc:"$XDG_CONFIG_HOME"/gtk-2.0/gtkrc.mine
+export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
 
 # configuring the system
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --color=16'
