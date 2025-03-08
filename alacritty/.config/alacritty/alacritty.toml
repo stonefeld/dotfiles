@@ -1,6 +1,6 @@
 # set the colorscheme
 [general]
-import = ["~/.config/alacritty/tokyonight-moon.toml", "~/AppData/Roaming/alacritty/tokyonight-moon.toml"]
+import = ["~/.config/alacritty/catppuccin-frappe.toml", "~/AppData/Roaming/alacritty/catppuccin-frappe.toml"]
 
 # have the same padding all around the window
 [window]
@@ -16,13 +16,15 @@ lines = 28
 
 # configuring the font
 [font]
-size = 11
+size = 10
 
 [font.offset]
-y = 1
+y = 2
 
 [font.normal]
-family = "RecMonoLinear Nerd Font"
+# family = "RecMonoLinear Nerd Font"
+# family = "JetBrainsMono Nerd Font"
+family = "CaskaydiaCove Nerd Font"
 
 # configure cursor blinking
 [cursor]

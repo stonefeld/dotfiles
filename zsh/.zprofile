@@ -7,9 +7,9 @@ export XDG_DATA_HOME="$HOME"/.local/share
 export PATH=~/.local/bin/:~/.local/share/pyenv/bin/:~/.local/share/npm/bin/:~/.local/share/cargo/bin/:~/.local/share/go/bin/:$PATH
 
 # override these defaults
-export BROWSER='firefox'
+export BROWSER='google-chrome-stable'
 export EDITOR='nvim'
-export TERMINAL='alacritty'
+export TERMINAL='kitty'
 export MANPAGER='nvim +Man!'
 
 # dark theme everywhere

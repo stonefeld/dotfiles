@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rclone --vfs-cache-mode writes mount onedrive: ~/OneDrive &
+notify-send "OneDrive mounted" "OneDrive has been mounted to ~/OneDrive."
