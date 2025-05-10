@@ -83,6 +83,7 @@ else
 fi
 
 alias ip='ip -c'
+alias grep='grep --color=auto'
 
 alias lg='lazygit'
 
@@ -101,5 +102,5 @@ else
     alias lf='vifm'
 fi
 
-# Post init
-[ -d "$PWD/.venv" ] && pys || :
+# # Post init
+# [ -d "$PWD/.venv" ] && pys || :

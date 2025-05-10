@@ -1,0 +1,21 @@
+# font-family = "CaskaydiaCove Nerd Font"
+font-family = "UbuntuMono Nerd Font"
+font-feature = -calt
+font-size = 12
+
+adjust-cell-height = 10%
+# theme = light:catppuccin-latte,dark:catppuccin-mocha
+# theme = light:GruvboxLight,dark:Ghostty Default StyleDark
+theme = light:Adwaita,dark:Adwaita Dark
+window-theme = system
+
+window-padding-x = 0
+window-padding-y = 0
+
+mouse-hide-while-typing = true
+adjust-box-thickness = 1
+
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+shell-integration-features = no-cursor

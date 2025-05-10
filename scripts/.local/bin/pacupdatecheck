@@ -2,8 +2,9 @@
 
 
 notify() {
-	message="$1 package(s) to update\n- Pacman: $2\n- AUR: $3"
-	notify-send -i cloud-download "Package upgrades" "$message"
+	# message="$1 package(s) to update\n- Pacman: $2\n- AUR: $3"
+	message="$1 package(s) to update: $2 (pacman) + $3 (aur)"
+	notify-send -i preferences-system-symbolic "Package upgrades" "$message"
 	canberra-gtk-play -i dialog-warning
 }
 

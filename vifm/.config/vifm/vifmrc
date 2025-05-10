@@ -64,6 +64,7 @@ nnoremap aa cW
 
 nnoremap <wait> ;f :touch<space>""<Left>
 nnoremap <wait> ;d :mkdir<space>""<Left>
+nnoremap <wait> ;o :!xdg-open<space>.<CR>
 
 nnoremap <wait> xx :ex<CR>
 nnoremap <wait> xz :zip<CR>
@@ -104,31 +105,31 @@ fileviewer *.json
 
 " Try to preview the pdf
 fileviewer *.pdf
-      \ vifmimg pdf %px %py %pw %ph %c
-      \ %pc
-      \ vifmimg clear,
+      " \ vifmimg pdf %px %py %pw %ph %c
+      " \ %pc
+      " \ vifmimg clear,
       \ pdfinfo %c,
       \ file %c,
 
 " Try to preview the djvu file
 fileviewer *.djvu
-      \ vifmimg djvu %px %py %pw %ph %c
-      \ %pc
-      \ vifmimg clear,
+      " \ vifmimg djvu %px %py %pw %ph %c
+      " \ %pc
+      " \ vifmimg clear,
       \ file %c,
 
 " Try to preview the epub
 fileviewer *.epub
-      \ vifmimg epub %px %py %pw %ph %c
-      \ %pc
-      \ vifmimg clear,
+      " \ vifmimg epub %px %py %pw %ph %c
+      " \ %pc
+      " \ vifmimg clear,
       \ file %c,
 
 " Try to preview the video thumbnail
 fileviewer <video/*>
-      \ vifmimg video %px %py %pw %ph %c
-      \ %pc
-      \ vifmimg clear,
+      " \ vifmimg video %px %py %pw %ph %c
+      " \ %pc
+      " \ vifmimg clear,
       \ ffprobe -pretty %c 2>&1,
       \ file %c,
 
@@ -139,26 +140,26 @@ fileviewer {*.avif},<image/avif>
 
 " Try to preview the picture
 fileviewer <image/*>
-      \ vifmimg draw %px %py %pw %ph %c
-      \ %pc
-      \ vifmimg clear,
+      " \ vifmimg draw %px %py %pw %ph %c
+      " \ %pc
+      " \ vifmimg clear,
       \ identify -verbose %f,
       \ exiftool %c,
       \ file %c,
 
 " Try to make a preview from the audio file
 fileviewer <audio/*>
-      \ vifmimg audio %px %py %pw %ph %c
-      \ %pc
-      \ vifmimg clear,
+      " \ vifmimg audio %px %py %pw %ph %c
+      " \ %pc
+      " \ vifmimg clear,
       \ mp3info %c,
       \ file %c,
 
 " Try to preview the font
 fileviewer <font/*>
-      \ vifmimg font %px %py %pw %ph %c
-      \ %pc
-      \ vifmimg clear,
+      " \ vifmimg font %px %py %pw %ph %c
+      " \ %pc
+      " \ vifmimg clear,
       \ file %c,
 
 " Try to show the manpage with style
