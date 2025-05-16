@@ -43,6 +43,17 @@ zinit light Aloxaf/fzf-tab
 autoload -U compinit && compinit -d $ZSH_COMPDUMP
 zinit cdreplay -q
 
+eval "$(uv generate-shell-completion zsh)"
+
+_uv_run_mod() {
+    if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
+        _arguments '*:filename:_files'
+    else
+        _uv "$@"
+    fi
+}
+compdef _uv_run_mod uv
+
 # Keybindings
 bindkey -e
 bindkey '^p' history-search-backward
