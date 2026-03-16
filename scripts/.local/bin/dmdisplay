@@ -1,11 +1,19 @@
 #!/bin/bash
 
-profiles="$(autorandr)"
+# check if Xorg or Wayland
+XORG="$(pgrep Xorg >/dev/null && echo true || echo false)"
+
+if $XORG; then
+    profiles="$(autorandr)"
+else
+    profiles="$(cat ~/.config/kanshi/config | grep 'profile' | cut -d ' ' -f 2)"
+fi
+
 auto_select="Auto detect profile"
 selected="$(printf "$auto_select\\n$profiles" | dmenu -p 'Select a profile' -l 20)"
 [ -z "$selected" ] && exit
 
 case "$selected" in
-    "$auto_select") autorandr --change;;
-    *) autorandr --load "$(cut -d ' ' -f 1 <<< "$selected")";;
+    "$auto_select") [ $XORG ] && autorandr --change || kanshi reload;;
+    *) [ $XORG ] && autorandr --load "$(cut -d ' ' -f 1 <<< "$selected")" || kanshictl switch "$selected";;
 esac

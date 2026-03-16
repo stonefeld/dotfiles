@@ -24,12 +24,16 @@ while [ $# -gt 0 ]; do
             [ -z "$2" ] && print_error "Missing command"
             cmd="$2" ; shift ;;
 
+        -t) [ -n "$terminal" ] && print_error "Terminal already set"
+            [ -z "$2" ] && print_error "Missing terminal"
+            terminal="$2" ; shift ;;
+
         *) print_error "Unknown argument: $1" ;;
     esac
     shift
 done
 
-terminal="${TERMINAL:-alacritty}"
+terminal="${terminal:-$TERMINAL}"
 
 case "$terminal" in
     st)
@@ -45,6 +49,11 @@ case "$terminal" in
     kitty)
         [ "$float" = "true" ] && float='--class Floating'
         [ "$geometry" = "true" ] && geometry="-o initial_window_width=${cols}c -o initial_window_height=${rows}c -o remember_window_size=no" ;;
+
+    ghostty)
+        [ "$float" = "true" ] && float='--x11-instance-name=Floating'
+        [ "$geometry" = "true" ] && geometry="--window-width=${cols} --window-height=${rows}"
+        [ -n "$cmd" ] && cmd="-e $cmd" ;;
 
     *) print_error "Unknown terminal: $terminal" ;;
 esac

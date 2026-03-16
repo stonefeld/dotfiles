@@ -1,16 +1,16 @@
-# font-family = "CaskaydiaCove Nerd Font"
-font-family = "UbuntuMono Nerd Font"
+font-family = "JetBrainsMono NF"
+font-style = "SemiBold"
+font-style-italic = "SemiBold Italic"
+font-style-bold = "ExtraBold"
+font-style-bold-italic = "ExtraBold Italic"
 font-feature = -calt
-font-size = 12
+font-size = 11
 
-adjust-cell-height = 10%
-# theme = light:catppuccin-latte,dark:catppuccin-mocha
-# theme = light:GruvboxLight,dark:Ghostty Default StyleDark
-theme = light:Adwaita,dark:Adwaita Dark
-window-theme = system
+theme = light:kanagawa-lotus,dark:kanagawa-wave
 
 window-padding-x = 0
 window-padding-y = 0
+unfocused-split-opacity = 1
 
 mouse-hide-while-typing = true
 adjust-box-thickness = 1
@@ -18,4 +18,8 @@ adjust-box-thickness = 1
 cursor-style = block
 cursor-style-blink = false
 cursor-invert-fg-bg = true
+
 shell-integration-features = no-cursor
+bell-features = no-title
+link-previews = false
+window-inherit-working-directory = false

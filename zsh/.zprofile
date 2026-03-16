@@ -4,16 +4,13 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 
 # set additional paths and locale
-export PATH=~/.local/bin/:~/.local/share/pyenv/bin/:~/.local/share/npm/bin/:~/.local/share/cargo/bin/:~/.local/share/go/bin/:$PATH
+export PATH=~/.local/bin/:~/.local/share/npm/bin/:~/.local/share/cargo/bin/:~/.local/share/go/bin/:~/.local/share/flutter-sdk/bin/:$PATH
 
 # override these defaults
-export BROWSER='google-chrome-stable'
+export BROWSER='zen-browser'
 export EDITOR='nvim'
-export TERMINAL='kitty'
+export TERMINAL='ghostty'
 export MANPAGER='nvim +Man!'
-
-# dark theme everywhere
-export QT_QPA_PLATFORMTHEME=qt6ct
 
 # configuring the system
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --color=16'
@@ -48,3 +45,9 @@ export PSQLRC="$XDG_CONFIG_HOME"/pg/psqlrc
 export PSQL_HISTORY="$XDG_CACHE_HOME"/psql_history
 export PGPASSFILE="$XDG_CONFIG_HOME"/pg/pgpass
 export PGSERVICEFILE="$XDG_CONFIG_HOME"/pg/pg_service.conf
+export GHCUP_USE_XDG_DIRS=1
+
+# android setup
+export ANDROID_SDK_ROOT=~/.local/share/android-sdk
+export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
+export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH

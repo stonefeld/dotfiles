@@ -23,9 +23,6 @@ zinit snippet OMZL::git.zsh
 # Add omz plugins
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::systemd
-zinit snippet OMZP::git
-zinit snippet OMZP::gitignore
-zinit snippet OMZP::python
 
 # Setting the prompt
 setopt prompt_subst
@@ -43,8 +40,8 @@ zinit light Aloxaf/fzf-tab
 autoload -U compinit && compinit -d $ZSH_COMPDUMP
 zinit cdreplay -q
 
+# Proper uv completion (with path)
 eval "$(uv generate-shell-completion zsh)"
-
 _uv_run_mod() {
     if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
         _arguments '*:filename:_files'
@@ -86,7 +83,7 @@ command -v fzf &>/dev/null && eval "$(fzf --zsh)"
 if command -v eza &>/dev/null; then
     alias ls='eza --group-directories-first -g'
     alias la='ls -a'
-    alias ll='la -la'
+    alias ll='la -la --icons=always'
 else
     alias ls='LC_COLLATE=C ls --group-directories-first'
     alias la='ls -a'
@@ -97,6 +94,7 @@ alias ip='ip -c'
 alias grep='grep --color=auto'
 
 alias lg='lazygit'
+alias ldo='lazydocker'
 
 alias v='nvim'
 alias vv="[ -f 'Session.vim' ] && nvim -S Session.vim || nvim -c 'Obsession'"
@@ -107,6 +105,8 @@ alias tmuxd='tmux new -s "${${PWD##*/}:-/}"'
 alias pys='source .venv/bin/activate'
 alias pyd='deactivate'
 
+alias open='xdg-open'
+
 if command -v vifmrun &>/dev/null; then
     alias lf='vifmrun'
 else
@@ -114,4 +114,4 @@ else
 fi
 
 # # Post init
-# [ -d "$PWD/.venv" ] && pys || :
+[ -d "$PWD/.venv" ] && pys || :

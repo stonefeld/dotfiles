@@ -9,6 +9,16 @@ prgname="$(basename "$0")"
 swall_location="$HOME"/Pictures/wallpaper
 [ -z "$SWALL_LOCATION" ] || swall_location="$SWALL_LOCATION"
 
+# Detect Sway environment
+is_sway() {
+    [ -n "$SWAYSOCK" ]
+}
+
+# Detect Xorg environment
+is_xorg() {
+    [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ]
+}
+
 # Print the help message
 print_help() {
     printf "Usage: $prgname [OPTIONS...] [FILE]
@@ -18,6 +28,8 @@ OPTIONS:
 
 If it's the first time using '$prgname', it's mandatory to set a wallpaper by specifying the wallpaper image.
 Once it's set, by just running the command without arguments it will restore the last picture
+
+Supports both Sway (Wayland, swaybg) and Xorg (xwallpaper).
 "
 }
 
@@ -25,7 +37,7 @@ Once it's set, by just running the command without arguments it will restore the
 print_error() {
     echo "$1"
     print_help
-    exit
+    exit 1
 }
 
 # Check if a given file exists or not
@@ -41,7 +53,15 @@ set_wallpaper() {
     [ "$1" = "$dest" ] || cp "$1" "$dest"
 
     echo "Setting wallpaper '$(basename "$1")'..."
-    xwallpaper --zoom "$1"
+
+    if is_xorg; then
+        xwallpaper --zoom "$1"
+    elif is_sway; then
+        pkill swaybg 2>/dev/null
+        swaybg -i "$1" -m fill &
+    else
+        print_error "No supported session detected (Sway or Xorg required)."
+    fi
 }
 
 # Search for an already existing default wallpaper
