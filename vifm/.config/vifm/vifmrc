@@ -1,9 +1,3 @@
-"        _  __
-" __   _(_)/ _|_ __ ___  _ __ ___
-" \ \ / / | |_| '_ ` _ \| '__/ __|
-"  \ V /| |  _| | | | | | | | (__
-"   \_/ |_|_| |_| |_| |_|_|  \___|
-
 set nowrap mouse=a
 set history=1000 undolevels=1000
 set ignorecase smartcase
@@ -20,35 +14,13 @@ set statusline=" %t%= %A %10u:%-7g %15s %20d "
 
 set vifminfo=dhistory,savedirs,chistory,state,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 set suggestoptions=delay:0,normal,visual,view,keys,marks,registers
-set previewoptions+=graphicsdelay:0
 
 colorscheme Custom
-source ~/.config/vifm/bookmarks.vifm
+if filereadable(expand("$HOME/.config/vifm/bookmarks.vifm"))
+  source ~/.config/vifm/bookmarks.vifm
+endif
 source ~/.config/vifm/icons.vifm
 
-" The following macros can be used in a command
-" %a is replaced with the user arguments.
-" %c the current file under the cursor.
-" %C the current file under the cursor in the other directory.
-" %f the current selected file, or files.
-" %F the current selected file, or files in the other directory.
-" %b same as %f %F.
-" %d the current directory name.
-" %D the other window directory name.
-" %m run the command in a menu window
-command! df df -h %m 2> /dev/null
-command! du du -h . %m 2> /dev/null
-command! reload :write | restart full
-command! zip apack %f.zip %f
-command! tgz apack %f.tar.gz %f
-command! tar apack %f.tar %f
-command! ex aunpack %f
-command! run !! ./%f
-command! drag dragon-drop -a -x %f
-command! sw swall %c
-command! fw ffwpp %c
-
-" ========== MAPPINGS ========== "
 nnoremap e :edit<CR>
 nnoremap E :!
 nnoremap s :shell<CR>
@@ -66,13 +38,6 @@ nnoremap <wait> ;f :touch<space>""<Left>
 nnoremap <wait> ;d :mkdir<space>""<Left>
 nnoremap <wait> ;o :!xdg-open<space>.<CR>
 
-nnoremap <wait> xx :ex<CR>
-nnoremap <wait> xz :zip<CR>
-nnoremap <wait> xt :tar<CR>
-nnoremap <wait> xg :tgz<CR>
-
-nnoremap <wait> xw :fw<CR>
-
 nnoremap <silent> <C-t> :tabnew<CR>
 nnoremap <silent> <C-k> :tabc<CR>
 nnoremap <silent> <C-l> :tabn<CR>
@@ -87,127 +52,82 @@ nnoremap qq :q<CR>
 nnoremap J 5j
 nnoremap K 5k
 
-nmap dr :drag<CR>
-
-" Open files with the program specified on each system
 filetype *
       \ xdg-open %c 2>/dev/null &
 
-" Try to highlight known text files, otherwise just print them
 fileviewer <text/*>
-      \ highlight -O ansi -s base16/bright %c,
       \ cat %c,
 
-" Try to format a json file
 fileviewer *.json
       \ python -m json.tool %c,
-      \ file %c,
+      \ cat %c,
 
-" Try to preview the pdf
 fileviewer *.pdf
-      " \ vifmimg pdf %px %py %pw %ph %c
-      " \ %pc
-      " \ vifmimg clear,
       \ pdfinfo %c,
       \ file %c,
 
-" Try to preview the djvu file
 fileviewer *.djvu
-      " \ vifmimg djvu %px %py %pw %ph %c
-      " \ %pc
-      " \ vifmimg clear,
       \ file %c,
 
-" Try to preview the epub
 fileviewer *.epub
-      " \ vifmimg epub %px %py %pw %ph %c
-      " \ %pc
-      " \ vifmimg clear,
       \ file %c,
 
-" Try to preview the video thumbnail
 fileviewer <video/*>
-      " \ vifmimg video %px %py %pw %ph %c
-      " \ %pc
-      " \ vifmimg clear,
       \ ffprobe -pretty %c 2>&1,
       \ file %c,
 
-" Avif file not supported by vifmimg
 fileviewer {*.avif},<image/avif>
       \ exiftool %c,
       \ file %c,
 
-" Try to preview the picture
 fileviewer <image/*>
-      " \ vifmimg draw %px %py %pw %ph %c
-      " \ %pc
-      " \ vifmimg clear,
       \ identify -verbose %f,
       \ exiftool %c,
       \ file %c,
 
-" Try to make a preview from the audio file
 fileviewer <audio/*>
-      " \ vifmimg audio %px %py %pw %ph %c
-      " \ %pc
-      " \ vifmimg clear,
       \ mp3info %c,
       \ file %c,
 
-" Try to preview the font
 fileviewer <font/*>
-      " \ vifmimg font %px %py %pw %ph %c
-      " \ %pc
-      " \ vifmimg clear,
       \ file %c,
 
-" Try to show the manpage with style
 fileviewer {*.[1-8]},<text/troff>
       \ man %c | col -b,
       \ file %c,
 
-" Try to show torrent information
 fileviewer {*.torrent},<application/x-bittorrent>
       \ dumptorrent -v %c,
       \ file %c,
 
-" Try to preview some compressed files
 fileviewer *.zip,*.jar,*.war,*.ear,*.oxt
       \ zip -sf %c,
       \ file %c,
 
-" Try to preview some compressed files
 fileviewer {*.tar},<application/x-tar>
       \ tar -tf %c,
       \ file %c,
 
-" Try to preview some compressed files
 fileviewer *.tgz,*.tar.gz
       \ tar -tzf %c,
       \ file %c,
 
-" Try to preview some compressed files
 fileviewer *.tar.bz2,*.tbz2
       \ tar -tjf %c,
       \ file %c,
 
-" Try to preview some compressed files
 fileviewer *.tar.txz,*.txz
       \ xz --list %c,
       \ file %c,
 
-" Try to preview some compressed files
 fileviewer {*.rar},<application/x-rar>
       \ unrar v %c,
       \ file %c,
 
-" Try to preview some compressed files
 fileviewer {*.7z},<application/x-7z-compressed>
       \ 7z l %c,
       \ file %c,
 
-" Show verbose information from every other file
 fileviewer *[^/]
       \ exiftool %c,
       \ file %c,

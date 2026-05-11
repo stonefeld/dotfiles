@@ -21,12 +21,7 @@ zinit snippet OMZL::termsupport.zsh
 zinit snippet OMZL::git.zsh
 
 # Add omz plugins
-zinit snippet OMZP::archlinux
 zinit snippet OMZP::systemd
-
-# Setting the prompt
-setopt prompt_subst
-zinit snippet OMZT::robbyrussell
 
 # Add big 3 zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -36,20 +31,18 @@ zinit light zsh-users/zsh-autosuggestions
 # FZF integration
 zinit light Aloxaf/fzf-tab
 
+# Setting the prompt
+setopt prompt_subst
+# zinit snippet OMZT::robbyrussell
+zinit ice as"command" from"gh-r" \
+    atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship"\
+    atpull"%atclone" src"init.zsh"
+zinit light starship/starship
+
 # Load completions
+[ -d ~/.config/zsh/completion ] && fpath=(~/.config/zsh/completion $fpath)
 autoload -U compinit && compinit -d $ZSH_COMPDUMP
 zinit cdreplay -q
-
-# Proper uv completion (with path)
-eval "$(uv generate-shell-completion zsh)"
-_uv_run_mod() {
-    if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
-        _arguments '*:filename:_files'
-    else
-        _uv "$@"
-    fi
-}
-compdef _uv_run_mod uv
 
 # Keybindings
 bindkey -e
@@ -113,5 +106,8 @@ else
     alias lf='vifm'
 fi
 
-# # Post init
+# ghcup
+[ -f ~/.local/share/ghcup/env ] && . ~/.local/share/ghcup/env
+
+# Post init
 [ -d "$PWD/.venv" ] && pys || :

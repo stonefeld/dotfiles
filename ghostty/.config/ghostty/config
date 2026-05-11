@@ -1,15 +1,18 @@
-font-family = "JetBrainsMono NF"
+font-family = "Monaspace Neon"
 font-style = "SemiBold"
 font-style-italic = "SemiBold Italic"
 font-style-bold = "ExtraBold"
 font-style-bold-italic = "ExtraBold Italic"
-font-feature = -calt
+font-feature = +calt
 font-size = 11
 
-theme = light:kanagawa-lotus,dark:kanagawa-wave
+theme = light:Alabaster,dark:Ghostty Default Style Dark
+adjust-cell-height = 10%
 
 window-padding-x = 0
 window-padding-y = 0
+window-height = 34
+window-width = 120
 unfocused-split-opacity = 1
 
 mouse-hide-while-typing = true
