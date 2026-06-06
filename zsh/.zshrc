@@ -88,6 +88,7 @@ alias grep='grep --color=auto'
 
 alias lg='lazygit'
 alias ldo='lazydocker'
+alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
 
 alias v='nvim'
 alias vv="[ -f 'Session.vim' ] && nvim -S Session.vim || nvim -c 'Obsession'"
@@ -100,14 +101,6 @@ alias pyd='deactivate'
 
 alias open='xdg-open'
 
-if command -v vifmrun &>/dev/null; then
-    alias lf='vifmrun'
-else
-    alias lf='vifm'
-fi
 
 # ghcup
 [ -f ~/.local/share/ghcup/env ] && . ~/.local/share/ghcup/env
-
-# Post init
-[ -d "$PWD/.venv" ] && pys || :

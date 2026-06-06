@@ -20,7 +20,6 @@ adjust-box-thickness = 1
 
 cursor-style = block
 cursor-style-blink = false
-cursor-invert-fg-bg = true
 
 shell-integration-features = no-cursor
 bell-features = no-title
