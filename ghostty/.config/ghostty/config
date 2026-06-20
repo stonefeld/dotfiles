@@ -1,8 +1,8 @@
 font-family = "Monaspace Neon"
-font-style = "SemiBold"
-font-style-italic = "SemiBold Italic"
-font-style-bold = "ExtraBold"
-font-style-bold-italic = "ExtraBold Italic"
+font-style = "Medium"
+font-style-italic = "Medium Italic"
+font-style-bold = "Bold"
+font-style-bold-italic = "Bold Italic"
 font-feature = +calt
 font-size = 11
 
